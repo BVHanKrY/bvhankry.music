@@ -161,6 +161,51 @@ audio::-webkit-media-controls-time-remaining-display {
    outline: none;
    box-shadow: 0 0 15px rgba(168, 85, 247, 0.7);
  }
+      /* Estilos para control de volumen vertical en celulares */
+@media only screen and (max-width: 768px) {
+  audio {
+    height: 70px;
+    position: relative;
+  }
+
+  audio::-webkit-media-controls-volume-slider {
+    position: absolute;
+    top: -80px;
+    right: 20px;
+    width: 15px;
+    height: 60px;
+    background-color: rgba(26, 26, 26, 0.95);
+    border-radius: 10px;
+    padding: 5px;
+    border: 1px solid #a855f7;
+    transition: all 0.2s ease;
+  }
+
+  audio::-webkit-media-controls-volume-slider::-webkit-slider-thumb {
+    width: 13px;
+    height: 13px;
+    background-color: #a855f7;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  audio:hover::-webkit-media-controls-volume-slider,
+  audio:focus::-webkit-media-controls-volume-slider,
+  audio:active::-webkit-media-controls-volume-slider {
+    display: block;
+  }
+}
+
+/* Mantener el control horizontal en computadoras */
+@media only screen and (min-width: 769px) {
+  audio::-webkit-media-controls-volume-slider {
+    display: inline-block;
+    width: 60px;
+    height: 8px;
+    margin-left: 10px;
+  }
+}
+/* HASTA AQUÍ LLEGAN LOS NUEVOS ESTILOS */
       
     </style>
   </head>
