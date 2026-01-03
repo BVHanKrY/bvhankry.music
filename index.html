@@ -12,7 +12,7 @@
       }
 
       body {
-        background-image: url(https://github.com/BVHanKrY/bvhankry.music/blob/main/ChatGPT%20Image%2030%20dic%2025,%2010_59_54%20a.m..png?raw=true), linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+        background-image: url(https://github.com/BVHanKrY/bvhankry.music/blob/main/ChatGPT%20Image%2030%20dic%202025,%2010_59_54%20a.m..png?raw=true), linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
         background-blend-mode: overlay;
         background-size: cover;
         background-position: center;
@@ -74,6 +74,7 @@
         box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
       }
 
+      /* Estilos unificados sin duplicados */
       .cancion-card {
         width: 100%;
         max-width: 450px;
@@ -111,6 +112,7 @@
         filter: invert(1) sepia(20%) saturate(5000%) hue-rotate(260deg) brightness(0.9);
       }
 
+      /* Reproductor */
       .audio-container {
         position: relative;
         width: 100%;
@@ -303,7 +305,7 @@
 
       <h2 class="ep-title">EP: Pulso</h2>
 
-      <!-- CANCIÓN TINKUY (RUTA ORIGINAL QUE SORDEABA) -->
+      <!-- CANCIÓN TINKUY (FUNCIONAL COMO ANTES) -->
       <div class="cancion-card">
         <h3>Tinkuy</h3>
         <div class="audio-container">
@@ -313,75 +315,74 @@
           </div>
           <div class="time-display" id="tinkuy-time">0:00 / 4:31</div>
           <div class="volume-container">
-            <button class="volume-btn" onclick="toggleMute('tinkuy-audio')"></button>
+            <button class="volume-btn" onclick="toggleMute('tinkuy-audio'); toggleVolumeSlider(this.nextElementSibling)"></button>
             <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('tinkuy-audio', this)">
           </div>
-          <!-- AQUÍ ESTÁ TU RUTA ORIGINAL - NO LA CAMBIÉ -->
           <audio id="tinkuy-audio" src="audio/tinkuy.mp3" type="audio/mpeg" onloadedmetadata="setDuration('tinkuy-audio')">
-        
+        </div>
+      </div>
+
+      <!-- CANCIÓN NAVI -->
+      <div class="cancion-card">
+        <h3>Navi</h3>
+        <div class="audio-container">
+          <button class="play-btn" onclick="togglePlay('navi-audio')"></button>
+          <div class="progress-container" onclick="setProgress('navi-audio', event)">
+            <div class="progress-bar" id="navi-progress"></div>
+          </div>
+          <div class="time-display" id="navi-time">0:00 / 0:00</div>
+          <div class="volume-container">
+            <button class="volume-btn" onclick="toggleMute('navi-audio'); toggleVolumeSlider(this.nextElementSibling)"></button>
+            <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('navi-audio', this)">
+          </div>
+          <audio id="navi-audio" src="audio/navi.mp3" type="audio/mpeg" onloadedmetadata="setDuration('navi-audio')">
+        </div>
+      </div>
+
+      <!-- CANCIÓN SAMI -->
+      <div class="cancion-card">
+        <h3>Sami</h3>
+        <div class="audio-container">
+          <button class="play-btn" onclick="togglePlay('sami-audio')"></button>
+          <div class="progress-container" onclick="setProgress('sami-audio', event)">
+            <div class="progress-bar" id="sami-progress"></div>
+          </div>
+          <div class="time-display" id="sami-time">0:00 / 0:00</div>
+          <div class="volume-container">
+            <button class="volume-btn" onclick="toggleMute('sami-audio'); toggleVolumeSlider(this.nextElementSibling)"></button>
+            <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('sami-audio', this)">
+          </div>
+          <audio id="sami-audio" src="audio/sami.mp3" type="audio/mpeg" onloadedmetadata="setDuration('sami-audio')">
+        </div>
       </div>
     </div>
 
-    <!-- CANCIÓN NAVI -->
-    <div class="cancion-card">
-      <h3>Navi</h3>
-      <div class="audio-container">
-        <button class="play-btn" onclick="togglePlay('navi-audio')"></button>
-        <div class="progress-container" onclick="setProgress('navi-audio', event)">
-          <div class="progress-bar" id="navi-progress"></div>
-        </div>
-        <div class="time-display" id="navi-time">0:00 / 0:00</div>
-        <div class="volume-container">
-          <button class="volume-btn" onclick="toggleMute('navi-audio')"></button>
-          <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('navi-audio', this)">
-        </div>
-        <audio id="navi-audio" src="audio/navi.mp3" type="audio/mpeg" onloadedmetadata="setDuration('navi-audio')">
-      
-    </div>
-  </div>
+    <script>
+      // Formatear tiempo
+      function formatTime(seconds) {
+        if (isNaN(seconds)) return "0:00";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' + secs : secs}`;
+      }
 
-  <!-- CANCIÓN SAMI -->
-  <div class="cancion-card">
-    <h3>Sami</h3>
-    <div class="audio-container">
-      <button class="play-btn" onclick="togglePlay('sami-audio')"></button>
-      <div class="progress-container" onclick="setProgress('sami-audio', event)">
-        <div class="progress-bar" id="sami-progress"></div>
-      </div>
-      <div class="time-display" id="sami-time">0:00 / 0:00</div>
-      <div class="volume-container">
-        <button class="volume-btn" onclick="toggleMute('sami-audio')"></button>
-        <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('sami-audio', this)">
-      </div>
-      <audio id="sami-audio" src="audio/sami.mp3" type="audio/mpeg" onloadedmetadata="setDuration('sami-audio')">
-    
-  </div>
-</div>
+      // Establecer duración
+      function setDuration(audioId) {
+        const audio = document.getElementById(audioId);
+        const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
+        timeDisplay.innerHTML = `0:00 / ${formatTime(audio.duration)}`;
+      }
 
-<script>
-  // Formatear tiempo
-  function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs < 10 ? '0' + secs : secs}`;
-  }
+      // Play/Pausa COMPLETO Y FUNCIONAL
+      function togglePlay(audioId) {
+        const audio = document.getElementById(audioId);
+        const btn = document.querySelector(`[onclick="togglePlay('${audioId}')"]`);
+        const progressInterval = audio.getAttribute('data-interval');
 
-  // Establecer duración cuando carga el audio
-  function setDuration(audioId) {
-    const audio = document.getElementById(audioId);
-    const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
-    timeDisplay.innerHTML = `0:00 / ${formatTime(audio.duration)}`;
-  }
-
-  // Play/Pausa (FUNCIONA COMO ANTES)
-  function togglePlay(audioId) {
-    const audio = document.getElementById(audioId);
-    const btn = document.querySelector(`[onclick="togglePlay('${audioId}')"]`);
-    const progressInterval = audio.getAttribute('data-interval');
-
-    if (audio.paused) {
-      audio.play();
-      btn.classList.add('paused');
-      const interval = setInterval(() => {
-        const progress = document.getElementById(`${audioId.split('-')[0]}-progress`);
-        const timeDisplay = document
+        if (audio.paused) {
+          audio.play().catch(() => {
+            alert("Haz clic primero en la página para habilitar la reproducción (restricción del navegador)");
+          });
+          btn.classList.add('paused');
+          const interval = setInterval(() => {
+            const progress = document.getElementById(`${audioId.split('-
