@@ -3,37 +3,71 @@
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>BVHanKrY - Musica Oficial</title>
-     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+     <style>
+       /* ESTILOS PROPIOS QUE SI FUNCIONAN */
+       body {
+         background-color: #1a1a1a;
+         color: white;
+         font-family: Arial, sans-serif;
+         max-width: 800px;
+         margin: 0 auto;
+         padding: 20px;
+       }
+       header {
+         text-align: center;
+         margin-bottom: 30px;
+       }
+       h1 {
+         color: #a855f7;
+         font-size: 30px;
+       }
+       h2 {
+         color: #c084fc;
+         text-align: center;
+         font-size: 24px;
+       }
+       .cancion {
+         background-color: #2d2d2d;
+         padding: 20px;
+         border-radius: 10px;
+         margin-bottom: 20px;
+       }
+       h3 {
+         font-size: 20px;
+         margin-top: 0;
+       }
+       audio {
+         width: 100%;
+         margin-top: 10px;
+       }
+     </style>
    </head>
-   <body class="bg-gray-900 text-white">
-     <header class="py-5 text-center">
-       <h1 class="text-3xl font-bold text-purple-500">BVHanKrY</h1>
-       <p class="text-lg mt-2">DUB Music - Ecuador</p>
+   <body>
+     <header>
+       <h1>BVHanKrY</h1>
+       <p>DUB Music - Ecuador</p>
      </header>
-     <section class="musica mx-auto w-4/5 mt-8">
-       <h2 class="text-2xl font-semibold text-center text-purple-400">EP: Pulso</h2>
+     <h2>EP: Pulso</h2>
+     <div class="cancion">
+       <h3>Tinkuy</h3>
+       <audio controls>
+         <source src="audio/tinkuy.mp3" type="audio/mpeg">
+         Tu navegador no soporta el reproductor de audio.
        
-       <div class="cancion bg-gray-800 p-5 rounded-lg mt-4">
-         <h3 class="text-xl font-medium">Tinkuy</h3>
-         <audio controls class="w-full mt-2">
-           <source src="audio/tinkuy.mp3" type="audio/mpeg">
-           Tu navegador no soporta el reproductor de audio.
-         
-       </div>
-       <div class="cancion bg-gray-800 p-5 rounded-lg mt-4">
-         <h3 class="text-xl font-medium">Nawi</h3>
-         <audio controls class="w-full mt-2">
-           <source src="audio/nawi.mp3" type="audio/mpeg">
-           Tu navegador no soporta el reproductor de audio.
-         
-       </div>
-       <div class="cancion bg-gray-800 p-5 rounded-lg mt-4">
-         <h3 class="text-xl font-medium">Sami</h3>
-         <audio controls class="w-full mt-2">
-           <source src="audio/sami.mp3" type="audio/mpeg">
-           Tu navegador no soporta el reproductor de audio.
-         
-       </div>
-     </section>
+     </div>
+     <div class="cancion">
+       <h3>Nawi</h3>
+       <audio controls>
+         <source src="audio/nawi.mp3" type="audio/mpeg">
+         Tu navegador no soporta el reproductor de audio.
+       
+     </div>
+     <div class="cancion">
+       <h3>Sami</h3>
+       <audio controls>
+         <source src="audio/sami.mp3" type="audio/mpeg">
+         Tu navegador no soporta el reproductor de audio.
+       
+     </div>
    </body>
  </html>
