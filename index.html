@@ -238,95 +238,97 @@
   text-align: center;
 }
 
-/* Control de volumen PROFESIONAL */
-.volume-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
+ /* Control de volumen PROFESIONAL */
+        .volume-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
 
-.volume-btn {
-  width: 28px;
-  height: 28px;
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-size: 0;
-  cursor: pointer;
-  margin-right: 5px;
-}
+        .volume-btn {
+            width: 28px;
+            height: 28px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 0;
+            cursor: pointer;
+            margin-right: 5px;
+        }
 
-/* Icono de bocina profesional */
-.volume-btn::before {
-  content: "";
-  display: block;
-  width: 20px;
-  height: 20px;
-  background: url('https://cdn-icons-png.flaticon.com/512/3033/3033180.png') no-repeat center;
-  background-size: 100%;
-  filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
-}
+        /* Icono de bocina profesional */
+        .volume-btn::before {
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: url('https://cdn-icons-png.flaticon.com/512/3033/3033180.png') no-repeat center;
+            background-size: 100%;
+            filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
+        }
 
-.volume-btn.muted::before {
-  background: url('https://cdn-icons-png.flaticon.com/512/3033/3033182.png') no-repeat center;
-  background-size: 100%;
-  filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
-}
+        .volume-btn.muted::before {
+            background: url('https://cdn-icons-png.flaticon.com/512/3033/3033182.png') no-repeat center;
+            background-size: 100%;
+            filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
+        }
 
-/* Slider de volumen */
-.volume-slider {
-  position: absolute;
-  top: -90px;
-  right: 0;
-  width: 65px;
-  height: 18px;
-  background-color: rgba(26, 26, 26, 0.95);
-  border: 1px solid #a855f7;
-  border-radius: 10px;
-  padding: 5px;
-  display: none;
-  -webkit-appearance: none;
-  appearance: none;
-  outline: none;
-  cursor: pointer;
-  transform: rotate(270deg);
-  transform-origin: right top;
-  z-index: 10;
-}
+        /* Slider de volumen VERTICAL FUNCIONAL */
+        .volume-slider {
+            position: absolute;
+            top: -90px;
+            right: 0;
+            width: 65px;
+            height: 18px;
+            background-color: rgba(26, 26, 26, 0.95);
+            border: 1px solid #a855f7;
+            border-radius: 10px;
+            padding: 5px;
+            display: none;
+            -webkit-appearance: none;
+            appearance: none;
+            outline: none;
+            cursor: pointer;
+            transform: rotate(270deg);
+            transform-origin: right top;
+            z-index: 10;
+        }
 
-.volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
-}
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
+            transition: transform 0.2s ease;
+        }
 
-.volume-slider::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: rgba(80, 80, 80, 0.5);
-  border-radius: 5px;
-  height: 6px;
-}
+        .volume-slider::-webkit-slider-runnable-track {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: rgba(80, 80, 80, 0.5);
+            border-radius: 5px;
+            height: 6px;
+        }
 
-/* Solo para computadoras: slider se mantiene visible */
-@media only screen and (min-width: 769px) {
-  .volume-slider.active {
-    display: block;
-  }
-}
+        /* MANTENER SLIDER VISIBLE EN COMPUTADORAS CUANDO SE INTERACTÚA */
+        @media only screen and (min-width: 769px) {
+           .volume-container:hover .volume-slider,
+           .volume-btn:hover + .volume-slider {
+                display: block;
+            }
+        }
 
-/* Para celulares: comportamiento original */
-@media only screen and (max-width: 768px) {
-  .volume-container:hover .volume-slider {
-    display: block;
-  }
-}
-
+        /* MANTENER COMPORTAMIENTO ORIGINAL EN CELULARES */
+        @media only screen and (max-width: 768px) {
+            .volume-container:hover .volume-slider {
+                display: block;
+            }
+        }
+     
     </style>
   </head>
   <body>
