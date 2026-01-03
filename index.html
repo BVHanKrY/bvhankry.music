@@ -388,110 +388,87 @@
   </div>
 </div>  
 
-      <script>
-// Formatear tiempo
-function formatTime(seconds) {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs < 10 ? '0' + secs : secs}`;
-}
+ <script>
+        // Formatear tiempo
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' + secs : secs}`;
+        }
 
-// Establecer duración cuando carga el audio
-function setDuration(audioId) {
-  const audio = document.getElementById(audioId);
-  const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
-  timeDisplay.innerHTML = `0:00 / ${formatTime(audio.duration)}`;
-}
+        // Establecer duración cuando carga el audio
+        function setDuration(audioId) {
+            const audio = document.getElementById(audioId);
+            const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
+            timeDisplay.innerHTML = `0:00 / ${formatTime(audio.duration)}`;
+        }
 
-// Play/Pausa con icono dinámico
-function togglePlay(audioId) {
-  const audio = document.getElementById(audioId);
-  const btn = document.querySelector(`[onclick="togglePlay('${audioId}')"]`);
-  const progressInterval = audio.getAttribute('data-interval');
-  if (audio.paused) {
-    audio.play();
-    btn.classList.add('paused');
+        // Play/Pausa con icono dinámico
+        function togglePlay(audioId) {
+            const audio = document.getElementById(audioId);
+            const btn = document.querySelector(`[onclick="togglePlay('${audioId}')"]`);
 
-    // Actualizar progreso cada segundo
-    const interval = setInterval(() => {
-      const progress = document.getElementById(`${audioId.split('-')[0]}-progress`);
-      const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
-      const percent = (audio.currentTime / audio.duration) * 100;
-      progress.style.width = percent + "%";
-      timeDisplay.innerHTML = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-    }, 1000);
-    audio.setAttribute('data-interval', interval);
-  } else {
-    audio.pause();
-    btn.classList.remove('paused');
-    clearInterval(progressInterval);
-  }
-}
+            if (audio.paused) {
+                audio.play();
+                btn.classList.add('paused');
+                // Actualizar progreso cada segundo
+                const interval = setInterval(() => {
+                    const progress = document.getElementById(`${audioId.split('-')[0]}-progress`);
+                    const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
+                    const percent = (audio.currentTime / audio.duration) * 100;
+                    progress.style.width = percent + "%";
+                    timeDisplay.innerHTML = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+                }, 1000);
+                audio.dataset.interval = interval; // Guardar el intervalo en el dataset
+            } else {
+                audio.pause();
+                btn.classList.remove('paused');
+                clearInterval(audio.dataset.interval); // Limpiar el intervalo usando el dataset
+            }
+        }
 
-// Establecer progreso al hacer clic en la barra
-function setProgress(audioId, event) {
-  const audio = document.getElementById(audioId);
-  const progressContainer = event.currentTarget;
-  const rect = progressContainer.getBoundingClientRect();
-  const clickX = event.clientX - rect.left;
-  const percent = (clickX / rect.width) * 100;
-  audio.currentTime = (percent / 100) * audio.duration;
-  const progress = document.getElementById(`${audioId.split('-')[0]}-progress`);
-  progress.style.width = percent + "%";
-  const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
-  timeDisplay.innerHTML = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-}
+        // Establecer progreso al hacer clic en la barra
+        function setProgress(audioId, event) {
+            const audio = document.getElementById(audioId);
+            const progressContainer = event.currentTarget;
+            const rect = progressContainer.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const percent = (clickX / rect.width) * 100;
+            audio.currentTime = (percent / 100) * audio.duration;
+            
+            const progress = document.getElementById(`${audioId.split('-')[0]}-progress`);
+            progress.style.width = percent + "%";
+            const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
+            timeDisplay.innerHTML = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+        }
 
-// Ajustar volumen FUNCIONAL (sin solapamiento)
-function setVolume(audioId, slider) {
-  const audio = document.getElementById(audioId);
-  const volumeValue = parseFloat(slider.value);
-  audio.volume = volumeValue;
-  audio.muted = false; // Evita que se mutee al mover el slider
-  const volumeBtn = document.querySelector(`[onclick="toggleMute('${audioId}')"]`);
-  volumeBtn.classList.toggle('muted', volumeValue === 0);
-  slider.focus(); // Mantiene el slider activo cuando se mueve
-}
- 
-// Silenciar/activar volumen
-function toggleMute(audioId) {
-  const audio = document.getElementById(audioId);
-  const volumeBtn = document.querySelector(`[onclick="toggleMute('${audioId}')"]`);
-  const volumeSlider = volumeBtn.nextElementSibling;
-  if (audio.muted) {
-    audio.muted = false;
-    volumeSlider.value = audio.volume;
-    volumeBtn.classList.remove('muted');
-  } else {
-    audio.muted = true;
-    volumeSlider.value = 0;
-    volumeBtn.classList.add('muted');
+        // Ajustar volumen FUNCIONAL
+        function setVolume(audioId, slider) {
+            const audio = document.getElementById(audioId);
+            const volumeValue = parseFloat(slider.value);
+            audio.volume = volumeValue;
+            audio.muted = false;
+            
+            const volumeBtn = document.querySelector(`[onclick="toggleMute('${audioId}')"]`);
+            volumeBtn.classList.toggle('muted', volumeValue === 0);
+        }
 
-    // Función para mostrar/ocultar slider en computadoras
-function toggleVolumeSlider(slider) {
-  // Solo aplicar en computadoras
-  if (window.innerWidth >= 769) {
-    slider.classList.toggle('active');
-    // Cerrar slider si se hace clic fuera
-    document.addEventListener('click', function(e) {
-      if (!slider.contains(e.target) && !e.target.classList.contains('volume-btn')) {
-        slider.classList.remove('active');
-      }
-    });
-  }
-}
- 
-// Ajustar volumen
-function setVolume(audioId, slider) {
-  const audio = document.getElementById(audioId);
-  const volumeValue = parseFloat(slider.value);
-  audio.volume = volumeValue;
-  audio.muted = false;
-  const volumeBtn = document.querySelector(`[onclick="toggleMute('${audioId}')"]`);
-  volumeBtn.classList.toggle('muted', volumeValue === 0);
-  }
-}
-
-</script>
+        // Silenciar/activar volumen
+        function toggleMute(audioId) {
+            const audio = document.getElementById(audioId);
+            const volumeBtn = document.querySelector(`[onclick="toggleMute('${audioId}')"]`);
+            const volumeSlider = volumeBtn.nextElementSibling;
+            
+            if (audio.muted) {
+                audio.muted = false;
+                volumeSlider.value = audio.volume;
+                volumeBtn.classList.remove('muted');
+            } else {
+                audio.muted = true;
+                volumeSlider.value = 0;
+                volumeBtn.classList.add('muted');
+            }
+        }
+    </script>
   </body>
 </html>
