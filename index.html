@@ -491,44 +491,40 @@ header {
     margin-bottom: 20px; /* Aumenta la distancia entre el título y el contenido */
 }
 
-    /* Estilo base de la tarjeta */
-.cancion-tarjeta {
-    position: relative; /* Para posicionar el contador de reproducciones */
+    /* === ESTILOS NUEVOS - ADAPTADOS A TU CORAZÓN Y RESPONSIVE === */
+.cancion-card {
+  position: relative;
+  padding-top: 25px; /* Espacio para el contador */
 }
 
-/* Contador de reproducciones - Esquina superior derecha */
-.contador-reproducciones {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 12px;
-    color: #b3b3b3;
+/* Contador de Reviews - Esquina superior derecha */
+.contador-reviews {
+  position: absolute;
+  top: 0px;
+  right: 15px;
+  font-size: 12px;
+  color: #c8c8c8;
+  margin: 0;
 }
 
-/* Estilo del reproductor y contenedor de gustos */
-.gustos-contenedor {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 10px; /* Espacio adicional */
+/* Ocultar en pantallas grandes (PC) - Solución al problema en PC */
+@media (min-width: 768px) { /* Ajusta el valor según tu diseño */
+  .contador-reviews-pagina {
+    display: none; /* Oculta el contador global en PC */
+  }
 }
 
-.btn-corazon {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    transition: color 0.3s;
+/* Número de "Me Gustas" al lado del corazón */
+.num-gustos {
+  font-size: 12px;
+  color: #c8c8c8;
+  margin: 0 8px 0 2px;
 }
 
-.btn-corazon:hover {
-    color: #ff4d4d;
+/* Estilo del corazón (transición de color) */
+.heart-btn {
+  transition: color 0.2s ease;
 }
-
-.numero-gustos {
-    font-size: 12px;
-    color: #b3b3b3;
-} 
      
     </style>
   </head>
@@ -600,9 +596,14 @@ header {
     </div>
 
     <!-- CONTADOR DE REPRODUCCIONES/VISITAS - ESQUINA SUPERIOR DERECHA -->
-   <div class="contador-reproducciones">
-     <span>Reproducciones: <strong id="contador-visitas-tinkuy">0</strong></span>
-   </div>
+   <div class="cancion-card">
+  <!-- CONTADOR DE REVIEWS (CORREGIDO) -->
+  <div class="contador-reviews" id="reviews-tinkuy">
+    Reviews: <strong>0</strong>
+  </div>
+
+  <!-- ... tu código original de la canción ... -->
+</div>
 
    <!-- CORAZÓN Y CONTADOR DE ME GUSTAS -->
    <div class="gustos-contenedor">
@@ -642,9 +643,14 @@ header {
     </div>
 
     <!-- CONTADOR DE REPRODUCCIONES/VISITAS - ESQUINA SUPERIOR DERECHA -->
-   <div class="contador-reproducciones">
-     <span>Reproducciones: <strong id="contador-visitas-navi">0</strong></span>
-   </div>
+<div class="cancion-card">
+  <!-- CONTADOR DE REVIEWS (CORREGIDO) -->
+  <div class="contador-reviews" id="reviews-navi">
+    Reviews: <strong>0</strong>
+  </div>
+
+  <!-- ... tu código original de la canción ... -->
+</div>
 
    <!-- CORAZÓN Y CONTADOR DE ME GUSTAS -->
    <div class="gustos-contenedor">
@@ -682,9 +688,14 @@ header {
     </div>
 
     <!-- CONTADOR DE REPRODUCCIONES/VISITAS - ESQUINA SUPERIOR DERECHA -->
-   <div class="contador-reproducciones">
-     <span>Reproducciones: <strong id="contador-visitas-sami">0</strong></span>
-   </div>
+  <div class="cancion-card">
+  <!-- CONTADOR DE REVIEWS (CORREGIDO) -->
+  <div class="contador-reviews" id="reviews-sami">
+    Reviews: <strong>0</strong>
+  </div>
+
+  <!-- ... tu código original de la canción ... -->
+</div>
 
    <!-- CORAZÓN Y CONTADOR DE ME GUSTAS -->
    <div class="gustos-contenedor">
@@ -716,6 +727,11 @@ header {
   <h2>Shop</h2>
  <p>Proximamente...</p>
 </section>
+
+     <!-- Contador global de Reviews (solo visible en móviles) -->
+<div class="contador-reviews-pagina">
+  Total Reviews: <strong id="total-reviews">0</strong>
+</div>
      
  <script>
         // Formatear tiempo
@@ -825,53 +841,67 @@ document.addEventListener('contextmenu', function(e) {
     }
 });
 
-  // CONTADOR DE REPRODUCCIONES/VISITAS
-function incrementarVisitas(cancionId) {
-    let contadorVisitas = localStorage.getItem(`contadorVisitas-${cancionId}`) || 0;
-    contadorVisitas++;
-    localStorage.setItem(`contadorVisitas-${cancionId}`, contadorVisitas);
-    const elementoContadorVisitas = document.getElementById(`contador-visitas-${cancionId}`);
-    elementoContadorVisitas.textContent = contadorVisitas;
+/* === FUNCIONES NUEVAS - ADAPTADAS A REVIEWS Y RESPONSIVE === */
+
+// Función para cargar el contador de Reviews
+function cargarContadorReviews(nombreCancion) {
+  let reviews = localStorage.getItem(`reviews-${nombreCancion}`) || 0;
+  reviews = parseInt(reviews) + 1;
+  localStorage.setItem(`reviews-${nombreCancion}`, reviews);
+  document.getElementById(`reviews-${nombreCancion}`).querySelector('strong').textContent = reviews;
+  actualizarContadorTotal(); // Actualizamos el contador total
 }
 
-//CONTADOR DE ME GUSTAS
-function agregarMeGusta(cancionId) {
-    let contadorMeGustas = localStorage.getItem(`contadorMeGustas-${cancionId}`) || 0;
-    const elementoContadorMeGustas = document.getElementById(`contador-me-gustas-${cancionId}`);
-    const btnCorazon = document.getElementById(`btn-me-gusta-${cancionId}`);
+// Función para activar el "Me Gusta"
+function activarMeGusta(nombreCancion) {
+  const corazon = document.getElementById(`corazon-${nombreCancion}`);
+  const numGusta = document.getElementById(`num-gustos-${nombreCancion}`);
 
-    if (localStorage.getItem(`usuarioDioMeGusta-${cancionId}`) !== 'true') {
-        contadorMeGustas++;
-        localStorage.setItem(`contadorMeGustas-${cancionId}`, contadorMeGustas);
-        localStorage.setItem(`usuarioDioMeGusta-${cancionId}`, 'true');
-        elementoContadorMeGustas.textContent = contadorMeGustas;
-        btnCorazon.style.color = '#ff4d4d';
-        alert('¡Gracias por tu me gusta!');
-    } else {
-        alert('Ya has dado me gusta a esta canción :)');
-    }
+  if (localStorage.getItem(`gusto-${nombreCancion}`) === 'activado') {
+    alert('¡Ya le diste "Me Gusta" a esta canción! 🎵');
+    return;
+  }
+
+  let gustos = localStorage.getItem(`cant-gustos-${nombreCancion}`) || 0;
+  gustos = parseInt(gustos) + 1;
+  localStorage.setItem(`cant-gustos-${nombreCancion}`, gustos);
+  localStorage.setItem(`gusto-${nombreCancion}`, 'activado');
+
+  corazon.style.color = '#ff3a3a';
+  numGusta.textContent = gustos;
+  alert('¡Gracias por tu "Me Gusta"! 🙏');
 }
 
-// Inicialización de contadores al cargar la página
+// Función para actualizar el contador total de Reviews
+function actualizarContadorTotal() {
+  let total = 0;
+  const canciones = ['tinkuy', 'navi', 'sami']; // Lista de canciones
+  canciones.forEach(cancion => {
+    total += parseInt(localStorage.getItem(`reviews-${cancion}`) || 0);
+  });
+  document.getElementById('total-reviews').textContent = total;
+}
+
+// Inicialización al cargar la página
 window.onload = function() {
-    // Para cada canción...
-    ['tinkuy', 'navi', 'sami'].forEach(cancionId => {
-        // Actualizar contador de visitas
-        incrementarVisitas(cancionId);
-        const elementoContadorVisitas = document.getElementById(`contador-visitas-${cancionId}`);
-        let contadorVisitas = localStorage.getItem(`contadorVisitas-${cancionId}`) || 0;
-        elementoContadorVisitas.textContent = contadorVisitas;
+  const canciones = ['tinkuy', 'navi', 'sami'];
 
-        // Actualizar contador de "me gusta" y estado del corazón
-        const elementoContadorMeGustas = document.getElementById(`contador-me-gustas-${cancionId}`);
-        let contadorMeGustas = localStorage.getItem(`contadorMeGustas-${cancionId}`) || 0;
-        elementoContadorMeGustas.textContent = contadorMeGustas;
+  canciones.forEach(cancion => {
+    cargarContadorReviews(cancion);
 
-        const btnCorazon = document.getElementById(`btn-me-gusta-${cancionId}`);
-        if (localStorage.getItem(`usuarioDioMeGusta-${cancionId}`) === 'true') {
-            btnCorazon.style.color = '#ff4d4d';
-        }
-    });
+    const corazon = document.getElementById(`corazon-${cancion}`);
+    const numGustos = document.getElementById(`num-gustos-${cancion}`);
+
+    corazon.onclick = () => activarMeGusta(cancion);
+
+    const gustosGuardados = localStorage.getItem(`cant-gustos-${cancion}`) || 0;
+    numGustos.textContent = gustosGuardados;
+
+    if (localStorage.getItem(`gusto-${cancion}`) === 'activado') {
+      corazon.style.color = '#ff3a3a';
+    }
+  });
+  actualizarContadorTotal(); // Aseguramos que el contador total se cargue al inicio
 };
   
     </script>
