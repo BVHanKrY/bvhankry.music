@@ -438,6 +438,36 @@
 .social-links a:hover img {
     transform: scale(1.2); /* Aumenta ligeramente el tamaño al pasar el ratón */
 }
+
+     /*tarjeta de transparencio*/
+     .nav-links {
+    display: flex;
+    list-style: none; /* Elimina los puntos de la lista */
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo transparente */
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 5px 15px; /* Espacio interno */
+}
+
+.nav-links li {
+    margin-left: 15px; /* Espacio entre los enlaces */
+}
+
+.nav-links li:first-child {
+    margin-left: 0; /* Elimina el margen izquierdo del primer enlace */
+}
+
+.nav-links a {
+    color: #fff; /* Color del texto */
+    text-decoration: none; /* Elimina el subrayado */
+    font-weight: bold; /* Texto en negrita */
+    transition: color 0.2s ease; /* Transición suave al pasar el ratón */
+}
+
+.nav-links a:hover {
+    color: #a855f7; /* Cambia el color al pasar el ratón */
+}
      
     </style>
   </head>
@@ -446,7 +476,12 @@
       <header>
         <h1>BVHanKrY</h1>
         <p>DUB Music - Ecuador</p>
+     
       </header>
+ <section id="Music">
+    <!-- Contenido de la sección "Music" -->
+</section>
+     
       <h2 class="ep-title">EP: Pulso</h2>
 
 <!-- CANCIÓN TINKUY -->
@@ -535,7 +570,19 @@
         </a>
     </div>
 </div>
+     
+<section id="videos">
+    <!-- Contenido de la sección "Videos" -->
+ <h2>Videos</h2>
+ <p>Proximamente...</p>
+</section>
 
+<section id="productos">
+    <!-- Contenido de la sección "Productos" -->
+  <h2>Shop</h2>
+ <p>Proximamente...</p>
+</section>
+     
  <script>
         // Formatear tiempo
         function formatTime(seconds) {
@@ -654,12 +701,17 @@ document.addEventListener('contextmenu', function(e) {
     </div>
         
   </body>
- 
+
  <nav class="main-nav">
     <div class="nav-container">
         <a href="#" class="logo">
             <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/BVHANKRY-Photoroom.png">
         </a>
+        <ul class="nav-links">
+            <li><a href="#music">Music</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#productos">Productos</a></li>
+        </ul>
         <ul class="social-links">
             <li>
                 <a href="https://www.instagram.com/henryandresvill/" target="_blank">
