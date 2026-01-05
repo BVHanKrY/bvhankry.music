@@ -1,98 +1,1081 @@
-</style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BVHanKrY - Música Dub desde Ecuador. Escucha el EP Pulso con canciones como Tinkuy, Navi y Sami.">
+    <meta name="keywords" content="BVHanKrY, música dub, Ecuador, EP Pulso, Tinkuy, música electrónica">
+    <title>BVHanKrY - Música Oficial</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/multimedia/BVHANKRY-Photoroom.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        body {
+            background-image: url(https://github.com/BVHanKrY/bvhankry.music/blob/main/ChatGPT%20Image%2030%20dic%202025,%2010_59_54%20a.m..png?raw=true), linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+            background-blend-mode: overlay; /* Mezcla la imagen con el degradado */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #f5f5f5;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: rgba(18, 18, 18, 0.85); /* Fondo semi-transparente */
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 80px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            color: #a855f7;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            color: #b3b3b3;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .ep-title {
+            text-align: center;
+            color: #c084fc;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .ep-title::after {
+            content: '';
+            width: 80px;
+            height: 2px;
+            background-color: #a855f7;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+        }
+        
+        .cancion-card {
+            background: linear-gradient(145deg, rgba(45, 45, 45, 0.9) 0%, rgba(56, 56, 56, 0.9) 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            width: 100%;
+            max-width: 450px;
+            margin: 15px auto;
+        }
+
+        .cancion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(168, 85, 247, 0.5);
+        }
+        
+        .cancion-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .cancion-card h3 .song-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cancion-card h3 .song-title::before {
+            content: "🎵";
+            margin-right: 5px;
+            font-size: 1.8rem;
+        }
+        
+        /* Sistema de Me Gusta */
+        .song-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .likes-counter {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #a0a0a0;
+            transition: color 0.3s ease;
+        }
+
+        .likes-counter:hover {
+            color: #a855f7;
+        }
+
+        .heart-icon {
+            font-size: 1.2em;
+            transition: transform 0.2s ease;
+        }
+
+        .heart-icon.liked {
+            color: #a855f7;
+        }
+
+        .heart-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .plays-counter {
+            color: #a0a0a0;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Reproductor personalizado PROFESIONAL */
+        .audio-container {
+            position: relative;
+            width: 100%;
+            height: 70px;
+            background-color: rgba(26, 26, 26, 0.95);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            border-radius: 30px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.7);
+            margin-bottom: 15px;
+        }
+
+        /* Botón de play/pausa PROFESIONAL */
+        .play-btn {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 0; /* Ocultar texto */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+            transition: transform 0.2s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Iconos de play/pausa como pseudo-elementos */
+        .play-btn::before {
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 12px solid white;
+            margin-left: 1px;
+        }
+
+        .play-btn.paused::before {
+            border: none;
+            width: 10px;
+            height: 16px;
+            background: white;
+            box-shadow: 4px 0 0 0 white;
+            margin-left: 0;
+        }
+
+        /* Barra de progreso PROFESIONAL */
+        .progress-container {
+            flex: 1;
+            height: 8px;
+            background-color: rgba(80, 80, 80, 0.5);
+            border-radius: 20px;
+            position: relative;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #a855f7 0%, #7c3aed 100%);
+            border-radius: 20px;
+            width: 0%;
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
+            display: none;
+        }
+
+        .progress-container:hover .progress-bar::after {
+            display: block;
+        }
+
+        /* Tiempo */
+        .time-display {
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            margin-right: 15px;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        /* Control de volumen PROFESIONAL */
+        .volume-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .volume-btn {
+            width: 28px;
+            height: 28px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 0;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        /* Icono de bocina profesional */
+        .volume-btn::before {
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: url('https://cdn-icons-png.flaticon.com/512/3033/3033180.png') no-repeat center;
+            background-size: 100%;
+            filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
+        }
+
+        .volume-btn.muted::before {
+            background: url('https://cdn-icons-png.flaticon.com/512/3033/3033182.png') no-repeat center;
+            background-size: 100%;
+            filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
+        }
+
+        /* Slider de volumen VERTICAL FUNCIONAL */
+        .volume-slider {
+            position: absolute;
+            top: -90px;
+            right: 0;
+            width: 65px;
+            height: 18px;
+            background-color: rgba(26, 26, 26, 0.95);
+            border: 1px solid #a855f7;
+            border-radius: 10px;
+            padding: 5px;
+            display: none;
+            -webkit-appearance: none;
+            appearance: none;
+            outline: none;
+            cursor: pointer;
+            transform: rotate(270deg);
+            transform-origin: right top;
+            z-index: 10;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
+            transition: transform 0.2s ease;
+        }
+
+        .volume-slider::-webkit-slider-runnable-track {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: rgba(80, 80, 80, 0.5);
+            border-radius: 5px;
+            height: 6px;
+        }
+
+        /* MANTENER SLIDER VISIBLE EN COMPUTADORAS CUANDO SE INTERACTÚA */
+        @media only screen and (min-width: 769px) {
+            .volume-container:hover .volume-slider,
+            .volume-btn:hover + .volume-slider,
+            .volume-container.volume-active .volume-slider { /* Agregamos esta línea */
+                display: block;
+            }
+        }
+
+        /* MANTENER COMPORTAMIENTO ORIGINAL EN CELULARES */
+        @media only screen and (max-width: 768px) {
+            .volume-container:hover .volume-slider {
+                display: block;
+            }
+        }
+
+        /* Banner de navegación */
+        .main-nav {
+            background-color: rgba(18, 18, 18, 0.95);
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 5px 15px;
+        }
+
+        .nav-links li {
+            margin-left: 15px;
+        }
+
+        .nav-links li:first-child {
+            margin-left: 0;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #a855f7;
+        }
+
+        .social-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .social-links li {
+            margin-left: 20px;
+        }
+
+        .social-links li:first-child {
+            margin-left: 0;
+        }
+
+        .social-links a img {
+            height: 25px;
+            transition: transform 0.2s ease;
+        }
+
+        .social-links a:hover img {
+            transform: scale(1.2);
+        }
+
+        /* Secciones */
+        section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+        }
+
+        section h2 {
+            color: #c084fc;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        /* Derechos de autor */
+        .copyright-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(168, 85, 247, 0.3);
+            text-align: center;
+            font-size: 0.9em;
+            color: #d1d5db;
+            width: 100%;
+            max-width: 100%; /* Agrega esta línea */
+            margin-left: auto; /* Agrega esta línea */
+            margin-right: auto; /* Agrega esta línea */
+        }
+
+        .copyright-subtext {
+            font-size: 0.8em;
+            margin: 5px 0;
+            color: #888;
+        }
+
+        .song-copyright {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(168, 85, 247, 0.1);
+            font-size: 0.75em;
+            color: #79716B;
+            text-align: center;
+        }
+
+        /* Botón de compartir */
+        .share-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .share-whatsapp {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.85em;
+            transition: background-color 0.2s ease;
+        }
+
+        .share-whatsapp:hover {
+            background-color: #128c7e;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                margin: 10px 0;
+            }
+
+            .social-links {
+                margin-top: 10px;
+            }
+
+            .container {
+                margin-top: 140px;
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .ep-title {
+                font-size: 1.5rem;
+            }
+
+            .cancion-card {
+                padding: 20px;
+            }
+
+            .cancion-card h3 {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .song-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Loading para audio */
+        .audio-loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #a855f7;
+            font-size: 0.9em;
+        }
+
+        .audio-container.loading .audio-loading {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>BVHanKrY</h1>
-      <p>DUB Music - Ecuador</p>
-    </header>
-    <h2 class="ep-title">EP: Pulso</h2>
 
-    <!-- CANCIÓN TINKUY -->
-    <div class="cancion-card animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
-      <h3>Tinkuy</h3>
-      <div class="audio-container" oncontextmenu="return false;"> <!-- Evita clic derecho -->
-        <button class="play-btn" onclick="togglePlay('tinkuy-audio')"></button>
-        <div class="progress-container" onclick="setProgress('tinkuy-audio', event)">
-          <div class="progress-bar" id="tinkuy-progress"></div>
+    <!-- Banner de navegación -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/BVHANKRY-Photoroom.png" alt="BVHanKrY Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#music">Music</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#productos">Productos</a></li>
+            </ul>
+            <ul class="social-links">
+                <li>
+                    <a href="https://www.instagram.com/henryandresvill/" target="_blank" rel="noopener">
+                        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/instagram.png" alt="Instagram">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wa.link/uuajw5" target="_blank" rel="noopener">
+                        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/whatsapp.png" alt="WhatsApp">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/channel/UCJrxTphZnI8Rm_GTyCJp44g" target="_blank" rel="noopener">
+                        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/youtube.png" alt="YouTube">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://open.spotify.com/intl-es/artist/0IPDl4adPnkF6LaoEyUwDl?si=Q1rMXXmjSRaxMks57Zw3gA" target="_blank" rel="noopener">
+                        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/spotify.png" alt="Spotify">
+                    </a>
+                </li>
+            </ul>
         </div>
-        <div class="time-display" id="tinkuy-time">0:00 / 4:31</div>
-        <div class="volume-container">
-          <button class="volume-btn" onclick="toggleMute('tinkuy-audio')"></button>
-          <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('tinkuy-audio', this)">
-        </div>
-        <audio id="tinkuy-audio" src="audio/tinkuy.mp3" type="audio/mpeg" onloadedmetadata="setDuration('tinkuy-audio')">
-        <!-- Cierra la etiqueta audio que faltaba -->
-      </div>
-      <!-- AVISO ESPECÍFICO POR CANCIÓN -->
-      <div class="song-copyright">
-        <p>Compositor: BVHanKrY | Producción: BVros</p>
-        <p>℗ 2026 BVHanKrY - No para uso público</p>
-      </div>
-      <!-- BOTÓN DE COMPARTIR -->
-      <div class="share-button-container">
-        <a href="https://wa.me/?text=¡Escucha%20%22Tinkuy%22%20de%20BVHanKrY%20-%20EP%20Pulso!%20https://bvhankry.onrender.com/tinkuy" 
-          target="_blank" 
-          class="share-whatsapp">
-          <i class="fab fa-whatsapp"></i> Compartir en WhatsApp
-        </a>
-      </div>
-    </div>
+    </nav>
 
-    <!-- CANCIÓN NAVI -->
-    <div class="cancion-card animate__animated animate__fadeInUp" style="animation-delay: 1s;">
-      <h3>Navi</h3>
-      <div class="audio-container" oncontextmenu="return false;">
-        <button class="play-btn" onclick="togglePlay('navi-audio')"></button>
-        <div class="progress-container" onclick="setProgress('navi-audio', event)">
-          <div class="progress-bar" id="navi-progress"></div>
-        </div>
-        <div class="time-display" id="navi-time">0:00 / 0:00</div>
-        <div class="volume-container">
-          <button class="volume-btn" onclick="toggleMute('navi-audio')"></button>
-          <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('navi-audio', this)">
-        </div>
-        <audio id="navi-audio" src="audio/navi.mp3" type="audio/mpeg" onloadedmetadata="setDuration('navi-audio')"></audio>
-      </div>
-      <div class="song-copyright">
-        <p>Compositor: BVHanKrY | Producción: BVros</p>
-        <p>℗ 2026 BVHanKrY - No para uso público</p>
-      </div>
-      <div class="share-button-container">
-        <a href="https://wa.me/?text=¡Escucha%20%22Navi%22%20de%20BVHanKrY%20-%20EP%20Pulso!%20https://www.bvhankry.com/navi"
-          target="_blank" 
-          class="share-whatsapp">
-          Compartir en WhatsApp
-        </a>
-      </div>
-    </div>
+    <div class="container">
+        <header>
+            <h1>BVHanKrY</h1>
+            <p>DUB Music - Ecuador</p>
+        </header>
 
-    <!-- CANCIÓN SAMI -->
-    <div class="cancion-card animate__animated animate__fadeInUp" style="animation-delay: 1.5s;">
-      <h3>Sami</h3>
-      <div class="audio-container" oncontextmenu="return false;">
-        <button class="play-btn" onclick="togglePlay('sami-audio')"></button>
-        <div class="progress-container" onclick="setProgress('sami-audio', event)">
-          <div class="progress-bar" id="sami-progress"></div>
+        <h2 class="ep-title">EP: Pulso</h2>
+
+        <!-- CANCIÓN TINKUY -->
+        <div class="cancion-card">
+            <h3>
+                <span class="song-title">Tinkuy</span>
+                <span class="total-reviews">Total Reviews: <span id="total-reviews">0</span></span>
+            </h3>
+            
+            <div class="song-stats">
+                <div class="likes-counter" onclick="activarMeGusta('tinkuy')">
+                    <span class="heart-icon" id="corazon-tinkuy">❤️</span>
+                    <span id="num-gustos-tinkuy">0</span> Me gusta
+                </div>
+                <div class="plays-counter">
+                    Reproducciones: <strong id="reviews-tinkuy">0</strong>
+                </div>
+            </div>
+
+            <div class="audio-container" oncontextmenu="return false;">
+                <div class="audio-loading">Cargando...</div>
+                <button class="play-btn" onclick="togglePlay('tinkuy-audio')"></button>
+                <div class="progress-container" onclick="setProgress('tinkuy-audio', event)">
+                    <div class="progress-bar" id="tinkuy-progress"></div>
+                </div>
+                <div class="time-display" id="tinkuy-time">0:00 / 0:00</div>
+                <div class="volume-container">
+                    <button class="volume-btn" onclick="toggleMute('tinkuy-audio')"></button>
+                    <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('tinkuy-audio', this)">
+                </div>
+            </div>
+            <audio id="tinkuy-audio" preload="metadata" onloadedmetadata="setDuration('tinkuy-audio')" onerror="audioError('tinkuy-audio')">
+                <source src="https://github.com/BVHanKrY/bvhankry.music/releases/download/v1.0/tinkuy.mp3" type="audio/mpeg">
+            </audio>
+                Tu navegador no soporta el elemento de audio.
+
+            <div class="song-copyright">
+                <p>Compositor: BVHanKrY | Producción: BVros</p>
+                <p>℗ 2026 BVHanKrY - No para uso público</p>
+            </div>
+            <div class="share-button-container">
+                <a href="https://wa.me/?text=¡Escucha%20%22Tinkuy%22%20de%20BVHanKrY%20-%20EP%20Pulso!%20https://bvhankry.onrender.com" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="share-whatsapp">
+                    Compartir en WhatsApp
+                </a>
+            </div>
         </div>
-        <div class="time-display" id="sami-time">0:00 / 0:00</div>
-        <div class="volume-container">
-          <button class="volume-btn" onclick="toggleMute('sami-audio')"></button>
-          <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('sami-audio', this)">
+
+        <!-- CANCIÓN NAVI -->
+        <div class="cancion-card">
+            <h3>
+                <span class="song-title">Navi</span>
+            </h3>
+            
+            <div class="song-stats">
+                <div class="likes-counter" onclick="activarMeGusta('navi')">
+                    <span class="heart-icon" id="corazon-navi">❤️</span>
+                    <span id="num-gustos-navi">0</span> Me gusta
+                </div>
+                <div class="plays-counter">
+                    Reproducciones: <strong id="reviews-navi">0</strong>
+                </div>
+            </div>
+
+            <div class="audio-container" oncontextmenu="return false;">
+                <div class="audio-loading">Cargando...</div>
+                <button class="play-btn" onclick="togglePlay('navi-audio')"></button>
+                <div class="progress-container" onclick="setProgress('navi-audio', event)">
+                    <div class="progress-bar" id="navi-progress"></div>
+                </div>
+                <div class="time-display" id="navi-time">0:00 / 0:00</div>
+                <div class="volume-container">
+                    <button class="volume-btn" onclick="toggleMute('navi-audio')"></button>
+                    <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('navi-audio', this)">
+                </div>
+            </div>
+            <audio id="navi-audio" preload="metadata" onloadedmetadata="setDuration('navi-audio')" onerror="audioError('navi-audio')">
+                <source src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/navi.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+
+            <div class="song-copyright">
+                <p>Compositor: BVHanKrY | Producción: BVros</p>
+                <p>℗ 2026 BVHanKrY - No para uso público</p>
+            </div>
+            <div class="share-button-container">
+                <a href="https://wa.me/?text=¡Escucha%20%22Navi%22%20de%20BVHanKrY%20-%20EP%20Pulso!%20https://bvhankry.onrender.com" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="share-whatsapp">
+                    Compartir en WhatsApp
+                </a>
+            </div>
         </div>
-        <audio id="sami-audio" src="audio/sami.mp3" type="audio/mpeg" onloadedmetadata="setDuration('sami-audio')"></audio>
-      </div>
-      <div class="song-copyright">
-        <p>Compositor: BVHanKrY | Producción: BVros</p>
-        <p>℗ 2026 BVHanKrY - No para uso público</p>
-      </div>
-      <div class="share-button-container">
-        <a href="https://wa.me/?text=¡Escucha%20%22Sami%22%20de%20BVHanKrY%20-%20EP%20Pulso!%20https://www.bvhankry.com/sami"
-          target="_blank" 
-          class="share-whatsapp">
-          Compartir en WhatsApp
-        </a>
-      </div>
+
+        <!-- CANCIÓN SAMI -->
+        <div class="cancion-card">
+            <h3>
+                <span class="song-title">Sami</span>
+            </h3>
+            
+            <div class="song-stats">
+                <div class="likes-counter" onclick="activarMeGusta('sami')">
+                    <span class="heart-icon" id="corazon-sami">❤️</span>
+                    <span id="num-gustos-sami">0</span> Me gusta
+                </div>
+                <div class="plays-counter">
+                    Reproducciones: <strong id="reviews-sami">0</strong>
+                </div>
+            </div>
+
+            <div class="audio-container" oncontextmenu="return false;">
+                <div class="audio-loading">Cargando...</div>
+                <button class="play-btn" onclick="togglePlay('sami-audio')"></button>
+                <div class="progress-container" onclick="setProgress('sami-audio', event)">
+                    <div class="progress-bar" id="sami-progress"></div>
+                </div>
+                <div class="time-display" id="sami-time">0:00 / 0:00</div>
+                <div class="volume-container">
+                    <button class="volume-btn" onclick="toggleMute('sami-audio')"></button>
+                    <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('sami-audio', this)">
+                </div>
+            </div>
+            <audio id="sami-audio" preload="metadata" onloadedmetadata="setDuration('sami-audio')" onerror="audioError('sami-audio')">
+                <source src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/sami.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+
+            <div class="song-copyright">
+                <p>Compositor: BVHanKrY | Producción: BVros</p>
+                <p>℗ 2026 BVHanKrY - No para uso público</p>
+            </div>
+            <div class="share-button-container">
+                <a href="https://wa.me/?text=¡Escucha%20%22Sami%22%20de%20BVHanKrY%20-%20EP%20Pulso!%20https://bvhankry.onrender.com" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="share-whatsapp">
+                    Compartir en WhatsApp
+                </a>
+            </div>
+        </div>
+
+        <!-- SECCIONES -->
+        <section id="music">
+            <h2>Música</h2>
+            <p>Disfruta del EP completo "Pulso", una fusión de sonidos dub con influencias andinas.</p>
+        </section>
+
+        <section id="videos">
+            <h2>Videos</h2>
+            <p>Próximamente videos musicales y behind the scenes.</p>
+        </section>
+
+        <section id="productos">
+            <h2>Shop</h2>
+            <p>Próximamente merch y productos exclusivos.</p>
+        </section>
+
+        <!-- AVISO GENERAL DE DERECHOS DE AUTOR -->
+        <div class="copyright-section">
+            <p>© 2026 BVHanKrY (Todos los derechos reservados)</p>
+            <p class="copyright-subtext">Las composiciones, producciones y contenidos de este sitio web están protegidos por las leyes internacionales de derechos de autor.</p>
+            <p class="copyright-subtext">No se permite la reproducción, distribución, modificación o uso comercial de los contenidos sin autorización expresa por escrito.</p>
+        </div>
     </div>
 
     <script>
+        // Variables globales para manejar intervalos
+        const audioIntervals = {};
+
+        // Formatear tiempo
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' + secs : secs}`;
+        }
+
+        // Establecer duración cuando carga el audio
+        function setDuration(audioId) {
+            const audio = document.getElementById(audioId);
+            const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
+            if (audio.duration && !isNaN(audio.duration)) {
+                timeDisplay.innerHTML = `0:00 / ${formatTime(audio.duration)}`;
+            }
+        }
+
+        // Manejar errores de audio
+        function audioError(audioId) {
+            console.error(`Error cargando el audio: ${audioId}`);
+            const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
+            timeDisplay.innerHTML = "Error / 0:00";
+            timeDisplay.style.color = "#ff6b6b";
+            
+            // Mostrar mensaje de error
+            alert(`Error al cargar la canción ${audioId.split('-')[0]}. Por favor, verifica que el archivo exista en: https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/`);
+        }
+
+        // Play/Pausa con icono dinámico
+        function togglePlay(audioId) {
+            const audio = document.getElementById(audioId);
+            const btn = document.querySelector(`[onclick="togglePlay('${audioId}')"]`);
+            const container = btn.closest('.audio-container');
+
+            if (!audio.src || audio.src.includes('undefined')) {
+                alert('El archivo de audio no está disponible. Por favor, sube el archivo MP3 a GitHub en la carpeta /audio/');
+                return;
+            }
+
+            // Detener todos los demás audios
+            document.querySelectorAll('audio').forEach(otherAudio => {
+                if (otherAudio.id !== audioId && !otherAudio.paused) {
+                    otherAudio.pause();
+                    const otherBtn = document.querySelector(`[onclick="togglePlay('${otherAudio.id}')"]`);
+                    if (otherBtn) otherBtn.classList.remove('paused');
+                    clearInterval(audioIntervals[otherAudio.id]);
+                }
+            });
+
+            if (audio.paused) {
+                // Mostrar loading
+                container.classList.add('loading');
+                
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        btn.classList.add('paused');
+                        container.classList.remove('loading');
+                        
+                        // Actualizar progreso
+                        clearInterval(audioIntervals[audioId]);
+                        audioIntervals[audioId] = setInterval(() => {
+                            updateAudioProgress(audioId);
+                        }, 100);
+                        
+                        // Registrar reproducción
+                        if (!audio.dataset.played) {
+                            cargarContadorReviews(audioId.split('-')[0]);
+                            audio.dataset.played = 'true';
+                        }
+                    }).catch(error => {
+                        console.error("Error reproduciendo audio:", error);
+                        container.classList.remove('loading');
+                        alert('Error al reproducir el audio. Por favor, intenta de nuevo.');
+                    });
+                }
+            } else {
+                audio.pause();
+                btn.classList.remove('paused');
+                clearInterval(audioIntervals[audioId]);
+                container.classList.remove('loading');
+            }
+        }
+
+        // Actualizar progreso del audio
+        function updateAudioProgress(audioId) {
+            const audio = document.getElementById(audioId);
+            const progress = document.getElementById(`${audioId.split('-')[0]}-progress`);
+            const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
+            
+            if (audio.duration && !isNaN(audio.duration)) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progress.style.width = percent + "%";
+                timeDisplay.innerHTML = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+            }
+        }
+
+        // Establecer progreso al hacer clic en la barra
+        function setProgress(audioId, event) {
+            const audio = document.getElementById(audioId);
+            const progressContainer = event.currentTarget;
+            const rect = progressContainer.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const percent = (clickX / rect.width) * 100;
+            
+            if (audio.duration && !isNaN(audio.duration)) {
+                audio.currentTime = (percent / 100) * audio.duration;
+                updateAudioProgress(audioId);
+            }
+        }
+
+        // Ajustar volumen FUNCIONAL
+        function setVolume(audioId, slider) {
+            const audio = document.getElementById(audioId);
+            const volumeValue = parseFloat(slider.value);
+            audio.volume = volumeValue;
+            audio.muted = false;
+            
+            const volumeBtn = document.querySelector(`[onclick="toggleMute('${audioId}')"]`);
+            volumeBtn.classList.toggle('muted', volumeValue === 0);
+        }
+
+        // Silenciar/activar volumen
+        function toggleMute(audioId) {
+            const audio = document.getElementById(audioId);
+            const volumeBtn = document.querySelector(`[onclick="toggleMute('${audioId}')"]`);
+            const volumeSlider = volumeBtn.nextElementSibling;
+            const volumeContainer = volumeBtn.parentNode; // Obtener el contenedor del volumen
+
+            if (audio.muted) {
+                audio.muted = false;
+                volumeSlider.value = audio.volume;
+                volumeBtn.classList.remove('muted');
+            } else {
+                audio.muted = true;
+                volumeSlider.value = 0;
+                volumeBtn.classList.add('muted');
+            }
+
+            // Agregar o eliminar la clase 'volume-active' al contenedor
+            if (volumeContainer.classList.contains('volume-active')) {
+                volumeContainer.classList.remove('volume-active');
+            } else {
+                volumeContainer.classList.add('volume-active');
+            }
+        }
+
+        // Cerrar el slider de volumen al hacer clic fuera del contenedor
+        document.addEventListener('click', function(event) {
+            const volumeContainers = document.querySelectorAll('.volume-container');
+            volumeContainers.forEach(function(container) {
+                if (!container.contains(event.target)) {
+                    container.classList.remove('volume-active');
+                }
+            });
+        });
+
+        // Evitar descarga de imágenes y contenidos
+        document.addEventListener('contextmenu', function(e) {
+            // Solo permite clic derecho en elementos que no sean audio o imágenes
+            if (e.target.tagName === 'AUDIO' || e.target.tagName === 'IMG' || e.target.classList.contains('audio-container')) {
+                e.preventDefault();
+            }
+        });
+
+        // === SISTEMA DE ME GUSTA Y REPRODUCCIONES ===
+
+        // Función para cargar el contador de reproducciones
+        function cargarContadorReviews(nombreCancion) {
+            let reviews = localStorage.getItem(`reviews-${nombreCancion}`) || 0;
+            reviews = parseInt(reviews) + 1;
+            localStorage.setItem(`reviews-${nombreCancion}`, reviews);
+            const reviewsElement = document.getElementById(`reviews-${nombreCancion}`);
+            if (reviewsElement) {
+                reviewsElement.textContent = reviews;
+            }
+            actualizarContadorTotal();
+        }
+
+        // Función para activar el "Me Gusta"
+        function activarMeGusta(nombreCancion) {
+            const corazon = document.getElementById(`corazon-${nombreCancion}`);
+            const numGustos = document.getElementById(`num-gustos-${nombreCancion}`);
+
+            if (localStorage.getItem(`gusto-${nombreCancion}`) === 'activado') {
+                alert('¡Ya le diste "Me Gusta" a esta canción! 🎵');
+                return;
+            }
+
+            let gustos = localStorage.getItem(`cant-gustos-${nombreCancion}`) || 0;
+            gustos = parseInt(gustos) + 1;
+            localStorage.setItem(`cant-gustos-${nombreCancion}`, gustos);
+            localStorage.setItem(`gusto-${nombreCancion}`, 'activado');
+
+            corazon.classList.add('liked');
+            if (numGustos) {
+                numGustos.textContent = gustos;
+            }
+            alert('¡Gracias por tu "Me Gusta"! 🙏');
+        }
+
+        // Función para actualizar el contador total
+        function actualizarContadorTotal() {
+            let total = 0;
+            const canciones = ['tinkuy', 'navi', 'sami'];
+            canciones.forEach(cancion => {
+                total += parseInt(localStorage.getItem(`reviews-${cancion}`) || 0);
+            });
+            const totalElement = document.getElementById('total-reviews');
+            if (totalElement) {
+                totalElement.textContent = total;
+            }
+        }
+
+        // Inicialización al cargar la página
+        window.onload = function() {
+            const canciones = ['tinkuy', 'navi', 'sami'];
+
+            canciones.forEach(cancion => {
+                // Cargar reproducciones
+                const reviewsGuardadas = localStorage.getItem(`reviews-${cancion}`) || 0;
+                const reviewsElement = document.getElementById(`reviews-${cancion}`);
+                if (reviewsElement) {
+                    reviewsElement.textContent = reviewsGuardadas;
+                }
+
+                // Cargar me gustas
+                const gustosGuardados = localStorage.getItem(`cant-gustos-${cancion}`) || 0;
+                const gustosElement = document.getElementById(`num-gustos-${cancion}`);
+                if (gustosElement) {
+                    gustosElement.textContent = gustosGuardados;
+                }
+
+                // Verificar si ya dio like
+                const corazon = document.getElementById(`corazon-${cancion}`);
+                if (corazon && localStorage.getItem(`gusto-${cancion}`) === 'activado') {
+                    corazon.classList.add('liked');
+                }
+
+                // Configurar eventos de audio
+                const audio = document.getElementById(`${cancion}-audio`);
+                if (audio) {
+                    audio.addEventListener('timeupdate', () => updateAudioProgress(`${cancion}-audio`));
+                    audio.addEventListener('ended', () => {
+                        const btn = document.querySelector(`[onclick="togglePlay('${cancion}-audio')"]`);
+                        if (btn) btn.classList.remove('paused');
+                        clearInterval(audioIntervals[`${cancion}-audio`]);
+                    });
+                }
+            });
+
+            actualizarContadorTotal();
+            
+            // Proteger contenido
+            document.addEventListener('contextmenu', function(e) {
+                if (e.target.tagName === 'AUDIO' || 
+                    e.target.classList.contains('audio-container') || 
+                    e.target.tagName === 'SOURCE') {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        };
+
+        // Manejar tecla Escape para pausar audio
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('audio').forEach(audio => {
+                    if (!audio.paused) {
+                        audio.pause();
+                        const btn = document.querySelector(`[onclick="togglePlay('${audio.id}')"]`);
+                        if (btn) btn.classList.remove('paused');
+                        clearInterval(audioIntervals[audio.id]);
+                    }
+                });
+            }
+        });
+
+        // Agrega esto al final de tu script
+        (function() {
+            // Bloquear clic derecho en elementos multimedia
+            ['audio', 'source'].forEach(tag => {
+                document.querySelectorAll(tag).forEach(el => {
+                    el.addEventListener('contextmenu', e => {
+                        e.preventDefault();
+                        alert('© BVHanKrY - Este contenido está protegido');
+                        return false;
+                    });
+                });
+            });
+            
+            // Ocultar URLs en consola
+            const originalLog = console.log;
+            console.log = function(...args) {
+                if (typeof args[0] === 'string' && args[0].includes('.mp3')) {
+                    return; // No mostrar URLs de audio
+                }
+                originalLog.apply(console, args);
+            };
+        })();
+    </script>
+
+</body>
+</html>
