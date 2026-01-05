@@ -21,5 +21,377 @@
    min-height: 100vh;
    padding: 15px;
  }
+
+ .container {
+   max-width: 900px;
+   margin: 0 auto;
+   background-color: rgba(18, 18, 18, 0.85); /* Fondo semi-transparente */
+   padding: 20px;
+   border-radius: 20px;
+ }
+        
+     header {
+        text-align: center;
+        padding: 40px 0;
+        border-bottom: 1px solid #333;
+        margin-bottom: 40px;
+      }
+        
+      header h1 {
+        color: #a855f7;
+        font-size: 3.5rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        text-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+      }
+        
+      header p {
+        font-size: 1.2rem;
+        color: #b3b3b3;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+      }
+        
+      .ep-title {
+        text-align: center;
+        color: #c084fc;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 50px;
+        position: relative;
+      }
+
+      .ep-title::after {
+        content: '';
+        width: 80px;
+        height: 2px;
+        background-color: #a855f7;
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+      }
+        
+      .cancion-card {
+        background: linear-gradient(145deg, rgba(45, 45, 45, 0.9) 0%, rgba(56, 56, 56, 0.9) 100%);
+        border-radius: 15px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(168, 85, 247, 0.2);
+      }
+
+      .cancion-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        border-color: rgba(168, 85, 247, 0.5);
+      }
+        
+      .cancion-card h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+      }
+        
+      .cancion-card h3::before {
+        content: '🎵';
+        margin-right: 15px;
+        font-size: 1.8rem;
+      }
+        
+      .cancion-card {
+  width: 100%;
+  max-width: 450px; /* Ajusta este valor si quieres un ancho máximo */
+  margin: 15px auto; /* Centra las tarjetas y agrega espacio entre ellas */
+  padding: 15px;
+  background-color: rgba(40, 40, 40, 0.8);
+  border-radius: 20px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+}
+        
+.cancion-card h3 {
+  color: white;
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cancion-card h3::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: url('https://cdn-icons-png.flaticon.com/512/1077/1077035.png') no-repeat center;
+  background-size: 100%;
+  filter: invert(1) sepia(20%) saturate(5000%) hue-rotate(260deg) brightness(0.9);
+}      
+
+        /* Reproductor personalizado PROFESIONAL */
+
+.audio-container {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  background-color: rgba(26, 26, 26, 0.95);
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  border-radius: 30px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.7);
+}
+
+/* Botón de play/pausa PROFESIONAL */
+.play-btn {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 0; /* Ocultar texto */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.play-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Iconos de play/pausa como pseudo-elementos */
+.play-btn::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 12px solid white;
+  margin-left: 1px;
+}
+
+.play-btn.paused::before {
+  border: none;
+  width: 10px;
+  height: 16px;
+  background: white;
+  box-shadow: 4px 0 0 0 white;
+  margin-left: 0;
+}
+
+/* Barra de progreso PROFESIONAL */
+.progress-container {
+  flex: 1;
+  height: 8px;
+  background-color: rgba(80, 80, 80, 0.5);
+  border-radius: 20px;
+  position: relative;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #a855f7 0%, #7c3aed 100%);
+  border-radius: 20px;
+  width: 0%;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
+  display: none;
+}
+
+.progress-container:hover .progress-bar::after {
+  display: block;
+}
+
+/* Tiempo */
+.time-display {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 15px;
+  min-width: 70px;
+  text-align: center;
+}
+
+ //* Control de volumen PROFESIONAL */
+.volume-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.volume-btn {
+    width: 28px;
+    height: 28px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 0;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+/* Icono de bocina profesional */
+.volume-btn::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url('https://cdn-icons-png.flaticon.com/512/3033/3033180.png') no-repeat center;
+    background-size: 100%;
+    filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
+}
+
+.volume-btn.muted::before {
+    background: url('https://cdn-icons-png.flaticon.com/512/3033/3033182.png') no-repeat center;
+    background-size: 100%;
+    filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
+}
+
+/* Slider de volumen VERTICAL FUNCIONAL */
+.volume-slider {
+    position: absolute;
+    top: -90px;
+    right: 0;
+    width: 65px;
+    height: 18px;
+    background-color: rgba(26, 26, 26, 0.95);
+    border: 1px solid #a855f7;
+    border-radius: 10px;
+    padding: 5px;
+    display: none;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+    transform: rotate(270deg);
+    transform-origin: right top;
+    z-index: 10;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
+    transition: transform 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: rgba(80, 80, 80, 0.5);
+    border-radius: 5px;
+    height: 6px;
+}
+
+/* MANTENER SLIDER VISIBLE EN COMPUTADORAS CUANDO SE INTERACTÚA */
+@media only screen and (min-width: 769px) {
+    .volume-container:hover .volume-slider,
+    .volume-btn:hover + .volume-slider,
+    .volume-container.volume-active .volume-slider { /* Agregamos esta línea */
+        display: block;
+    }
+}
+
+/* MANTENER COMPORTAMIENTO ORIGINAL EN CELULARES */
+@media only screen and (max-width: 768px) {
+    .volume-container:hover .volume-slider {
+        display: block;
+    }
+}
+
+        /* MANTENER COMPORTAMIENTO ORIGINAL EN CELULARES */
+        @media only screen and (max-width: 768px) {
+            .volume-container:hover .volume-slider {
+                display: block;
+            }
+        }
+     
+    /* Estilos para aviso de derechos de autor */
+.copyright-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(168, 85, 247, 0.3);
+    text-align: center;
+    font-size: 0.9em;
+    color: #d1d5db;
+    width: 100%;
+    max-width: 100%; /* Agrega esta línea */
+    margin-left: auto; /* Agrega esta línea */
+    margin-right: auto; /* Agrega esta línea */
+}
+
+.copyright-subtext {
+    font-size: 0.8em;
+    margin: 5px 0;
+    color: #888;
+}
+
+/* Estilos para aviso por canción */
+.song-copyright {
+    margin-top: 10px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(168, 85, 247, 0.1);
+    font-size: 0.75em;
+    /*color: #a855f7;  Elimina esta línea */
+    color: #79716B /* Agrega esta línea */
+    text-align: center;
+}
+
+/* Estilos para botón de compartir */
+.share-button-container {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.share-whatsapp {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #25d366;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+}
+
+.share-whatsapp:hover {
+    background-color: #128c7e;
+}
+
+/* Para que el icono de WhatsApp se vea bien (si usas Font Awesome) */
+.fab.fa-whatsapp {
+    margin-right: 5px;
+}
  </style>
  
