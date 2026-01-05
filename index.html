@@ -1026,6 +1026,30 @@
                 });
             }
         });
+
+// Agrega esto al final de tu script
+(function() {
+    // Bloquear clic derecho en elementos multimedia
+    ['audio', 'source'].forEach(tag => {
+        document.querySelectorAll(tag).forEach(el => {
+            el.addEventListener('contextmenu', e => {
+                e.preventDefault();
+                alert('© BVHanKrY - Este contenido está protegido');
+                return false;
+            });
+        });
+    });
+    
+    // Ocultar URLs en consola
+    const originalLog = console.log;
+    console.log = function(...args) {
+        if (typeof args[0] === 'string' && args[0].includes('.mp3')) {
+            return; // No mostrar URLs de audio
+        }
+        originalLog.apply(console, args);
+    };
+})();
+        
     </script>
 
 </body>
