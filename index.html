@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -5,7 +6,7 @@
     <meta name="description" content="BVHanKrY - Música Dub desde Ecuador. Escucha el EP Pulso con canciones como Tinkuy, Navi y Sami.">
     <meta name="keywords" content="BVHanKrY, música dub, Ecuador, EP Pulso, Tinkuy, música electrónica">
     <title>BVHanKrY - Música Oficial</title>
-    <link rel="icon" href="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" type="image/png">
+    <link rel="icon" href="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/multimedia/BVHANKRY-Photoroom.png" type="image/png">
     <style>
         * {
             margin: 0;
@@ -15,7 +16,7 @@
         }
         
         body {
-            background-image: url(https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/ChatGPT%20Image%2030%20dic%202025%2C%2010_59_54%20a.m..png), linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+            background-image: url(https://github.com/BVHanKrY/bvhankry.music/blob/main/ChatGPT%20Image%2030%20dic%202025,%2010_59_54%20a.m..png?raw=true), linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
             background-blend-mode: overlay;
             background-size: cover;
             background-position: center;
@@ -104,296 +105,22 @@
             color: #ffffff;
             display: flex;
             align-items: center;
+            justify-content: space-between;
         }
-        .cancion-card h3 .song-title::before {
-            content: "🎵";
-            margin-right: 5px;
-            font-size: 1.8rem;
-        }
-
-        .cancion-card {
-            width: 100%;
-            max-width: 450px; /* Ajusta este valor si quieres un ancho máximo */
-            margin: 15px auto; /* Centra las tarjetas y agrega espacio entre ellas */
-            padding: 15px;
-            background-color: rgba(40, 40, 40, 0.8);
-            border-radius: 20px;
-            border: 1px solid rgba(168, 85, 247, 0.2);
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
-        }    
         
-        .cancion-card h3 {
-            color: white;
-            font-size: 18px;
-            margin: 0 0 10px 0;
+        .cancion-card h3 .song-title {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .cancion-card h3::before {
-           content: "";
-           width: 20px;
-           height: 20px;
-           background: url('https://cdn-icons-png.flaticon.com/512/1077/1077035.png') no-repeat center;
-           background-size: 100%;
-           filter: invert(1) sepia(20%) saturate(5000%) hue-rotate(260deg) brightness(0.9);
+        .cancion-card h3 .song-title::before {
+            content: "🎵";
+            margin-right: 5px;
+            font-size: 1.8rem;
         }
         
-/* Reproductor personalizado */
-        .audio-container {
-            position: relative;
-            width: 100%;
-            height: 70px;
-            background-color: rgba(26, 26, 26, 0.95);
-            border: 2px solid rgba(168, 85, 247, 0.3);
-            border-radius: 30px;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.7);
-            margin-bottom: 15px;
-        }
-
-/* Botón de play/pausa */
-        .play-btn {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
-            transition: transform 0.2s ease;
-        }
-
-        .play-btn:hover {
-            transform: scale(1.05);
-        }
-
-/* Iconos de play/pausa como pseudo-elementos*/
-        .play-btn::before {
-            content: "";
-            width: 0;
-            height: 0;
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-            border-left: 12px solid white;
-            margin-left: 1px;
-        }
-
-        .play-btn.paused::before {
-            border: none;
-            width: 10px;
-            height: 16px;
-            background: white;
-            box-shadow: 4px 0 0 0 white;
-            margin-left: 0;
-        }
-
-/* Barra de progreso PROFECIONAL*/
-        .progress-container {
-            flex: 1;
-            height: 8px;
-            background-color: rgba(80, 80, 80, 0.5);
-            border-radius: 20px;
-            position: relative;
-            margin-right: 15px;
-            cursor: pointer;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #a855f7 0%, #7c3aed 100%);
-            border-radius: 20px;
-            width: 0%;
-            position: relative;
-        }
-
-        .progress-bar::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 14px;
-            height: 14px;
-            background-color: white;
-            border-radius: 50%;
-            box-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
-            display: none;
-        }
-
-        .progress-container:hover .progress-bar::after {
-            display: block;
-        }
-
-/* Tiempo */
-        .time-display {
-            color: white;
-            font-size: 14px;
-            font-weight: 500;
-            margin-right: 15px;
-            min-width: 70px;
-            text-align: center;
-        }
-
-/* Control de volumen */
-        .volume-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .volume-btn {
-            width: 28px;
-            height: 28px;
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 0;
-            cursor: pointer;
-            margin-right: 5px;
-        }
-
-/*Icono de bocina profesional*/
-        .volume-btn::before {
-            content: "";
-            display: block;
-            width: 20px;
-            height: 20px;
-            background: url(https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/volume.png) no-repeat center;
-            background-size: 100%;
-            filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
-        }
-
-        .volume-btn.muted::before {
-            background: url(https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/low-volume.png) no-repeat center;
-            background-size: 100%;
-            filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
-        }
-
- /* Slider de volumen */
-        .volume-slider {
-            position: absolute;
-            top: -90px;
-            right: 0;
-            width: 65px;
-            height: 18px;
-            background-color: rgba(26, 26, 26, 0.95);
-            border: 1px solid #a855f7;
-            border-radius: 10px;
-            padding: 5px;
-            display: none;
-            -webkit-appearance: none;
-            appearance: none;
-            outline: none;
-            cursor: pointer;
-            transform: rotate(270deg);
-            transform-origin: right top;
-            z-index: 10;
-        }
-
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 15px;
-            height: 15px;
-            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
-            transition: transform 0.2s ease;
-        }
-
-        .volume-slider::-webkit-slider-runnable-track {
-            -webkit-appearance: none;
-            appearance: none;
-            background-color: rgba(80, 80, 80, 0.5);
-            border-radius: 5px;
-            height: 6px;
-        }
-
- /* Mantener slider visible en computadoras cuando se interactua*/
-        @media only screen and (min-width: 769px) {
-            .volume-container:hover .volume-slider,
-            .volume-btn:hover + .volume-slider,
-            .volume-container.volume-active .volume-slider {
-                display: block;
-            }
-        }
-
- /* MANTENER COMPORTAMIENTO ORIGINAL EN CELULARES */
-        @media only screen and (max-width: 768px) {
-            .volume-container:hover .volume-slider {
-                display: block;
-            }
-        }
-        
- /*Derechos de autor Estilo*/
-        .copyright-section {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(168, 85, 247, 0.3);
-            text-align: center;
-            font-size: 0.9em;
-            color: #d1d5db;
-            width: 100%;
-            max-width: 100%; /* Agrega esta línea */
-            margin-left: auto; /* Agrega esta línea */
-            margin-right: auto; /* Agrega esta línea */
-        }    
-
-        .copyright-subtext {
-            font-size: 0.8em;
-            margin: 5px 0;
-            color: #888;
-        }
-
- /*Estilo para cada cancion*/
-
-        .song-copyright {
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px solid rgba(168, 85, 247, 0.1);
-            font-size: 0.75em;
-            color: #79716B;
-            text-align: center;
-        }
-
-/* Estilos para Botón de compartir Whatapps*/
-        .share-button-container {
-            margin-top: 15px;
-            text-align: center;
-        }
-
-        .share-whatsapp {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #25d366;
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 0.85em;
-            transition: background-color 0.2s ease;
-        }
-
-        .share-whatsapp:hover {
-            background-color: #128c7e;
-        }
-
-/* Para que el icono de WhatsApp se vea bien (si usas Font Awesome) */
-        .fab.fa-whatsapp {
-            margin-right: 5px;
-        }
-
-/* Sistema de Me Gusta */
+        /* Sistema de Me Gusta */
         .song-stats {
             display: flex;
             justify-content: space-between;
@@ -434,8 +161,195 @@
             display: flex;
             align-items: center;
         }
+        
+        /* Reproductor personalizado */
+        .audio-container {
+            position: relative;
+            width: 100%;
+            height: 70px;
+            background-color: rgba(26, 26, 26, 0.95);
+            border: 2px solid rgba(168, 85, 247, 0.3);
+            border-radius: 30px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.7);
+            margin-bottom: 15px;
+        }
 
-/* Banner de navegación */
+        /* Botón de play/pausa */
+        .play-btn {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+            transition: transform 0.2s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .play-btn::before {
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-left: 12px solid white;
+            margin-left: 1px;
+        }
+
+        .play-btn.paused::before {
+            border: none;
+            width: 10px;
+            height: 16px;
+            background: white;
+            box-shadow: 4px 0 0 0 white;
+            margin-left: 0;
+        }
+
+        /* Barra de progreso */
+        .progress-container {
+            flex: 1;
+            height: 8px;
+            background-color: rgba(80, 80, 80, 0.5);
+            border-radius: 20px;
+            position: relative;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #a855f7 0%, #7c3aed 100%);
+            border-radius: 20px;
+            width: 0%;
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
+            display: none;
+        }
+
+        .progress-container:hover .progress-bar::after {
+            display: block;
+        }
+
+        /* Tiempo */
+        .time-display {
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            margin-right: 15px;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        /* Control de volumen */
+        .volume-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .volume-btn {
+            width: 28px;
+            height: 28px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 0;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .volume-btn::before {
+            content: "";
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: url(https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/volume.png) no-repeat center;
+            background-size: 100%;
+            filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
+        }
+
+        .volume-btn.muted::before {
+            background: url(https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/low-volume.png) no-repeat center;
+            background-size: 100%;
+            filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
+        }
+
+        /* Slider de volumen */
+        .volume-slider {
+            position: absolute;
+            top: -90px;
+            right: 0;
+            width: 65px;
+            height: 18px;
+            background-color: rgba(26, 26, 26, 0.95);
+            border: 1px solid #a855f7;
+            border-radius: 10px;
+            padding: 5px;
+            display: none;
+            -webkit-appearance: none;
+            appearance: none;
+            outline: none;
+            cursor: pointer;
+            transform: rotate(270deg);
+            transform-origin: right top;
+            z-index: 10;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
+            transition: transform 0.2s ease;
+        }
+
+        .volume-slider::-webkit-slider-runnable-track {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: rgba(80, 80, 80, 0.5);
+            border-radius: 5px;
+            height: 6px;
+        }
+
+        /* Mantener slider visible en hover */
+        @media only screen and (min-width: 769px) {
+            .volume-container:hover .volume-slider,
+            .volume-btn:hover + .volume-slider,
+            .volume-container.volume-active .volume-slider {
+                display: block;
+            }
+        }
+
+        /* Banner de navegación */
         .main-nav {
             background-color: rgba(18, 18, 18, 0.95);
             padding: 15px 20px;
@@ -512,7 +426,7 @@
             transform: scale(1.2);
         }
 
-/* Secciones */
+        /* Secciones */
         section {
             margin: 40px 0;
             padding: 20px;
@@ -526,7 +440,53 @@
             font-size: 1.8rem;
         }
 
-/* Responsive */
+        /* Derechos de autor */
+        .copyright-section {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(168, 85, 247, 0.3);
+            text-align: center;
+            font-size: 0.9em;
+            color: #d1d5db;
+        }
+
+        .copyright-subtext {
+            font-size: 0.8em;
+            margin: 5px 0;
+            color: #888;
+        }
+
+        .song-copyright {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(168, 85, 247, 0.1);
+            font-size: 0.75em;
+            color: #79716B;
+            text-align: center;
+        }
+
+        /* Botón de compartir */
+        .share-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .share-whatsapp {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.85em;
+            transition: background-color 0.2s ease;
+        }
+
+        .share-whatsapp:hover {
+            background-color: #128c7e;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -570,7 +530,7 @@
             }
         }
 
-/* Loading para audio */
+        /* Loading para audio */
         .audio-loading {
             display: none;
             position: absolute;
@@ -580,20 +540,19 @@
             color: #a855f7;
             font-size: 0.9em;
         }
-        
+
         .audio-container.loading .audio-loading {
             display: block;
         }
-        
     </style>
 </head>
 <body>
 
-<!-- Banner de navegación -->
+    <!-- Banner de navegación -->
     <nav class="main-nav">
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" alt="BVHanKrY Logo">
+                <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/BVHANKRY-Photoroom.png" alt="BVHanKrY Logo">
             </a>
             <ul class="nav-links">
                 <li><a href="#music">Music</a></li>
@@ -634,7 +593,7 @@
         <h2 class="ep-title">EP: Pulso</h2>
 
         <!-- CANCIÓN TINKUY -->
-       <div class="cancion-card animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
+        <div class="cancion-card">
             <h3>
                 <span class="song-title">Tinkuy</span>
                 <span class="total-reviews">Total Reviews: <span id="total-reviews">0</span></span>
@@ -798,7 +757,11 @@
             <p class="copyright-subtext">No se permite la reproducción, distribución, modificación o uso comercial de los contenidos sin autorización expresa por escrito.</p>
         </div>
     </div>
-<script>
+
+    <script>
+        // Variables globales para manejar intervalos
+        const audioIntervals = {};
+
         // Formatear tiempo
         function formatTime(seconds) {
             if (isNaN(seconds)) return "0:00";
@@ -816,31 +779,84 @@
             }
         }
 
+        // Manejar errores de audio
+        function audioError(audioId) {
+            console.error(`Error cargando el audio: ${audioId}`);
+            const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
+            timeDisplay.innerHTML = "Error / 0:00";
+            timeDisplay.style.color = "#ff6b6b";
+            
+            // Mostrar mensaje de error
+            alert(`Error al cargar la canción ${audioId.split('-')[0]}. Por favor, verifica que el archivo exista en: https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/`);
+        }
+
         // Play/Pausa con icono dinámico
         function togglePlay(audioId) {
             const audio = document.getElementById(audioId);
             const btn = document.querySelector(`[onclick="togglePlay('${audioId}')"]`);
             const container = btn.closest('.audio-container');
 
+            if (!audio.src || audio.src.includes('undefined')) {
+                alert('El archivo de audio no está disponible. Por favor, sube el archivo MP3 a GitHub en la carpeta /audio/');
+                return;
+            }
+
+            // Detener todos los demás audios
+            document.querySelectorAll('audio').forEach(otherAudio => {
+                if (otherAudio.id !== audioId && !otherAudio.paused) {
+                    otherAudio.pause();
+                    const otherBtn = document.querySelector(`[onclick="togglePlay('${otherAudio.id}')"]`);
+                    if (otherBtn) otherBtn.classList.remove('paused');
+                    clearInterval(audioIntervals[otherAudio.id]);
+                }
+            });
+
+            if (audio.paused) {
+                // Mostrar loading
+                container.classList.add('loading');
+                
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        btn.classList.add('paused');
+                        container.classList.remove('loading');
+                        
+                        // Actualizar progreso
+                        clearInterval(audioIntervals[audioId]);
+                        audioIntervals[audioId] = setInterval(() => {
+                            updateAudioProgress(audioId);
+                        }, 100);
+                        
+                        // Registrar reproducción
+                        if (!audio.dataset.played) {
+                            cargarContadorReviews(audioId.split('-')[0]);
+                            audio.dataset.played = 'true';
+                        }
+                    }).catch(error => {
+                        console.error("Error reproduciendo audio:", error);
+                        container.classList.remove('loading');
+                        alert('Error al reproducir el audio. Por favor, intenta de nuevo.');
+                    });
+                }
+            } else {
+                audio.pause();
+                btn.classList.remove('paused');
+                clearInterval(audioIntervals[audioId]);
+                container.classList.remove('loading');
+            }
         }
 
-           if (audio.paused) {
-                audio.play();
-                btn.classList.add('paused');
-        
-                // Actualizar progreso cada segundo
-            const interval = setInterval(() => {
+        // Actualizar progreso del audio
+        function updateAudioProgress(audioId) {
+            const audio = document.getElementById(audioId);
             const progress = document.getElementById(`${audioId.split('-')[0]}-progress`);
             const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
-            const percent = (audio.currentTime / audio.duration) * 100;
-                  progress.style.width = percent + "%";
-                  timeDisplay.innerHTML = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-                  }, 1000);
-                  audio.dataset.interval = interval; // Guardar el intervalo en el dataset
-        }   else {
-                  audio.pause();
-                  btn.classList.remove('paused');
-                  clearInterval(audio.dataset.interval); // Limpiar el intervalo usando el dataset
+            
+            if (audio.duration && !isNaN(audio.duration)) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progress.style.width = percent + "%";
+                timeDisplay.innerHTML = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+            }
         }
 
         // Establecer progreso al hacer clic en la barra
@@ -850,15 +866,14 @@
             const rect = progressContainer.getBoundingClientRect();
             const clickX = event.clientX - rect.left;
             const percent = (clickX / rect.width) * 100;
-            audio.currentTime = (percent / 100) * audio.duration;
             
-            const progress = document.getElementById(`${audioId.split('-')[0]}-progress`);
-            progress.style.width = percent + "%";
-            const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
-            timeDisplay.innerHTML = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+            if (audio.duration && !isNaN(audio.duration)) {
+                audio.currentTime = (percent / 100) * audio.duration;
+                updateAudioProgress(audioId);
+            }
         }
 
-        // Ajustar volumen funcional
+        // Ajustar volumen
         function setVolume(audioId, slider) {
             const audio = document.getElementById(audioId);
             const volumeValue = parseFloat(slider.value);
@@ -887,13 +902,6 @@
             }
 
             volumeContainer.classList.toggle('volume-active');
-        }
-
-        // Agregar o eliminar la clase 'volume-active' al contenedor
-            if (volumeContainer.classList.contains('volume-active')) {
-                volumeContainer.classList.remove('volume-active');
-            } else {
-                volumeContainer.classList.add('volume-active');
         }
 
         // Cerrar el slider de volumen al hacer clic fuera
@@ -1022,4 +1030,3 @@
 
 </body>
 </html>
-        
