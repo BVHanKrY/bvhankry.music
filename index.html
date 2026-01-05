@@ -795,10 +795,7 @@
             const audio = document.getElementById(audioId);
             const btn = document.querySelector(`[onclick="togglePlay('${audioId}')"]`);
             const container = btn.closest('.audio-container');
-
-            if (!audio.src || audio.src.includes('undefined')) {
-                alert('El archivo de audio no está disponible. Por favor, sube el archivo MP3 a GitHub en la carpeta /audio/');
-                return;
+            
             }
 
             // Detener todos los demás audios
