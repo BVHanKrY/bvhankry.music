@@ -140,7 +140,7 @@
            filter: invert(1) sepia(20%) saturate(5000%) hue-rotate(260deg) brightness(0.9);
         }
         
-        /* Reproductor personalizado */
+/* Reproductor personalizado */
         .audio-container {
             position: relative;
             width: 100%;
@@ -155,7 +155,7 @@
             margin-bottom: 15px;
         }
 
-        /* Botón de play/pausa */
+/* Botón de play/pausa */
         .play-btn {
             width: 38px;
             height: 38px;
@@ -177,7 +177,7 @@
             transform: scale(1.05);
         }
 
-        /* Iconos de play/pausa como pseudo-elementos*/
+/* Iconos de play/pausa como pseudo-elementos*/
         .play-btn::before {
             content: "";
             width: 0;
@@ -197,7 +197,7 @@
             margin-left: 0;
         }
 
-        /* Barra de progreso PROFECIONAL*/
+/* Barra de progreso PROFECIONAL*/
         .progress-container {
             flex: 1;
             height: 8px;
@@ -234,7 +234,7 @@
             display: block;
         }
 
-        /* Tiempo */
+/* Tiempo */
         .time-display {
             color: white;
             font-size: 14px;
@@ -244,7 +244,7 @@
             text-align: center;
         }
 
-        /* Control de volumen */
+/* Control de volumen */
         .volume-container {
             position: relative;
             display: flex;
@@ -262,7 +262,7 @@
             margin-right: 5px;
         }
 
-        /*Icono de bocina profesional*/
+/*Icono de bocina profesional*/
         .volume-btn::before {
             content: "";
             display: block;
@@ -279,7 +279,7 @@
             filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
         }
 
-        /* Slider de volumen */
+ /* Slider de volumen */
         .volume-slider {
             position: absolute;
             top: -90px;
@@ -320,7 +320,7 @@
             height: 6px;
         }
 
-        /* Mantener slider visible en computadoras cuando se interactua*/
+ /* Mantener slider visible en computadoras cuando se interactua*/
         @media only screen and (min-width: 769px) {
             .volume-container:hover .volume-slider,
             .volume-btn:hover + .volume-slider,
@@ -329,14 +329,14 @@
             }
         }
 
-        /* MANTENER COMPORTAMIENTO ORIGINAL EN CELULARES */
+ /* MANTENER COMPORTAMIENTO ORIGINAL EN CELULARES */
         @media only screen and (max-width: 768px) {
             .volume-container:hover .volume-slider {
                 display: block;
             }
         }
         
-        /*Derechos de autor Estilo*/
+ /*Derechos de autor Estilo*/
         .copyright-section {
             margin-top: 40px;
             padding-top: 20px;
@@ -356,7 +356,7 @@
             color: #888;
         }
 
-        /*Estilo para cada cancion*/
+ /*Estilo para cada cancion*/
 
         .song-copyright {
             margin-top: 15px;
@@ -367,7 +367,7 @@
             text-align: center;
         }
 
-        /* Estilos para Botón de compartir Whatapps*/
+/* Estilos para Botón de compartir Whatapps*/
         .share-button-container {
             margin-top: 15px;
             text-align: center;
@@ -388,12 +388,145 @@
             background-color: #128c7e;
         }
 
-        /* Para que el icono de WhatsApp se vea bien (si usas Font Awesome) */
+/* Para que el icono de WhatsApp se vea bien (si usas Font Awesome) */
         .fab.fa-whatsapp {
             margin-right: 5px;
         }
 
-        /* Responsive */
+/* Sistema de Me Gusta */
+        .song-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .likes-counter {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #a0a0a0;
+            transition: color 0.3s ease;
+        }
+
+        .likes-counter:hover {
+            color: #a855f7;
+        }
+
+        .heart-icon {
+            font-size: 1.2em;
+            transition: transform 0.2s ease;
+        }
+
+        .heart-icon.liked {
+            color: #a855f7;
+        }
+
+        .heart-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .plays-counter {
+            color: #a0a0a0;
+            display: flex;
+            align-items: center;
+        }
+
+/* Banner de navegación */
+        .main-nav {
+            background-color: rgba(18, 18, 18, 0.95);
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 5px 15px;
+        }
+
+        .nav-links li {
+            margin-left: 15px;
+        }
+
+        .nav-links li:first-child {
+            margin-left: 0;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: #a855f7;
+        }
+
+        .social-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .social-links li {
+            margin-left: 20px;
+        }
+
+        .social-links li:first-child {
+            margin-left: 0;
+        }
+
+        .social-links a img {
+            height: 25px;
+            transition: transform 0.2s ease;
+        }
+
+        .social-links a:hover img {
+            transform: scale(1.2);
+        }
+
+/* Secciones */
+        section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: rgba(30, 30, 30, 0.7);
+            border-radius: 15px;
+        }
+
+        section h2 {
+            color: #c084fc;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+/* Responsive */
         @media (max-width: 768px) {
             .nav-container {
                 flex-direction: column;
@@ -437,7 +570,7 @@
             }
         }
 
-        /* Loading para audio */
+/* Loading para audio */
         .audio-loading {
             display: none;
             position: absolute;
@@ -447,7 +580,7 @@
             color: #a855f7;
             font-size: 0.9em;
         }
-
+        
         .audio-container.loading .audio-loading {
             display: block;
         }
@@ -456,7 +589,7 @@
 </head>
 <body>
 
-    <!-- Banner de navegación -->
+<!-- Banner de navegación -->
     <nav class="main-nav">
         <div class="nav-container">
             <a href="#" class="logo">
