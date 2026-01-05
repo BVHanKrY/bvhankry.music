@@ -369,29 +369,44 @@
 }
 
 /* Estilos para botón de compartir */
-.share-button-container {
-    margin-top: 10px;
-    text-align: center;
+.share-container {
+  position: relative;
+  display: inline-block;
 }
 
-.share-whatsapp {
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: #25d366;
-    color: white;
-    text-decoration: none;
-    border-radius: 20px;
-    font-size: 0.85em;
-    transition: background-color 0.2s ease;
+.share-button {
+  background-color: #a855f7;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
-.share-whatsapp:hover {
-    background-color: #128c7e;
+.share-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #1e1e1e;
+  border-radius: 5px;
+  display: none;
 }
 
-/* Para que el icono de WhatsApp se vea bien (si usas Font Awesome) */
-.fab.fa-whatsapp {
-    margin-right: 5px;
+.share-options li {
+  padding: 8px 12px;
+}
+
+.share-options a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.share-container:hover .share-options {
+  display: block;
 }
      
      /*banner*/
@@ -497,12 +512,11 @@ header {
   padding-top: 25px; /* Espacio para el contador */
 }
 
-/* Tinkuy Contador de Reviews - Esquina superior derecha */
-#reviews-tinkuy {
+.reviews-container { /* Nueva clase para el contenedor de Reviews */
   font-size: 12px;
   color: #c8c8c8;
-  margin-top: 5px; /* Ajusta el espacio entre el reproductor y "Reviews" */
-  text-align: right; /* Alinea a la derecha */
+  margin-top: 5px; /*ajusta el espacio entre el reproductor y el review*/
+  text-align: right; /*alinea a la derecha*/
 }
 
 /* Ocultar en pantallas grandes (PC) - Solución al problema en PC */
@@ -527,6 +541,37 @@ header {
      .cancion-card h3.liked::before {
   filter: none; /* Elimina los filtros para mostrar el corazón "lleno" */
 }
+
+.buy-container {
+  display: inline-block;
+}
+
+.buy-button {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.buy-button i {
+  margin-right: 5px;
+}
+
+.song-actions-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.song-actions-container > * {
+  margin-right: 10px;
+}
+
+.song-actions-container > *:last-child {
+  margin-right: 0;
+}     
      
     </style>
   </head>
@@ -599,14 +644,34 @@ header {
  
     <!-- CONTADOR DE REVIEWS (CORREGIDO) -->
 <!-- Después del reproductor -->
-<div id="reviews-tinkuy">
+<div class="reviews-container" id="reviews-tinkuy">
   Reviews: <strong>0</strong>
 </div>
 
-   <!-- CORAZÓN Y CONTADOR DE ME GUSTAS -->
-   <div class="song-actions">
+  <!--CONTADOR DE ME GUSTAS y BOTON DE COMPARTIR -->
+  <div class="song-actions">
   <span class="num-gustos" id="num-gustos-tinkuy">0</span>
-  <button class="share-btn">Compartir</button>
+  <div class="share-container">
+  <button class="share-button">
+    <i class="fas fa-share-alt"></i> Compartir
+  </button>
+  <ul class="share-options">
+    <li>
+      <a href="#" class="share-link" data-platform="whatsapp">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </li>
+    <li>
+      <a href="#" class="share-link" data-platform="twitter">
+        <i class="fab fa-twitter"></i> Twitter
+      </a>
+    </li>
+    <li>
+      <a href="#" class="share-link" data-platform="facebook">
+        <i class="fab fa-facebook"></i> Facebook
+      </a>
+    </li>
+    </ul>
 </div>
  
     <!-- AVISO ESPECÍFICO POR CANCIÓN -->
@@ -642,14 +707,34 @@ header {
 
 <!-- CONTADOR DE REVIEWS (CORREGIDO) -->
 <!-- Después del reproductor -->
-<div id="reviews-navi">
+<div class="reviews-container" id="reviews-navi">
   Reviews: <strong>0</strong>
 </div>
 
-   <!-- CORAZÓN Y CONTADOR DE ME GUSTAS -->
+   <!--CONTADOR DE ME GUSTAS y BOTON DE COMPARTIR -->
   <div class="song-actions">
   <span class="num-gustos" id="num-gustos-navi">0</span>
-  <button class="share-btn">Compartir</button>
+  <div class="share-container">
+  <button class="share-button">
+    <i class="fas fa-share-alt"></i> Compartir
+  </button>
+  <ul class="share-options">
+    <li>
+      <a href="#" class="share-link" data-platform="whatsapp">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </li>
+    <li>
+      <a href="#" class="share-link" data-platform="twitter">
+        <i class="fab fa-twitter"></i> Twitter
+      </a>
+    </li>
+    <li>
+      <a href="#" class="share-link" data-platform="facebook">
+        <i class="fab fa-facebook"></i> Facebook
+      </a>
+    </li>
+    </ul>
 </div>
  
     <div class="song-copyright">
@@ -683,14 +768,34 @@ header {
 
 <!-- CONTADOR DE REVIEWS (CORREGIDO) -->
 <!-- Después del reproductor -->
-<div id="reviews-sami">
+<div class="reviews-container" id="reviews-sami">
   Reviews: <strong>0</strong>
 </div>
 
-   <!-- CORAZÓN Y CONTADOR DE ME GUSTAS -->
+   <!--CONTADOR DE ME GUSTAS y BOTON DE COMPARTIR -->
   <div class="song-actions">
   <span class="num-gustos" id="num-gustos-sami">0</span>
-  <button class="share-btn">Compartir</button>
+  <div class="share-container">
+  <button class="share-button">
+    <i class="fas fa-share-alt"></i> Compartir
+  </button>
+  <ul class="share-options">
+    <li>
+      <a href="#" class="share-link" data-platform="whatsapp">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </li>
+    <li>
+      <a href="#" class="share-link" data-platform="twitter">
+        <i class="fab fa-twitter"></i> Twitter
+      </a>
+    </li>
+    <li>
+      <a href="#" class="share-link" data-platform="facebook">
+        <i class="fab fa-facebook"></i> Facebook
+      </a>
+    </li>
+    </ul>
 </div>
  
     <div class="song-copyright">
@@ -721,6 +826,15 @@ header {
      <!-- Contador global de Reviews (solo visible en móviles) -->
 <div class="contador-reviews-pagina">
   Total Reviews: <strong id="total-reviews">0</strong>
+</div>
+
+ <div class="buy-container">
+  <button class="buy-button">
+    <i class="fab fa-paypal"></i>
+    <i class="fab fa-cc-visa"></i>
+    <i class="fab fa-google-pay"></i>
+    Comprar
+  </button>
 </div>
      
  <script>
@@ -842,7 +956,7 @@ function cargarContadorReviews(nombreCancion) {
   actualizarContadorTotal();
 }
 
-// Función para activar el "Me Gusta" y rellenar el corazón
+// Función para activar el "Me Gusta"
 function activarMeGusta(nombreCancion) {
   const corazon = document.getElementById(`corazon-${nombreCancion}`);
   const numGustos = document.getElementById(`num-gustos-${nombreCancion}`);
@@ -893,6 +1007,90 @@ window.onload = function() {
   });
   actualizarContadorTotal();
 };
+
+const shareLinks = document.querySelectorAll('.share-link');
+
+shareLinks.forEach(link => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    const platform = link.dataset.platform;
+    const songName = 'Tinkuy'; // Reemplaza con el nombre real de la canción
+    const message = `¡Escucha "${songName}" de BVHanKrY!`;
+    let url;
+
+    switch (platform) {
+      case 'whatsapp':
+        url = `https://wa.me/?text=${message} ${window.location.href}`;
+        break;
+      case 'twitter':
+        url = `https://twitter.com/intent/tweet?text=${message}&url=${window.location.href}`;
+        break;
+      case 'facebook':
+        url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
+        break;
+      default:
+        url = window.location.href;
+    }
+
+    window.open(url, '_blank');
+  });
+});
+
+const shareLinks = document.querySelectorAll('.share-link');
+
+shareLinks.forEach(link => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    const platform = link.dataset.platform;
+    const songName = 'Navi'; // Reemplaza con el nombre real de la canción
+    const message = `¡Escucha "${songName}" de BVHanKrY!`;
+    let url;
+
+    switch (platform) {
+      case 'whatsapp':
+        url = `https://wa.me/?text=${message} ${window.location.href}`;
+        break;
+      case 'twitter':
+        url = `https://twitter.com/intent/tweet?text=${message}&url=${window.location.href}`;
+        break;
+      case 'facebook':
+        url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
+        break;
+      default:
+        url = window.location.href;
+    }
+
+    window.open(url, '_blank');
+  });
+});  
+
+const shareLinks = document.querySelectorAll('.share-link');
+
+shareLinks.forEach(link => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    const platform = link.dataset.platform;
+    const songName = 'Sami'; // Reemplaza con el nombre real de la canción
+    const message = `¡Escucha "${songName}" de BVHanKrY!`;
+    let url;
+
+    switch (platform) {
+      case 'whatsapp':
+        url = `https://wa.me/?text=${message} ${window.location.href}`;
+        break;
+      case 'twitter':
+        url = `https://twitter.com/intent/tweet?text=${message}&url=${window.location.href}`;
+        break;
+      case 'facebook':
+        url = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`;
+        break;
+      default:
+        url = window.location.href;
+    }
+
+    window.open(url, '_blank');
+  });
+});
   
     </script>
         
