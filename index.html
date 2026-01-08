@@ -1,271 +1,51 @@
-        // Variables globales para manejar intervalos
-        const audioIntervals = {};
-
-        // Formatear tiempo
-        function formatTime(seconds) {
-            if (isNaN(seconds)) return "0:00";
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs < 10 ? '0' + secs : secs}`;
-        }
-
-        // Establecer duración cuando carga el audio
-        function setDuration(audioId) {
-            const audio = document.getElementById(audioId);
-            const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
-            if (audio.duration && !isNaN(audio.duration)) {
-                timeDisplay.innerHTML = `0:00 / ${formatTime(audio.duration)}`;
-            }
-        }
-
-        // Manejar errores de audio
-        function audioError(audioId) {
-            console.error(`Error cargando el audio: ${audioId}`);
-            const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
-            timeDisplay.innerHTML = "Error / 0:00";
-            timeDisplay.style.color = "#ff6b6b";
+<div class="cancion-card">
+            <h3>
+                <span class="song-title">Tinkuy</span>
+                <span class="total-reviews">Total Reviews: <span id="total-reviews">0</span></span>
+            </h3>
             
-            // Mostrar mensaje de error
-            alert(`Error al cargar la canción ${audioId.split('-')[0]}. Por favor, verifica que el archivo exista en: https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/`);
-        }
+            <div class="song-stats">
+                <div class="likes-counter" onclick="activarMeGusta('tinkuy')">
+                    <span class="heart-icon" id="corazon-tinkuy">❤️</span>
+                    <span id="num-gustos-tinkuy">0</span> Me gusta
+                </div>
+                <div class="plays-counter">
+                    Reproducciones: <strong id="reviews-tinkuy">0</strong>
+                </div>
+            </div>
 
-        // Play/Pausa con icono dinámico
-        function togglePlay(audioId) {
-            const audio = document.getElementById(audioId);
-            const btn = document.querySelector(`[onclick="togglePlay('${audioId}')"]`);
-            const container = btn.closest('.audio-container');
+            <div class="audio-container" oncontextmenu="return false;">
+                <div class="audio-loading">Cargando...</div>
+                <button class="play-btn" onclick="togglePlay('tinkuy-audio')"></button>
+                <div class="progress-container" onclick="setProgress('tinkuy-audio', event)">
+                    <div class="progress-bar" id="tinkuy-progress"></div>
+                </div>
+                <div class="time-display" id="tinkuy-time">0:00 / 0:00</div>
+                <div class="volume-container">
+                    <button class="volume-btn" onclick="toggleMute('tinkuy-audio')"></button>
+                    <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('tinkuy-audio', this)">
+                </div>
+            </div>
+            <audio id="tinkuy-audio" preload="metadata" onloadedmetadata="setDuration('tinkuy-audio')" onerror="audioError('tinkuy-audio')">
+                <source src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/tinkuy.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
 
-            if (!audio.src || audio.src.includes('undefined')) {
-                alert('El archivo de audio no está disponible. Por favor, sube el archivo MP3 a GitHub en la carpeta /audio/');
-                return;
-            }
+            <div class="song-copyright">
+                <p>Compositor: BVHanKrY | Producción: BVros</p>
+                <p>℗ 2026 BVHanKrY - No para uso público</p>
+            </div>
+            <div class="share-button-container">
+                <a href="https://wa.me/?text=¡Escucha%20%22Tinkuy%22%20de%20BVHanKrY%20-%20EP%20Pulso!%20https://bvhankry.onrender.com" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="share-whatsapp">
+                    Compartir en WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
 
-            // Detener todos los demás audios
-            document.querySelectorAll('audio').forEach(otherAudio => {
-                if (otherAudio.id !== audioId && !otherAudio.paused) {
-                    otherAudio.pause();
-                    const otherBtn = document.querySelector(`[onclick="togglePlay('${otherAudio.id}')"]`);
-                    if (otherBtn) otherBtn.classList.remove('paused');
-                    clearInterval(audioIntervals[otherAudio.id]);
-                }
-            });
-
-            if (audio.paused) {
-                // Mostrar loading
-                container.classList.add('loading');
-                
-                const playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        btn.classList.add('paused');
-                        container.classList.remove('loading');
-                        
-                        // Actualizar progreso
-                        clearInterval(audioIntervals[audioId]);
-                        audioIntervals[audioId] = setInterval(() => {
-                            updateAudioProgress(audioId);
-                        }, 100);
-                        
-                        // Registrar reproducción
-                        if (!audio.dataset.played) {
-                            cargarContadorReviews(audioId.split('-')[0]);
-                            audio.dataset.played = 'true';
-                        }
-                    }).catch(error => {
-                        console.error("Error reproduciendo audio:", error);
-                        container.classList.remove('loading');
-                        alert('Error al reproducir el audio. Por favor, intenta de nuevo.');
-                    });
-                }
-            } else {
-                audio.pause();
-                btn.classList.remove('paused');
-                clearInterval(audioIntervals[audioId]);
-                container.classList.remove('loading');
-            }
-        }
-
-        // Actualizar progreso del audio
-        function updateAudioProgress(audioId) {
-            const audio = document.getElementById(audioId);
-            const progress = document.getElementById(`${audioId.split('-')[0]}-progress`);
-            const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
-            
-            if (audio.duration && !isNaN(audio.duration)) {
-                const percent = (audio.currentTime / audio.duration) * 100;
-                progress.style.width = percent + "%";
-                timeDisplay.innerHTML = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-            }
-        }
-
-        // Establecer progreso al hacer clic en la barra
-        function setProgress(audioId, event) {
-            const audio = document.getElementById(audioId);
-            const progressContainer = event.currentTarget;
-            const rect = progressContainer.getBoundingClientRect();
-            const clickX = event.clientX - rect.left;
-            const percent = (clickX / rect.width) * 100;
-            
-            if (audio.duration && !isNaN(audio.duration)) {
-                audio.currentTime = (percent / 100) * audio.duration;
-                updateAudioProgress(audioId);
-            }
-        }
-
-        // Ajustar volumen
-        function setVolume(audioId, slider) {
-            const audio = document.getElementById(audioId);
-            const volumeValue = parseFloat(slider.value);
-            audio.volume = volumeValue;
-            audio.muted = false;
-            
-            const volumeBtn = document.querySelector(`[onclick="toggleMute('${audioId}')"]`);
-            volumeBtn.classList.toggle('muted', volumeValue === 0);
-        }
-
-        // Silenciar/activar volumen
-        function toggleMute(audioId) {
-            const audio = document.getElementById(audioId);
-            const volumeBtn = document.querySelector(`[onclick="toggleMute('${audioId}')"]`);
-            const volumeSlider = volumeBtn.nextElementSibling;
-            const volumeContainer = volumeBtn.parentNode;
-
-            if (audio.muted) {
-                audio.muted = false;
-                volumeSlider.value = audio.volume;
-                volumeBtn.classList.remove('muted');
-            } else {
-                audio.muted = true;
-                volumeSlider.value = 0;
-                volumeBtn.classList.add('muted');
-            }
-
-            volumeContainer.classList.toggle('volume-active');
-        }
-
-        // Cerrar el slider de volumen al hacer clic fuera
-        document.addEventListener('click', function(event) {
-            const volumeContainers = document.querySelectorAll('.volume-container');
-            volumeContainers.forEach(function(container) {
-                if (!container.contains(event.target)) {
-                    container.classList.remove('volume-active');
-                }
-            });
-        });
-
-        // === SISTEMA DE ME GUSTA Y REPRODUCCIONES ===
-
-        // Función para cargar el contador de reproducciones
-        function cargarContadorReviews(nombreCancion) {
-            let reviews = localStorage.getItem(`reviews-${nombreCancion}`) || 0;
-            reviews = parseInt(reviews) + 1;
-            localStorage.setItem(`reviews-${nombreCancion}`, reviews);
-            const reviewsElement = document.getElementById(`reviews-${nombreCancion}`);
-            if (reviewsElement) {
-                reviewsElement.textContent = reviews;
-            }
-            actualizarContadorTotal();
-        }
-
-        // Función para activar el "Me Gusta"
-        function activarMeGusta(nombreCancion) {
-            const corazon = document.getElementById(`corazon-${nombreCancion}`);
-            const numGustos = document.getElementById(`num-gustos-${nombreCancion}`);
-
-            if (localStorage.getItem(`gusto-${nombreCancion}`) === 'activado') {
-                alert('¡Ya le diste "Me Gusta" a esta canción! 🎵');
-                return;
-            }
-
-            let gustos = localStorage.getItem(`cant-gustos-${nombreCancion}`) || 0;
-            gustos = parseInt(gustos) + 1;
-            localStorage.setItem(`cant-gustos-${nombreCancion}`, gustos);
-            localStorage.setItem(`gusto-${nombreCancion}`, 'activado');
-
-            corazon.classList.add('liked');
-            if (numGustos) {
-                numGustos.textContent = gustos;
-            }
-            alert('¡Gracias por tu "Me Gusta"! 🙏');
-        }
-
-        // Función para actualizar el contador total
-        function actualizarContadorTotal() {
-            let total = 0;
-            const canciones = ['tinkuy', 'navi', 'sami'];
-            canciones.forEach(cancion => {
-                total += parseInt(localStorage.getItem(`reviews-${cancion}`) || 0);
-            });
-            const totalElement = document.getElementById('total-reviews');
-            if (totalElement) {
-                totalElement.textContent = total;
-            }
-        }
-
-        // Inicialización al cargar la página
-        window.onload = function() {
-            const canciones = ['tinkuy', 'navi', 'sami'];
-
-            canciones.forEach(cancion => {
-                // Cargar reproducciones
-                const reviewsGuardadas = localStorage.getItem(`reviews-${cancion}`) || 0;
-                const reviewsElement = document.getElementById(`reviews-${cancion}`);
-                if (reviewsElement) {
-                    reviewsElement.textContent = reviewsGuardadas;
-                }
-
-                // Cargar me gustas
-                const gustosGuardados = localStorage.getItem(`cant-gustos-${cancion}`) || 0;
-                const gustosElement = document.getElementById(`num-gustos-${cancion}`);
-                if (gustosElement) {
-                    gustosElement.textContent = gustosGuardados;
-                }
-
-                // Verificar si ya dio like
-                const corazon = document.getElementById(`corazon-${cancion}`);
-                if (corazon && localStorage.getItem(`gusto-${cancion}`) === 'activado') {
-                    corazon.classList.add('liked');
-                }
-
-                // Configurar eventos de audio
-                const audio = document.getElementById(`${cancion}-audio`);
-                if (audio) {
-                    audio.addEventListener('timeupdate', () => updateAudioProgress(`${cancion}-audio`));
-                    audio.addEventListener('ended', () => {
-                        const btn = document.querySelector(`[onclick="togglePlay('${cancion}-audio')"]`);
-                        if (btn) btn.classList.remove('paused');
-                        clearInterval(audioIntervals[`${cancion}-audio`]);
-                    });
-                }
-            });
-
-            actualizarContadorTotal();
-            
-            // Proteger contenido
-            document.addEventListener('contextmenu', function(e) {
-                if (e.target.tagName === 'AUDIO' || 
-                    e.target.classList.contains('audio-container') || 
-                    e.target.tagName === 'SOURCE') {
-                    e.preventDefault();
-                    return false;
-                }
-            });
-        };
-
-        // Manejar tecla Escape para pausar audio
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('audio').forEach(audio => {
-                    if (!audio.paused) {
-                        audio.pause();
-                        const btn = document.querySelector(`[onclick="togglePlay('${audio.id}')"]`);
-                        if (btn) btn.classList.remove('paused');
-                        clearInterval(audioIntervals[audio.id]);
-                    }
-                });
-            }
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
