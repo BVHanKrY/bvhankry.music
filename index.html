@@ -3,639 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BVHanKrY - Música Dub desde Ecuador. Escucha el EP Pulso.">
-    <meta name="keywords" content="BVHanKrY, música dub, Ecuador, EP Pulso, electrónica">
     <title>BVHanKrY - Música Oficial</title>
+    <!-- Fuente Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="icon" href="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" type="image/png">
     <style>
         :root {
-            --primary: #a855f7;
-            --primary-dark: #7c3aed;
-            --primary-light: #d8b4fe;
-            --bg-dark: #121212;
-            --bg-card: rgba(30, 30, 30, 0.6);
-            --text-main: #f5f5f5;
-            --text-muted: #a3a3a3;
-            --success: #25d366;
-            --glass-border: rgba(168, 85, 247, 0.2);
+            --primary: #000000;
+            --primary-dark: #000000;
+            --bg-light: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #000000;
+            --text-muted: #333333;
+            --accent-gray: #f4f4f4;
+            
+            /* Textura de rayas diagonales */
+            --pattern-stripe: repeating-linear-gradient(
+                45deg,
+                #000000,
+                #000000 2px,
+                transparent 2px,
+                transparent 6px
+            );
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; 
+           font-family: 'Roboto', sans-serif;
+           scroll-behavior: smooth; }
         
-        body {
-            background-color: var(--bg-dark);
-            /* Fallback de fondo */
-            background-image: linear-gradient(rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.95)), 
-                              url('https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/ChatGPT%20Image%2030%20dic%202025%2C%2010_59_54%20a.m..png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: var(--text-main);
-            min-height: 100vh;
-            padding-bottom: 80px;
+        body { 
+            background-color: #ffffff; 
+            color: var(--text-main); 
+            min-height: 100vh; 
+            padding-bottom: 60px; 
             overflow-x: hidden;
         }
 
-        /* --- Navegación --- */
-        .main-nav {
-            background-color: rgba(18, 18, 18, 0.95);
-            padding: 15px 20px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        /* Navegación */
+        .main-nav { 
+            background-color: rgba(255,255,255, 0.98); 
+            backdrop-filter: blur(5px);
+            padding: 15px 0; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 1000; 
+            border-bottom: 3px solid #000000; 
+            transition: transform 0.3s ease-in-out; 
+            width: 100%; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .logo img {
-            height: 45px;
-            filter: drop-shadow(0 0 8px var(--primary));
-            transition: transform 0.3s ease;
-        }
+        .main-nav.hidden-nav { transform: translateY(-100%); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 5%; max-width: 1400px; margin: 0 auto; }
+        .logo img { height: 40px; filter: grayscale(100%) brightness(0); transition: transform 0.2s; }
+        .logo:hover img { transform: scale(1.05); }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { color: #000000; text-decoration: none; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: #000; transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
         
-        .logo:hover img {
-            transform: scale(1.05);
-        }
-
-        .nav-links, .social-links {
-            display: flex;
-            list-style: none; /* Elimina puntos nativamente */
-            gap: 20px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
+        .social-links { display: flex; gap: 15px; }
+        .social-links a img { height: 22px; transition: transform 0.2s, filter 0.2s; filter: grayscale(100%) brightness(0); }
+        .social-links a:hover img { transform: translateY(-3px); filter: grayscale(0%) brightness(0); }
+        
+        /* Contenedor Principal */
+        .container { max-width: 1200px; margin: 120px auto 60px; padding: 0 20px; }
+        
+        /* Header */
+        header { text-align: center; padding: 40px 0 40px; margin-bottom: 40px; }
+        header h1 { 
+            color: #000000; 
+            font-size: clamp(3rem, 8vw, 6rem); 
+            font-weight: 900; 
+            margin-bottom: 15px; 
+            letter-spacing: -3px; 
+            line-height: 1;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
-
-        .nav-links a:hover {
-            color: var(--primary-light);
-            text-shadow: 0 0 8px var(--primary);
-        }
-
-        .social-links a img {
-            height: 22px;
-            opacity: 0.7;
-            transition: transform 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
-        }
-
-        .social-links a:hover img {
-            transform: translateY(-2px) scale(1.1);
-            opacity: 1;
-            filter: drop-shadow(0 0 5px var(--primary));
-        }
-
-        /* --- Contenedor Principal --- */
-        .container {
-            max-width: 1100px;
-            margin: 110px auto 40px;
-            padding: 0 20px;
-        }
-        
-        header {
-            text-align: center;
-            padding: 40px 0 50px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        header h1 {
-            color: #fff;
-            font-size: 4rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 5px;
-            background: linear-gradient(to right, #fff, var(--primary-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textShine 5s infinite linear;
-            filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.3));
-        }
-
-        @keyframes textShine {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        
-        header p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            margin-top: 10px;
-        }
-        
-        .ep-title {
-            text-align: center;
-            color: var(--primary-light);
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 50px;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .ep-title::after {
-            content: '';
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            border-radius: 2px;
-        }
-
-        /* --- Grid de Canciones --- */
-        .songs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 35px;
-            margin-bottom: 60px;
-        }
-
-        /* --- Tarjeta de Canción --- */
-        .cancion-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            border-radius: 24px;
-            padding: 30px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cancion-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .cancion-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            border-color: rgba(168, 85, 247, 0.3);
-        }
-        
-        .cancion-card:hover::before {
-            opacity: 1;
-        }
-        
-        .cancion-card h3 {
-            font-size: 1.8rem;
+        header p { 
+            font-size: 1.2rem; 
+            color: #000000; 
+            text-transform: uppercase; 
+            letter-spacing: 8px; 
             font-weight: 700;
-            margin-bottom: 20px;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .cancion-card h3 span.icon {
-            color: var(--primary);
-            font-size: 1.4rem;
-        }
-
-        .total-reviews-badge {
-            font-size: 0.75rem;
-            background: rgba(168, 85, 247, 0.15);
-            color: var(--primary-light);
-            padding: 5px 12px;
-            border-radius: 20px;
-            margin-left: auto;
-            font-weight: 600;
-            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-bottom: 3px solid #000000;
+            display: inline-block;
+            padding-bottom: 10px;
         }
         
-        /* Estadísticas */
-        .song-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            font-size: 0.9em;
-            color: var(--text-muted);
-        }
-
-        .likes-counter {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.3s ease;
-            background: rgba(255,255,255,0.03);
-            padding: 5px 10px;
-            border-radius: 12px;
-        }
-
-        .likes-counter:hover {
-            color: #ff6b6b;
-            background: rgba(255,255,255,0.06);
-        }
-
-        .heart-icon {
-            font-size: 1.2em;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            color: #666;
-        }
-
-        .heart-icon.liked {
-            color: var(--primary);
-            text-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
-        }
-
-        .heart-icon:active {
-            transform: scale(0.7);
-        }
+        .ep-title { text-align: center; color: #000000; font-size: 2rem; font-weight: 900; margin-bottom: 80px; letter-spacing: 5px; text-transform: uppercase; position: relative; display: inline-block; left: 50%; transform: translateX(-50%); }
+        .ep-title::after { content: ''; width: 100%; height: 6px; background: var(--pattern-stripe); position: absolute; bottom: -10px; left: 0; z-index: -1; }
         
-        /* --- Visualizer Animation (New) --- */
-        .visualizer {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            gap: 3px;
-            height: 30px;
-            margin-bottom: 10px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
+        /* Grid de Canciones */
+        .songs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 50px; margin-bottom: 100px; }
         
-        .cancion-card.playing .visualizer {
-            opacity: 1;
-        }
-
-        .bar {
-            width: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-            animation: bounce 0s infinite ease-in-out;
-        }
-
-        @keyframes bounce {
-            0%, 100% { height: 10%; opacity: 0.5; }
-            50% { height: 100%; opacity: 1; box-shadow: 0 0 8px var(--primary); }
-        }
-
-        /* --- Reproductor --- */
-        .player-wrapper {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255,255,255,0.03);
-        }
-
-        .audio-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .play-btn {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            flex-shrink: 0;
-        }
-
-        .play-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
-        }
-
-        .play-btn:active {
-            transform: scale(0.95);
-        }
-
-        .icon-play, .icon-pause {
-            width: 18px;
-            height: 18px;
-            fill: white;
-            pointer-events: none;
-        }
-
-        .progress-container {
-            flex-grow: 1;
-            height: 6px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
+        .cancion-card { 
+            background: var(--bg-card); 
+            border-radius: 4px; 
+            padding: 0; 
+            border: 2px solid #000000; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s; 
+            display: flex; 
+            flex-direction: column; 
+            box-shadow: 10px 10px 0px #000000;
             position: relative;
-            cursor: pointer;
             overflow: hidden;
         }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), #c084fc);
-            border-radius: 3px;
-            width: 0%;
-            transition: width 0.1s linear;
-        }
-
-        .progress-container:hover .progress-bar {
-            background: linear-gradient(90deg, #c084fc, var(--primary));
-        }
-
-        .time-display {
-            font-size: 0.8rem;
-            color: #ccc;
-            font-variant-numeric: tabular-nums;
-            min-width: 85px;
-            text-align: right;
-        }
-
-        /* Volumen */
-        .volume-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .volume-btn {
-            background: none;
-            border: none;
-            color: #aaa;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            padding: 5px;
-            transition: color 0.2s;
-        }
-
-        .volume-btn:hover {
-            color: white;
-        }
-
-        .volume-slider-container {
-            position: absolute;
-            bottom: 140%;
-            left: 50%;
-            transform: translateX(-50%) scale(0.8);
-            background: rgba(20, 20, 20, 0.98);
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease, transform 0.2s ease;
-            width: 100px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
-        }
-
-        .volume-wrapper:hover .volume-slider-container,
-        .volume-slider-container:hover {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateX(-50%) scale(1);
-        }
-
-        input[type=range].volume-slider {
-            -webkit-appearance: none;
-            width: 100%;
-            background: transparent;
-        }
-
-        input[type=range].volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 14px;
-            width: 14px;
-            border-radius: 50%;
-            background: var(--primary);
-            cursor: pointer;
-            margin-top: -5px;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
-        }
-
-        input[type=range].volume-slider::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 4px;
-            cursor: pointer;
-            background: rgba(255,255,255,0.2);
-            border-radius: 2px;
+        .cancion-card:hover { transform: translate(-6px, -6px); box-shadow: 14px 14px 0px #000000; }
+        
+        .cancion-card h3 { 
+            font-size: 1.4rem; 
+            font-weight: 900; 
+            color: #ffffff; 
+            background-color: #000000;
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            padding: 20px; 
+            border-bottom: 2px solid #000000; 
+            text-transform: uppercase;
         }
         
-        /* --- Info y Compartir --- */
-        .song-copyright {
-            margin-top: auto;
-            padding-top: 15px;
-            font-size: 0.75em;
-            color: #666;
-            text-align: center;
-            line-height: 1.4;
-        }
+        .total-reviews-badge { font-size: 0.7rem; background: #ffffff; color: #000000; padding: 4px 10px; border-radius: 50px; font-weight: 900; letter-spacing: 1px; border: 2px solid #ffffff; }
+        
+        .song-stats { display: flex; justify-content: space-between; padding: 15px 20px; background: #fafafa; border-bottom: 1px solid #000000; font-size: 0.8rem; color: #000000; letter-spacing: 1px; font-weight: 700; }
+        
+        .likes-counter { cursor: pointer; display: flex; align-items: center; gap: 8px; transition: color 0.3s; user-select: none; }
+        .likes-counter:hover .heart-icon { color: #cc0000; transform: scale(1.2); }
+        .heart-icon { font-size: 1.2em; transition: transform 0.2s, color 0.2s; color: #000000; display: inline-block; }
+        .heart-icon.liked { color: #cc0000; animation: pulse 0.4s; }
+        
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1.2); } }
 
-        .share-button-container {
-            margin-top: 15px;
-            text-align: center;
+        .player-wrapper { background: #ffffff; padding: 25px 20px; display: flex; flex-direction: column; gap: 15px; }
+        .audio-controls { display: flex; align-items: center; gap: 15px; }
+        
+        .play-btn { 
+            width: 45px; 
+            height: 45px; 
+            background: #000000; 
+            border: 2px solid #000000; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: transform 0.1s, background 0.2s; 
+            flex-shrink: 0; 
+            border-radius: 50%;
         }
+        .play-btn:hover { background: #333; transform: scale(1.05); }
+        .play-btn:active { transform: scale(0.95); }
+        
+        .icon-play, .icon-pause { width: 14px; height: 14px; fill: white; pointer-events: none; }
+        
+        .progress-container { 
+            flex-grow: 1; 
+            height: 6px; 
+            background-color: #e0e0e0; 
+            border-radius: 3px; 
+            position: relative; 
+            cursor: pointer; 
+            overflow: hidden; 
+        }
+        .progress-bar { 
+            height: 100%; 
+            background-color: #000000; 
+            border-radius: 3px; 
+            width: 0%; 
+            transition: width 0.1s linear; 
+        }
+        
+        .time-display { font-size: 0.75rem; color: #666; font-variant-numeric: tabular-nums; min-width: 85px; text-align: right; font-weight: 500; }
+        
+        .volume-wrapper { display: flex; align-items: center; justify-content: center; width: 30px; }
+        .volume-btn { background: none; border: none; cursor: pointer; color: #000; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; }
+        .volume-btn:hover { opacity: 0.7; }
+        .volume-btn svg { width: 20px; height: 20px; fill: currentColor; }
+        .volume-btn.muted { opacity: 0.4; }
+        
+        .song-copyright { padding: 15px 20px; font-size: 0.7em; color: #777; text-align: center; letter-spacing: 1px; border-top: 1px dashed #ccc; background: #fdfdfd; margin-top: auto; }
+        .share-button-container { padding: 20px; text-align: center; border-top: 2px solid #000; background: #fff; }
+        .share-whatsapp { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 12px 0; background-color: #000000; color: white; text-decoration: none; font-size: 0.9em; font-weight: 700; letter-spacing: 1px; transition: background 0.2s; text-transform: uppercase; }
+        .share-whatsapp:hover { background-color: #25D366; } /* Color oficial WhatsApp */
+        
+        /* Secciones Informativas */
+        .info-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 50px; }
+        section { padding: 40px; background: var(--bg-card); border-radius: 0px; border: 3px solid #000000; box-shadow: 8px 8px 0px rgba(0,0,0,1); transition: transform 0.3s; }
+        section:hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0px rgba(0,0,0,1); }
+        section h2 { color: #000000; margin-bottom: 20px; font-weight: 900; letter-spacing: 2px; font-size: 1.8rem; text-transform: uppercase; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        section p { color: #444; font-size: 1rem; line-height: 1.7; font-weight: 400; }
+        
+        footer { text-align: center; margin-top: 100px; padding: 40px; border-top: 4px solid #000000; font-size: 0.9em; color: #000000; letter-spacing: 2px; font-weight: 700; background: #fff; }
 
-        .share-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            background-color: var(--success);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 0.9em;
-            font-weight: 600;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
-        }
-
-        .share-whatsapp:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
-            filter: brightness(1.1);
-        }
-
-        /* --- Secciones Informativas --- */
-        .info-sections {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 60px;
-        }
-
-        section {
-            padding: 30px;
-            background: rgba(30, 30, 30, 0.4);
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.03);
-            border-left: 4px solid var(--primary);
-            transition: background 0.3s ease;
-        }
-
-        section:hover {
-            background: rgba(30, 30, 30, 0.6);
-        }
-
-        section h2 {
-            color: #c084fc;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        section p {
-            color: #ccc;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            margin-top: 80px;
-            padding: 30px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.85em;
-            color: #666;
-        }
-
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background-color: rgba(20, 20, 20, 0.98);
-            border: 1px solid var(--primary);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            z-index: 2000;
-            opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
-        }
-
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
+        /* Notificación Toast */
+        #toast-container { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 2000; pointer-events: none; }
+        .toast { background-color: #000; color: #fff; padding: 12px 24px; border-radius: 4px; margin-top: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.success { border-left: 4px solid #fff; }
+        .toast.info { border-left: 4px solid #555; }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .nav-links, .social-links {
-                width: 100%;
-                justify-content: center;
-                gap: 25px;
-            }
-
-            header h1 {
-                font-size: 2.8rem;
-            }
-            
-            .ep-title {
-                font-size: 1.6rem;
-            }
-
-            .volume-slider-container {
-                position: static;
-                transform: none;
-                opacity: 1;
-                pointer-events: auto;
-                width: 70px;
-                margin-left: 10px;
-                padding: 0;
-                border: none;
-                background: transparent;
-                box-shadow: none;
-            }
-            
-            .songs-grid {
-                grid-template-columns: 1fr;
-            }
+            .nav-container { flex-direction: column; gap: 15px; padding: 15px; }
+            .nav-links { gap: 20px; width: 100%; justify-content: center; }
+            header h1 { font-size: 3.5rem; }
+            header p { font-size: 0.9rem; letter-spacing: 4px; }
+            .cancion-card { box-shadow: 6px 6px 0px #000000; }
+            .cancion-card:hover { transform: none; box-shadow: 6px 6px 0px #000000; }
         }
     </style>
 </head>
 <body>
-
-    <!-- Banner de navegación -->
+    <!-- Navegación -->
     <nav class="main-nav">
         <div class="nav-container">
-            <a href="#" class="logo">
-                <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" alt="BVHanKrY Logo">
-            </a>
+            <a href="#" class="logo"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" alt="Logo BVHanKrY"></a>
             <ul class="nav-links">
                 <li><a href="#music">Música</a></li>
                 <li><a href="#videos">Videos</a></li>
                 <li><a href="#shop">Shop</a></li>
             </ul>
             <ul class="social-links">
-                <li>
-                    <a href="https://www.instagram.com/henryandresvill/" target="_blank" rel="noopener" aria-label="Instagram">
-                        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/instagram.png" alt="Instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="https://wa.link/uuajw5" target="_blank" rel="noopener" aria-label="WhatsApp">
-                        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/whatsapp.png" alt="WhatsApp">
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.youtube.com/channel/UCJrxTphZnI8Rm_GTyCJp44g" target="_blank" rel="noopener" aria-label="YouTube">
-                        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/youtube.png" alt="YouTube">
-                    </a>
-                </li>
-                <li>
-                    <a href="https://open.spotify.com/intl-es/artist/0IPDl4adPnkF6LaoEyUwDl?si=Q1rMXXmjSRaxMks57Zw3gA" target="_blank" rel="noopener" aria-label="Spotify">
-                        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/spotify.png" alt="Spotify">
-                    </a>
-                </li>
+                <li><a href="https://www.instagram.com/henryandresvill/" target="_blank" aria-label="Instagram"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/instagram.png" alt="Instagram"></a></li>
+                <li><a href="https://wa.link/uuajw5" target="_blank" aria-label="WhatsApp"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/whatsapp.png" alt="WhatsApp"></a></li>
+                <li><a href="https://www.youtube.com/channel/UCJrxTphZnI8Rm_GTyCJp44g" target="_blank" aria-label="YouTube"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/youtube.png" alt="YouTube"></a></li>
+                <li><a href="https://open.spotify.com/intl-es/artist/0IPDl4adPnkF6LaoEyUwDl" target="_blank" aria-label="Spotify"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/spotify.png" alt="Spotify"></a></li>
             </ul>
         </div>
     </nav>
@@ -648,236 +240,137 @@
 
         <h2 class="ep-title">EP: Pulso</h2>
 
-        <!-- Grid de Canciones -->
-        <div class="songs-grid">
-
-            <!-- CANCIÓN 1: Corregido de Navi a Tinkuy para coincidir con el audio y JS -->
-            <article class="cancion-card" data-song="tinkuy">
-                <!-- Visualizer Bars -->
-                <div class="visualizer">
-                    <div class="bar" style="animation-duration: 0.5s"></div>
-                    <div class="bar" style="animation-duration: 0.7s"></div>
-                    <div class="bar" style="animation-duration: 0.4s"></div>
-                    <div class="bar" style="animation-duration: 0.8s"></div>
-                    <div class="bar" style="animation-duration: 0.6s"></div>
-                </div>
-
-                <h3>
-                    <span class="icon">🎵</span> Tinkuy
-                    <span class="total-reviews-badge">Reviews Globales: <span id="total-reviews-badge">0</span></span>
-                </h3>
-                
+        <div class="songs-grid" id="music">
+            <!-- 1. NAVI -->
+            <article class="cancion-card" data-song="navi" data-review-id="total-reviews">
+                <h3><span class="icon">🎵</span> Navi <span class="total-reviews-badge">Reviews: <span class="count-display">0</span></span></h3>
                 <div class="song-stats">
-                    <div class="likes-counter" title="Dar Me Gusta">
-                        <span class="heart-icon">❤</span>
-                        <span class="likes-count">0</span> Me gusta
-                    </div>
-                    <div class="plays-counter">
-                        ▶ <span class="plays-count">0</span> Reprod.
-                    </div>
+                    <div class="likes-counter" title="Dar Me gusta"><span class="heart-icon">❤</span> <span class="likes-count">0</span> Likes</div>
+                    <div class="plays-counter">▶ <span class="plays-count">0</span> Plays</div>
                 </div>
-
                 <div class="player-wrapper">
                     <div class="audio-controls">
-                        <button class="play-btn">
-                            <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                        </button>
-                        
-                        <div class="progress-container">
-                            <div class="progress-bar"></div>
-                        </div>
-                        
-                        <div class="time-display">0:00</div>
-
-                        <div class="volume-wrapper">
-                            <button class="volume-btn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-                            </button>
-                            <div class="volume-slider-container">
-                                <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Audio Element: Corregido a tinkuy.mp3 -->
-                <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/tinkuy.mp3" preload="metadata"></audio>
-
-                <div class="song-copyright">
-                    <p>Compositor: BVHanKrY | Producción: BVros</p>
-                    <p>℗ 2026 BVHanKrY</p>
-                </div>
-                <div class="share-button-container">
-                    <!-- Se rellenará dinámicamente con JS -->
-                    <a href="#" class="share-whatsapp" target="_blank">Compartir en WhatsApp</a>
-                </div>
-            </article>
-
-            <!-- CANCIÓN 2: Subtle Gad -->
-            <article class="cancion-card" data-song="subtle-gad">
-                <div class="visualizer">
-                    <div class="bar" style="animation-duration: 0.6s"></div>
-                    <div class="bar" style="animation-duration: 0.4s"></div>
-                    <div class="bar" style="animation-duration: 0.8s"></div>
-                    <div class="bar" style="animation-duration: 0.5s"></div>
-                    <div class="bar" style="animation-duration: 0.7s"></div>
-                </div>
-
-                <h3><span class="icon">🎵</span> Subtle Gad</h3>
-                
-                <div class="song-stats">
-                    <div class="likes-counter" title="Dar Me Gusta">
-                        <span class="heart-icon">❤</span>
-                        <span class="likes-count">0</span> Me gusta
-                    </div>
-                    <div class="plays-counter">
-                        ▶ <span class="plays-count">0</span> Reprod.
-                    </div>
-                </div>
-
-                <div class="player-wrapper">
-                    <div class="audio-controls">
-                        <button class="play-btn">
+                        <button class="play-btn" aria-label="Reproducir">
                             <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         </button>
                         <div class="progress-container"><div class="progress-bar"></div></div>
                         <div class="time-display">0:00</div>
                         <div class="volume-wrapper">
-                            <button class="volume-btn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                            <button class="volume-btn" aria-label="Silenciar">
+                                <!-- SVG Volumen Alto -->
+                                <svg class="vol-high" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                                <!-- SVG Mute (Oculto inicialmente) -->
+                                <svg class="vol-mute" viewBox="0 0 24 24" style="display:none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
                             </button>
-                            <div class="volume-slider-container"><input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1"></div>
                         </div>
                     </div>
                 </div>
-                
+                <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/navi.mp3" preload="metadata"></audio>
+                <div class="song-copyright"><p>Compositor: BVHanKrY | Producción: BVros</p><p>℗ 2026 BVHanKrY</p></div>
+                <div class="share-button-container"><a href="https://wa.me/?text=¡Escucha%20Navi!%20https://bvhankry.onrender.com" target="_blank" class="share-whatsapp">Compartir en WhatsApp</a></div>
+            </article>
+
+            <!-- 2. SUBTLE GAD -->
+            <article class="cancion-card" data-song="subtle_gad" data-review-id="total-reviews-2">
+                <h3><span class="icon">🎵</span> Subtle Gad <span class="total-reviews-badge">Reviews: <span class="count-display">0</span></span></h3>
+                <div class="song-stats">
+                    <div class="likes-counter" title="Dar Me gusta"><span class="heart-icon">❤</span> <span class="likes-count">0</span> Likes</div>
+                    <div class="plays-counter">▶ <span class="plays-count">0</span> Plays</div>
+                </div>
+                <div class="player-wrapper">
+                    <div class="audio-controls">
+                        <button class="play-btn" aria-label="Reproducir">
+                            <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+                        <div class="progress-container"><div class="progress-bar"></div></div>
+                        <div class="time-display">0:00</div>
+                        <div class="volume-wrapper">
+                            <button class="volume-btn" aria-label="Silenciar">
+                                <svg class="vol-high" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                                <svg class="vol-mute" viewBox="0 0 24 24" style="display:none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/Subtle gad.mp3" preload="metadata"></audio>
-
-                <div class="song-copyright">
-                    <p>Compositor: BVHanKrY | Producción: BVros</p>
-                    <p>℗ 2026 BVHanKrY</p>
-                </div>
-                <div class="share-button-container">
-                    <a href="#" class="share-whatsapp" target="_blank">Compartir en WhatsApp</a>
-                </div>
+                <div class="song-copyright"><p>Compositor: BVHanKrY | Producción: BVros</p><p>℗ 2026 BVHanKrY</p></div>
+                <div class="share-button-container"><a href="https://wa.me/?text=¡Escucha%20Subtle%20Gad!%20https://bvhankry.onrender.com" target="_blank" class="share-whatsapp">Compartir en WhatsApp</a></div>
             </article>
 
-            <!-- CANCIÓN 3: Regresion (Corregido link de audio) -->
-            <article class="cancion-card" data-song="regresion">
-                <div class="visualizer">
-                    <div class="bar" style="animation-duration: 0.7s"></div>
-                    <div class="bar" style="animation-duration: 0.5s"></div>
-                    <div class="bar" style="animation-duration: 0.9s"></div>
-                    <div class="bar" style="animation-duration: 0.4s"></div>
-                    <div class="bar" style="animation-duration: 0.6s"></div>
-                </div>
-
-                <h3><span class="icon">🎵</span> Regresion</h3>
-                
+            <!-- 3. REGRESIÓN -->
+            <article class="cancion-card" data-song="regrecion" data-review-id="total-reviews-3">
+                <h3><span class="icon">🎵</span> Regresión <span class="total-reviews-badge">Reviews: <span class="count-display">0</span></span></h3>
                 <div class="song-stats">
-                    <div class="likes-counter" title="Dar Me Gusta">
-                        <span class="heart-icon">❤</span>
-                        <span class="likes-count">0</span> Me gusta
-                    </div>
-                    <div class="plays-counter">
-                        ▶ <span class="plays-count">0</span> Reprod.
-                    </div>
+                    <div class="likes-counter" title="Dar Me gusta"><span class="heart-icon">❤</span> <span class="likes-count">0</span> Likes</div>
+                    <div class="plays-counter">▶ <span class="plays-count">0</span> Plays</div>
                 </div>
-
                 <div class="player-wrapper">
                     <div class="audio-controls">
-                        <button class="play-btn">
+                        <button class="play-btn" aria-label="Reproducir">
                             <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         </button>
                         <div class="progress-container"><div class="progress-bar"></div></div>
                         <div class="time-display">0:00</div>
                         <div class="volume-wrapper">
-                            <button class="volume-btn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                            <button class="volume-btn" aria-label="Silenciar">
+                                <svg class="vol-high" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                                <svg class="vol-mute" viewBox="0 0 24 24" style="display:none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73 4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
                             </button>
-                            <div class="volume-slider-container"><input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1"></div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Corrección del nombre del archivo de regrecion a regresion -->
-                <audio src="https://github.com/BVHanKrY/bvhankry.music/raw/refs/heads/main/audio/regresion.mp3" preload="metadata" onerror="this.src='https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/regrecion.mp3'"></audio>
-
-                <div class="song-copyright">
-                    <p>Compositor: BVHanKrY | Producción: BVros</p>
-                    <p>℗ 2026 BVHanKrY</p>
-                </div>
-                <div class="share-button-container">
-                    <a href="#" class="share-whatsapp" target="_blank">Compartir en WhatsApp</a>
-                </div>
+                <audio src="https://github.com/BVHanKrY/bvhankry.music/raw/refs/heads/main/audio/regrecion.mp3" preload="metadata"></audio>
+                <div class="song-copyright"><p>Compositor: BVHanKrY | Producción: BVros</p><p>℗ 2026 BVHanKrY</p></div>
+                <div class="share-button-container"><a href="https://wa.me/?text=¡Escucha%20Regresión!%20https://bvhankry.onrender.com" target="_blank" class="share-whatsapp">Compartir en WhatsApp</a></div>
             </article>
-
-        </div> <!-- End Grid -->
-
-        <!-- Info Sections -->
-        <div class="info-sections" id="music">
-            <section>
-                <h2>Música</h2>
-                <p>Disfruta del EP completo "Pulso", una fusión de sonidos dub con influencias andinas y electrónica.</p>
-            </section>
-            <section id="videos">
-                <h2>Videos</h2>
-                <p>Próximamente videos musicales y contenido exclusivo behind the scenes.</p>
-            </section>
-            <section id="shop">
-                <h2>Shop</h2>
-                <p>Próximamente merch oficial y productos exclusivos para seguidores.</p>
-            </section>
         </div>
 
-        <footer>
-            <p>© 2026 BVHanKrY (Todos los derechos reservados)</p>
-            <p style="font-size: 0.75em; color: #555; margin-top: 5px;">Contenido protegido por leyes internacionales de derechos de autor.</p>
-        </footer>
+        <div class="info-sections">
+            <section><h2>Música</h2><p>EP completo "Pulso" disponible ahora en todas las plataformas digitales. Sumérgete en el sonido Dub de Ecuador.</p></section>
+            <section id="videos"><h2>Videos</h2><p>Videoclips oficiales y contenido visual detrás de cámaras. Próximamente.</p></section>
+            <section id="shop"><h2>Shop</h2><p>Merch oficial exclusiva. Camisetas, vinilos y accesorios.</p></section>
+        </div>
+        
+        <footer><p>© 2026 BVHanKrY | Todos los derechos reservados</p></footer>
     </div>
 
-    <!-- Toast Notification Element -->
-    <div id="toast" class="toast">
-        <span>✅</span> <span id="toast-msg">Mensaje</span>
-    </div>
+    <!-- Contenedor para notificaciones -->
+    <div id="toast-container"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const formatTime = (seconds) => { 
+                if (isNaN(seconds)) return "0:00"; 
+                const mins = Math.floor(seconds / 60); 
+                const secs = Math.floor(seconds % 60); 
+                return `${mins}:${secs < 10 ? '0' + secs : secs}`; 
+            };
             
-            // --- UTILIDADES ---
-            const formatTime = (seconds) => {
-                if (isNaN(seconds)) return "0:00";
-                const mins = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60);
-                return `${mins}:${secs < 10 ? '0' + secs : secs}`;
-            };
-
-            const showToast = (message) => {
-                const toast = document.getElementById('toast');
-                const msgSpan = document.getElementById('toast-msg');
-                msgSpan.textContent = message;
-                toast.classList.add('show');
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            };
-
-            // --- GESTIÓN DE AUDIO ---
             let currentAudio = null;
             let currentBtn = null;
-            let currentCard = null;
-
-            // Lista para guardar las referencias de los contadores totales
-            const totalReviewsBadge = document.getElementById('total-reviews-badge');
-
-            // Inicializar Total Reviews
-            updateTotalReviews();
+            
+            // Función para mostrar notificaciones Toast (reemplazo de alert)
+            function showToast(message, type = 'success') {
+                const container = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                container.appendChild(toast);
+                
+                // Forzar reflow para animación
+                setTimeout(() => toast.classList.add('show'), 10);
+                
+                // Eliminar después de 3 segundos
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
 
             document.querySelectorAll('.cancion-card').forEach(card => {
-                // Obtener ID único de la canción
                 const songName = card.dataset.song;
                 const audio = card.querySelector('audio');
                 const playBtn = card.querySelector('.play-btn');
@@ -886,149 +379,152 @@
                 const progressBar = card.querySelector('.progress-bar');
                 const progressContainer = card.querySelector('.progress-container');
                 const timeDisplay = card.querySelector('.time-display');
-                const volumeSlider = card.querySelector('.volume-slider');
-
-                // Elementos de UI
+                const volumeBtn = card.querySelector('.volume-btn');
+                const volHigh = volumeBtn.querySelector('.vol-high');
+                const volMute = volumeBtn.querySelector('.vol-mute');
+                
                 const likesCount = card.querySelector('.likes-count');
                 const playsCount = card.querySelector('.plays-count');
+                const reviewBadgeCount = card.querySelector('.count-display'); // Elemento específico en el título
+                
                 const heartIcon = card.querySelector('.heart-icon');
                 const likeBtn = card.querySelector('.likes-counter');
-                
-                // Botón compartir dinámico
-                const shareBtn = card.querySelector('.share-whatsapp');
-                const songTitle = card.querySelector('h3').textContent.replace(/🎵\s*/, '').trim();
-                shareBtn.href = `https://wa.me/?text=¡Escucha%20"${encodeURIComponent(songTitle)}"%20de%20BVHanKrY!%20https://bvhankry.onrender.com`;
 
-                // --- 1. Cargar datos guardados ---
-                likesCount.textContent = localStorage.getItem(`cant-gustos-${songName}`) || 0;
-                playsCount.textContent = localStorage.getItem(`reviews-${songName}`) || 0;
+                // Cargar datos guardados
+                const storedLikes = localStorage.getItem(`cant-gustos-${songName}`);
+                const storedPlays = localStorage.getItem(`reviews-${songName}`);
                 
-                if (localStorage.getItem(`gusto-${songName}`) === 'activado') {
-                    heartIcon.classList.add('liked');
+                if (storedLikes) likesCount.textContent = storedLikes;
+                if (storedPlays) {
+                    playsCount.textContent = storedPlays;
+                    if(reviewBadgeCount) reviewBadgeCount.textContent = storedPlays; // Sincronizar badge
                 }
+                
+                if (localStorage.getItem(`gusto-${songName}`) === 'activado') heartIcon.classList.add('liked');
 
-                // --- 2. Función Play/Pause ---
+                // --- Control de Play/Pause ---
                 playBtn.addEventListener('click', () => {
-                    // Si hay otro audio reproduciéndose, pausarlo
+                    // Si hay otra canción sonando, detenerla
                     if (currentAudio && currentAudio !== audio && !currentAudio.paused) {
                         currentAudio.pause();
-                        const prevBtn = currentBtn;
-                        const prevCard = currentCard;
+                        currentAudio.currentTime = 0; // Opcional: resetear canción anterior
                         
-                        prevBtn.querySelector('.icon-play').style.display = 'block';
-                        prevBtn.querySelector('.icon-pause').style.display = 'none';
-                        prevCard.classList.remove('playing');
+                        // Resetear botón anterior visualmente
+                        if (currentBtn) {
+                            const prevPlay = currentBtn.querySelector('.icon-play');
+                            const prevPause = currentBtn.querySelector('.icon-pause');
+                            prevPlay.style.display = 'block';
+                            prevPause.style.display = 'none';
+                        }
                     }
 
                     if (audio.paused) {
                         const playPromise = audio.play();
-                        
                         if (playPromise !== undefined) {
                             playPromise.then(_ => {
                                 currentAudio = audio;
                                 currentBtn = playBtn;
-                                currentCard = card;
-                                
                                 playIcon.style.display = 'none';
                                 pauseIcon.style.display = 'block';
-                                card.classList.add('playing'); // Activa visualizador
                                 
-                                // Registrar reproducción una vez por carga (lógica mejorada)
-                                if (!audio.dataset.played) {
-                                    const plays = parseInt(playsCount.textContent) + 1;
+                                // Contar reproducción si no se ha contado en esta sesión
+                                if (!audio.dataset.counted) {
+                                    let plays = parseInt(playsCount.textContent) + 1;
                                     playsCount.textContent = plays;
+                                    if(reviewBadgeCount) reviewBadgeCount.textContent = plays; // Actualizar badge
+                                    
                                     localStorage.setItem(`reviews-${songName}`, plays);
-                                    audio.dataset.played = 'true';
-                                    updateTotalReviews();
+                                    audio.dataset.counted = 'true';
+                                    // showToast(`Reproduciendo: ${songName.replace('_', ' ')}`, 'info');
                                 }
-                            })
-                            .catch(error => {
-                                console.error("Error:", error);
-                                showToast("Error al cargar el audio. Verifica tu conexión.");
-                            });
+                            }).catch(error => console.error("Error reproduciendo:", error));
                         }
                     } else {
                         audio.pause();
                         playIcon.style.display = 'block';
                         pauseIcon.style.display = 'none';
-                        card.classList.remove('playing');
                     }
                 });
 
-                // --- 3. Barra de progreso y Tiempo ---
-                audio.addEventListener('timeupdate', () => {
-                    if (audio.duration) {
-                        const percent = (audio.currentTime / audio.duration) * 100;
-                        progressBar.style.width = percent + "%";
-                        timeDisplay.textContent = formatTime(audio.currentTime) + " / " + formatTime(audio.duration);
-                    }
+                // --- Barra de Progreso ---
+                audio.addEventListener('timeupdate', () => { 
+                    if (audio.duration) { 
+                        const percent = (audio.currentTime / audio.duration) * 100; 
+                        progressBar.style.width = percent + "%"; 
+                        timeDisplay.textContent = formatTime(audio.currentTime) + " / " + formatTime(audio.duration); 
+                    } 
                 });
 
-                progressContainer.addEventListener('click', (e) => {
-                    if (audio.duration) {
-                        const width = progressContainer.clientWidth;
-                        const clickX = e.offsetX;
-                        const duration = audio.duration;
-                        audio.currentTime = (clickX / width) * duration;
-                    }
+                progressContainer.addEventListener('click', (e) => { 
+                    if (audio.duration) { 
+                        const width = progressContainer.clientWidth; 
+                        const clickX = e.offsetX; 
+                        audio.currentTime = (clickX / width) * audio.duration; 
+                    } 
                 });
 
-                // Resetear UI al terminar
-                audio.addEventListener('ended', () => {
-                    playIcon.style.display = 'block';
-                    pauseIcon.style.display = 'none';
-                    progressBar.style.width = "0%";
-                    card.classList.remove('playing');
+                audio.addEventListener('ended', () => { 
+                    playIcon.style.display = 'block'; 
+                    pauseIcon.style.display = 'none'; 
+                    progressBar.style.width = "0%"; 
                     timeDisplay.textContent = "0:00 / " + formatTime(audio.duration);
+                    audio.dataset.counted = 'false'; // Permitir contar nueva reproducción si se reproduce de nuevo
                 });
 
-                audio.addEventListener('loadedmetadata', () => {
-                    timeDisplay.textContent = "0:00 / " + formatTime(audio.duration);
+                audio.addEventListener('loadedmetadata', () => { 
+                    timeDisplay.textContent = "0:00 / " + formatTime(audio.duration); 
                 });
 
-                // --- 4. Volumen ---
-                volumeSlider.addEventListener('input', (e) => {
-                    audio.volume = e.target.value;
+                // --- Control de Volumen ---
+                volumeBtn.addEventListener('click', () => { 
+                    audio.muted = !audio.muted; 
+                    if (audio.muted) { 
+                        volHigh.style.display = 'none';
+                        volMute.style.display = 'block';
+                        volumeBtn.classList.add('muted'); 
+                    } else { 
+                        volHigh.style.display = 'block';
+                        volMute.style.display = 'none';
+                        volumeBtn.classList.remove('muted'); 
+                    } 
                 });
 
-                // --- 5. Sistema de Likes ---
-                likeBtn.addEventListener('click', () => {
-                    if (localStorage.getItem(`gusto-${songName}`) === 'activado') {
-                        showToast("¡Ya le diste Me Gusta a esta canción!");
-                        return;
-                    }
-
-                    const likes = parseInt(likesCount.textContent) + 1;
-                    likesCount.textContent = likes;
-                    localStorage.setItem(`cant-gustos-${songName}`, likes);
-                    localStorage.setItem(`gusto-${songName}`, 'activado');
+                // --- Botón Me Gusta ---
+                likeBtn.addEventListener('click', () => { 
+                    if (localStorage.getItem(`gusto-${songName}`) === 'activado') { 
+                        showToast("Ya le diste Me Gusta a esta canción", 'info'); 
+                        return; 
+                    } 
                     
-                    heartIcon.classList.add('liked');
-                    
-                    // Animación pop
-                    heartIcon.style.transform = "scale(1.4)";
-                    setTimeout(() => heartIcon.style.transform = "scale(1)", 200);
-
-                    showToast("¡Gracias por tu Me Gusta! 🎵");
+                    const likes = parseInt(likesCount.textContent) + 1; 
+                    likesCount.textContent = likes; 
+                    localStorage.setItem(`cant-gustos-${songName}`, likes); 
+                    localStorage.setItem(`gusto-${songName}`, 'activado'); 
+                    heartIcon.classList.add('liked'); 
+                    showToast("¡Gracias por tu Me Gusta!", 'success');
                 });
             });
+        });
 
-            // --- Función Global Actualizar Total Reviews ---
-            function updateTotalReviews() {
-                let total = 0;
-                // Busca TODOS los cards en el DOM, no un array fijo
-                document.querySelectorAll('.cancion-card').forEach(card => {
-                    const songName = card.dataset.song;
-                    total += parseInt(localStorage.getItem(`reviews-${songName}`) || 0);
-                });
-                
-                if(totalReviewsBadge) totalReviewsBadge.textContent = total;
+        // Navbar hide/show logic (Mantiene la funcionalidad original pero mejorada)
+        let lastScrollTop = 0;
+        const delta = 5;
+        const navbar = document.querySelector('.main-nav');
+        const navbarHeight = navbar.offsetHeight;
+
+        window.addEventListener('scroll', function() {
+            let st = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (Math.abs(lastScrollTop - st) <= delta) return;
+
+            if (st > lastScrollTop && st > navbarHeight) {
+                // Scroll Down -> Ocultar
+                navbar.classList.add('hidden-nav');
+            } else {
+                // Scroll Up -> Mostrar
+                navbar.classList.remove('hidden-nav');
             }
-
-            // Prevenir descarga directa
-            document.querySelectorAll('audio').forEach(audio => {
-                audio.addEventListener('contextmenu', (e) => e.preventDefault());
-            });
+            lastScrollTop = st;
         });
     </script>
 </body>
