@@ -360,6 +360,17 @@
             .floating-play-btn { bottom: 70px; right: 15px; width: 40px; height: 40px; }
             .floating-play-btn svg { width: 20px; height: 20px; }
         }
+                /* --- CORRECCIÓN PUNTOS BLANCOS --- */
+        .nav-links li, .social-links li {
+            list-style-type: none !important; /* Forza a quitar el punto */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Método moderno para ocultar marcadores en cualquier navegador */
+        .nav-links li::marker, .social-links li::marker {
+            content: "";
+        }
     </style>
 </head>
 <body>
