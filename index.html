@@ -18,7 +18,7 @@
             --accent-hover: #1fdf64;
             --nav-height: 64px;
             --player-height: 110px;
-            --vinyl-size: 56px; /* Tamaño ajustado del vinilo */
+            --vinyl-size: 56px; /* Tamaño ajustado del vinilo (PC) */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -368,6 +368,13 @@
                 width: 20%; order: 1; max-width: 50px; 
                 gap: 5px; justify-content: center; 
             }
+            
+            /* Icono más pequeño en celular */
+            .gp-cover { 
+                width: 40px; 
+                height: 40px; 
+            }
+
             .gp-info-text { display: none; } 
             
             .gp-center { 
@@ -422,7 +429,6 @@
 
         <div class="songs-grid" id="music">
             <!-- 1. Tinkuy -->
-            <!-- Se añadió data-cover para actualizar el vinilo dinámicamente -->
             <article class="cancion-card" id="card-navi" data-title="Tinkuy" data-artist="BVHanKrY" data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
                 <button class="floating-play-btn btn-card-float" aria-label="Reproducir"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
                 <div class="song-header-row">
@@ -536,7 +542,7 @@
         <!-- Izquierda: Vinilo -->
         <div class="gp-left">
             <div class="gp-cover" id="gpCover">
-                <img src="" alt="Cover" id="gpCoverImg">
+                <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png" alt="Cover" id="gpCoverImg">
             </div>
             <div class="gp-info-text">
                 <div class="gp-title" id="gpTitle">Título</div>
@@ -661,8 +667,7 @@
 
             // Imagen por defecto inicial
             const defaultCover = "https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png";
-            gpCoverImg.src = defaultCover;
-
+            
             const formatTime = (s) => isNaN(s) ? "0:00" : `${Math.floor(s/60)}:${Math.floor(s%60)<10?'0':''}${Math.floor(s%60)}`;
 
             // --- Toast ---
@@ -864,51 +869,39 @@
             setupSeekButton(gpNextBtn, playNext, 1);  // 1 adelanta
 
             // --- Progreso y Tiempo ---
-            if (currentAudio) {
-                currentAudio.ontimeupdate = () => {
-                    if(!currentAudio) return;
-                    const pct = (currentAudio.currentTime / currentAudio.duration) * 100;
-                    if(gpProgressBar) gpProgressBar.style.width = `${pct}%`;
-                    if(gpCurrentTime) gpCurrentTime.innerText = formatTime(currentAudio.currentTime);
-                    
-                    // Actualizar tarjeta individual
-                    const card = document.getElementById(currentCardId);
-                    if(card) {
-                        card.querySelector('.progress-bar').style.width = `${pct}%`;
-                        card.querySelector('.time-display').innerText = formatTime(currentAudio.currentTime);
-                    }
-                };
-                
-                currentAudio.onloadedmetadata = () => {
-                    if(gpDuration) gpDuration.innerText = formatTime(currentAudio.duration);
-                };
-                
-                currentAudio.onended = playNext;
-            }
             
+            const updateTime = () => {
+                if(!currentAudio) return;
+                const pct = (currentAudio.currentTime / currentAudio.duration) * 100;
+                if(gpProgressBar) gpProgressBar.style.width = `${pct}%`;
+                if(gpCurrentTime) gpCurrentTime.innerText = formatTime(currentAudio.currentTime);
+                
+                // Actualizar tarjeta individual
+                const card = document.getElementById(currentCardId);
+                if(card) {
+                    card.querySelector('.progress-bar').style.width = `${pct}%`;
+                    card.querySelector('.time-display').innerText = formatTime(currentAudio.currentTime);
+                }
+                if(currentAudio.paused || currentAudio.ended) return;
+                requestAnimationFrame(updateTime);
+            };
+
             // Observer para asignar eventos a nuevos audios dinámicamente
             const observer = new MutationObserver(() => {
                 const audios = document.querySelectorAll('audio');
                 audios.forEach(audio => {
-                    audio.ontimeupdate = () => {
-                        if(audio !== currentAudio) return;
-                        const pct = (audio.currentTime / audio.duration) * 100;
-                        if(gpProgressBar) gpProgressBar.style.width = `${pct}%`;
-                        if(gpCurrentTime) gpCurrentTime.innerText = formatTime(audio.currentTime);
-                        
-                        const card = document.getElementById(currentCardId);
-                        if(card) {
-                            card.querySelector('.progress-bar').style.width = `${pct}%`;
-                            card.querySelector('.time-display').innerText = formatTime(audio.currentTime);
-                        }
-                    };
-                    audio.onloadedmetadata = () => {
-                        if(audio === currentAudio && gpDuration) gpDuration.innerText = formatTime(audio.duration);
-                    };
-                    audio.onended = playNext;
+                    if(!audio.onloadedmetadata) {
+                        audio.onloadedmetadata = () => {
+                            if(audio === currentAudio && gpDuration) gpDuration.innerText = formatTime(audio.duration);
+                        };
+                        audio.onended = playNext;
+                    }
                 });
             });
             observer.observe(document.body, { childList: true, subtree: true });
+            
+            // Loop de tiempo global
+            requestAnimationFrame(updateTime);
 
             // Click barra de progreso
             gpProgressContainer.addEventListener('click', (e) => {
