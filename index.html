@@ -529,7 +529,43 @@
         font-size: 1.2rem;
     }
 }
+        /* --- MENU HAMBURGUESA (MÓVIL) --- */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
 
+/* MOBILE */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: rgba(0,0,0,0.9);
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    padding: 1rem 0;
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    text-align: center;
+    padding: 0.8rem 0;
+  }
+}
     </style>
 </head>
 <body>
@@ -537,6 +573,7 @@
     <nav class="main-nav">
         <div class="nav-container">
             <a href="#" class="logo"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" alt="Logo BVHanKrY"></a>
+            <button class="menu-toggle" aria-label="Abrir menú">☰</button>
             <ul class="nav-links">
                 <li><a href="#music" class="active">Música</a></li>
                 <li><a href="#videos">Videos</a></li>
@@ -1179,6 +1216,11 @@
                 }
                 lastScroll = currentScroll;
             });
+        });
+        const toggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        toggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
         });
     </script>
 </body>
