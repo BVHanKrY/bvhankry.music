@@ -9,9 +9,11 @@
     <link rel="icon" href="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" type="image/png">
     <style>
         :root {
-            /* Paleta de Colores "Streaming" (Estilo Spotify/YouTube) */
+            /* Paleta de Colores "Streaming" Moderna */
             --bg-body: #121212;
-            --bg-gradient: radial-gradient(circle at 10% 20%, #1a1a1a 0%, #121212 90%);
+            /* Fondo con mejor contraste mediante overlay */
+            --bg-gradient: linear-gradient(to bottom, rgba(18,18,18,0.85) 0%, rgba(18,18,18,0.95) 40%, #121212 100%);
+            
             --bg-card: #181818;
             --bg-card-hover: #282828;
             --text-primary: #ffffff;
@@ -29,12 +31,15 @@
 
         body { 
             font-family: 'Roboto', sans-serif;
-            background: var(--bg-body);
-            background-image: url(https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/ChatGPT%20Image%2030%20dic%202025%2C%2010_59_54%20a.m..png), linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+            background-color: var(--bg-body);
+            /* Imagen de fondo con overlay oscuro para contraste */
+            background-image: var(--bg-gradient), url(https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/ChatGPT%20Image%2030%20dic%202025%2C%2010_59_54%20a.m..png);
             background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
             color: var(--text-primary); 
             min-height: 100vh; 
-            padding-bottom: calc(var(--player-height) + 20px); /* Espacio para el player */
+            padding-bottom: calc(var(--player-height) + 20px); 
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
@@ -64,10 +69,12 @@
             width: 100%; padding: 0 32px; max-width: 1600px; margin: 0 auto; 
         }
         
+        /* CORRECCIÓN LOGO: Se elimina el filtro que borraba el color */
         .logo img { 
             height: 32px; 
             object-fit: contain;
-            filter: brightness(0) invert(1); /* Asegurar que sea blanco */
+            /* filter: brightness(0) invert(1);  <-- ELIMINADO */
+            border-radius: 4px; /* Un pequeño borde suave nunca está de más */
         }
 
         .nav-links { display: flex; gap: 32px; list-style: none; }
@@ -99,21 +106,40 @@
             margin-bottom: 40px;
         }
         
+        /* ACTUALIZACIÓN: Portada del EP */
         .header-art {
             width: 232px;
             height: 232px;
-            background: linear-gradient(135deg, #333, #000);
-            box-shadow: 0 4px 60px rgba(0,0,0,0.5);
+            background-color: #333;
+            /* Imagen de portada solicitada */
+            background-image: url('https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 8px 50px rgba(0,0,0,0.6); /* Sombra más profunda */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 80px;
+            font-size: 0; /* Ocultar texto anterior */
             font-weight: 900;
             color: #555;
             border-radius: 4px;
             flex-shrink: 0;
-            text-shadow: 2px 2px 0 #000;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
         }
+        
+        /* Efecto sutil de brillo al pasar el mouse sobre la portada */
+        .header-art::after {
+            content: '';
+            position: absolute;
+            top:0; left:0; width:100%; height:100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .header-art:hover::after { opacity: 1; }
 
         .header-text { display: flex; flex-direction: column; justify-content: flex-end; }
         
@@ -131,6 +157,7 @@
             line-height: 1;
             letter-spacing: -2px;
             color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         
         header p { 
@@ -152,7 +179,7 @@
             background-color: var(--bg-card); 
             border-radius: var(--border-radius);
             padding: 16px;
-            transition: background-color 0.3s ease, transform 0.2s;
+            transition: background-color 0.3s ease, transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
             display: flex;
             flex-direction: column;
@@ -163,13 +190,14 @@
             background-color: var(--bg-card-hover); 
             transform: translateY(-4px);
             border-color: rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
         /* Botón Flotante */
         .floating-play-btn {
             position: absolute;
             right: 20px;
-            bottom: 90px; /* Ajustado para no tapar controles */
+            bottom: 90px; 
             width: 48px;
             height: 48px;
             border-radius: 50%;
@@ -255,7 +283,7 @@
 
         /* --- Secciones Info --- */
         .info-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 60px; }
-        section { padding: 24px; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); border-radius: 8px; }
+        section { padding: 24px; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); border-radius: 8px; backdrop-filter: blur(5px); }
         section h2 { font-size: 1.2rem; margin-bottom: 12px; color: #fff; display: flex; align-items: center; gap: 10px; }
         section h2::before { content: ''; width: 4px; height: 18px; background: var(--accent-green); display: block; border-radius: 2px; }
         section p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
@@ -276,6 +304,7 @@
             transform: translateY(100%);
             transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
             box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
         }
         .global-player.active { transform: translateY(0); }
         
@@ -289,10 +318,10 @@
             display: flex; align-items: center; justify-content: center; font-size: 10px; color: #444; font-weight: bold;
             position: relative; overflow: hidden; border: 1px solid #333;
             flex-shrink: 0;
-            /* Textura de vinilo CSS */
-            background-image: repeating-radial-gradient(#222 0, #222 2px, #111 3px, #111 4px);
+            background-image: url('https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png');
+            background-size: cover;
+            background-position: center;
         }
-        .gp-cover::after { content: ''; position: absolute; width: 16px; height: 16px; background: #000; border-radius: 50%; border: 2px solid #333; z-index: 2; }
         
         /* Animación de giro */
         .gp-cover-spin { animation: spin 4s linear infinite; }
@@ -341,9 +370,9 @@
         @media (max-width: 768px) {
             .container { padding: 0 16px; margin-top: calc(var(--nav-height) + 20px); }
             .nav-container { padding: 0 16px; }
-            .nav-links { display: none; } /* Ocultar links en móvil para simplificar */
+            .nav-links { display: none; }
             header { flex-direction: column; align-items: flex-start; }
-            .header-art { width: 140px; height: 140px; font-size: 50px; }
+            .header-art { width: 180px; height: 180px; } /* Ligeramente más grande en móvil para impacto */
             
             /* Player Mobile */
             .global-player { height: auto; padding: 12px 16px; flex-direction: row; flex-wrap: wrap; bottom: -200px; }
@@ -354,29 +383,26 @@
             
             .gp-progress-wrapper { order: 3; width: 100%; margin-top: 5px; }
             .gp-volume-wrapper { display: none; }
-            .gp-btn:not(.gp-play-pause) { display: none; } /* Solo Play/Pause en móvil */
+            .gp-btn:not(.gp-play-pause) { display: none; } 
             footer { padding: 40px 16px; }
             
             .floating-play-btn { bottom: 70px; right: 15px; width: 40px; height: 40px; }
             .floating-play-btn svg { width: 20px; height: 20px; }
         }
-                /* --- CORRECCIÓN PUNTOS BLANCOS --- */
-        .nav-links li, .social-links li {
-            list-style-type: none !important; /* Forza a quitar el punto */
-            margin: 0;
-            padding: 0;
-        }
 
-        /* Método moderno para ocultar marcadores en cualquier navegador */
-        .nav-links li::marker, .social-links li::marker {
-            content: "";
+        /* --- CORRECCIÓN PUNTOS BLANCOS --- */
+        .nav-links li, .social-links li {
+            list-style-type: none !important;
+            margin: 0; padding: 0;
         }
+        .nav-links li::marker, .social-links li::marker { content: ""; }
     </style>
 </head>
 <body>
     <!-- Navegación -->
     <nav class="main-nav">
         <div class="nav-container">
+            <!-- Logo: El filtro CSS ha sido eliminado para que se vea el color original -->
             <a href="#" class="logo"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" alt="Logo BVHanKrY"></a>
             <ul class="nav-links">
                 <li><a href="#music" class="active">Música</a></li>
@@ -394,6 +420,7 @@
 
     <div class="container">
         <header>
+            <!-- Header Art: Ahora muestra la portada "portada pulso.png" -->
             <div class="header-art">EP</div>
             <div class="header-text">
                 <span class="header-type">EP • 2026</span>
@@ -604,7 +631,6 @@
             // Sistema de Notificaciones (Toast)
             function showToast(msg) {
                 const container = document.getElementById('toast-container');
-                // Evitar spam de notificaciones
                 if(container.querySelector('.toast.show')) return; 
                 
                 const t = document.createElement('div');
@@ -633,7 +659,7 @@
                 if (currentAudio && currentAudio !== audio) {
                     currentAudio.pause();
                     currentAudio.currentTime = 0;
-                    resetCardUI(currentCardId); // Resetear UI anterior
+                    resetCardUI(currentCardId);
                 }
 
                 // Inicializar nueva canción
@@ -649,9 +675,8 @@
                     updateGlobalPlayerUI(true);
                     globalPlayer.classList.add('active');
                     
-                    // Contador de reproducciones (simple, local)
+                    // Contador de reproducciones
                     const playsEl = card.querySelector('.plays-count');
-                    // Solo contar si no se contó en esta sesión (o si reiniciamos)
                     if(!currentAudio.dataset.counted) {
                         let count = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0');
                         count++;
@@ -674,13 +699,13 @@
 
             function playNext() {
                 const currentIndex = cards.findIndex(c => c.id === currentCardId);
-                const nextIndex = (currentIndex + 1) % cards.length; // Loop al principio si es el último
+                const nextIndex = (currentIndex + 1) % cards.length;
                 playSong(cards[nextIndex].id);
             }
 
             function playPrev() {
                 const currentIndex = cards.findIndex(c => c.id === currentCardId);
-                const prevIndex = (currentIndex - 1 + cards.length) % cards.length; // Loop al final si es el primero
+                const prevIndex = (currentIndex - 1 + cards.length) % cards.length;
                 playSong(cards[prevIndex].id);
             }
 
@@ -711,7 +736,6 @@
                         b.style.backgroundColor = 'var(--accent-green)'; 
                         b.style.borderColor = 'var(--accent-green)';
                         b.style.color = '#000';
-                        // Para el botón flotante
                         if(b.classList.contains('btn-card-float')) b.style.boxShadow = '0 8px 8px rgba(0,0,0,0.3)';
                     });
                     playIcon.style.display = 'none';
@@ -793,11 +817,9 @@
                 audio.addEventListener('timeupdate', () => {
                     if(audio.duration) {
                         const pct = (audio.currentTime / audio.duration) * 100;
-                        // Actualizar tarjeta
                         pBar.style.width = pct + '%';
                         tDisplay.textContent = formatTime(audio.currentTime);
                         
-                        // Actualizar Global si es la activa
                         if(audio === currentAudio) {
                             gpProgressBar.style.width = pct + '%';
                             gpCurrentTime.textContent = formatTime(audio.currentTime);
@@ -811,7 +833,7 @@
 
                 audio.addEventListener('ended', () => {
                     resetCardUI(cardId);
-                    playNext(); // Auto-play next
+                    playNext(); 
                 });
 
                 // Likes
@@ -849,7 +871,6 @@
             gpNextBtn.addEventListener('click', playNext);
             gpPrevBtn.addEventListener('click', playPrev);
 
-            // Click en barra global
             gpProgressContainer.addEventListener('click', (e) => {
                 if(currentAudio?.duration) {
                     const rect = gpProgressContainer.getBoundingClientRect();
@@ -869,7 +890,6 @@
                 updateVolumeVisuals(globalVolumeValue);
             });
             
-            // Inicializar visual de volumen
             updateVolumeVisuals(1.0);
 
             gpMuteBtn.addEventListener('click', () => {
