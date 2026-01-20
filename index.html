@@ -396,6 +396,140 @@
         /* --- CORRECCIÓN PUNTOS BLANCOS --- */
         .nav-links li, .social-links li { list-style-type: none !important; margin: 0; padding: 0; }
         .nav-links li::marker, .social-links li::marker { content: ""; }
+
+        @media (max-width: 768px) {
+    .container {
+        padding: 0 12px;
+        margin-top: calc(var(--nav-height) + 20px);
+    }
+
+    .nav-container {
+        padding: 0 16px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 16px;
+        margin-top: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 0;
+    }
+
+    .header-art {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 10px;
+    }
+
+    .header-text h1 {
+        font-size: 2rem;
+    }
+
+    .songs-grid {
+        gap: 16px;
+    }
+
+    .cancion-card {
+        padding: 12px;
+    }
+
+    .song-title-text {
+        font-size: 0.95rem;
+    }
+
+    .song-artist-text {
+        font-size: 0.75rem;
+    }
+
+    .inline-play-btn {
+        width: 28px;
+        height: 28px;
+    }
+
+    .floating-play-btn {
+        width: 42px;
+        height: 42px;
+        bottom: 80px;
+    }
+
+    .global-player {
+        padding: 10px 16px;
+        height: 70px;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    .gp-left {
+        flex: 0 0 auto;
+        gap: 8px;
+        width: auto;
+        max-width: 60px;
+    }
+
+    .gp-cover {
+        width: 40px;
+        height: 40px;
+    }
+
+    .gp-info-text {
+        display: flex;
+    }
+
+    .gp-title {
+        font-size: 0.85rem;
+    }
+
+    .gp-artist {
+        font-size: 0.7rem;
+    }
+
+    .gp-center {
+        flex: 1;
+        padding: 0 10px;
+    }
+
+    .gp-controls {
+        gap: 12px;
+    }
+
+    .gp-play-pause {
+        width: 30px;
+        height: 30px;
+    }
+
+    .gp-right {
+        display: none !important;
+    }
+
+    .gp-extra-actions {
+        display: none;
+    }
+
+    .share-dropdown {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .toast {
+        font-size: 0.8rem;
+    }
+
+    footer {
+        padding: 20px 16px;
+        font-size: 0.8rem;
+    }
+
+    .footer-logo {
+        font-size: 1.2rem;
+    }
+}
+
     </style>
 </head>
 <body>
