@@ -17,8 +17,8 @@
             --accent-green: #1ed760;
             --accent-hover: #1fdf64;
             --nav-height: 64px;
-            --player-height: 110px; /* Aumentado ligeramente para nuevos controles */
-            --vinyl-size: 56px;
+            --player-height: 110px;
+            --vinyl-size: 40px; /* Tamaño reducido para el icono */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -160,8 +160,8 @@
         /* Left: Vinyl Cover */
         .gp-left { 
             flex: 0 0 auto; 
-            display: flex; align-items: center; gap: 16px; 
-            width: 25%; max-width: 280px;
+            display: flex; align-items: center; gap: 12px; 
+            width: 20%; max-width: 260px;
             z-index: 10;
         }
         
@@ -172,7 +172,7 @@
             position: relative;
             flex-shrink: 0;
             background: #000;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
             overflow: hidden;
             border: 2px solid #333;
             cursor: pointer;
@@ -212,9 +212,9 @@
         .gp-cover-spin { animation: spin 4s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        .gp-info-text { display: flex; flex-direction: column; overflow: hidden; }
-        .gp-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .gp-artist { font-size: 0.8rem; color: var(--text-secondary); }
+        .gp-info-text { display: flex; flex-direction: column; overflow: hidden; justify-content: center; }
+        .gp-title { font-size: 0.9rem; font-weight: 600; color: #fff; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .gp-artist { font-size: 0.75rem; color: var(--text-secondary); }
 
         /* Center: Controls */
         .gp-center { 
