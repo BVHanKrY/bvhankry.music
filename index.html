@@ -566,6 +566,121 @@
     padding: 0.8rem 0;
   }
 }
+        @media (max-width: 768px) {
+  .main-nav { position: fixed; }
+
+  .nav-container{
+    position: relative;
+    display: flex;
+    flex-direction: row;          /* <-- clave */
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    gap: 10px;
+  }
+
+  /* Orden: Logo - Social - Hamburguesa */
+  .logo { order: 1; flex: 0 0 auto; }
+  .social-links { 
+    order: 2; 
+    flex: 1 1 auto; 
+    justify-content: center;
+    gap: 14px;
+  }
+  .menu-toggle { order: 3; flex: 0 0 auto; }
+
+  /* El menú (nav-links) debe ser dropdown, no fila */
+  .nav-links{
+    display: none;                 /* por defecto oculto */
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.92);
+    padding: 12px 0;
+    flex-direction: column;
+    z-index: 1001;
+  }
+  .nav-links.active{ display: flex; }
+
+  .nav-links li{ text-align:center; padding: 10px 0; }
+}
+        @media (max-width: 768px) {
+  /* Player: más compacto y con info visible */
+  .global-player{
+    height: auto;
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .gp-left{
+    width: auto;
+    max-width: none;
+    gap: 10px;
+  }
+
+  .gp-info-text{
+    display: flex;
+    max-width: 42vw;       /* espacio real para texto */
+    min-width: 140px;
+  }
+  .gp-title{
+    font-size: 0.9rem;
+    max-width: 42vw;
+  }
+  .gp-artist{
+    font-size: 0.75rem;
+  }
+
+  /* Centro: que use el espacio restante */
+  .gp-center{
+    flex: 1;
+    max-width: none;
+    padding: 0;
+  }
+
+  /* Progreso: en móvil solo mostramos un tiempo para no aplastar */
+  #gpDuration{ display:none; }     /* <-- quita el segundo 0:00 */
+  .gp-progress-wrapper{
+    gap: 8px;
+  }
+  .gp-progress-container{
+    height: 6px;
+  }
+}
+        @media (max-width: 768px) {
+  /* Asegura espacio para info */
+  .gp-info-text{
+    display: flex;
+    max-width: 44vw;
+    min-width: 120px;
+    overflow: hidden;
+  }
+
+  .gp-title{
+    font-size: 0.82rem;      /* más pequeño */
+    font-weight: 800;        /* negrilla fuerte */
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .gp-artist{
+    font-size: 0.72rem;
+    font-weight: 700;        /* negrilla */
+    opacity: 0.9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Tiempos un poco más pequeños para que no aplasten */
+  .gp-progress-wrapper{
+    font-size: 0.72rem;
+    gap: 8px;
+  }
+}
     </style>
 </head>
 <body>
