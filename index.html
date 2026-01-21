@@ -992,13 +992,16 @@
 
                 currentAudio = audio;
                 currentCardId = cardId;
-                
+                bindAudioEvents(audio); // ✅ asegura metadata/timeupdate siempre
+                                
                 // ACTUALIZAR IMAGEN DEL VINILO
                 gpCoverImg.style.opacity = '0'; // Pequeño fade
                 setTimeout(() => {
                     gpCoverImg.src = coverUrl;
                     gpCoverImg.style.opacity = '1';
                 }, 150);
+                syncTimeUI(); // ✅ fuerza refresco inmediato de contadores
+
 
                 if(audio.volume !== globalVolumeValue) audio.volume = globalVolumeValue;
 
@@ -1148,7 +1151,12 @@
                 // direction: 1 (forward), -1 (backward)
                 seekInterval = setInterval(() => {
                     if(currentAudio) {
-                        currentAudio.currentTime += direction * 2; // +/- 2 segundos cada 100ms
+                        if (currentAudio && isFinite(currentAudio.duration)) {
+  currentAudio.currentTime = Math.min(
+    currentAudio.duration,
+    Math.max(0, currentAudio.currentTime + direction * 2)
+  );
+  syncTimeUI();
                     }
                 }, 100);
             }
@@ -1160,53 +1168,81 @@
             setupSeekButton(gpPrevBtn, playPrev, -1); // -1 retrocede
             setupSeekButton(gpNextBtn, playNext, 1);  // 1 adelanta
 
-            // --- Progreso y Tiempo ---
-            
-            const updateTime = () => {
-                if(!currentAudio) return;
-                const pct = (currentAudio.currentTime / currentAudio.duration) * 100;
-                if(gpProgressBar) gpProgressBar.style.width = `${pct}%`;
-               const cur = currentAudio.currentTime || 0;
-               const dur = currentAudio.duration || 0;
-               const remaining = Math.max(0, dur - cur);
+           // --- Progreso y Tiempo (FIX: timeupdate + loadedmetadata) ---
 
-               if (gpCurrentTime) gpCurrentTime.innerText = formatTime(cur);
+function syncTimeUI() {
+  if (!currentAudio) return;
 
-            /* ✅ aquí el conteo regresivo */
-               if (gpDuration) gpDuration.innerText = `-${formatTime(remaining)}`; // con signo menos (recomendado)
+  const dur = currentAudio.duration;
+  const cur = currentAudio.currentTime;
 
-          /* Si NO quieres el "-", usa esta línea en vez de la de arriba:
-            if (gpDuration) gpDuration.innerText = formatTime(remaining);
-              */
-       
-                // Actualizar tarjeta individual
-                const card = document.getElementById(currentCardId);
-                if(card) {
-                    card.querySelector('.progress-bar').style.width = `${pct}%`;
-                    card.querySelector('.time-display').innerText = `-${formatTime(remaining)}`;
-                // o sin "-" si prefieres
+  // Si aún no hay metadata, no calculamos porcentaje
+  const safeDur = (isFinite(dur) && dur > 0) ? dur : 0;
+  const safeCur = isFinite(cur) ? cur : 0;
 
-                }
-                if(currentAudio.paused || currentAudio.ended) return;
-                requestAnimationFrame(updateTime);
-            };
+  // % progreso
+  const pct = safeDur ? (safeCur / safeDur) * 100 : 0;
+  if (gpProgressBar) gpProgressBar.style.width = `${pct}%`;
 
-            // Observer para asignar eventos a nuevos audios dinámicamente
-            const observer = new MutationObserver(() => {
-                const audios = document.querySelectorAll('audio');
-                audios.forEach(audio => {
-                    if(!audio.onloadedmetadata) {
-                        audio.onloadedmetadata = () => {
-                           if(audio === currentAudio && gpDuration) gpDuration.innerText = `-${formatTime(audio.duration)}`;
-                        };
-                        audio.onended = playNext;
-                    }
-                });
-            });
-            observer.observe(document.body, { childList: true, subtree: true });
-            
-            // Loop de tiempo global
-            requestAnimationFrame(updateTime);
+  // Tiempos (tu estilo: duración como restante con "-")
+  const remaining = safeDur ? Math.max(0, safeDur - safeCur) : 0;
+
+  if (gpCurrentTime) gpCurrentTime.textContent = formatTime(safeCur);
+  if (gpDuration) gpDuration.textContent = safeDur ? `-${formatTime(remaining)}` : "0:00";
+
+  // Actualizar tarjeta individual
+  const card = document.getElementById(currentCardId);
+  if (card) {
+    const pb = card.querySelector('.progress-bar');
+    const td = card.querySelector('.time-display');
+    if (pb) pb.style.width = `${pct}%`;
+    if (td) td.textContent = safeDur ? `-${formatTime(remaining)}` : "0:00";
+  }
+}
+
+function bindAudioEvents(audio) {
+  if (!audio || audio.dataset.bound === "1") return;
+  audio.dataset.bound = "1";
+
+  audio.addEventListener("loadedmetadata", () => {
+    // Si quieres que antes de reproducir se vea la duración:
+    const card = audio.closest(".cancion-card");
+    if (card) {
+      const td = card.querySelector(".time-display");
+      if (td && isFinite(audio.duration)) td.textContent = formatTime(audio.duration);
+    }
+
+    // Si este audio es el actual, refrescamos el global
+    if (audio === currentAudio) syncTimeUI();
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    if (audio === currentAudio) syncTimeUI();
+  });
+
+  audio.addEventListener("ended", () => {
+    if (audio === currentAudio) playNext();
+  });
+}
+
+// Bind inicial a TODOS los audios existentes
+document.querySelectorAll("audio").forEach(bindAudioEvents);
+
+// Si en el futuro agregas audios dinámicamente, esto lo soporta:
+const observer = new MutationObserver(() => {
+  document.querySelectorAll("audio").forEach(bindAudioEvents);
+});
+observer.observe(document.body, { childList: true, subtree: true });
+
+// Click barra de progreso global (con guard para duración)
+gpProgressContainer.addEventListener('click', (e) => {
+  if (!currentAudio || !isFinite(currentAudio.duration) || currentAudio.duration <= 0) return;
+  const rect = gpProgressContainer.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const pct = Math.min(1, Math.max(0, x / rect.width));
+  currentAudio.currentTime = pct * currentAudio.duration;
+  syncTimeUI();
+});
 
             // Click barra de progreso
             gpProgressContainer.addEventListener('click', (e) => {
