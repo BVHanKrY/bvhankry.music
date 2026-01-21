@@ -954,7 +954,13 @@
             // Imagen por defecto inicial
             const defaultCover = "https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png";
             
-            const formatTime = (s) => isNaN(s) ? "0:00" : `${Math.floor(s/60)}:${Math.floor(s%60)<10?'0':''}${Math.floor(s%60)}`;
+           const formatTime = (s) => {
+           if (!isFinite(s) || isNaN(s)) return "0:00";
+           s = Math.max(0, s);
+           const m = Math.floor(s / 60);
+           const sec = Math.floor(s % 60);
+           return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+           };
 
             // --- Toast ---
             function showToast(msg) {
@@ -1160,13 +1166,26 @@
                 if(!currentAudio) return;
                 const pct = (currentAudio.currentTime / currentAudio.duration) * 100;
                 if(gpProgressBar) gpProgressBar.style.width = `${pct}%`;
-                if(gpCurrentTime) gpCurrentTime.innerText = formatTime(currentAudio.currentTime);
-                
+               const cur = currentAudio.currentTime || 0;
+               const dur = currentAudio.duration || 0;
+               const remaining = Math.max(0, dur - cur);
+
+               if (gpCurrentTime) gpCurrentTime.innerText = formatTime(cur);
+
+            /* ✅ aquí el conteo regresivo */
+               if (gpDuration) gpDuration.innerText = `-${formatTime(remaining)}`; // con signo menos (recomendado)
+
+          /* Si NO quieres el "-", usa esta línea en vez de la de arriba:
+            if (gpDuration) gpDuration.innerText = formatTime(remaining);
+              */
+       
                 // Actualizar tarjeta individual
                 const card = document.getElementById(currentCardId);
                 if(card) {
                     card.querySelector('.progress-bar').style.width = `${pct}%`;
-                    card.querySelector('.time-display').innerText = formatTime(currentAudio.currentTime);
+                    card.querySelector('.time-display').innerText = `-${formatTime(remaining)}`;
+                // o sin "-" si prefieres
+
                 }
                 if(currentAudio.paused || currentAudio.ended) return;
                 requestAnimationFrame(updateTime);
@@ -1178,7 +1197,7 @@
                 audios.forEach(audio => {
                     if(!audio.onloadedmetadata) {
                         audio.onloadedmetadata = () => {
-                            if(audio === currentAudio && gpDuration) gpDuration.innerText = formatTime(audio.duration);
+                           if(audio === currentAudio && gpDuration) gpDuration.innerText = `-${formatTime(audio.duration)}`;
                         };
                         audio.onended = playNext;
                     }
