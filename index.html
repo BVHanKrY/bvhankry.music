@@ -651,25 +651,48 @@
 
     <!-- STREAMING -->
     <section id="streaming-section" class="streaming scroll-fade">
-      <h2>Streaming en otras plataformas</h2>
-      <div class="embed">
-        <!-- Reemplaza con links reales -->
-        <iframe
-          src="https://open.spotify.com/intl-es/artist/0IPDl4adPnkF6LaoEyUwDl?si=aW35BLC_TWKYjCsAoSJPSg"
-          height="152"
-          loading="lazy"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-        </iframe>
+  <h2>Streaming en otras plataformas</h2>
 
-        <iframe
-          src="https://youtu.be/JJoU2X8_I0I?si=ZtgEgrU5lKSsEMoO"
-          height="220"
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      </div>
-    </section>
+  <div class="embed">
+    <!-- SPOTIFY PLAYLIST -->
+    <iframe
+      src="https://open.spotify.com/embed/playlist/37i9dQZF1E4yFKxFgd38pU"
+      height="152"
+      loading="lazy"
+      frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>
+
+    <!-- YOUTUBE VIDEO -->
+    <iframe
+      src="https://www.youtube.com/embed/JJoU2X8_I0I"
+      height="220"
+      loading="lazy"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <!-- BOTONES FALLBACK (por si el navegador bloquea embeds) -->
+  <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
+    <a
+      class="share-whatsapp"
+      href="https://open.spotify.com/playlist/37i9dQZF1E4yFKxFgd38pU"
+      target="_blank"
+      rel="noopener">
+      Abrir playlist en Spotify
+    </a>
+
+    <a
+      class="share-whatsapp"
+      href="https://youtu.be/JJoU2X8_I0I"
+      target="_blank"
+      rel="noopener">
+      Ver video en YouTube
+    </a>
+  </div>
+</section>
 
     <!-- SONGS -->
     <div class="songs-grid" id="music">
