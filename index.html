@@ -661,6 +661,69 @@
     display: block;
   }
 }
+
+      /* =========================
+   SCROLL FADE PRO (Cinemático)
+   ========================= */
+.scroll-fade{
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  filter: blur(10px);
+  transition:
+    opacity 900ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform, filter;
+}
+
+.scroll-fade.visible{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+    /* Streaming: entrada más cinematográfica */
+#streaming-section.scroll-fade{
+  transition-delay: 140ms;
+}
+
+#streaming-section.scroll-fade.visible{
+  box-shadow:
+    0 18px 60px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 0 22px rgba(30,215,96,0.12);
+}
+
+    /* Stagger interno (solo cuando el streaming ya está visible) */
+#streaming-section.scroll-fade .embed-item{
+  opacity: 0;
+  transform: translateY(14px) scale(0.99);
+  filter: blur(8px);
+  transition:
+    opacity 700ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform, filter;
+}
+
+/* Cuando aparece: se activan */
+#streaming-section.scroll-fade.visible .embed-item{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Delay escalonado */
+#streaming-section.scroll-fade.visible .embed-spotify{ transition-delay: 120ms; }
+#streaming-section.scroll-fade.visible .embed-youtube{ transition-delay: 240ms; }
+
+      @media (max-width: 768px){
+  .scroll-fade{
+    filter: none;
+    transform: translateY(16px);
+  }
+}
+
   </style>
 </head>
 
@@ -698,53 +761,6 @@
         <p>DUB Music • Ecuador • BVros Productions</p>
       </div>
     </header>
-
-    <!-- STREAMING -->
-    <section id="streaming-section" class="streaming scroll-fade">
-  <h2>Streaming en otras plataformas</h2>
-
-<div class="embed embed-grid">
-  <div class="embed-item embed-spotify">
-    <iframe
-      src="https://open.spotify.com/embed/playlist/37i9dQZF1E4yFKxFgd38pU"
-      loading="lazy"
-      frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-    </iframe>
-  </div>
-
-  <div class="embed-item embed-youtube">
-    <div class="yt-box">
-      <iframe
-        src="https://www.youtube.com/embed/JJoU2X8_I0I"
-        loading="lazy"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-</div>
-
-  <!-- BOTONES FALLBACK (por si el navegador bloquea embeds) -->
-  <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
-    <a
-      class="share-whatsapp"
-      href="https://open.spotify.com/playlist/37i9dQZF1E4yFKxFgd38pU"
-      target="_blank"
-      rel="noopener">
-      Abrir playlist en Spotify
-    </a>
-
-    <a
-      class="share-whatsapp"
-      href="https://youtu.be/JJoU2X8_I0I"
-      target="_blank"
-      rel="noopener">
-      Ver video en YouTube
-    </a>
-  </div>
-</section>
 
     <!-- SONGS -->
     <div class="songs-grid" id="music">
@@ -863,6 +879,53 @@
       </article>
     </div>
 
+           <!-- STREAMING -->
+    <section id="streaming-section" class="streaming scroll-fade">
+  <h2>Streaming en otras plataformas</h2>
+
+<div class="embed embed-grid">
+  <div class="embed-item embed-spotify">
+    <iframe
+      src="https://open.spotify.com/embed/playlist/37i9dQZF1E4yFKxFgd38pU"
+      loading="lazy"
+      frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>
+  </div>
+
+  <div class="embed-item embed-youtube">
+    <div class="yt-box">
+      <iframe
+        src="https://www.youtube.com/embed/JJoU2X8_I0I"
+        loading="lazy"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
+
+  <!-- BOTONES FALLBACK (por si el navegador bloquea embeds) -->
+  <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
+    <a
+      class="share-whatsapp"
+      href="https://open.spotify.com/playlist/37i9dQZF1E4yFKxFgd38pU"
+      target="_blank"
+      rel="noopener">
+      Abrir playlist en Spotify
+    </a>
+
+    <a
+      class="share-whatsapp"
+      href="https://youtu.be/JJoU2X8_I0I"
+      target="_blank"
+      rel="noopener">
+      Ver video en YouTube
+    </a>
+  </div>
+</section>
+    
     <div class="info-sections">
       <section id="music-info">
         <h2>Sobre el EP</h2>
