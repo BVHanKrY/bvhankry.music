@@ -723,6 +723,133 @@
     transform: translateY(16px);
   }
 }
+ /* =========================CINEMA PRO: Streaming========================= */
+
+/* Base (si ya tienes scroll-fade, puedes dejarlo; esto lo mejora) */
+    
+.scroll-fade{
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  filter: blur(10px);
+  transition:
+    opacity 900ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform, filter;
+}
+.scroll-fade.visible{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Streaming: marco pro + brillo */
+#streaming-section{
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+/* Glow “cinema” al hacerse visible */
+#streaming-section.visible{
+  box-shadow:
+    0 18px 70px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 0 26px rgba(30,215,96,0.14);
+}
+
+/* Capa de luz animada (pulse) */
+#streaming-section::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius: 16px;
+  pointer-events:none;
+  opacity: 0;
+  background:
+    radial-gradient(600px 140px at 20% 10%, rgba(30,215,96,0.18), transparent 60%),
+    radial-gradient(520px 160px at 90% 40%, rgba(255,255,255,0.08), transparent 55%),
+    linear-gradient(180deg, rgba(255,255,255,0.03), transparent 35%);
+  transform: translateY(14px);
+  filter: blur(10px);
+  transition: opacity 700ms ease, transform 900ms cubic-bezier(0.2,0.8,0.2,1);
+}
+#streaming-section.visible::before{
+  opacity: 1;
+  transform: translateY(0);
+  animation: streamGlow 2.6s ease-in-out infinite;
+}
+@keyframes streamGlow{
+  0%,100%{ filter: blur(10px); opacity: 0.85; }
+  50%{ filter: blur(14px); opacity: 1; }
+}
+
+/* Reveal del título (h2) */
+#streaming-section h2{
+  position: relative;
+  display: inline-block;
+  transform: translateY(12px);
+  opacity: 0;
+  transition: transform 700ms cubic-bezier(0.2,0.8,0.2,1), opacity 700ms ease;
+}
+#streaming-section.visible h2{
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 120ms;
+}
+
+/* Línea verde entra con “wipe” */
+#streaming-section h2::before{
+  content:"";
+  position:absolute;
+  left: -12px;
+  top: 6px;
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--accent-green);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 700ms cubic-bezier(0.2,0.8,0.2,1);
+}
+#streaming-section.visible h2::before{
+  transform: scaleY(1);
+  transition-delay: 180ms;
+}
+
+/* Stagger interno (Spotify y YouTube entran escalonados) */
+#streaming-section .embed-item{
+  opacity: 0;
+  transform: translateY(16px) scale(0.99);
+  filter: blur(8px);
+  transition:
+    opacity 700ms cubic-bezier(0.2,0.8,0.2,1),
+    transform 700ms cubic-bezier(0.2,0.8,0.2,1),
+    filter 700ms cubic-bezier(0.2,0.8,0.2,1);
+  will-change: opacity, transform, filter;
+}
+
+#streaming-section.visible .embed-item{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+#streaming-section.visible .embed-spotify{ transition-delay: 160ms; }
+#streaming-section.visible .embed-youtube{ transition-delay: 280ms; }
+
+/* Parallax suave (solo PC) */
+@media (min-width: 769px){
+  #streaming-section .embed-item{
+    will-change: transform;
+  }
+}
+
+/* Anti-lag móvil: sin blur pesado */
+@media (max-width: 768px){
+  .scroll-fade{ filter:none; transform: translateY(16px); }
+  #streaming-section::before{ filter:none; }
+}
 
   </style>
 </head>
@@ -1358,5 +1485,45 @@
       };
     });
   </script>
+  <script>
+(() => {
+  const section = document.getElementById("streaming-section");
+  if (!section) return;
+
+  // Solo PC para evitar consumo en móvil
+  const isPC = window.matchMedia("(min-width: 769px)").matches;
+  if (!isPC) return;
+
+  const items = section.querySelectorAll(".embed-item");
+  let ticking = false;
+
+  function parallax() {
+    ticking = false;
+    const r = section.getBoundingClientRect();
+    const vh = window.innerHeight || 800;
+
+    // Progreso de visibilidad (0 a 1 aprox)
+    const t = (vh - r.top) / (vh + r.height);
+    const clamped = Math.max(0, Math.min(1, t));
+
+    // Movimiento MUY sutil, premium
+    const y1 = (0.5 - clamped) * 18; // Spotify
+    const y2 = (0.5 - clamped) * 28; // YouTube
+
+    if (items[0]) items[0].style.transform = `translateY(${y1}px)`;
+    if (items[1]) items[1].style.transform = `translateY(${y2}px)`;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(parallax);
+    }
+  }, { passive: true });
+
+  window.addEventListener("resize", () => requestAnimationFrame(parallax));
+  requestAnimationFrame(parallax);
+})();
+</script>
 </body>
 </html>
