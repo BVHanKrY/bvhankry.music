@@ -771,32 +771,42 @@
                 </div>
             </article>
 
-            <!-- 3. Regresión -->
-            <article class="cancion-card" id="card-regresión" data-title="Regresión" data-artist="BVHanKrY" data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
-                <button class="floating-play-btn btn-card-float" aria-label="Reproducir"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
-                <div class="song-header-row">
-                    <div><div class="song-title-text">Regresión</div><div class="song-artist-text">BVHanKrY</div></div>
-                    <div class="mini-visualizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
-                </div>
-                <div class="player-wrapper">
-                    <div class="audio-controls-row-1">
-                        <button class="inline-play-btn btn-card" aria-label="Reproducir">
-                            <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                        </button>
-                        <div class="progress-container"><div class="progress-bar"></div></div>
-                        <div class="time-display font-mono">0:00</div>
-                    </div>
-                </div>
-                <audio src="https://github.com/BVHanKrY/bvhankry.music/raw/refs/heads/main/audio/regresión.mp3" preload="metadata" data-id="regresión"></audio>
-                <div class="song-stats">
-                    <div class="likes-counter" title="Dar Me gusta"><span class="heart-icon">♡</span> <span class="likes-count font-mono">0</span></div>
-                    <div class="plays-counter font-mono"><span class="plays-count">0</span> plays</div>
-                </div>
-                <div class="share-button-container">
-                    <a href="#" onclick="copyToClipboard('https://bvhankry.onrender.com', 'Regresión'); return false;" class="share-whatsapp">Compartir</a>
-                </div>
-            </article>
+<!-- 3. Regresión -->
+<article class="cancion-card" id="card-regrecion" data-title="Regresión" data-artist="BVHanKrY" data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
+    <button class="floating-play-btn btn-card-float" aria-label="Reproducir">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <div class="song-header-row">
+        <div>
+            <div class="song-title-text">Regresión</div>
+            <div class="song-artist-text">BVHanKrY</div>
+        </div>
+        <div class="mini-visualizer">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+    </div>
+    <div class="player-wrapper">
+        <div class="audio-controls-row-1">
+            <button class="inline-play-btn btn-card" aria-label="Reproducir">
+                <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="progress-container"><div class="progress-bar"></div></div>
+            <div class="time-display font-mono">0:00</div>
+        </div>
+    </div>
+    <audio src="https://github.com/BVHanKrY/bvhankry.music/raw/refs/heads/main/audio/regresion.mp3" preload="metadata" data-id="regrecion"></audio>
+    <div class="song-stats">
+        <div class="likes-counter" title="Dar Me gusta">
+            <span class="heart-icon">♡</span> 
+            <span class="likes-count font-mono">0</span>
+        </div>
+        <div class="plays-counter font-mono"><span class="plays-count">0</span> plays</div>
+    </div>
+    <div class="share-button-container">
+        <a href="#" onclick="copyToClipboard('https://bvhankry.onrender.com', 'Regresión'); return false;" class="share-whatsapp">Compartir</a>
+    </div>
+</article>
         </div>
 
         <div class="info-sections">
@@ -1337,6 +1347,10 @@
         toggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
         });
+        // Función para abrir/cerrar menú hamburguesa en móviles
+document.querySelector('.menu-toggle').addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.toggle('active');
+});
     </script>
 </body>
 </html>
