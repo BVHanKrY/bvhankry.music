@@ -1693,8 +1693,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }, true);
 
     // reactivar guard para futuras interacciones
-   document.querySelectorAll(".embed-click-guard").forEach(g => {
-   g.style.pointerEvents = "auto";
+    document.addEventListener("ended", (e) => {
+    if (e.target && e.target.tagName === "AUDIO") {
+    document.querySelectorAll(".embed-click-guard").forEach((g) => {
+    g.style.pointerEvents = "auto";
     });
   }
 }, true);
