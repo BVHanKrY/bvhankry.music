@@ -1622,26 +1622,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   });
 }
 
-// Cuando cualquier audio local empieza, pausa los demás
+// ========== AUDIO COEXISTENCE (GLOBAL) ==========
+
+// Pausa todos los audios locales (<audio>) excepto uno (si se pasa)
+    
+    function pauseAllLocalAudio(exceptEl = null) {
+  document.querySelectorAll("audio").forEach(a => {
+    if (a !== exceptEl && !a.paused) a.pause();
+  });
+}
+
+// 1) Si empieza un audio local, pausa los demás
 document.addEventListener("play", (e) => {
   const a = e.target;
   if (a && a.tagName === "AUDIO") pauseAllLocalAudio(a);
 }, true);
 
-    const streaming = document.getElementById("streaming-section");
+    document.addEventListener("play", (e) => {
+  const a = e.target;
+  if (a && a.tagName === "AUDIO") {
+    pauseAllLocalAudio(a);
 
-if (streaming) {
-  const stopLocalBeforeStreaming = () => pauseAllLocalAudio(null);
+    // reactivar guard para futuras interacciones
+    document.querySelectorAll(".embed-click-guard").forEach(g => {
+      g.style.pointerEvents = "auto";
+    });
+  }
+}, true);
 
-  // Cualquier interacción “previa” dentro del bloque streaming
-  streaming.addEventListener("pointerdown", stopLocalBeforeStreaming, true);
-  streaming.addEventListener("touchstart", stopLocalBeforeStreaming, { capture: true, passive: true });
-  streaming.addEventListener("keydown", stopLocalBeforeStreaming, true);
+// 2) Si el usuario interactúa con el STREAMING, pausa audio local (Spotify/YouTube)
+const streamingSection = document.getElementById("streaming-section");
+if (streamingSection) {
+  const stopLocal = () => pauseAllLocalAudio(null);
+
+  // Captura “antes” que la mayoría de interacciones
+  ["pointerdown", "mousedown", "touchstart", "click", "keydown"].forEach(evt => {
+    streamingSection.addEventListener(evt, stopLocal, { capture: true, passive: evt === "touchstart" });
+  });
 }
-    document.querySelectorAll(".embed-click-guard").forEach(guard => {
-    guard.addEventListener("pointerdown", () => {
+
+// 3) Extra: si el usuario hace focus en un iframe (muy común en Spotify), pausa audio local
+window.addEventListener("blur", () => {
+  // Cuando haces click dentro de un iframe, la ventana a veces pierde foco
+  pauseAllLocalAudio(null);
+});
+
+    // 4) (Opcional) Guard: primer click pausa audio y luego deja interactuar directo con el iframe
+document.querySelectorAll(".embed-click-guard").forEach(guard => {
+  guard.addEventListener("pointerdown", () => {
     pauseAllLocalAudio(null);
-    guard.style.pointerEvents = "none"; // deja pasar interacción al iframe desde ahora
+    guard.style.pointerEvents = "none";
   }, { capture: true });
 });
 
