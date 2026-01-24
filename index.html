@@ -858,6 +858,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .floating-play-btn {
   display: none !important;
 }
+    .embed-wrap { position: relative; }
+    .embed-click-guard{
+    position:absolute;
+    inset:0;
+    background: transparent;
+    cursor: pointer;
+}
+
   </style>
 </head>
 
@@ -1026,19 +1034,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <h2>Streaming en otras plataformas</h2>
 
 <div class="embed embed-grid">
-  <div class="embed-item embed-spotify">
-    <iframe
+  
+   <div class="embed-item embed-spotify embed-wrap">
+     <div class="embed-click-guard" aria-hidden="true"></div>
+
+     <iframe
       src="https://open.spotify.com/embed/playlist/37i9dQZF1E4yFKxFgd38pU"
+      width="100%"
+      height="352"
       loading="lazy"
       frameborder="0"
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
-    </iframe>
+     </iframe>
   </div>
 
-  <div class="embed-item embed-youtube">
+  <div class="embed-item embed-youtube embed-wrap">
+  <div class="embed-click-guard" aria-hidden="true"></div>
     <div class="yt-box">
       <iframe
         src="https://www.youtube.com/embed/JJoU2X8_I0I"
+        width="100%"
+        height="315"
         loading="lazy"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1599,7 +1615,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.querySelectorAll('audio').forEach(bindAudio);
   });
   obs.observe(document.body, { childList: true, subtree: true });
-</script>
+
+    function pauseAllLocalAudio(exceptEl = null) {
+  document.querySelectorAll("audio").forEach(a => {
+    if (a !== exceptEl && !a.paused) a.pause();
+  });
+}
+
+// Cuando cualquier audio local empieza, pausa los demás
+document.addEventListener("play", (e) => {
+  const a = e.target;
+  if (a && a.tagName === "AUDIO") pauseAllLocalAudio(a);
+}, true);
+
+    const streaming = document.getElementById("streaming-section");
+
+if (streaming) {
+  const stopLocalBeforeStreaming = () => pauseAllLocalAudio(null);
+
+  // Cualquier interacción “previa” dentro del bloque streaming
+  streaming.addEventListener("pointerdown", stopLocalBeforeStreaming, true);
+  streaming.addEventListener("touchstart", stopLocalBeforeStreaming, { capture: true, passive: true });
+  streaming.addEventListener("keydown", stopLocalBeforeStreaming, true);
+}
+    document.querySelectorAll(".embed-click-guard").forEach(guard => {
+    guard.addEventListener("pointerdown", () => {
+    pauseAllLocalAudio(null);
+    guard.style.pointerEvents = "none"; // deja pasar interacción al iframe desde ahora
+  }, { capture: true });
+});
+
+  </script>
 
 </body>
 </html>
