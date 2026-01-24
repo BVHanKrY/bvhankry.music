@@ -1284,6 +1284,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         container.appendChild(t);
         setTimeout(() => { t.classList.remove('show'); setTimeout(()=>t.remove(), 300); }, 3200);
       }
+
+      window.showToast = showToast;
+
       // ====== AVISO GLOBAL: PAUSA SPOTIFY ======
 
       // Marca si el usuario interactuó con el área de streaming recientemente
