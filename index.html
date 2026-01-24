@@ -1601,39 +1601,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 })();
 </script>
   
-<script>
-  window.dataLayer = window.dataLayer || [];
-
-  document.querySelectorAll('audio').forEach((audio) => {
-    const getTitle = () => audio.getAttribute('data-track-title') || 'desconocido';
-    const getId = () => audio.getAttribute('data-track-id') || audio.getAttribute('data-id') || 'sin_id';
-
-    audio.addEventListener('play', () => {
-      window.dataLayer.push({
-        event: 'audio_play',
-        track_title: getTitle(),
-        track_id: getId()
-      });
-    });
-
-    audio.addEventListener('pause', () => {
-      window.dataLayer.push({
-        event: 'audio_pause',
-        track_title: getTitle(),
-        track_id: getId()
-      });
-    });
-
-    audio.addEventListener('ended', () => {
-      window.dataLayer.push({
-        event: 'audio_end',
-        track_title: getTitle(),
-        track_id: getId()
-      });
-    });
-  });
-</script>
-
   <script>
   window.dataLayer = window.dataLayer || [];
 
