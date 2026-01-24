@@ -1204,16 +1204,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div id="toast-container"></div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+      // ✅ TOAST GLOBAL (siempre disponible)
+           function showToast(msg){
+  // Crear contenedor si no existe (fix PC)
+        let container = document.getElementById('toast-container');
+        if(!container){
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+      }
+        if(container.querySelector('.toast.show')) return;
+        const t = document.createElement('div');
+        t.className = 'toast show';
+        t.textContent = msg;
+        container.appendChild(t);
+        setTimeout(() => { t.classList.remove('show'); setTimeout(()=>t.remove(), 300); }, 3200);
+      }
+        window.showToast = showToast;
+    
+      document.addEventListener('DOMContentLoaded', () => {
       // ===== MENU HAMBURGUESA (1 SOLO LISTENER) =====
       const menuBtn = document.querySelector('.menu-toggle');
       const navLinks = document.querySelector('.nav-links');
+      if (menuBtn && navLinks) {
       menuBtn.addEventListener('click', () => {
-        const willOpen = !navLinks.classList.contains('active');
-        navLinks.classList.toggle('active');
-        menuBtn.setAttribute('aria-expanded', String(willOpen));
-      });
-
+      const willOpen = !navLinks.classList.contains('active');
+      navLinks.classList.toggle('active');
+      menuBtn.setAttribute('aria-expanded', String(willOpen));
+  });
+}
       // ===== SCROLL NAV HIDE =====
       let lastScroll = 0;
       window.addEventListener('scroll', () => {
@@ -1268,24 +1287,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
        const sec = s % 60;
        return `${sign}${m}:${sec < 10 ? "0" : ""}${sec}`;};
 
-
-       function showToast(msg){
-  // Crear contenedor si no existe (fix PC)
-        let container = document.getElementById('toast-container');
-        if(!container){
-        container = document.createElement('div');
-        container.id = 'toast-container';
-        document.body.appendChild(container);
-      }
-        if(container.querySelector('.toast.show')) return;
-        const t = document.createElement('div');
-        t.className = 'toast show';
-        t.textContent = msg;
-        container.appendChild(t);
-        setTimeout(() => { t.classList.remove('show'); setTimeout(()=>t.remove(), 300); }, 3200);
-      }
-
-      window.showToast = showToast;
 
       // ====== AVISO GLOBAL: PAUSA SPOTIFY ======
 
@@ -1723,15 +1724,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     // ===== YouTube Iframe API: pausar cuando suene audio local =====
     let ytPlayers = [];
-
-  function onYouTubeIframeAPIReady() {
+  
+    window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
   // busca todos los iframes de youtube dentro del streaming
     document.querySelectorAll('#streaming-section iframe[src*="youtube.com/embed"]').forEach((iframe) => {
     // Asegurar enablejsapi=1
-  const src = iframe.getAttribute("src") || "";
-  if (!src.includes("enablejsapi=1")) {
-  const join = src.includes("?") ? "&" : "?";
-  iframe.setAttribute("src", src + join + "enablejsapi=1");
+    const src = iframe.getAttribute("src") || "";
+    if (!src.includes("enablejsapi=1")) {
+    const join = src.includes("?") ? "&" : "?";
+    iframe.setAttribute("src", src + join + "enablejsapi=1");
     }
 
   ytPlayers.push(new YT.Player(iframe, {
