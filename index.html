@@ -1593,47 +1593,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         window.copyToClipboard = (url, title) => {
         navigator.clipboard.writeText(`${title} - ${url}`).then(() => showToast("Enlace copiado"));
       };
-    });
+    // FIX: asegurar que el streaming sea visible en PC
+        const streamingFix = document.getElementById("streaming-section");
+        if (streamingFix) {
+        streamingFix.classList.add("visible");
+      }
+     });
   </script>
+  
   <script>
-(() => {
-    const section = document.getElementById("streaming-section");
-    if (!section) return;
+       document.addEventListener("DOMContentLoaded", () => {
+       const section = document.getElementById("streaming-section");
+       if (!section) return;
+       const section = document.getElementById("streaming-section");
+       if (!section) return;
 
   // Solo PC para evitar consumo en móvil
-    const isPC = window.matchMedia("(min-width: 769px)").matches;
-    if (!isPC) return;
-
-    const items = section.querySelectorAll(".embed-item");
-    let ticking = false;
+      const isPC = window.matchMedia("(min-width: 769px)").matches;
+      if (!isPC) return;
+      const items = section.querySelectorAll(".embed-item");
+      let ticking = false;
 
     function parallax() {
-    ticking = false;
-    const r = section.getBoundingClientRect();
-    const vh = window.innerHeight || 800;
+      ticking = false;
+      const r = section.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
 
     // Progreso de visibilidad (0 a 1 aprox)
-    const t = (vh - r.top) / (vh + r.height);
-    const clamped = Math.max(0, Math.min(1, t));
+      const t = (vh - r.top) / (vh + r.height);
+      const clamped = Math.max(0, Math.min(1, t));
 
     // Movimiento MUY sutil, premium
-    const y1 = (0.5 - clamped) * 18; // Spotify
-    const y2 = (0.5 - clamped) * 28; // YouTube
+      const y1 = (0.5 - clamped) * 18; // Spotify
+      const y2 = (0.5 - clamped) * 28; // YouTube
 
-    if (items[0]) items[0].style.transform = `translateY(${y1}px)`;
-    if (items[1]) items[1].style.transform = `translateY(${y2}px)`;
+      if (items[0]) items[0].style.transform = `translateY(${y1}px)`;
+      if (items[1]) items[1].style.transform = `translateY(${y2}px)`;
   }
 
   window.addEventListener("scroll", () => {
-    if (!ticking) {
-    ticking = true;
-    requestAnimationFrame(parallax);
+      if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(parallax);
     }
   }, { passive: true });
 
-    window.addEventListener("resize", () => requestAnimationFrame(parallax));
-    requestAnimationFrame(parallax);
-})();
+      window.addEventListener("resize", () => requestAnimationFrame(parallax));
+      requestAnimationFrame(parallax);
+  });
   </script>
   
   <script>
