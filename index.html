@@ -691,10 +691,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 /* MOBILE: uno debajo del otro (como quieres) */
-
-  .embed-grid{
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 768px){
+  .embed-grid{ grid-template-columns: 1fr;}
   .embed-spotify iframe{ height: 152px; }
   .yt-box{ aspect-ratio: 16 / 9; }
 }
@@ -745,15 +743,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   transform: translateY(0) scale(1);
   filter: blur(0);
 }
-
-    /* Streaming: entrada más cinematográfica */
-
-    /* Stagger interno (solo cuando el streaming ya está visible) */
-
-/* Cuando aparece: se activan */
-
-/* Delay escalonado */
-
  /* =========================CINEMA PRO: Streaming========================= */
 
 /* Base (si ya tienes scroll-fade, puedes dejarlo; esto lo mejora) */
