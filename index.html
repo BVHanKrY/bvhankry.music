@@ -1686,15 +1686,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 
 // 1) Si empieza un audio local, pausa los demás
-   document.addEventListener("play", (e) => {
-   const a = e.target;
-   if (a && a.tagName === "AUDIO") pauseAllLocalAudio(a);
-   }, true);
-
-   document.addEventListener("play", (e) => {
-   const a = e.target;
-   if (a && a.tagName === "AUDIO") {
-   pauseAllLocalAudio(a);
+    document.addEventListener("play", (e) => {
+    const a = e.target;
+    if (a && a.tagName === "AUDIO") {pauseAllLocalAudio(a);
+    }
+  }, true);
 
     // reactivar guard para futuras interacciones
    document.querySelectorAll(".embed-click-guard").forEach(g => {
@@ -1757,20 +1753,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 
 // Enganchar al play local
-    document.addEventListener("play", (e) => {
-    if (e.target && e.target.tagName === "AUDIO") {
-    pauseAllYouTube();
-  }
-}, true);
+  if (!window.__playHookInstalled) {
+     window.__playHookInstalled = true;
 
-    // ENGANCHE AL PLAY DEL EP
-    document.addEventListener("play", (e) => {
-    const a = e.target;
-    if (a && a.tagName === "AUDIO") {
-    pauseAllLocalAudio(a);
-  }
-}, true);
+     document.addEventListener("play", (e) => {
+  const a = e.target;
+  if (!a || a.tagName !== "AUDIO") return;
 
+     pauseAllYouTube();
+     pauseAllLocalAudio(a);
+  }, true);
+}
+    
   </script>
 
 </body>
