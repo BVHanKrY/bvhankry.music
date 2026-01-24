@@ -1626,5 +1626,65 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   });
 </script>
 
+  <script>
+  window.dataLayer = window.dataLayer || [];
+
+  const getMeta = (audio) => {
+    const trackId =
+      audio.getAttribute('data-track-id') ||
+      audio.getAttribute('data-id') ||
+      'sin_id';
+
+    const trackTitle =
+      audio.getAttribute('data-track-title') ||
+      audio.getAttribute('data-title') ||
+      'desconocido';
+
+    return { trackId, trackTitle };
+  };
+
+  // Evita duplicar listeners si por alguna razón se re-ejecuta el script
+  const bindAudio = (audio) => {
+    if (audio.dataset.gtmBound === '1') return;
+    audio.dataset.gtmBound = '1';
+
+    audio.addEventListener('play', () => {
+      const { trackId, trackTitle } = getMeta(audio);
+      window.dataLayer.push({
+        event: 'audio_play',
+        track_id: trackId,
+        track_title: trackTitle
+      });
+    });
+
+    audio.addEventListener('pause', () => {
+      const { trackId, trackTitle } = getMeta(audio);
+      window.dataLayer.push({
+        event: 'audio_pause',
+        track_id: trackId,
+        track_title: trackTitle
+      });
+    });
+
+    audio.addEventListener('ended', () => {
+      const { trackId, trackTitle } = getMeta(audio);
+      window.dataLayer.push({
+        event: 'audio_end',
+        track_id: trackId,
+        track_title: trackTitle
+      });
+    });
+  };
+
+  // Bind inicial
+  document.querySelectorAll('audio').forEach(bindAudio);
+
+  // Si en el futuro agregas canciones dinámicamente (AJAX), esto las cubre:
+  const obs = new MutationObserver(() => {
+    document.querySelectorAll('audio').forEach(bindAudio);
+  });
+  obs.observe(document.body, { childList: true, subtree: true });
+</script>
+
 </body>
 </html>
