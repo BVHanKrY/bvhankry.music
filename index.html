@@ -1303,39 +1303,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 
 // ====== AVISO GLOBAL SPOTIFY (PC + móvil, sin depender del iframe) ======
-       let lastStreamingSignal = 0;
+// Cuando un <audio> local empieza a sonar,
+// si venimos del streaming → mostramos aviso
+document.addEventListener("play", (e) => {
+  const audio = e.target;
+  if (!audio || audio.tagName !== "AUDIO") return;
 
-// señal si hubo interacción cerca del streaming
-       const streamingSection = document.getElementById("streaming-section");
-       if (streamingSection) {
-       ["pointerdown","mousedown","touchstart","click","keydown"].forEach(evt => {
-       streamingSection.addEventListener(evt, () => {
-       lastStreamingSignal = Date.now();
-    }, { capture: true, passive: evt === "touchstart" });
-  });
-}
+  const recentlyUsedStreaming = (Date.now() - lastStreamingInteraction) < 30000;
 
-// señal por blur (cuando clickas dentro de iframes, típico PC)
-      window.addEventListener("blur", () => {
-      lastStreamingSignal = Date.now();
-});
-
-// cuando empieza un audio local, muestra aviso 1 vez por sesión
-      document.addEventListener("play", (e) => {
-      const a = e.target;
-      if (!a || a.tagName !== "AUDIO") return;
-
-  // si quieres que sea SIEMPRE, comenta el if (recent...)
-      const recentStreaming = (Date.now() - lastStreamingSignal) < 60000;
-
-  // 1 vez por sesión para no molestar
-      if (sessionStorage.getItem("spotify_notice_shown")) return;
-
-  // Si quieres que solo aparezca si hubo señal reciente:
-      if (!recentStreaming) return;
-
-     sessionStorage.setItem("spotify_notice_shown", "1");
-     showToast("Si Spotify está sonando 🎧 paúsalo para escuchar el EP.");
+  if (recentlyUsedStreaming) {
+    showToast("Spotify activo 🎧 Pausalo para escuchar EP");
+  }
 }, true);
 
       function resetCardUI(cardId){
