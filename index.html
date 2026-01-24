@@ -1332,7 +1332,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if (sessionStorage.getItem("spotify_notice_shown")) return;
 
   // Si quieres que solo aparezca si hubo señal reciente:
-  // if (!recentStreaming) return;
+      if (!recentStreaming) return;
 
      sessionStorage.setItem("spotify_notice_shown", "1");
      showToast("Si Spotify está sonando 🎧 paúsalo para escuchar el EP.");
