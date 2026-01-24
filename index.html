@@ -983,7 +983,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/tinkuy.mp3" preload="metadata" data-id="navi"></audio>
-
+        <audio data-title="Tinkuy" controls>
+          
         <div class="song-stats">
           <div class="likes-counter" title="Dar Me gusta"><span class="heart-icon">♡</span> <span class="likes-count">0</span></div>
           <div class="plays-counter"><span class="plays-count">0</span> plays</div>
@@ -1021,7 +1022,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/Subtle%20gad.mp3" preload="metadata" data-id="subtle_gad"></audio>
-
+        <audio data-title="Subtle Gad" controls>
+          
         <div class="song-stats">
           <div class="likes-counter" title="Dar Me gusta"><span class="heart-icon">♡</span> <span class="likes-count">0</span></div>
           <div class="plays-counter"><span class="plays-count">0</span> plays</div>
@@ -1059,7 +1061,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/regresi%C3%B3n.mp3" preload="metadata" data-id="regresion"></audio>
-
+        <audio data-title="Regresión" controls>
         <div class="song-stats">
           <div class="likes-counter" title="Dar Me gusta"><span class="heart-icon">♡</span> <span class="likes-count">0</span></div>
           <div class="plays-counter"><span class="plays-count">0</span> plays</div>
@@ -1589,6 +1591,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   window.addEventListener("resize", () => requestAnimationFrame(parallax));
   requestAnimationFrame(parallax);
 })();
+</script>
+  
+  <script>
+document.querySelectorAll('audio').forEach(audio => {
+  audio.addEventListener('play', () => {
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+      event: 'audio_play',
+      track_title: audio.getAttribute('data-title') || 'desconocido'
+    });
+  });
+
+  audio.addEventListener('pause', () => {
+    window.dataLayer.push({
+      event: 'audio_pause',
+      track_title: audio.getAttribute('data-title') || 'desconocido'
+    });
+  });
+
+  audio.addEventListener('ended', () => {
+    window.dataLayer.push({
+      event: 'audio_end',
+      track_title: audio.getAttribute('data-title') || 'desconocido'
+    });
+  });
+});
 </script>
 </body>
 </html>
