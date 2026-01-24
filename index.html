@@ -858,14 +858,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .floating-play-btn {
   display: none !important;
 }
-    .embed-wrap { position: relative; }
-    .embed-click-guard{
-    position:absolute;
-    inset:0;
-    background: transparent;
-    cursor: pointer;
-}
-
+  
   </style>
 </head>
 
@@ -1035,9 +1028,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="embed embed-grid">
   
-   <div class="embed-item embed-spotify embed-wrap">
-     <div class="embed-click-guard" aria-hidden="true"></div>
-
+   <div class="embed-item embed-spotify">
      <iframe
       src="https://open.spotify.com/embed/playlist/37i9dQZF1E4yFKxFgd38pU"
       width="100%"
@@ -1048,10 +1039,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      </iframe>
   </div>
 
-  <div class="embed-item embed-youtube embed-wrap">
-  <div class="embed-click-guard" aria-hidden="true"></div>
+  <div class="embed-item embed-youtube">
     <div class="yt-box">
       <iframe
+        id="yt-embed"
         src="https://www.youtube.com/embed/JJoU2X8_I0I"
         width="100%"
         height="315"
@@ -1238,15 +1229,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const shareToggleBtn = document.getElementById('gpShareToggleBtn');
       const shareDropdown = document.getElementById('shareDropdown');
 
-      const defaultCover = "https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png";
+       const defaultCover = "https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png";
 
-      const formatTime = (s) => {
-      if (isNaN(s) || !isFinite(s)) return "0:00";
-      const sign = s < 0 ? "-" : "";
-      s = Math.max(0, Math.floor(Math.abs(s)));
-      const m = Math.floor(s / 60);
-      const sec = s % 60;
-      return `${sign}${m}:${sec < 10 ? "0" : ""}${sec}`;};
+       const formatTime = (s) => {
+       if (isNaN(s) || !isFinite(s)) return "0:00";
+       const sign = s < 0 ? "-" : "";
+       s = Math.max(0, Math.floor(Math.abs(s)));
+       const m = Math.floor(s / 60);
+       const sec = s % 60;
+       return `${sign}${m}:${sec < 10 ? "0" : ""}${sec}`;};
 
 
       function showToast(msg){
@@ -1258,6 +1249,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         container.appendChild(t);
         setTimeout(() => { t.classList.remove('show'); setTimeout(()=>t.remove(), 250); }, 2200);
       }
+      // ====== AVISO GLOBAL: PAUSA SPOTIFY ======
+
+      // Marca si el usuario interactuó con el área de streaming recientemente
+       let lastStreamingInteraction = 0;
+       const streamingSection = document.getElementById("streaming-section");
+
+       if (streamingSection) {
+       ["pointerdown", "mousedown", "touchstart", "click", "keydown"].forEach(evt => {
+       streamingSection.addEventListener(evt, () => {
+       lastStreamingInteraction = Date.now();
+    }, { capture: true, passive: evt === "touchstart" });
+  });
+}
+
+    // Cuando un <audio> local empieza a sonar,
+    // si venimos del streaming → mostramos aviso
+       document.addEventListener("play", (e) => {
+       const audio = e.target;
+       if (!audio || audio.tagName !== "AUDIO") return;
+
+       const recentlyUsedStreaming = (Date.now() - lastStreamingInteraction) < 30000;
+
+       if (recentlyUsedStreaming) {
+      showToast("Spotify activo 🎧 Pausalo para escuchar este EP 🎶");
+  }
+}, true);
+
 
       function resetCardUI(cardId){
         if(!cardId) return;
@@ -1371,18 +1389,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           resetCardUI(currentCardId);
         }
 
-        currentAudio = audio;
-        currentCardId = cardId;
+          currentAudio = audio;
+          currentCardId = cardId;
 
-        gpCoverImg.style.opacity = '0';
-        setTimeout(() => {
+          gpCoverImg.style.opacity = '0';
+          setTimeout(() => {
           gpCoverImg.src = coverUrl;
           gpCoverImg.style.opacity = '1';
         }, 120);
 
-        audio.volume = globalVolumeValue;
+          audio.volume = globalVolumeValue;
 
-        audio.play().then(() => {
+          audio.play().then(() => {
           globalPlayer.classList.add('active');
           updateCardUI(cardId, true);
           updateGlobalPlayerUI(true);
@@ -1392,65 +1410,65 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           // plays
           const playsEl = card.querySelector('.plays-count');
           if(!audio.dataset.counted){
-            let count = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0', 10);
-            count++;
-            playsEl.textContent = count;
-            localStorage.setItem(`plays-${audio.dataset.id}`, count);
-            audio.dataset.counted = 'true';
+          let count = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0', 10);
+          count++;
+          playsEl.textContent = count;
+          localStorage.setItem(`plays-${audio.dataset.id}`, count);
+          audio.dataset.counted = 'true';
           }
         }).catch(() => showToast("Error al cargar audio"));
       }
 
-      function playNext(){
-        if(!currentCardId) return;
-        const i = cards.findIndex(c => c.id === currentCardId);
-        playSong(cards[(i + 1) % cards.length].id);
+        function playNext(){
+          if(!currentCardId) return;
+          const i = cards.findIndex(c => c.id === currentCardId);
+          playSong(cards[(i + 1) % cards.length].id);
       }
-      function playPrev(){
-        if(!currentCardId) return;
-        const i = cards.findIndex(c => c.id === currentCardId);
-        playSong(cards[(i - 1 + cards.length) % cards.length].id);
+        function playPrev(){
+          if(!currentCardId) return;
+          const i = cards.findIndex(c => c.id === currentCardId);
+          playSong(cards[(i - 1 + cards.length) % cards.length].id);
       }
 
       // Bind buttons
-      gpPlayBtn.addEventListener('click', () => {
-        if(currentAudio){
+        gpPlayBtn.addEventListener('click', () => {
+          if(currentAudio){
           if(currentAudio.paused) playSong(currentCardId);
           else { currentAudio.pause(); updateCardUI(currentCardId,false); updateGlobalPlayerUI(false); }
         } else if(cards.length) {
           playSong(cards[0].id);
         }
       });
-      gpNextBtn.addEventListener('click', playNext);
-      gpPrevBtn.addEventListener('click', playPrev);
+        gpNextBtn.addEventListener('click', playNext);
+        gpPrevBtn.addEventListener('click', playPrev);
 
-      gpProgressContainer.addEventListener('click', (e) => {
-        if(!currentAudio) return;
-        const rect = gpProgressContainer.getBoundingClientRect();
-        const pct = (e.clientX - rect.left) / rect.width;
-        currentAudio.currentTime = pct * currentAudio.duration;
+        gpProgressContainer.addEventListener('click', (e) => {
+          if(!currentAudio) return;
+          const rect = gpProgressContainer.getBoundingClientRect();
+          const pct = (e.clientX - rect.left) / rect.width;
+          currentAudio.currentTime = pct * currentAudio.duration;
       });
 
-      gpVolSlider.addEventListener('input', (e) => {
+        gpVolSlider.addEventListener('input', (e) => {
         globalVolumeValue = parseFloat(e.target.value);
-        if(currentAudio) currentAudio.volume = globalVolumeValue;
+          if(currentAudio) currentAudio.volume = globalVolumeValue;
       });
 
-      gpLikeBtn.addEventListener('click', () => { if(currentCardId) toggleLike(currentCardId); });
+        gpLikeBtn.addEventListener('click', () => { if(currentCardId) toggleLike(currentCardId); });
 
       // Dropdown share
-      shareToggleBtn.addEventListener('click', (e) => {
+        shareToggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         shareDropdown.classList.toggle('active');
       });
-      document.addEventListener('click', (e) => {
-        if(!shareDropdown.contains(e.target) && e.target !== shareToggleBtn){
-          shareDropdown.classList.remove('active');
+        document.addEventListener('click', (e) => {
+         if(!shareDropdown.contains(e.target) && e.target !== shareToggleBtn){
+        shareDropdown.classList.remove('active');
         }
       });
 
       // Cards events
-      cards.forEach(card => {
+        cards.forEach(card => {
         const audio = card.querySelector('audio');
 
         // init plays from storage
@@ -1459,8 +1477,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         // init like icon state on card
         if(localStorage.getItem(`like-${card.id}`) === 'true'){
-          card.querySelector('.heart-icon').classList.add('liked');
-          card.querySelector('.heart-icon').textContent = '♥';
+        card.querySelector('.heart-icon').classList.add('liked');
+        card.querySelector('.heart-icon').textContent = '♥';
         }
 
         card.querySelectorAll('.btn-card, .btn-card-float').forEach(btn => {
@@ -1487,48 +1505,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
 
       // Global time update loop
-      function rafUpdate(){
-        if(currentAudio){
+       function rafUpdate(){
+          if(currentAudio){
           const pct = (currentAudio.currentTime / currentAudio.duration) * 100;
           if(isFinite(pct)) gpProgressBar.style.width = `${pct}%`;
           const remaining = (currentAudio.duration || 0) - (currentAudio.currentTime || 0);
 
     // Izquierda: tiempo restante (conteo regresivo)
-        gpCurrentTime.textContent = formatTime(remaining);
+          gpCurrentTime.textContent = formatTime(remaining);
 
     // Derecha (PC): duración total (en móvil está oculto por CSS)
-        gpDuration.textContent = formatTime(currentAudio.duration);
+          gpDuration.textContent = formatTime(currentAudio.duration);
 
 
           const card = document.getElementById(currentCardId);
           if(card){
-            card.querySelector('.progress-bar').style.width = `${isFinite(pct) ? pct : 0}%`;
-            card.querySelector('.time-display').textContent = formatTime(remaining);
+          card.querySelector('.progress-bar').style.width = `${isFinite(pct) ? pct : 0}%`;
+          card.querySelector('.time-display').textContent = formatTime(remaining);
           }
         }
         requestAnimationFrame(rafUpdate);
       }
-      requestAnimationFrame(rafUpdate);
+        requestAnimationFrame(rafUpdate);
 
       // Clipboard
-      window.copyToClipboard = (url, title) => {
+        window.copyToClipboard = (url, title) => {
         navigator.clipboard.writeText(`${title} - ${url}`).then(() => showToast("Enlace copiado"));
       };
     });
   </script>
   <script>
 (() => {
-  const section = document.getElementById("streaming-section");
-  if (!section) return;
+    const section = document.getElementById("streaming-section");
+    if (!section) return;
 
   // Solo PC para evitar consumo en móvil
-  const isPC = window.matchMedia("(min-width: 769px)").matches;
-  if (!isPC) return;
+    const isPC = window.matchMedia("(min-width: 769px)").matches;
+    if (!isPC) return;
 
-  const items = section.querySelectorAll(".embed-item");
-  let ticking = false;
+    const items = section.querySelectorAll(".embed-item");
+    let ticking = false;
 
-  function parallax() {
+    function parallax() {
     ticking = false;
     const r = section.getBoundingClientRect();
     const vh = window.innerHeight || 800;
@@ -1547,20 +1565,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   window.addEventListener("scroll", () => {
     if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(parallax);
+    ticking = true;
+    requestAnimationFrame(parallax);
     }
   }, { passive: true });
 
-  window.addEventListener("resize", () => requestAnimationFrame(parallax));
-  requestAnimationFrame(parallax);
+    window.addEventListener("resize", () => requestAnimationFrame(parallax));
+    requestAnimationFrame(parallax);
 })();
-</script>
+  </script>
   
   <script>
   window.dataLayer = window.dataLayer || [];
 
-  const getMeta = (audio) => {
+    const getMeta = (audio) => {
     const trackId =
       audio.getAttribute('data-track-id') ||
       audio.getAttribute('data-id') ||
@@ -1576,30 +1594,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   // Evita duplicar listeners si por alguna razón se re-ejecuta el script
   const bindAudio = (audio) => {
-    if (audio.dataset.gtmBound === '1') return;
-    audio.dataset.gtmBound = '1';
+     if (audio.dataset.gtmBound === '1') return;
+         audio.dataset.gtmBound = '1';
 
-    audio.addEventListener('play', () => {
-      const { trackId, trackTitle } = getMeta(audio);
-      window.dataLayer.push({
+        audio.addEventListener('play', () => {
+  const { trackId, trackTitle } = getMeta(audio);
+        window.dataLayer.push({
         event: 'audio_play',
         track_id: trackId,
         track_title: trackTitle
       });
     });
 
-    audio.addEventListener('pause', () => {
-      const { trackId, trackTitle } = getMeta(audio);
-      window.dataLayer.push({
+        audio.addEventListener('pause', () => {
+  const { trackId, trackTitle } = getMeta(audio);
+        window.dataLayer.push({
         event: 'audio_pause',
         track_id: trackId,
         track_title: trackTitle
       });
     });
 
-    audio.addEventListener('ended', () => {
-      const { trackId, trackTitle } = getMeta(audio);
-      window.dataLayer.push({
+        audio.addEventListener('ended', () => {
+  const { trackId, trackTitle } = getMeta(audio);
+        window.dataLayer.push({
         event: 'audio_end',
         track_id: trackId,
         track_title: trackTitle
@@ -1612,12 +1630,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   // Si en el futuro agregas canciones dinámicamente (AJAX), esto las cubre:
   const obs = new MutationObserver(() => {
-    document.querySelectorAll('audio').forEach(bindAudio);
+  document.querySelectorAll('audio').forEach(bindAudio);
   });
   obs.observe(document.body, { childList: true, subtree: true });
 
     function pauseAllLocalAudio(exceptEl = null) {
-  document.querySelectorAll("audio").forEach(a => {
+    document.querySelectorAll("audio").forEach(a => {
     if (a !== exceptEl && !a.paused) a.pause();
   });
 }
@@ -1627,33 +1645,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 // Pausa todos los audios locales (<audio>) excepto uno (si se pasa)
     
     function pauseAllLocalAudio(exceptEl = null) {
-  document.querySelectorAll("audio").forEach(a => {
+    document.querySelectorAll("audio").forEach(a => {
     if (a !== exceptEl && !a.paused) a.pause();
   });
 }
 
 // 1) Si empieza un audio local, pausa los demás
-document.addEventListener("play", (e) => {
-  const a = e.target;
-  if (a && a.tagName === "AUDIO") pauseAllLocalAudio(a);
-}, true);
+   document.addEventListener("play", (e) => {
+   const a = e.target;
+   if (a && a.tagName === "AUDIO") pauseAllLocalAudio(a);
+   }, true);
 
-    document.addEventListener("play", (e) => {
-  const a = e.target;
-  if (a && a.tagName === "AUDIO") {
-    pauseAllLocalAudio(a);
+   document.addEventListener("play", (e) => {
+   const a = e.target;
+   if (a && a.tagName === "AUDIO") {
+   pauseAllLocalAudio(a);
 
     // reactivar guard para futuras interacciones
-    document.querySelectorAll(".embed-click-guard").forEach(g => {
-      g.style.pointerEvents = "auto";
+   document.querySelectorAll(".embed-click-guard").forEach(g => {
+   g.style.pointerEvents = "auto";
     });
   }
 }, true);
 
 // 2) Si el usuario interactúa con el STREAMING, pausa audio local (Spotify/YouTube)
-const streamingSection = document.getElementById("streaming-section");
-if (streamingSection) {
-  const stopLocal = () => pauseAllLocalAudio(null);
+   const streamingSection = document.getElementById("streaming-section");
+   if (streamingSection) {
+   const stopLocal = () => pauseAllLocalAudio(null);
 
   // Captura “antes” que la mayoría de interacciones
   ["pointerdown", "mousedown", "touchstart", "click", "keydown"].forEach(evt => {
@@ -1662,18 +1680,61 @@ if (streamingSection) {
 }
 
 // 3) Extra: si el usuario hace focus en un iframe (muy común en Spotify), pausa audio local
-window.addEventListener("blur", () => {
+    window.addEventListener("blur", () => {
   // Cuando haces click dentro de un iframe, la ventana a veces pierde foco
-  pauseAllLocalAudio(null);
+    pauseAllLocalAudio(null);
 });
 
-    // 4) (Opcional) Guard: primer click pausa audio y luego deja interactuar directo con el iframe
-document.querySelectorAll(".embed-click-guard").forEach(guard => {
-  guard.addEventListener("pointerdown", () => {
-    pauseAllLocalAudio(null);
-    guard.style.pointerEvents = "none";
-  }, { capture: true });
-});
+    // ===== YouTube Iframe API: pausar cuando suene audio local =====
+    let ytPlayers = [];
+
+  function onYouTubeIframeAPIReady() {
+  // busca todos los iframes de youtube dentro del streaming
+    document.querySelectorAll('#streaming-section iframe[src*="youtube.com/embed"]').forEach((iframe) => {
+    // Asegurar enablejsapi=1
+  const src = iframe.getAttribute("src") || "";
+  if (!src.includes("enablejsapi=1")) {
+  const join = src.includes("?") ? "&" : "?";
+  iframe.setAttribute("src", src + join + "enablejsapi=1");
+    }
+
+  ytPlayers.push(new YT.Player(iframe, {
+      events: {
+        onReady: () => {}
+      }
+    }));
+  });
+}
+
+// Cargar la API si no está
+  (function loadYT() {
+  if (window.YT && window.YT.Player) return;
+  const tag = document.createElement("script");
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(tag);
+})();
+
+// Pausar YouTube cuando se reproduce audio local
+   function pauseAllYouTube() {
+   ytPlayers.forEach(p => {
+  try { p.pauseVideo(); } catch(e) {}
+  });
+}
+
+// Enganchar al play local
+    document.addEventListener("play", (e) => {
+    if (e.target && e.target.tagName === "AUDIO") {
+    pauseAllYouTube();
+  }
+}, true);
+
+    // ENGANCHE AL PLAY DEL EP
+    document.addEventListener("play", (e) => {
+    const a = e.target;
+    if (a && a.tagName === "AUDIO") {
+    pauseAllLocalAudio(a);
+  }
+}, true);
 
   </script>
 
