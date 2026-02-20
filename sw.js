@@ -1,6 +1,6 @@
 const CACHE_VERSION = 'v2';
-const STATIC_CACHE = `bvhanrkry-static-${CACHE_VERSION}`;
-const RUNTIME_CACHE = `bvhanrkry-runtime-${CACHE_VERSION}`;
+const STATIC_CACHE = `bvhankry-static-${CACHE_VERSION}`;
+const RUNTIME_CACHE = `bvhankry-runtime-${CACHE_VERSION}`;
 
 const PRECACHE_URLS = [
   '/',
@@ -26,5 +26,41 @@ self.addEventListener('activate', (event) => {
         .map((key) => caches.delete(key))
     );
     await self.clients.claim();
+  })());
+});
+
+self.addEventListener('fetch', (event) => {
+  const request = event.request;
+  const requestUrl = new URL(request.url);
+
+  if (request.method !== 'GET' || requestUrl.origin !== self.location.origin) {
+    return;
+  }
+
+  if (request.mode === 'navigate') {
+    event.respondWith((async () => {
+      try {
+        const networkResponse = await fetch(request);
+        const runtimeCache = await caches.open(RUNTIME_CACHE);
+        runtimeCache.put(request, networkResponse.clone());
+        return networkResponse;
+      } catch {
+        return (await caches.match(request)) || (await caches.match('/index.html'));
+      }
+    })());
+    return;
+  }
+
+  event.respondWith((async () => {
+    const cached = await caches.match(request);
+    if (cached) return cached;
+
+    const networkResponse = await fetch(request);
+    const destination = request.destination;
+    if (['style', 'script', 'image', 'font'].includes(destination)) {
+      const runtimeCache = await caches.open(RUNTIME_CACHE);
+      runtimeCache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
   })());
 });
