@@ -6,7 +6,7 @@ const PRECACHE_URLS = [
   '/',
   '/index.html',
   '/manifest.webmanifest',
-  '/iconos/pesta%C3%B1a%20simbo.png'
+  '/iconos pestaña.png'
 ];
 
 self.addEventListener('install', (event) => {
