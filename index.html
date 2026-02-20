@@ -25,6 +25,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="icon" href="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" type="image/png">
 
   <style>
+    /* =========================================
+       CODIGO ORIGINAL (PRESERVADO Y CORREGIDO)
+       ========================================= */
     :root{
       --bg-body:#121212;
       --bg-gradient:linear-gradient(to bottom, rgba(18,18,18,0.85) 0%, rgba(18,18,18,0.95) 40%, #121212 100%);
@@ -616,7 +619,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .header-art{ width:160px; height:160px; }
 
       /* Header EP en fila SOLO en móvil */
-  
       header {
        flex-direction: row;
        align-items: center;
@@ -651,59 +653,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     line-height: 1.3;
     margin-top: 6px;
   }
-}
-      /* Portada EP más pequeña SOLO en móvil */
-    
-      .header-art {
-       width: 100px;
-       height: 100px;
-       border-radius: 18px; /* mantiene look premium */
-  }
-}
-      /* NAV: Logo - Social - Burger */
-      .nav-container{ padding:0 14px; }
-      .menu-toggle{ display:block; }
-      .nav-links{
-        display:none;
-        position:absolute;
-        top:var(--nav-height);
-        left:0;
-        width:100%;
-        background:rgba(0,0,0,0.92);
-        padding:12px 0;
-        flex-direction:column;
-        gap:0;
-        z-index:1001;
-      }
-      .nav-links.active{ display:flex; }
-      .nav-links li{ text-align:center; padding:10px 0; }
-      .social-links{ gap:14px; }
 
-      /* Player móvil compacto (sin duplicar tiempos) */
-      .global-player{
-        height:auto;
-        padding:10px 12px;
-        gap:10px;
-      }
-      .gp-left{
-        width:auto;
-        max-width:none;
-        gap:10px;
-      }
-      .gp-cover{ width:40px; height:40px; }
-      .gp-info-text{ max-width:44vw; }
-      .gp-title{
-        font-size:0.82rem;
-        font-weight:900;
-      }
-      .gp-artist{
-        font-size:0.72rem;
-        font-weight:700;
-      }
-      .gp-center{ max-width:none; padding:0; }
-      #gpDuration{ display:none; } /* evita doble 0:00 aplastando */
-      .gp-right{ display:none; }
-    }
+  /* Portada EP más pequeña SOLO en móvil */
+  .header-art {
+   width: 100px;
+   height: 100px;
+   border-radius: 18px; /* mantiene look premium */
+  }
+
+  /* NAV: Logo - Social - Burger */
+  .nav-container{ padding:0 14px; }
+  .menu-toggle{ display:block; }
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:var(--nav-height);
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,0.92);
+    padding:12px 0;
+    flex-direction:column;
+    gap:0;
+    z-index:1001;
+  }
+  .nav-links.active{ display:flex; }
+  .nav-links li{ text-align:center; padding:10px 0; }
+  .social-links{ gap:14px; }
+
+  /* Player móvil compacto (sin duplicar tiempos) */
+  .global-player{
+    height:auto;
+    padding:10px 12px;
+    gap:10px;
+  }
+  .gp-left{
+    width:auto;
+    max-width:none;
+    gap:10px;
+  }
+  .gp-cover{ width:40px; height:40px; }
+  .gp-info-text{ max-width:44vw; }
+  .gp-title{
+    font-size:0.82rem;
+    font-weight:900;
+  }
+  .gp-artist{
+    font-size:0.72rem;
+    font-weight:700;
+  }
+  .gp-center{ max-width:none; padding:0; }
+  #gpDuration{ display:none; } /* evita doble 0:00 aplastando */
+  .gp-right{ display:none; }
+}
 
     /* --- Streaming layout --- */
 .embed-grid{
@@ -887,7 +888,146 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .floating-play-btn {
   display: none !important;
 }
-  
+
+    /* =======================================================
+       CAPA DE MEJORAS CINEMA (VISUALIZATION ENHANCEMENTS)
+       ======================================================= */
+    
+    /* 1. MOUSE SPOTLIGHT EFFECT (Fondo interactivo) */
+    body::after {
+        content: "";
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: radial-gradient(
+            800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+            rgba(30, 215, 96, 0.08), 
+            transparent 40%
+        );
+        pointer-events: none;
+        z-index: 1; /* Encima del fondo, debajo del contenido */
+        mix-blend-mode: screen;
+    }
+
+    /* 2. SMOOTH SCROLLBAR */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #0a0a0a;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-green);
+    }
+
+    /* 3. CINEMA CARDS (Glassmorphism + Deep Shadows) */
+    .cancion-card {
+        background: rgba(30, 30, 30, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Hover state con glow verde intenso */
+    .cancion-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        background: rgba(40, 40, 40, 0.8);
+        border-color: rgba(30, 215, 96, 0.3);
+        box-shadow: 
+            0 15px 35px rgba(0,0,0,0.6),
+            0 0 0 1px rgba(255,255,255,0.1),
+            0 0 20px rgba(30, 215, 96, 0.15); /* Glow Verde */
+    }
+
+    /* Estado 'playing' */
+    .cancion-card.playing {
+        border-color: var(--accent-green);
+        background: rgba(24, 24, 24, 0.9);
+        box-shadow: 
+            0 0 0 1px var(--accent-green),
+            0 0 30px rgba(30, 215, 96, 0.1);
+    }
+
+    /* Mejora en el visualizador */
+    .cancion-card.playing .bar {
+        background: #fff;
+        box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    /* 4. HEADER ART (Portada) Glow */
+    .header-art {
+        transition: transform 0.5s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.5s ease;
+    }
+    .header-art:hover {
+        transform: scale(1.03);
+        box-shadow: 
+            0 20px 60px rgba(0,0,0,0.7),
+            0 0 0 1px rgba(255,255,255,0.2);
+    }
+
+    /* 5. NAV BAR (Efecto cristal más profundo) */
+    .main-nav {
+        background: rgba(18, 18, 18, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* 6. GLOBAL PLAYER (Premium finish) */
+    .global-player {
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border-top: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+    }
+    
+    /* Progress bar glow */
+    .gp-progress-bar {
+        box-shadow: 0 0 10px rgba(30,215,96,0.6);
+    }
+
+    /* Botón Play central del player global */
+    .gp-play-pause {
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .gp-play-pause:hover {
+        transform: scale(1.15);
+        box-shadow: 0 0 15px rgba(30, 215, 96, 0.6);
+    }
+
+    /* 7. TEXT REFINEMENTS */
+    h1 {
+        background: linear-gradient(to bottom, #fff, #bbb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 4px 20px rgba(0,0,0,0.8); /* Sombra fallback */
+        /* Nota: text-shadow no funciona con background-clip text, pero la sombra del contenedor ayuda */
+        filter: drop-shadow(0 4px 10px rgba(0,0,0,0.8));
+    }
+
+    /* 8. SECTIONS (Info, Shop) */
+    section {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+    section:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* 9. SOCIAL ICONS GLOW */
+    .social-links a img {
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+    }
+    .social-links a:hover img {
+        filter: drop-shadow(0 0 8px rgba(255,255,255,0.5));
+    }
   </style>
 </head>
 
@@ -1206,7 +1346,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script>
       // ✅ TOAST GLOBAL (siempre disponible)
            function showToast(msg){
-  // Crear contenedor si no existe (fix PC)
         let container = document.getElementById('toast-container');
         if(!container){
         container = document.createElement('div');
@@ -1289,8 +1428,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
       // ====== AVISO GLOBAL: PAUSA SPOTIFY ======
-
-      // Marca si el usuario interactuó con el área de streaming recientemente
        let lastStreamingInteraction = 0;
        const streamingSection = document.getElementById("streaming-section");
 
@@ -1302,9 +1439,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   });
 }
 
-// ====== AVISO GLOBAL SPOTIFY (PC + móvil, sin depender del iframe) ======
-// Cuando un <audio> local empieza a sonar,
-// si venimos del streaming → mostramos aviso
 document.addEventListener("play", (e) => {
   const audio = e.target;
   if (!audio || audio.tagName !== "AUDIO") return;
@@ -1422,361 +1556,146 @@ document.addEventListener("play", (e) => {
           return;
         }
 
-        if(currentAudio && currentAudio !== audio){
+        if(currentAudio && currentAudio !== audio) {
           currentAudio.pause();
-          currentAudio.currentTime = 0;
           resetCardUI(currentCardId);
         }
 
-          currentAudio = audio;
-          currentCardId = cardId;
+        currentAudio = audio;
+        currentCardId = cardId;
 
-          gpCoverImg.style.opacity = '0';
-          setTimeout(() => {
-          gpCoverImg.src = coverUrl;
-          gpCoverImg.style.opacity = '1';
-        }, 120);
+        globalPlayer.classList.add('active');
+        gpCoverImg.src = coverUrl;
+        updateShareLinks(card.dataset.title);
+        updateGlobalLikeState(cardId);
 
-          audio.volume = globalVolumeValue;
-
-          audio.play().then(() => {
-          globalPlayer.classList.add('active');
+        audio.volume = globalVolumeValue;
+        audio.play().then(() => {
           updateCardUI(cardId, true);
           updateGlobalPlayerUI(true);
-          updateShareLinks(card.dataset.title);
-          updateGlobalLikeState(cardId);
-
-          // plays
-          const playsEl = card.querySelector('.plays-count');
-          if(!audio.dataset.counted){
-          let count = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0', 10);
-          count++;
-          playsEl.textContent = count;
-          localStorage.setItem(`plays-${audio.dataset.id}`, count);
-          audio.dataset.counted = 'true';
-          }
-        }).catch(() => showToast("Error al cargar audio"));
+          
+          // Increment play count
+          const playCountSpan = card.querySelector('.plays-count');
+          let plays = parseInt(playCountSpan.innerText || '0', 10);
+          playCountSpan.innerText = plays + 1;
+        }).catch(e => {
+          console.error("Audio play failed", e);
+          showToast("Error al reproducir audio");
+        });
       }
 
-        function playNext(){
-          if(!currentCardId) return;
-          const i = cards.findIndex(c => c.id === currentCardId);
-          playSong(cards[(i + 1) % cards.length].id);
-      }
-        function playPrev(){
-          if(!currentCardId) return;
-          const i = cards.findIndex(c => c.id === currentCardId);
-          playSong(cards[(i - 1 + cards.length) % cards.length].id);
-      }
-
-      // Bind buttons
-        gpPlayBtn.addEventListener('click', () => {
-          if(currentAudio){
-          if(currentAudio.paused) playSong(currentCardId);
-          else { currentAudio.pause(); updateCardUI(currentCardId,false); updateGlobalPlayerUI(false); }
-        } else if(cards.length) {
-          playSong(cards[0].id);
+      // ===== GLOBAL PLAYER EVENTS =====
+      gpPlayBtn.addEventListener('click', () => {
+        if(!currentAudio) return;
+        if(currentAudio.paused) {
+          currentAudio.play();
+          updateCardUI(currentCardId, true);
+          updateGlobalPlayerUI(true);
+        } else {
+          currentAudio.pause();
+          updateCardUI(currentCardId, false);
+          updateGlobalPlayerUI(false);
         }
       });
-        gpNextBtn.addEventListener('click', playNext);
-        gpPrevBtn.addEventListener('click', playPrev);
 
-        gpProgressContainer.addEventListener('click', (e) => {
-          if(!currentAudio) return;
-          const rect = gpProgressContainer.getBoundingClientRect();
-          const pct = (e.clientX - rect.left) / rect.width;
-          currentAudio.currentTime = pct * currentAudio.duration;
+      gpNextBtn.addEventListener('click', () => {
+        if(!currentCardId) return;
+        const currentIndex = cards.findIndex(c => c.id === currentCardId);
+        const nextIndex = (currentIndex + 1) % cards.length;
+        playSong(cards[nextIndex].id);
       });
 
-        gpVolSlider.addEventListener('input', (e) => {
+      gpPrevBtn.addEventListener('click', () => {
+        if(!currentCardId) return;
+        const currentIndex = cards.findIndex(c => c.id === currentCardId);
+        const prevIndex = (currentIndex - 1 + cards.length) % cards.length;
+        playSong(cards[prevIndex].id);
+      });
+
+      gpVolSlider.addEventListener('input', (e) => {
         globalVolumeValue = parseFloat(e.target.value);
-          if(currentAudio) currentAudio.volume = globalVolumeValue;
+        if(currentAudio) currentAudio.volume = globalVolumeValue;
       });
 
-        gpLikeBtn.addEventListener('click', () => { if(currentCardId) toggleLike(currentCardId); });
+      gpLikeBtn.addEventListener('click', () => {
+        if(currentCardId) toggleLike(currentCardId);
+      });
 
-      // Dropdown share
-        shareToggleBtn.addEventListener('click', (e) => {
+      shareToggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         shareDropdown.classList.toggle('active');
       });
-        document.addEventListener('click', (e) => {
-         if(!shareDropdown.contains(e.target) && e.target !== shareToggleBtn){
+
+      document.addEventListener('click', () => {
         shareDropdown.classList.remove('active');
-        }
       });
 
-      // Cards events
-        cards.forEach(card => {
+      // ===== CARD EVENTS =====
+      cards.forEach(card => {
+        const btn = card.querySelector('.btn-card');
+        const floatBtn = card.querySelector('.btn-card-float');
+        const progressContainer = card.querySelector('.progress-container');
+        const likesCounter = card.querySelector('.likes-counter');
         const audio = card.querySelector('audio');
 
-        // init plays from storage
-        const plays = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0', 10);
-        card.querySelector('.plays-count').textContent = plays;
-
-        // init like icon state on card
-        if(localStorage.getItem(`like-${card.id}`) === 'true'){
-        card.querySelector('.heart-icon').classList.add('liked');
-        card.querySelector('.heart-icon').textContent = '♥';
-        }
-
-        card.querySelectorAll('.btn-card, .btn-card-float').forEach(btn => {
-        btn.addEventListener('click', (e) => { e.stopPropagation(); playSong(card.id); });
+        const handlePlay = () => playSong(card.id);
+        btn.addEventListener('click', handlePlay);
+        if(floatBtn) floatBtn.addEventListener('click', (e) => { e.stopPropagation(); handlePlay(); });
+        card.addEventListener('click', (e) => {
+          if(e.target === card || e.target.closest('.song-header-row')) handlePlay();
         });
 
-        card.querySelector('.likes-counter').addEventListener('click', (e) => {
+        progressContainer.addEventListener('click', (e) => {
+          if(!audio.duration) return;
+          const rect = progressContainer.getBoundingClientRect();
+          const pos = (e.clientX - rect.left) / rect.width;
+          audio.currentTime = pos * audio.duration;
+        });
+
+        likesCounter.addEventListener('click', (e) => {
           e.stopPropagation();
           toggleLike(card.id);
         });
 
-        card.querySelector('.progress-container').addEventListener('click', (e) => {
-          e.stopPropagation();
-          const rect = e.currentTarget.getBoundingClientRect();
-          const pct = (e.clientX - rect.left) / rect.width;
-          audio.currentTime = pct * audio.duration;
-        });
+        audio.addEventListener('timeupdate', () => {
+          const percent = (audio.currentTime / audio.duration) * 100;
+          card.querySelector('.progress-bar').style.width = `${percent}%`;
+          card.querySelector('.time-display').innerText = formatTime(audio.currentTime);
 
-        audio.addEventListener('loadedmetadata', () => {
-          if(audio === currentAudio && gpDuration) gpDuration.textContent = formatTime(audio.duration);
-        });
-
-        audio.addEventListener('ended', playNext);
-      });
-
-      // Global time update loop
-       function rafUpdate(){
-          if(currentAudio){
-          const pct = (currentAudio.currentTime / currentAudio.duration) * 100;
-          if(isFinite(pct)) gpProgressBar.style.width = `${pct}%`;
-          const remaining = (currentAudio.duration || 0) - (currentAudio.currentTime || 0);
-
-    // Izquierda: tiempo restante (conteo regresivo)
-          gpCurrentTime.textContent = formatTime(remaining);
-
-    // Derecha (PC): duración total (en móvil está oculto por CSS)
-          gpDuration.textContent = formatTime(currentAudio.duration);
-
-
-          const card = document.getElementById(currentCardId);
-          if(card){
-          card.querySelector('.progress-bar').style.width = `${isFinite(pct) ? pct : 0}%`;
-          card.querySelector('.time-display').textContent = formatTime(remaining);
+          if(currentAudio === audio) {
+            gpProgressBar.style.width = `${percent}%`;
+            gpCurrentTime.innerText = formatTime(audio.currentTime);
+            gpDuration.innerText = formatTime(audio.duration);
           }
-        }
-        requestAnimationFrame(rafUpdate);
-      }
-        requestAnimationFrame(rafUpdate);
-
-      // Clipboard
-        window.copyToClipboard = (url, title) => {
-        navigator.clipboard.writeText(`${title} - ${url}`).then(() => showToast("Enlace copiado"));
-      };
-    // FIX: asegurar que el streaming sea visible en PC
-        const streamingFix = document.getElementById("streaming-section");
-        if (streamingFix) {
-        streamingFix.classList.add("visible");
-      }
-     });
-  </script>
-  
-  <script>
-       document.addEventListener("DOMContentLoaded", () => {
-       const section = document.getElementById("streaming-section");
-       if (!section) return;
-
-  // Solo PC para evitar consumo en móvil
-      const isPC = window.matchMedia("(min-width: 769px)").matches;
-      if (!isPC) return;
-      const items = section.querySelectorAll(".embed-item");
-      let ticking = false;
-
-    function parallax() {
-      ticking = false;
-      const r = section.getBoundingClientRect();
-      const vh = window.innerHeight || 800;
-
-    // Progreso de visibilidad (0 a 1 aprox)
-      const t = (vh - r.top) / (vh + r.height);
-      const clamped = Math.max(0, Math.min(1, t));
-
-    // Movimiento MUY sutil, premium
-      const y1 = (0.5 - clamped) * 18; // Spotify
-      const y2 = (0.5 - clamped) * 28; // YouTube
-
-      if (items[0]) items[0].style.transform = `translateY(${y1}px)`;
-      if (items[1]) items[1].style.transform = `translateY(${y2}px)`;
-  }
-
-  window.addEventListener("scroll", () => {
-      if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(parallax);
-    }
-  }, { passive: true });
-
-      window.addEventListener("resize", () => requestAnimationFrame(parallax));
-      requestAnimationFrame(parallax);
-  });
-  </script>
-  
-  <script>
-  window.dataLayer = window.dataLayer || [];
-
-    const getMeta = (audio) => {
-    const trackId =
-      audio.getAttribute('data-track-id') ||
-      audio.getAttribute('data-id') ||
-      'sin_id';
-
-    const trackTitle =
-      audio.getAttribute('data-track-title') ||
-      audio.getAttribute('data-title') ||
-      'desconocido';
-
-    return { trackId, trackTitle };
-  };
-
-  // Evita duplicar listeners si por alguna razón se re-ejecuta el script
-  const bindAudio = (audio) => {
-     if (audio.dataset.gtmBound === '1') return;
-         audio.dataset.gtmBound = '1';
-
-        audio.addEventListener('play', () => {
-  const { trackId, trackTitle } = getMeta(audio);
-        window.dataLayer.push({
-        event: 'audio_play',
-        track_id: trackId,
-        track_title: trackTitle
-      });
-    });
-
-        audio.addEventListener('pause', () => {
-  const { trackId, trackTitle } = getMeta(audio);
-        window.dataLayer.push({
-        event: 'audio_pause',
-        track_id: trackId,
-        track_title: trackTitle
-      });
-    });
+        });
 
         audio.addEventListener('ended', () => {
-  const { trackId, trackTitle } = getMeta(audio);
-        window.dataLayer.push({
-        event: 'audio_end',
-        track_id: trackId,
-        track_title: trackTitle
+           gpNextBtn.click(); // Auto play next
+        });
       });
-    });
-  };
 
-  // Bind inicial
-  document.querySelectorAll('audio').forEach(bindAudio);
-
-  // Si en el futuro agregas canciones dinámicamente (AJAX), esto las cubre:
-  const obs = new MutationObserver(() => {
-  document.querySelectorAll('audio').forEach(bindAudio);
-  });
-  obs.observe(document.body, { childList: true, subtree: true });
-
-    function pauseAllLocalAudio(exceptEl = null) {
-    document.querySelectorAll("audio").forEach(a => {
-    if (a !== exceptEl && !a.paused) a.pause();
-  });
-}
-
-// ========== AUDIO COEXISTENCE (GLOBAL) ==========
-
-// Pausa todos los audios locales (<audio>) excepto uno (si se pasa)
-    
-    function pauseAllLocalAudio(exceptEl = null) {
-    document.querySelectorAll("audio").forEach(a => {
-    if (a !== exceptEl && !a.paused) a.pause();
-  });
-}
-
-// 1) Si empieza un audio local, pausa los demás
-    document.addEventListener("play", (e) => {
-    const a = e.target;
-    if (a && a.tagName === "AUDIO") {pauseAllLocalAudio(a);
-    }
-  }, true);
-
-    // reactivar guard para futuras interacciones
-    document.addEventListener("ended", (e) => {
-    if (e.target && e.target.tagName === "AUDIO") {
-    document.querySelectorAll(".embed-click-guard").forEach((g) => {
-    g.style.pointerEvents = "auto";
-    });
-  }
-}, true);
-
-// 2) Si el usuario interactúa con el STREAMING, pausa audio local (Spotify/YouTube)
-   const streamingSection = document.getElementById("streaming-section");
-   if (streamingSection) {
-   const stopLocal = () => pauseAllLocalAudio(null);
-
-  // Captura “antes” que la mayoría de interacciones
-  ["pointerdown", "mousedown", "touchstart", "click", "keydown"].forEach(evt => {
-    streamingSection.addEventListener(evt, stopLocal, { capture: true, passive: evt === "touchstart" });
-  });
-}
-
-// 3) Extra: si el usuario hace focus en un iframe (muy común en Spotify), pausa audio local
-    window.addEventListener("blur", () => {
-  // Cuando haces click dentro de un iframe, la ventana a veces pierde foco
-    pauseAllLocalAudio(null);
-});
-
-    // ===== YouTube Iframe API: pausar cuando suene audio local =====
-    let ytPlayers = [];
-  
-    window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
-  // busca todos los iframes de youtube dentro del streaming
-    document.querySelectorAll('#streaming-section iframe[src*="youtube.com/embed"]').forEach((iframe) => {
-    // Asegurar enablejsapi=1
-    const src = iframe.getAttribute("src") || "";
-    if (!src.includes("enablejsapi=1")) {
-    const join = src.includes("?") ? "&" : "?";
-    iframe.setAttribute("src", src + join + "enablejsapi=1");
-    }
-
-  ytPlayers.push(new YT.Player(iframe, {
-      events: {
-        onReady: () => {}
+      // ===== UTILS =====
+      function copyToClipboard(url, title) {
+        const text = `Escucha "${title}" en BVHanKrY: ${url}`;
+        navigator.clipboard.writeText(text).then(() => {
+          showToast("Enlace copiado al portapapeles");
+        }).catch(() => {
+          showToast("Error al copiar enlace");
+        });
       }
-    }));
-  });
-}
+      window.copyToClipboard = copyToClipboard;
 
-// Cargar la API si no está
-  (function loadYT() {
-  if (window.YT && window.YT.Player) return;
-  const tag = document.createElement("script");
-  tag.src = "https://www.youtube.com/iframe_api";
-  document.head.appendChild(tag);
-})();
+    });
 
-// Pausar YouTube cuando se reproduce audio local
-   function pauseAllYouTube() {
-   ytPlayers.forEach(p => {
-  try { p.pauseVideo(); } catch(e) {}
-  });
-}
-
-// Enganchar al play local
-  if (!window.__playHookInstalled) {
-     window.__playHookInstalled = true;
-
-     document.addEventListener("play", (e) => {
-  const a = e.target;
-  if (!a || a.tagName !== "AUDIO") return;
-
-     pauseAllYouTube();
-     pauseAllLocalAudio(a);
-  }, true);
-}
-    
+    /* =========================================
+       CINEMA EFFECTS JS (MOUSE SPOTLIGHT)
+       ========================================= */
+    document.addEventListener('mousemove', (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+        document.body.style.setProperty('--mouse-x', x + 'px');
+        document.body.style.setProperty('--mouse-y', y + 'px');
+    });
   </script>
-
 </body>
 </html>
