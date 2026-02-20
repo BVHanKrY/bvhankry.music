@@ -1,0 +1,27 @@
+{
+  "id": "/",
+  "name": "BVHanKrY - Pulso EP",
+  "short_name": "BVHanKrY",
+  "description": "Dub Music desde Ecuador. Escucha Pulso EP online.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "iconos/pesta%C3%B1a%20simbo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "iconos/pesta%C3%B1a%20simbo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
