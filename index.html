@@ -9,6 +9,9 @@
 <meta property="og:url" content="https://bvhankry.onrender.com">
 <meta name="twitter:card" content="summary_large_image">
 
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#050505">
+
   <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -1872,7 +1875,14 @@ document.addEventListener("play", (e) => {
         });
       }
     
-  </script>
-
+     </script>
+     <script>
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+    .then(() => console.log('Service Worker registrado'))
+    .catch(err => console.log('Error SW', err));
+    }
+       
+</script>
 </body>
 </html>
