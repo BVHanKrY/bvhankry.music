@@ -19,11 +19,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050505" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>BVHanKrY - Música Oficial</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="icon" href="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" type="image/png">
-
+  <link rel="manifest" href="manifest.webmanifest">
+  
   <style>
     :root{
       --bg-body:#121212;
@@ -563,6 +567,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       gap: 10px;
       pointer-events: none;
 }
+    .install-app-btn {
+      position: fixed;
+      right: 24px;
+      bottom: 170px;
+      z-index: 2100;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      background: rgba(10, 10, 10, 0.8);
+      color: var(--text-primary);
+      padding: 10px 18px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all .25s ease;
+      display: none;
+    }
+    .install-app-btn.visible {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .install-app-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(30, 215, 96, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 768px){
+      .install-app-btn {
+        right: 16px;
+        bottom: 132px;
+        font-size: 0.72rem;
+        padding: 8px 14px;
+      }
+    }
 
 /* “Tarjeta” del toast */
    .toast{
@@ -918,6 +960,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="#music" class="active">Música</a></li>
         <li><a href="#videos">Videos</a></li>
         <li><a href="#shop">Shop</a></li>
+        <li><a href="#app-location">App</a></li>
       </ul>
     </div>
   </nav>
@@ -1122,6 +1165,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p>Soporta el arte directamente. Vinilos de edición limitada y diseños exclusivos.</p>
         <span class="tag-coming-soon">Tienda Oficial</span>
       </section>
+      
+      <section id="app-location" class="scroll-fade">
+        <h2>Aplicación</h2>
+        <p>
+          La aplicación web oficial está en esta misma página (<strong>index.html</strong>) y se puede instalar
+          desde el botón flotante <strong>📲 Instalar app</strong> cuando tu navegador lo habilita.
+        </p>
+        <span class="tag-coming-soon">Ruta principal: /index.html</span>
+      </section>
     </div>
 
     <footer>
@@ -1202,6 +1254,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <div id="toast-container"></div>
+  <button id="installAppBtn" class="install-app-btn" type="button">📲 Instalar app</button>
 
   <script>
       // ✅ TOAST GLOBAL (siempre disponible)
@@ -1774,7 +1827,50 @@ document.addEventListener("play", (e) => {
      pauseAllYouTube();
      pauseAllLocalAudio(a);
   }, true);
-}
+    
+// Instalación PWA
+      const installAppBtn = document.getElementById('installAppBtn');
+      let deferredInstallPrompt = null;
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+      if (isStandalone) {
+        installAppBtn.remove();
+      } else {
+        window.addEventListener('beforeinstallprompt', (event) => {
+          event.preventDefault();
+          deferredInstallPrompt = event;
+          installAppBtn.classList.add('visible');
+        });
+
+        installAppBtn.addEventListener('click', async () => {
+          if (!deferredInstallPrompt) {
+            showToast('La instalación no está disponible en este navegador.');
+            return;
+          }
+
+          deferredInstallPrompt.prompt();
+          const choiceResult = await deferredInstallPrompt.userChoice;
+          if (choiceResult.outcome === 'accepted') {
+            showToast('App instalada correctamente ✅');
+          }
+
+          deferredInstallPrompt = null;
+          installAppBtn.classList.remove('visible');
+        });
+
+        window.addEventListener('appinstalled', () => {
+          installAppBtn.classList.remove('visible');
+          showToast('Gracias por instalar la app');
+        });
+      }
+
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').catch((error) => {
+            console.error('No se pudo registrar el service worker', error);
+          });
+        });
+      }
     
   </script>
 
