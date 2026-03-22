@@ -22,7 +22,8 @@ const PRECACHE_URLS = [
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(STATIC_CACHE);
-    await Promise.allSettled(PRECACHE_URLS.map((url) => cache.add(url)));
+    await Promise.all(PRECACHE_URLS.map(url => cache.add(url))
+);
     await self.skipWaiting();
   })());
 });
