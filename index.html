@@ -1346,8 +1346,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       // Marca si el usuario interactuó con el área de streaming recientemente
        let lastStreamingInteraction = 0;
-       const streamingSection = document.getElementById("streaming-section");
-
        if (streamingSection) {
        ["pointerdown", "mousedown", "touchstart", "click", "keydown"].forEach(evt => {
        streamingSection.addEventListener(evt, () => {
@@ -1732,11 +1730,6 @@ document.addEventListener("play", (e) => {
   });
   obs.observe(document.body, { childList: true, subtree: true });
 
-    function pauseAllLocalAudio(exceptEl = null) {
-    document.querySelectorAll("audio").forEach(a => {
-    if (a !== exceptEl && !a.paused) a.pause();
-  });
-}
 
 // ========== AUDIO COEXISTENCE (GLOBAL) ==========
 
@@ -1867,31 +1860,16 @@ document.addEventListener("play", (e) => {
 
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js').catch((error) => {
-            console.error('No se pudo registrar el service worker', error);
+        navigator.serviceWorker.register('./sw.js').catch((error) => {
+                     console.error('No se pudo registrar el service worker', error);
+          .catch(err => console.log('Error SW', err));
           });
         });
       }
-    
-     </script>
-     <script>
-    if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-    .then(() => console.log('Service Worker registrado'))
-    .catch(err => console.log('Error SW', err));
-    }
-
-
-      
+       </script>
+  
        <script>
-let deferredPrompt;
-const installBtn = document.getElementById("installBtn");
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault(); // evita el aviso automático
-  deferredPrompt = e;
-  installBtn.style.display = "block"; // muestra tu botón
-});
+         
        let currentAudio = null;
        function playAudio(audio){
        if(currentAudio && currentAudio !== audio){
