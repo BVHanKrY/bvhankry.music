@@ -1257,667 +1257,470 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div id="toast-container"></div>
   <button id="installAppBtn" class="install-app-btn" type="button">📲 Instalar app</button>
 
-  <script>
-      // ✅ TOAST GLOBAL (siempre disponible)
-           function showToast(msg){
-  // Crear contenedor si no existe (fix PC)
-        let container = document.getElementById('toast-container');
-        if(!container){
+<script>
+// ===== TOAST GLOBAL =====
+function showToast(msg) {
+    let container = document.getElementById('toast-container');
+    if (!container) {
         container = document.createElement('div');
         container.id = 'toast-container';
         document.body.appendChild(container);
-      }
-        if(container.querySelector('.toast.show')) return;
-        const t = document.createElement('div');
-        t.className = 'toast show';
-        t.textContent = msg;
-        container.appendChild(t);
-        setTimeout(() => { t.classList.remove('show'); setTimeout(()=>t.remove(), 300); }, 3200);
-      }
-        window.showToast = showToast;
-    
-      document.addEventListener('DOMContentLoaded', () => {
-      // ===== MENU HAMBURGUESA (1 SOLO LISTENER) =====
-      const menuBtn = document.querySelector('.menu-toggle');
-      const navLinks = document.querySelector('.nav-links');
-      if (menuBtn && navLinks) {
-      menuBtn.addEventListener('click', () => {
-      const willOpen = !navLinks.classList.contains('active');
-      navLinks.classList.toggle('active');
-      menuBtn.setAttribute('aria-expanded', String(willOpen));
-
-              // ===== LISTENER UNIFICADO (SOLO UNO) =====
-      document.addEventListener("play", (e) => {
-      const audio = e.target;
-      if (!audio || audio.tagName !== "AUDIO") return;
-
-      // 1. Pausar otros audios locales
-      pauseAllLocalAudio(audio);
-
-      // 2. Pausar YouTube si existe
-      if (typeof pauseAllYouTube === 'function') {
-      pauseAllYouTube();
-  }
-
-       // 3. Mostrar aviso si viene de streaming
-      const recentlyUsedStreaming = (Date.now() - lastStreamingInteraction) < 30000;
-      if (recentlyUsedStreaming) {
-      showToast("Spotify activo 🎵 Pausalo para escuchar EP");
-      }
-        }, true);
-  });
+    }
+    if (container.querySelector('.toast.show')) return;
+    const t = document.createElement('div');
+    t.className = 'toast show';
+    t.textContent = msg;
+    container.appendChild(t);
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 3200);
 }
-        
-      // ===== SCROLL NAV HIDE =====
-      let lastScroll = 0;
-      window.addEventListener('scroll', () => {
+window.showToast = showToast;
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ===== MENU HAMBURGUESA =====
+    const menuBtn = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+            const willOpen = !navLinks.classList.contains('active');
+            navLinks.classList.toggle('active');
+            menuBtn.setAttribute('aria-expanded', String(willOpen));
+        });
+    }
+
+    // ===== SCROLL NAV HIDE =====
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
         const nav = document.querySelector('.main-nav');
         if (currentScroll > lastScroll && currentScroll > 100) nav.classList.add('hidden-nav');
         else nav.classList.remove('hidden-nav');
         lastScroll = currentScroll;
-      });
+    });
 
-      // ===== SCROLL FADE =====
-      const scrollElements = document.querySelectorAll(".scroll-fade");
-      const io = new IntersectionObserver((entries) => {
+    // ===== SCROLL FADE =====
+    const scrollElements = document.querySelectorAll(".scroll-fade");
+    const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add("visible");
+            if (entry.isIntersecting) entry.target.classList.add("visible");
         });
-      }, { threshold: 0.25 });
-      scrollElements.forEach(el => io.observe(el));
+    }, { threshold: 0.25 });
+    scrollElements.forEach(el => io.observe(el));
 
-      // ===== AUDIO PLAYER =====
-      let currentAudio = null;
-      let currentCardId = null;
-      let globalVolumeValue = 1.0;
+    // ===== VARIABLES DEL REPRODUCTOR =====
+    let currentAudio = null;
+    let currentCardId = null;
+    let globalVolumeValue = 1.0;
+    let rafId = null;
 
-      const cards = Array.from(document.querySelectorAll('.cancion-card'));
+    const cards = Array.from(document.querySelectorAll('.cancion-card'));
+    const globalPlayer = document.getElementById('globalPlayer');
+    const gpTitle = document.getElementById('gpTitle');
+    const gpArtist = document.getElementById('gpArtist');
+    const gpCoverImg = document.getElementById('gpCoverImg');
+    const gpPlayBtn = document.getElementById('gpPlayBtn');
+    const gpIconPlay = gpPlayBtn.querySelector('.gp-icon-play');
+    const gpIconPause = gpPlayBtn.querySelector('.gp-icon-pause');
+    const gpProgressBar = document.getElementById('gpProgressBar');
+    const gpProgressContainer = document.getElementById('gpProgressContainer');
+    const gpCurrentTime = document.getElementById('gpCurrentTime');
+    const gpDuration = document.getElementById('gpDuration');
+    const gpVolSlider = document.getElementById('gpVolumeSlider');
+    const gpNextBtn = document.getElementById('gpNextBtn');
+    const gpPrevBtn = document.getElementById('gpPrevBtn');
+    const gpLikeBtn = document.getElementById('gpLikeBtn');
+    const shareToggleBtn = document.getElementById('gpShareToggleBtn');
+    const shareDropdown = document.getElementById('shareDropdown');
+    const defaultCover = "https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png";
+    const streamingSection = document.getElementById("streaming-section");
 
-      const globalPlayer = document.getElementById('globalPlayer');
-      const gpTitle = document.getElementById('gpTitle');
-      const gpArtist = document.getElementById('gpArtist');
-      const gpCoverImg = document.getElementById('gpCoverImg');
-      const gpPlayBtn = document.getElementById('gpPlayBtn');
-      const gpIconPlay = gpPlayBtn.querySelector('.gp-icon-play');
-      const gpIconPause = gpPlayBtn.querySelector('.gp-icon-pause');
-      const gpProgressBar = document.getElementById('gpProgressBar');
-      const gpProgressContainer = document.getElementById('gpProgressContainer');
-      const gpCurrentTime = document.getElementById('gpCurrentTime');
-      const gpDuration = document.getElementById('gpDuration');
-      const gpVolSlider = document.getElementById('gpVolumeSlider');
-      const gpNextBtn = document.getElementById('gpNextBtn');
-      const gpPrevBtn = document.getElementById('gpPrevBtn');
-      const gpLikeBtn = document.getElementById('gpLikeBtn');
-      const shareToggleBtn = document.getElementById('gpShareToggleBtn');
-      const shareDropdown = document.getElementById('shareDropdown');
+    const formatTime = (s) => {
+        if (isNaN(s) || !isFinite(s)) return "0:00";
+        const sign = s < 0 ? "-" : "";
+        s = Math.max(0, Math.floor(Math.abs(s)));
+        const m = Math.floor(s / 60);
+        const sec = s % 60;
+        return `${sign}${m}:${sec < 10 ? "0" : ""}${sec}`;
+    };
 
-       const defaultCover = "https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png";
+    // ===== INTERACCIÓN CON STREAMING =====
+    let lastStreamingInteraction = 0;
+    if (streamingSection) {
+        ["pointerdown", "mousedown", "touchstart", "click", "keydown"].forEach(evt => {
+            streamingSection.addEventListener(evt, () => {
+                lastStreamingInteraction = Date.now();
+            }, { capture: true, passive: evt === "touchstart" });
+        });
+    }
 
-       const formatTime = (s) => {
-       if (isNaN(s) || !isFinite(s)) return "0:00";
-       const sign = s < 0 ? "-" : "";
-       s = Math.max(0, Math.floor(Math.abs(s)));
-       const m = Math.floor(s / 60);
-       const sec = s % 60;
-       return `${sign}${m}:${sec < 10 ? "0" : ""}${sec}`;};
-
-
-      // ====== AVISO GLOBAL: PAUSA SPOTIFY ======
-
-      // Marca si el usuario interactuó con el área de streaming recientemente
-       let lastStreamingInteraction = 0;
-       if (streamingSection) {
-       ["pointerdown", "mousedown", "touchstart", "click", "keydown"].forEach(evt => {
-       streamingSection.addEventListener(evt, () => {
-       lastStreamingInteraction = Date.now();
-    }, { capture: true, passive: evt === "touchstart" });
-  });
-}
-
-// ====== AVISO GLOBAL SPOTIFY (PC + móvil, sin depender del iframe) ======
-// Cuando un <audio> local empieza a sonar,
-// si venimos del streaming → mostramos aviso
-        
-
-      function resetCardUI(cardId){
-        if(!cardId) return;
+    // ===== FUNCIONES DEL REPRODUCTOR =====
+    function resetCardUI(cardId) {
+        if (!cardId) return;
         const card = document.getElementById(cardId);
+        if (!card) return;
         card.classList.remove('playing');
-        card.querySelector('.progress-bar').style.width = '0%';
-        card.querySelector('.icon-play').style.display = 'block';
-        card.querySelector('.icon-pause').style.display = 'none';
+        const progressBar = card.querySelector('.progress-bar');
+        if (progressBar) progressBar.style.width = '0%';
+        const playIcon = card.querySelector('.icon-play');
+        const pauseIcon = card.querySelector('.icon-pause');
+        if (playIcon) playIcon.style.display = 'block';
+        if (pauseIcon) pauseIcon.style.display = 'none';
         const floatBtn = card.querySelector('.btn-card-float svg');
-        if(floatBtn) floatBtn.innerHTML = '<path d="M8 5v14l11-7z"/>';
-      }
+        if (floatBtn) floatBtn.innerHTML = '<path d="M8 5v14l11-7z"/>';
+    }
 
-      function updateCardUI(cardId, isPlaying){
-        if(!cardId) return;
+    function updateCardUI(cardId, isPlaying) {
+        if (!cardId) return;
         const card = document.getElementById(cardId);
+        if (!card) return;
         const playIcon = card.querySelector('.icon-play');
         const pauseIcon = card.querySelector('.icon-pause');
         const floatIcon = card.querySelector('.btn-card-float svg');
-
-        if(isPlaying){
-          card.classList.add('playing');
-          playIcon.style.display = 'none';
-          pauseIcon.style.display = 'block';
-          if(floatIcon) floatIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-        }else{
-          card.classList.remove('playing');
-          playIcon.style.display = 'block';
-          pauseIcon.style.display = 'none';
-          if(floatIcon) floatIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+        if (isPlaying) {
+            card.classList.add('playing');
+            if (playIcon) playIcon.style.display = 'none';
+            if (pauseIcon) pauseIcon.style.display = 'block';
+            if (floatIcon) floatIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+        } else {
+            card.classList.remove('playing');
+            if (playIcon) playIcon.style.display = 'block';
+            if (pauseIcon) pauseIcon.style.display = 'none';
+            if (floatIcon) floatIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
         }
-      }
+    }
 
-      function updateGlobalPlayerUI(isPlaying){
-        if(!currentAudio) return;
+    function updateGlobalPlayerUI(isPlaying) {
+        if (!currentCardId) return;
         const card = document.getElementById(currentCardId);
+        if (!card) return;
         gpTitle.textContent = card.dataset.title;
         gpArtist.textContent = card.dataset.artist;
-
-        if(isPlaying){
-          gpIconPlay.style.display = 'none';
-          gpIconPause.style.display = 'block';
-          document.getElementById('gpCover').classList.add('gp-cover-spin');
-        }else{
-          gpIconPlay.style.display = 'block';
-          gpIconPause.style.display = 'none';
-          document.getElementById('gpCover').classList.remove('gp-cover-spin');
+        if (isPlaying) {
+            gpIconPlay.style.display = 'none';
+            gpIconPause.style.display = 'block';
+            document.getElementById('gpCover').classList.add('gp-cover-spin');
+        } else {
+            gpIconPlay.style.display = 'block';
+            gpIconPause.style.display = 'none';
+            document.getElementById('gpCover').classList.remove('gp-cover-spin');
         }
-      }
+    }
 
-      function updateShareLinks(title){
+    function updateShareLinks(title) {
         const text = `Escucha ${title} en BVHanKrY Music`;
         const url = 'https://bvhankry.onrender.com';
-        document.getElementById('link-wa').href = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
-        document.getElementById('link-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-        document.getElementById('link-tw').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-        document.getElementById('link-tg').href = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
-      }
+        const waLink = document.getElementById('link-wa');
+        const fbLink = document.getElementById('link-fb');
+        const twLink = document.getElementById('link-tw');
+        const tgLink = document.getElementById('link-tg');
+        if (waLink) waLink.href = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+        if (fbLink) fbLink.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        if (twLink) twLink.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+        if (tgLink) tgLink.href = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+    }
 
-      function updateGlobalLikeState(cardId){
+    function updateGlobalLikeState(cardId) {
         const isLiked = localStorage.getItem(`like-${cardId}`) === 'true';
-        const icon = gpLikeBtn.querySelector('svg');
-        if(isLiked){
-          gpLikeBtn.classList.add('active-like');
-          icon.style.fill = 'var(--accent-green)';
-        }else{
-          gpLikeBtn.classList.remove('active-like');
-          icon.style.fill = 'currentColor';
+        if (isLiked) {
+            gpLikeBtn.classList.add('active-like');
+        } else {
+            gpLikeBtn.classList.remove('active-like');
         }
-      }
+    }
 
-      function toggleLike(cardId){
+    function toggleLike(cardId) {
         const card = document.getElementById(cardId);
         const likeState = localStorage.getItem(`like-${cardId}`) === 'true';
         const newState = !likeState;
         localStorage.setItem(`like-${cardId}`, newState);
-
         const heart = card.querySelector('.heart-icon');
         const countSpan = card.querySelector('.likes-count');
         let count = parseInt(countSpan.innerText || '0', 10);
-
-        if(newState){
-          heart.classList.add('liked');
-          heart.textContent = '♥';
-          count++;
-          showToast("Añadido a Me gusta");
-        }else{
-          heart.classList.remove('liked');
-          heart.textContent = '♡';
-          count = Math.max(0, count - 1);
+        if (newState) {
+            heart.classList.add('liked');
+            heart.textContent = '♥';
+            count++;
+            showToast("Añadido a Me gusta");
+        } else {
+            heart.classList.remove('liked');
+            heart.textContent = '♡';
+            count = Math.max(0, count - 1);
         }
         countSpan.innerText = count;
+        if (currentCardId === cardId) updateGlobalLikeState(cardId);
+    }
 
-        if(currentCardId === cardId) updateGlobalLikeState(cardId);
-      }
+    // ===== ACTUALIZACIÓN DE PROGRESO =====
+    function updateProgressUI() {
+        if (!currentAudio || currentAudio.paused) {
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
+            return;
+        }
+        const duration = currentAudio.duration;
+        const currentTime = currentAudio.currentTime;
+        if (duration && isFinite(duration)) {
+            const pct = (currentTime / duration) * 100;
+            const remaining = duration - currentTime;
+            gpProgressBar.style.width = `${pct}%`;
+            gpCurrentTime.textContent = formatTime(remaining);
+            gpDuration.textContent = formatTime(duration);
+            const card = document.getElementById(currentCardId);
+            if (card) {
+                const cardProgressBar = card.querySelector('.progress-bar');
+                const cardTimeDisplay = card.querySelector('.time-display');
+                if (cardProgressBar) cardProgressBar.style.width = `${pct}%`;
+                if (cardTimeDisplay) cardTimeDisplay.textContent = formatTime(remaining);
+            }
+        }
+        rafId = requestAnimationFrame(updateProgressUI);
+    }
 
-        // ===== NUEVO SISTEMA DE ACTUALIZACIÓN DE PROGRESO =====
-         let rafId = null;
+    function startProgressUpdates() {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(updateProgressUI);
+    }
 
-         function updateProgressUI() {
-         if (!currentAudio || currentAudio.paused) {
-         if (rafId) {
+    function stopProgressUpdates() {
+        if (rafId) {
             cancelAnimationFrame(rafId);
             rafId = null;
         }
-        return;
     }
-    
-        const duration = currentAudio.duration;
-        const currentTime = currentAudio.currentTime;
-     if (duration && isFinite(duration)) {
-        const pct = (currentTime / duration) * 100;
-        const remaining = duration - currentTime;
-        
-        gpProgressBar.style.width = `${pct}%`;
-        gpCurrentTime.textContent = formatTime(remaining);
-        gpDuration.textContent = formatTime(duration);
-        
-        const card = document.getElementById(currentCardId);
-      if (card) {
-        const cardProgressBar = card.querySelector('.progress-bar');
-        const cardTimeDisplay = card.querySelector('.time-display');
-      if (cardProgressBar) cardProgressBar.style.width = `${pct}%`;
-      if (cardTimeDisplay) cardTimeDisplay.textContent = formatTime(remaining);
-        }
-    }
-    
-         rafId = requestAnimationFrame(updateProgressUI);
-}
 
-        function startProgressUpdates() {
-     if (rafId) cancelAnimationFrame(rafId);
-         rafId = requestAnimationFrame(updateProgressUI);
-}
-
-        function stopProgressUpdates() {
-     if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-    }
-}
-        
-
-        function playSong(cardId){
+    // ===== PLAY SONG =====
+    function playSong(cardId) {
         const card = document.getElementById(cardId);
         const audio = card.querySelector('audio');
         const coverUrl = card.dataset.cover || defaultCover;
-
-        if(currentAudio === audio && !audio.paused){
-          audio.pause();
-          updateCardUI(cardId, false);
-          updateGlobalPlayerUI(false);
-          stopProgressUpdates(); // ← AÑADIDO ESTA LÍNEA
-          return;
+        if (currentAudio === audio && !audio.paused) {
+            audio.pause();
+            updateCardUI(cardId, false);
+            updateGlobalPlayerUI(false);
+            stopProgressUpdates();
+            return;
         }
-
-        if(currentAudio && currentAudio !== audio){
-          currentAudio.pause();
-          currentAudio.currentTime = 0;
-          resetCardUI(currentCardId);
-          stopProgressUpdates(); // ← AÑADIDO ESTA LÍNEA
+        if (currentAudio && currentAudio !== audio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            resetCardUI(currentCardId);
+            stopProgressUpdates();
         }
-
-          currentAudio = audio;
-          currentCardId = cardId;
-
-          gpCoverImg.style.opacity = '0';
-          setTimeout(() => {
-          gpCoverImg.src = coverUrl;
-          gpCoverImg.style.opacity = '1';
+        currentAudio = audio;
+        currentCardId = cardId;
+        gpCoverImg.style.opacity = '0';
+        setTimeout(() => {
+            gpCoverImg.src = coverUrl;
+            gpCoverImg.style.opacity = '1';
         }, 120);
-
-          audio.volume = globalVolumeValue;
-
-          audio.play().then(() => {
-          globalPlayer.classList.add('active');
-          updateCardUI(cardId, true);
-          updateGlobalPlayerUI(true);
-          updateShareLinks(card.dataset.title);
-          updateGlobalLikeState(cardId);
-          startProgressUpdates(); // ← AÑADIDO ESTA LÍNEA
-
-          // plays
-          const playsEl = card.querySelector('.plays-count');
-          if(!audio.dataset.counted){
-          let count = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0', 10);
-          count++;
-          playsEl.textContent = count;
-          localStorage.setItem(`plays-${audio.dataset.id}`, count);
-          audio.dataset.counted = 'true';
-          }
+        audio.volume = globalVolumeValue;
+        audio.play().then(() => {
+            globalPlayer.classList.add('active');
+            updateCardUI(cardId, true);
+            updateGlobalPlayerUI(true);
+            updateShareLinks(card.dataset.title);
+            updateGlobalLikeState(cardId);
+            startProgressUpdates();
+            const playsEl = card.querySelector('.plays-count');
+            if (!audio.dataset.counted) {
+                let count = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0', 10);
+                count++;
+                playsEl.textContent = count;
+                localStorage.setItem(`plays-${audio.dataset.id}`, count);
+                audio.dataset.counted = 'true';
+            }
         }).catch(() => showToast("Error al cargar audio"));
-      }
+    }
 
-        function playNext(){
-          if(!currentCardId) return;
-          const i = cards.findIndex(c => c.id === currentCardId);
-          playSong(cards[(i + 1) % cards.length].id);
-      }
-        function playPrev(){
-          if(!currentCardId) return;
-          const i = cards.findIndex(c => c.id === currentCardId);
-          playSong(cards[(i - 1 + cards.length) % cards.length].id);
-      }
+    function playNext() {
+        if (!currentCardId) return;
+        const i = cards.findIndex(c => c.id === currentCardId);
+        if (i !== -1) playSong(cards[(i + 1) % cards.length].id);
+    }
 
-      // Bind buttons
-        gpPlayBtn.addEventListener('click', () => {
-          if(currentAudio){
-          if(currentAudio.paused) playSong(currentCardId);
-          else { currentAudio.pause(); 
-          updateCardUI(currentCardId,false); 
-          updateGlobalPlayerUI(false); }
-          stopProgressUpdates(); // ← AÑADIDO ESTA LÍNEA
-            
-        } else if(cards.length) {
-          playSong(cards[0].id);
+    function playPrev() {
+        if (!currentCardId) return;
+        const i = cards.findIndex(c => c.id === currentCardId);
+        if (i !== -1) playSong(cards[(i - 1 + cards.length) % cards.length].id);
+    }
+
+    // ===== BIND BUTTONS =====
+    gpPlayBtn.addEventListener('click', () => {
+        if (currentAudio) {
+            if (currentAudio.paused) {
+                playSong(currentCardId);
+            } else {
+                currentAudio.pause();
+                updateCardUI(currentCardId, false);
+                updateGlobalPlayerUI(false);
+                stopProgressUpdates();
+            }
+        } else if (cards.length) {
+            playSong(cards[0].id);
         }
-      });
-        gpNextBtn.addEventListener('click', playNext);
-        gpPrevBtn.addEventListener('click', playPrev);
-
-        gpProgressContainer.addEventListener('click', (e) => {
-          if(!currentAudio) return;
-          const rect = gpProgressContainer.getBoundingClientRect();
-          const pct = (e.clientX - rect.left) / rect.width;
-          currentAudio.currentTime = pct * currentAudio.duration;
-      });
-
-        gpVolSlider.addEventListener('input', (e) => {
+    });
+    gpNextBtn.addEventListener('click', playNext);
+    gpPrevBtn.addEventListener('click', playPrev);
+    gpProgressContainer.addEventListener('click', (e) => {
+        if (!currentAudio) return;
+        const rect = gpProgressContainer.getBoundingClientRect();
+        const pct = (e.clientX - rect.left) / rect.width;
+        currentAudio.currentTime = pct * currentAudio.duration;
+    });
+    gpVolSlider.addEventListener('input', (e) => {
         globalVolumeValue = parseFloat(e.target.value);
-          if(currentAudio) currentAudio.volume = globalVolumeValue;
-      });
-
-        gpLikeBtn.addEventListener('click', () => { if(currentCardId) toggleLike(currentCardId); });
-
-      // Dropdown share
-        shareToggleBtn.addEventListener('click', (e) => {
+        if (currentAudio) currentAudio.volume = globalVolumeValue;
+    });
+    gpLikeBtn.addEventListener('click', () => { if (currentCardId) toggleLike(currentCardId); });
+    shareToggleBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         shareDropdown.classList.toggle('active');
-      });
-        document.addEventListener('click', (e) => {
-         if(!shareDropdown.contains(e.target) && e.target !== shareToggleBtn){
-        shareDropdown.classList.remove('active');
+    });
+    document.addEventListener('click', (e) => {
+        if (!shareDropdown.contains(e.target) && e.target !== shareToggleBtn) {
+            shareDropdown.classList.remove('active');
         }
-      });
+    });
 
-      // Cards events
-        cards.forEach(card => {
+    // ===== CARDS EVENTS =====
+    cards.forEach(card => {
         const audio = card.querySelector('audio');
-
-        // init plays from storage
         const plays = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0', 10);
         card.querySelector('.plays-count').textContent = plays;
-
-        // init like icon state on card
-        if(localStorage.getItem(`like-${card.id}`) === 'true'){
-        card.querySelector('.heart-icon').classList.add('liked');
-        card.querySelector('.heart-icon').textContent = '♥';
+        if (localStorage.getItem(`like-${card.id}`) === 'true') {
+            card.querySelector('.heart-icon').classList.add('liked');
+            card.querySelector('.heart-icon').textContent = '♥';
         }
-
         card.querySelectorAll('.btn-card, .btn-card-float').forEach(btn => {
-        btn.addEventListener('click', (e) => { e.stopPropagation(); playSong(card.id); });
+            btn.addEventListener('click', (e) => { e.stopPropagation(); playSong(card.id); });
         });
-
         card.querySelector('.likes-counter').addEventListener('click', (e) => {
-          e.stopPropagation();
-          toggleLike(card.id);
+            e.stopPropagation();
+            toggleLike(card.id);
         });
-
         card.querySelector('.progress-container').addEventListener('click', (e) => {
-          e.stopPropagation();
-          const rect = e.currentTarget.getBoundingClientRect();
-          const pct = (e.clientX - rect.left) / rect.width;
-          audio.currentTime = pct * audio.duration;
+            e.stopPropagation();
+            const rect = e.currentTarget.getBoundingClientRect();
+            const pct = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = pct * audio.duration;
         });
-
-        audio.addEventListener('loadedmetadata', () => {
-          if(audio === currentAudio && gpDuration) gpDuration.textContent = formatTime(audio.duration);
-        });
-
         audio.addEventListener('ended', () => {
-        stopProgressUpdates(); // ← AÑADIDO ESTA LÍNEA
-        playNext();
+            stopProgressUpdates();
+            playNext();
         });
-
-      // Global time update loop borrado!
-
-
-      // Clipboard
-        window.copyToClipboard = (url, title) => {
-        navigator.clipboard.writeText(`${title} - ${url}`).then(() => showToast("Enlace copiado"));
-      };
-    // FIX: asegurar que el streaming sea visible en PC
-        const streamingFix = document.getElementById("streaming-section");
-        if (streamingFix) {
-        streamingFix.classList.add("visible");
-      }
-     });
-  </script>
-  
-  <script>
-       document.addEventListener("DOMContentLoaded", () => {
-       const section = document.getElementById("streaming-section");
-       if (!section) return;
-
-  // Solo PC para evitar consumo en móvil
-      const isPC = window.matchMedia("(min-width: 769px)").matches;
-      if (!isPC) return;
-      const items = section.querySelectorAll(".embed-item");
-      let ticking = false;
-
-    function parallax() {
-      ticking = false;
-      const r = section.getBoundingClientRect();
-      const vh = window.innerHeight || 800;
-
-    // Progreso de visibilidad (0 a 1 aprox)
-      const t = (vh - r.top) / (vh + r.height);
-      const clamped = Math.max(0, Math.min(1, t));
-
-    // Movimiento MUY sutil, premium
-      const y1 = (0.5 - clamped) * 18; // Spotify
-      const y2 = (0.5 - clamped) * 28; // YouTube
-
-      if (items[0]) items[0].style.transform = `translateY(${y1}px)`;
-      if (items[1]) items[1].style.transform = `translateY(${y2}px)`;
-  }
-
-  window.addEventListener("scroll", () => {
-      if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(parallax);
-    }
-  }, { passive: true });
-
-      window.addEventListener("resize", () => requestAnimationFrame(parallax));
-      requestAnimationFrame(parallax);
-  });
-  </script>
-  
-  <script>
-  window.dataLayer = window.dataLayer || [];
-
-    const getMeta = (audio) => {
-    const trackId =
-      audio.getAttribute('data-track-id') ||
-      audio.getAttribute('data-id') ||
-      'sin_id';
-
-    const trackTitle =
-      audio.getAttribute('data-track-title') ||
-      audio.getAttribute('data-title') ||
-      'desconocido';
-
-    return { trackId, trackTitle };
-  };
-
-  // Evita duplicar listeners si por alguna razón se re-ejecuta el script
-  const bindAudio = (audio) => {
-     if (audio.dataset.gtmBound === '1') return;
-         audio.dataset.gtmBound = '1';
-
-        audio.addEventListener('play', () => {
-  const { trackId, trackTitle } = getMeta(audio);
-        window.dataLayer.push({
-        event: 'audio_play',
-        track_id: trackId,
-        track_title: trackTitle
-      });
     });
 
-        audio.addEventListener('pause', () => {
-  const { trackId, trackTitle } = getMeta(audio);
-        window.dataLayer.push({
-        event: 'audio_pause',
-        track_id: trackId,
-        track_title: trackTitle
-      });
-    });
-
-        audio.addEventListener('ended', () => {
-  const { trackId, trackTitle } = getMeta(audio);
-        window.dataLayer.push({
-        event: 'audio_end',
-        track_id: trackId,
-        track_title: trackTitle
-      });
-    });
-  };
-
-  // Bind inicial
-  document.querySelectorAll('audio').forEach(bindAudio);
-
-  // Si en el futuro agregas canciones dinámicamente (AJAX), esto las cubre:
-  const obs = new MutationObserver(() => {
-  document.querySelectorAll('audio').forEach(bindAudio);
-  });
-  obs.observe(document.body, { childList: true, subtree: true });
-
-
-// ========== AUDIO COEXISTENCE (GLOBAL) ==========
-
-// Pausa todos los audios locales (<audio>) excepto uno (si se pasa)
-    
+    // ===== LISTENER UNIFICADO =====
     function pauseAllLocalAudio(exceptEl = null) {
-    document.querySelectorAll("audio").forEach(a => {
-    if (a !== exceptEl && !a.paused) a.pause();
-  });
-}
+        document.querySelectorAll("audio").forEach(a => {
+            if (a !== exceptEl && !a.paused) a.pause();
+        });
+    }
 
-// 1) Si empieza un audio local, pausa los demás
+    document.addEventListener("play", (e) => {
+        const audio = e.target;
+        if (!audio || audio.tagName !== "AUDIO") return;
+        pauseAllLocalAudio(audio);
+        const recentlyUsedStreaming = (Date.now() - lastStreamingInteraction) < 30000;
+        if (recentlyUsedStreaming) {
+            showToast("Spotify activo 🎵 Pausalo para escuchar EP");
+        }
+    }, true);
 
-    // reactivar guard para futuras interacciones
-    document.addEventListener("ended", (e) => {
-    if (e.target && e.target.tagName === "AUDIO") {
-    document.querySelectorAll(".embed-click-guard").forEach((g) => {
-    g.style.pointerEvents = "auto";
-    });
-  }
-}, true);
-
-// 2) Si el usuario interactúa con el STREAMING, pausa audio local (Spotify/YouTube)
-   const streamingSection = document.getElementById("streaming-section");
-   if (streamingSection) {
-   const stopLocal = () => pauseAllLocalAudio(null);
-
-  // Captura “antes” que la mayoría de interacciones
-  ["pointerdown", "mousedown", "touchstart", "click", "keydown"].forEach(evt => {
-    streamingSection.addEventListener(evt, stopLocal, { capture: true, passive: evt === "touchstart" });
-  });
-}
-
-// 3) Extra: si el usuario hace focus en un iframe (muy común en Spotify), pausa audio local
-    window.addEventListener("blur", () => {
-  // Cuando haces click dentro de un iframe, la ventana a veces pierde foco
-    pauseAllLocalAudio(null);
+    // ===== FIX STREAMING VISIBLE =====
+    if (streamingSection) {
+        streamingSection.classList.add("visible");
+    }
 });
 
-    // ===== YouTube Iframe API: pausar cuando suene audio local =====
-    let ytPlayers = [];
-  
-    window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
-  // busca todos los iframes de youtube dentro del streaming
-    document.querySelectorAll('#streaming-section iframe[src*="youtube.com/embed"]').forEach((iframe) => {
-    // Asegurar enablejsapi=1
-    const src = iframe.getAttribute("src") || "";
-    if (!src.includes("enablejsapi=1")) {
-    const join = src.includes("?") ? "&" : "?";
-    iframe.setAttribute("src", src + join + "enablejsapi=1");
-    }
-
-  ytPlayers.push(new YT.Player(iframe, {
-      events: {
-        onReady: () => {}
-      }
-    }));
-  });
+// ===== YOUTUBE IFRAME API =====
+let ytPlayers = [];
+function pauseAllYouTube() {
+    ytPlayers.forEach(p => {
+        try { p.pauseVideo(); } catch(e) {}
+    });
 }
-
-// Cargar la API si no está
-  (function loadYT() {
-  if (window.YT && window.YT.Player) return;
-  const tag = document.createElement("script");
-  tag.src = "https://www.youtube.com/iframe_api";
-  document.head.appendChild(tag);
+window.onYouTubeIframeAPIReady = function() {
+    document.querySelectorAll('#streaming-section iframe[src*="youtube.com/embed"]').forEach((iframe) => {
+        const src = iframe.getAttribute("src") || "";
+        if (!src.includes("enablejsapi=1")) {
+            const join = src.includes("?") ? "&" : "?";
+            iframe.setAttribute("src", src + join + "enablejsapi=1");
+        }
+        ytPlayers.push(new YT.Player(iframe, { events: { onReady: () => {} } }));
+    });
+};
+(function loadYT() {
+    if (window.YT && window.YT.Player) return;
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
 })();
 
-// Pausar YouTube cuando se reproduce audio local
-   function pauseAllYouTube() {
-   ytPlayers.forEach(p => {
-  try { p.pauseVideo(); } catch(e) {}
-  });
+// ===== PAUSAR STREAMING AL INTERACTUAR =====
+const streamingSec = document.getElementById("streaming-section");
+if (streamingSec) {
+    const stopLocal = () => {
+        document.querySelectorAll("audio").forEach(a => { if (!a.paused) a.pause(); });
+    };
+    ["pointerdown", "mousedown", "touchstart", "click", "keydown"].forEach(evt => {
+        streamingSec.addEventListener(evt, stopLocal, { capture: true, passive: evt === "touchstart" });
+    });
 }
 
-// Instalación PWA
-      const installAppBtn = document.getElementById('installAppBtn');
-      let deferredInstallPrompt = null;
-      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-
-      if (isStandalone) {
-        installAppBtn.remove();
-      } else {
-        window.addEventListener('beforeinstallprompt', (event) => {
-          event.preventDefault();
-          deferredInstallPrompt = event;
-          installAppBtn.classList.add('visible');
-        });
-
+// ===== INSTALACIÓN PWA =====
+const installAppBtn = document.getElementById('installAppBtn');
+let deferredInstallPrompt = null;
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+if (isStandalone) {
+    if (installAppBtn) installAppBtn.remove();
+} else {
+    window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        deferredInstallPrompt = event;
+        if (installAppBtn) installAppBtn.classList.add('visible');
+    });
+    if (installAppBtn) {
         installAppBtn.addEventListener('click', async () => {
-          if (!deferredInstallPrompt) {
-            showToast('La instalación no está disponible en este navegador.');
-            return;
-          }
-
-          deferredInstallPrompt.prompt();
-          const choiceResult = await deferredInstallPrompt.userChoice;
-          if (choiceResult.outcome === 'accepted') {
-            showToast('App instalada correctamente ✅');
-          }
-
-          deferredInstallPrompt = null;
-          installAppBtn.classList.remove('visible');
+            if (!deferredInstallPrompt) {
+                showToast('La instalación no está disponible en este navegador.');
+                return;
+            }
+            deferredInstallPrompt.prompt();
+            const choiceResult = await deferredInstallPrompt.userChoice;
+            if (choiceResult.outcome === 'accepted') showToast('App instalada correctamente ✅');
+            deferredInstallPrompt = null;
+            installAppBtn.classList.remove('visible');
         });
+    }
+    window.addEventListener('appinstalled', () => {
+        if (installAppBtn) installAppBtn.classList.remove('visible');
+        showToast('Gracias por instalar la app');
+    });
+}
 
-        window.addEventListener('appinstalled', () => {
-          installAppBtn.classList.remove('visible');
-          showToast('Gracias por instalar la app');
-        });
-      }
-
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
+// ===== SERVICE WORKER =====
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').catch((error) => {
-                     console.error('No se pudo registrar el service worker', error);
-          .catch(err => console.log('Error SW', err));
-          });
+            console.error('Service Worker error:', error);
         });
-      }
-       </script>
-  
-       <script>
-         
-       let currentAudio = null;
-       function playAudio(audio){
-       if(currentAudio && currentAudio !== audio){
-          currentAudio.pause();
-  }       currentAudio = audio;
-          audio.play();
+    });
+}
 
-         document.querySelectorAll('.share-whatsapp').forEach(btn => {
-         btn.addEventListener('click', function(e) {
-         e.preventDefault();
-
+// ===== COMPARTIR =====
+window.copyToClipboard = (url, title) => {
+    navigator.clipboard.writeText(`${title} - ${url}`).then(() => showToast("Enlace copiado"));
+};
+document.querySelectorAll('.share-whatsapp').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
         const link = this.getAttribute('data-link');
         const title = this.getAttribute('data-title');
-
-        copyToClipboard(link, title);
-  });
+        if (window.copyToClipboard) copyToClipboard(link, title);
+    });
 });
-}
 </script>
 </body>
 </html>
