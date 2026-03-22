@@ -15,8 +15,8 @@ const PRECACHE_URLS = [
 
   // canciones (ejemplo)
   '/audio/tinkuy.mp3',
-  '/audio/subtle_gad.mp3'
-  '/audio/regresión.mp3
+  '/audio/subtle_gad.mp3',
+  '/audio/regresión.mp3'
 ];
 
 self.addEventListener('install', (event) => {
