@@ -1285,8 +1285,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const willOpen = !navLinks.classList.contains('active');
       navLinks.classList.toggle('active');
       menuBtn.setAttribute('aria-expanded', String(willOpen));
+
+              // ===== LISTENER UNIFICADO (SOLO UNO) =====
+      document.addEventListener("play", (e) => {
+      const audio = e.target;
+      if (!audio || audio.tagName !== "AUDIO") return;
+
+      // 1. Pausar otros audios locales
+      pauseAllLocalAudio(audio);
+
+      // 2. Pausar YouTube si existe
+      if (typeof pauseAllYouTube === 'function') {
+      pauseAllYouTube();
+  }
+
+       // 3. Mostrar aviso si viene de streaming
+      const recentlyUsedStreaming = (Date.now() - lastStreamingInteraction) < 30000;
+      if (recentlyUsedStreaming) {
+      showToast("Spotify activo 🎵 Pausalo para escuchar EP");
+      }
+        }, true);
   });
 }
+        
       // ===== SCROLL NAV HIDE =====
       let lastScroll = 0;
       window.addEventListener('scroll', () => {
@@ -1357,16 +1378,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 // ====== AVISO GLOBAL SPOTIFY (PC + móvil, sin depender del iframe) ======
 // Cuando un <audio> local empieza a sonar,
 // si venimos del streaming → mostramos aviso
-document.addEventListener("play", (e) => {
-  const audio = e.target;
-  if (!audio || audio.tagName !== "AUDIO") return;
-
-  const recentlyUsedStreaming = (Date.now() - lastStreamingInteraction) < 30000;
-
-  if (recentlyUsedStreaming) {
-    showToast("Spotify activo 🎧 Pausalo para escuchar EP");
-  }
-}, true);
+        
 
       function resetCardUI(cardId){
         if(!cardId) return;
@@ -1462,7 +1474,54 @@ document.addEventListener("play", (e) => {
         if(currentCardId === cardId) updateGlobalLikeState(cardId);
       }
 
-      function playSong(cardId){
+        // ===== NUEVO SISTEMA DE ACTUALIZACIÓN DE PROGRESO =====
+         let rafId = null;
+
+         function updateProgressUI() {
+         if (!currentAudio || currentAudio.paused) {
+         if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+        }
+        return;
+    }
+    
+        const duration = currentAudio.duration;
+        const currentTime = currentAudio.currentTime;
+     if (duration && isFinite(duration)) {
+        const pct = (currentTime / duration) * 100;
+        const remaining = duration - currentTime;
+        
+        gpProgressBar.style.width = `${pct}%`;
+        gpCurrentTime.textContent = formatTime(remaining);
+        gpDuration.textContent = formatTime(duration);
+        
+        const card = document.getElementById(currentCardId);
+      if (card) {
+        const cardProgressBar = card.querySelector('.progress-bar');
+        const cardTimeDisplay = card.querySelector('.time-display');
+      if (cardProgressBar) cardProgressBar.style.width = `${pct}%`;
+      if (cardTimeDisplay) cardTimeDisplay.textContent = formatTime(remaining);
+        }
+    }
+    
+         rafId = requestAnimationFrame(updateProgressUI);
+}
+
+        function startProgressUpdates() {
+     if (rafId) cancelAnimationFrame(rafId);
+         rafId = requestAnimationFrame(updateProgressUI);
+}
+
+        function stopProgressUpdates() {
+     if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+    }
+}
+        
+
+        function playSong(cardId){
         const card = document.getElementById(cardId);
         const audio = card.querySelector('audio');
         const coverUrl = card.dataset.cover || defaultCover;
@@ -1471,6 +1530,7 @@ document.addEventListener("play", (e) => {
           audio.pause();
           updateCardUI(cardId, false);
           updateGlobalPlayerUI(false);
+          stopProgressUpdates(); // ← AÑADIDO ESTA LÍNEA
           return;
         }
 
@@ -1478,6 +1538,7 @@ document.addEventListener("play", (e) => {
           currentAudio.pause();
           currentAudio.currentTime = 0;
           resetCardUI(currentCardId);
+          stopProgressUpdates(); // ← AÑADIDO ESTA LÍNEA
         }
 
           currentAudio = audio;
@@ -1497,6 +1558,7 @@ document.addEventListener("play", (e) => {
           updateGlobalPlayerUI(true);
           updateShareLinks(card.dataset.title);
           updateGlobalLikeState(cardId);
+          startProgressUpdates(); // ← AÑADIDO ESTA LÍNEA
 
           // plays
           const playsEl = card.querySelector('.plays-count');
@@ -1525,7 +1587,11 @@ document.addEventListener("play", (e) => {
         gpPlayBtn.addEventListener('click', () => {
           if(currentAudio){
           if(currentAudio.paused) playSong(currentCardId);
-          else { currentAudio.pause(); updateCardUI(currentCardId,false); updateGlobalPlayerUI(false); }
+          else { currentAudio.pause(); 
+          updateCardUI(currentCardId,false); 
+          updateGlobalPlayerUI(false); }
+          stopProgressUpdates(); // ← AÑADIDO ESTA LÍNEA
+            
         } else if(cards.length) {
           playSong(cards[0].id);
         }
@@ -1592,32 +1658,13 @@ document.addEventListener("play", (e) => {
           if(audio === currentAudio && gpDuration) gpDuration.textContent = formatTime(audio.duration);
         });
 
-        audio.addEventListener('ended', playNext);
-      });
+        audio.addEventListener('ended', () => {
+        stopProgressUpdates(); // ← AÑADIDO ESTA LÍNEA
+        playNext();
+        });
 
-      // Global time update loop
-       function rafUpdate(){
-          if(currentAudio){
-          const pct = (currentAudio.currentTime / currentAudio.duration) * 100;
-          if(isFinite(pct)) gpProgressBar.style.width = `${pct}%`;
-          const remaining = (currentAudio.duration || 0) - (currentAudio.currentTime || 0);
+      // Global time update loop borrado!
 
-    // Izquierda: tiempo restante (conteo regresivo)
-          gpCurrentTime.textContent = formatTime(remaining);
-
-    // Derecha (PC): duración total (en móvil está oculto por CSS)
-          gpDuration.textContent = formatTime(currentAudio.duration);
-
-
-          const card = document.getElementById(currentCardId);
-          if(card){
-          card.querySelector('.progress-bar').style.width = `${isFinite(pct) ? pct : 0}%`;
-          card.querySelector('.time-display').textContent = formatTime(remaining);
-          }
-        }
-        requestAnimationFrame(rafUpdate);
-      }
-        requestAnimationFrame(rafUpdate);
 
       // Clipboard
         window.copyToClipboard = (url, title) => {
@@ -1742,11 +1789,6 @@ document.addEventListener("play", (e) => {
 }
 
 // 1) Si empieza un audio local, pausa los demás
-    document.addEventListener("play", (e) => {
-    const a = e.target;
-    if (a && a.tagName === "AUDIO") {pauseAllLocalAudio(a);
-    }
-  }, true);
 
     // reactivar guard para futuras interacciones
     document.addEventListener("ended", (e) => {
@@ -1810,18 +1852,6 @@ document.addEventListener("play", (e) => {
   });
 }
 
-// Enganchar al play local
-  if (!window.__playHookInstalled) {
-     window.__playHookInstalled = true;
-
-     document.addEventListener("play", (e) => {
-  const a = e.target;
-  if (!a || a.tagName !== "AUDIO") return;
-
-     pauseAllYouTube();
-     pauseAllLocalAudio(a);
-  }, true);
-    
 // Instalación PWA
       const installAppBtn = document.getElementById('installAppBtn');
       let deferredInstallPrompt = null;
