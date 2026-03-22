@@ -1942,6 +1942,15 @@ function installApp() {
 
 if (installBtnMenu) installBtnMenu.addEventListener("click", installApp);
 if (installBtnCard) installBtnCard.addEventListener("click", installApp);
+
+       
+       let currentAudio = null;
+       function playAudio(audio){
+       if(currentAudio && currentAudio !== audio){
+          currentAudio.pause();
+  }       currentAudio = audio;
+          audio.play();
+}
 </script>
 </body>
 </html>
