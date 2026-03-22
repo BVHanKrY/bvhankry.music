@@ -955,8 +955,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
 
       <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
-      <button id="installBtn" style="display:none; padding:10px 20px; font-size:16px;"> 📲 Instalar App
-      </button>
 
       <ul class="nav-links" aria-label="Secciones">
         <li><a href="#music" class="active">Música</a></li>
@@ -1177,9 +1175,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </p>
         <span class="tag-coming-soon">Ruta principal: /index.html</span>
       </section>
-      <button id="installBtnCard" style="display:none;">
-       📲 Instalar App
-        </button>
     </div>
 
     <footer>
@@ -1897,53 +1892,6 @@ window.addEventListener("beforeinstallprompt", (e) => {
   deferredPrompt = e;
   installBtn.style.display = "block"; // muestra tu botón
 });
-
-installBtn.addEventListener("click", async () => {
-  if (!deferredPrompt) return;
-
-  deferredPrompt.prompt(); // muestra el diálogo de instalar
-  const { outcome } = await deferredPrompt.userChoice;
-
-  if (outcome === "accepted") {
-    console.log("Usuario aceptó instalar la app");
-  } else {
-    console.log("Usuario canceló la instalación");
-  }
-
-  deferredPrompt = null;
-  installBtn.style.display = "none";
-});
-       <script>
-let deferredPrompt;
-
-const installBtnMenu = document.getElementById("installBtnMenu");
-const installBtnCard = document.getElementById("installBtnCard");
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-
-  if (installBtnMenu) installBtnMenu.style.display = "block";
-  if (installBtnCard) installBtnCard.style.display = "block";
-});
-
-function installApp() {
-  if (!deferredPrompt) return;
-
-  deferredPrompt.prompt();
-
-  deferredPrompt.userChoice.then((choice) => {
-    deferredPrompt = null;
-
-    if (installBtnMenu) installBtnMenu.style.display = "none";
-    if (installBtnCard) installBtnCard.style.display = "none";
-  });
-}
-
-if (installBtnMenu) installBtnMenu.addEventListener("click", installApp);
-if (installBtnCard) installBtnCard.addEventListener("click", installApp);
-
-       
        let currentAudio = null;
        function playAudio(audio){
        if(currentAudio && currentAudio !== audio){
