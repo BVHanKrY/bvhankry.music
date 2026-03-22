@@ -6,7 +6,17 @@ const PRECACHE_URLS = [
   '/',
   '/index.html',
   '/manifest.webmanifest',
-  '/iconos_pestaña.png'
+  '/iconos_pestana.png',
+
+  // agrega tus recursos reales:
+  '/styles.css',
+  '/app.js',
+  '/imagenes/portada.png',
+
+  // canciones (ejemplo)
+  '/audio/tinkuy.mp3',
+  '/audio/subtle_gad.mp3'
+  '/audio/regresión.mp3
 ];
 
 self.addEventListener('install', (event) => {
