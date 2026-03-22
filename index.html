@@ -1013,7 +1013,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="share-button-container">
-          <a href="#" onclick="copyToClipboard('https://bvhankry.onrender.com','Tinkuy'); return false;" class="share-whatsapp">Compartir</a>
+          <a href="#" class="share-whatsapp" data-link="https://bvhankry.onrender.com" data-title="Tinkuy">Compartir</a>
         </div>
       </article>
 
@@ -1052,7 +1052,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="share-button-container">
-          <a href="#" onclick="copyToClipboard('https://bvhankry.onrender.com','Subtle_Gad'); return false;" class="share-whatsapp">Compartir</a>
+          <a href="#" class="share-whatsapp" data-link="https://bvhankry.onrender.com" data-title="Subtle_Gad">Compartir</a>
         </div>
       </article>
 
@@ -1082,7 +1082,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
 
-        <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/regresi%C3%B3n.mp3" preload="metadata" data-track-title="regresion" data-id="regresion"></audio>
+        <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/regresi%C3%B3n.mp3" preload="metadata" data-track-title="regresión" data-id="regresion"></audio>
    
         <div class="song-stats">
           <div class="likes-counter" title="Dar Me gusta"><span class="heart-icon">♡</span> <span class="likes-count">0</span></div>
@@ -1090,7 +1090,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="share-button-container">
-          <a href="#" onclick="copyToClipboard('https://bvhankry.onrender.com','Regresión'); return false;" class="share-whatsapp">Compartir</a>
+          <a href="#" class="share-whatsapp" data-link="https://bvhankry.onrender.com" data-title="Regresión">Compartir</a>
         </div>
       </article>
     </div>
@@ -1898,6 +1898,17 @@ window.addEventListener("beforeinstallprompt", (e) => {
           currentAudio.pause();
   }       currentAudio = audio;
           audio.play();
+
+         document.querySelectorAll('.share-whatsapp').forEach(btn => {
+         btn.addEventListener('click', function(e) {
+         e.preventDefault();
+
+        const link = this.getAttribute('data-link');
+        const title = this.getAttribute('data-title');
+
+        copyToClipboard(link, title);
+  });
+});
 }
 </script>
 </body>
