@@ -18,7 +18,7 @@
       "purpose": "any"
     },
     {
-      "src": "iconos pestaña.png",
+      "src": "iconos_pestaña.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
