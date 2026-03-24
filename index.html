@@ -1411,10 +1411,6 @@ document.addEventListener('DOMContentLoaded', () => {
       updateShareLinks(card.dataset.title);
       updateGlobalLikeState(cardId);
       startProgressUpdates();
-      setTimeout(() => {
-    audio.currentTime = 0;
-    audio.play().catch(() => {});
-      }, 150);
       
       // Contar reproducción
       const playsEl = card.querySelector('.plays-count');
@@ -1577,15 +1573,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
-  document.addEventListener("click", () => {
-  if (typeof AudioContext !== "undefined") {
-    const ctx = new AudioContext();
-    if (ctx.state === "suspended") {
-      ctx.resume();
-    }
-  }
-}, { once: true });
 
   // ===== PAUSAR TODOS LOS AUDIOS AL INTERACTUAR CON STREAMING =====
   function pauseAllLocalAudio() {
