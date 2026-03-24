@@ -1558,7 +1558,7 @@ function onYTStateChange(event) {
             currentAudio.pause();
             currentAudio.currentTime = 0;
             resetCardUI(currentCardId);
-            syncCardState(currentCardId, false);
+            
             stopProgressUpdates();
         }
         currentAudio = audio;
@@ -1583,7 +1583,7 @@ function onYTStateChange(event) {
             updateShareLinks(card.dataset.title);
             updateGlobalLikeState(cardId);
             startProgressUpdates();
-            syncCardState(cardId, true);
+            
             const playsEl = card.querySelector('.plays-count');
             if (!audio.dataset.counted) {
                 let count = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0', 10);
@@ -1617,7 +1617,7 @@ function onYTStateChange(event) {
                 updateCardUI(currentCardId, false);
                 updateGlobalPlayerUI(false);
                 stopProgressUpdates();
-                syncCardState(cardId, false);
+                
             }
         } else if (cards.length) {
             playSong(cards[0].id);
@@ -1784,23 +1784,6 @@ document.querySelectorAll('.share-whatsapp').forEach(btn => {
         if (window.copyToClipboard) copyToClipboard(link, title);
     });
 });
-  function syncCardState(cardId, isPlaying) {
-  const card = document.getElementById(cardId);
-  if (!card) return;
-
-  const playIcon = card.querySelector('.icon-play');
-  const pauseIcon = card.querySelector('.icon-pause');
-
-  if (isPlaying) {
-    card.classList.add('playing');
-    if (playIcon) playIcon.style.display = "none";
-    if (pauseIcon) pauseIcon.style.display = "block";
-  } else {
-    card.classList.remove('playing');
-    if (playIcon) playIcon.style.display = "block";
-    if (pauseIcon) pauseIcon.style.display = "none";
-  }
-}
 </script>
 </body>
 </html>
