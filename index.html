@@ -709,6 +709,7 @@ input[type=range].vol-slider-vertical::-webkit-slider-thumb{
     font-weight:700;
   }
   .gp-center{ max-width:none; padding:0; }
+  #gpDuration{ display:none; }
   .gp-right{ display:none; }
 }
 
@@ -1193,20 +1194,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const defaultCover = "https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png";
   const streamingSection = document.getElementById("streaming-section");
 
-  // Formato de tiempo REGRESIVO (muestra lo que resta)
-  const formatRemainingTime = (current, duration) => {
-    if (isNaN(current) || isNaN(duration) || !isFinite(duration) || duration <= 0) return "0:00";
-    const remaining = Math.max(0, duration - current);
-    const m = Math.floor(remaining / 60);
-    const s = Math.floor(remaining % 60);
-    return `${m}:${s < 10 ? "0" : ""}${s}`;
-  };
-
-  const formatDuration = (duration) => {
-    if (isNaN(duration) || !isFinite(duration) || duration <= 0) return "0:00";
-    const m = Math.floor(duration / 60);
-    const s = Math.floor(duration % 60);
-    return `${m}:${s < 10 ? "0" : ""}${s}`;
+  const formatTime = (s) => {
+    if (isNaN(s) || !isFinite(s) || s === undefined) return "0:00";
+    const sign = s < 0 ? "-" : "";
+    s = Math.max(0, Math.floor(Math.abs(s)));
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${sign}${m}:${sec < 10 ? "0" : ""}${sec}`;
   };
 
   // ===== INTERACCIÓN CON STREAMING =====
@@ -1311,7 +1305,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentCardId === cardId) updateGlobalLikeState(cardId);
   }
 
-  // ===== ACTUALIZACIÓN DE PROGRESO CON TIEMPO REGRESIVO =====
+  // ===== ACTUALIZACIÓN DE PROGRESO =====
   function updateProgressUI() {
     if (!currentAudio || currentAudio.paused) {
       if (rafId) {
@@ -1325,15 +1319,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (duration && isFinite(duration) && duration > 0) {
       const pct = (currentTime / duration) * 100;
       gpProgressBar.style.width = `${pct}%`;
-      // Tiempo REGRESIVO (lo que resta)
-      gpCurrentTime.textContent = formatRemainingTime(currentTime, duration);
-      gpDuration.textContent = formatDuration(duration);
+      gpCurrentTime.textContent = formatTime(currentTime);
+      gpDuration.textContent = formatTime(duration);
       const card = document.getElementById(currentCardId);
       if (card) {
         const cardProgressBar = card.querySelector('.progress-bar');
         const cardTimeDisplay = card.querySelector('.time-display');
         if (cardProgressBar) cardProgressBar.style.width = `${pct}%`;
-        if (cardTimeDisplay) cardTimeDisplay.textContent = formatRemainingTime(currentTime, duration);
+        if (cardTimeDisplay) cardTimeDisplay.textContent = formatTime(currentTime);
       }
     }
     rafId = requestAnimationFrame(updateProgressUI);
@@ -1622,7 +1615,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onYouTubeIframeAPIReady();
   }
 
-  // ===== MENÚ HAMBURGUESA (SOLO MÓVIL) =====
+  // ===== MENÚ HAMBURGUESA =====
   const menuBtn = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
   if (menuBtn && navLinks) {
