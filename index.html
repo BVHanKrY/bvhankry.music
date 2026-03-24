@@ -1279,6 +1279,34 @@ function showToast(msg) {
 window.showToast = showToast;
 
 document.addEventListener('DOMContentLoaded', () => {
+
+// ===============================
+// 🎬 YOUTUBE CONTROL REAL
+// ===============================
+
+let ytPlayer;
+
+window.onYouTubeIframeAPIReady = function () {
+  ytPlayer = new YT.Player('yt-player', {
+    events: {
+      'onStateChange': onYTStateChange
+    }
+  });
+};
+
+function onYTStateChange(event) {
+
+  // ▶️ Cuando YouTube reproduce
+  if (event.data === YT.PlayerState.PLAYING) {
+
+    console.log("YouTube PLAY detectado");
+
+    // 🔴 Pausar audio actual
+    if (currentAudio && !currentAudio.paused) {
+      currentAudio.pause();
+    }
+  }
+}
     // ===== MENU HAMBURGUESA =====
     const menuBtn = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
