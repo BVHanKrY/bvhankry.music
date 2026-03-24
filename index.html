@@ -1522,6 +1522,7 @@ function onYTStateChange(event) {
 
     // ===== PLAY SONG =====
     function playSong(cardId) {
+        pauseYouTube();  // ← AGREGADO ESTA LÍNEA
         const card = document.getElementById(cardId);
         const audio = card.querySelector('audio');
         const coverUrl = card.dataset.cover || defaultCover;
@@ -1666,28 +1667,52 @@ function onYTStateChange(event) {
 });
 
 // ===== YOUTUBE IFRAME API =====
-let ytPlayers = [];
-function pauseAllYouTube() {
-    ytPlayers.forEach(p => {
-        try { p.pauseVideo(); } catch(e) {}
-    });
+// ===== CONTROL DE YOUTUBE (PAUSA MUTUA) =====
+let ytPlayer = null;
+
+function pauseYouTube() {
+    if (ytPlayer && ytPlayer.pauseVideo) {
+        try {
+            ytPlayer.pauseVideo();
+        } catch(e) {}
+    }
 }
+
+function pauseLocalAudioForYouTube() {
+    if (currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        updateCardUI(currentCardId, false);
+        updateGlobalPlayerUI(false);
+        stopProgressUpdates();
+    }
+}
+
 window.onYouTubeIframeAPIReady = function() {
-    document.querySelectorAll('#streaming-section iframe[src*="youtube.com/embed"]').forEach((iframe) => {
-        const src = iframe.getAttribute("src") || "";
-        if (!src.includes("enablejsapi=1")) {
-            const join = src.includes("?") ? "&" : "?";
-            iframe.setAttribute("src", src + join + "enablejsapi=1");
+    const ytIframe = document.querySelector('#streaming-section iframe[src*="youtube.com/embed"]');
+    if (ytIframe) {
+        let src = ytIframe.getAttribute('src');
+        if (!src.includes('enablejsapi=1')) {
+            src += (src.includes('?') ? '&' : '?') + 'enablejsapi=1';
+            ytIframe.setAttribute('src', src);
         }
-        ytPlayers.push(new YT.Player(iframe, { events: { onReady: () => {} } }));
-    });
+        
+        ytPlayer = new YT.Player(ytIframe, {
+            events: {
+                'onStateChange': function(event) {
+                    if (event.data === YT.PlayerState.PLAYING) {
+                        pauseLocalAudioForYouTube();
+                    }
+                }
+            }
+        });
+    }
 };
-(function loadYT() {
-    if (window.YT && window.YT.Player) return;
-    const tag = document.createElement("script");
-    tag.src = "https://www.youtube.com/iframe_api";
+
+if (typeof YT === 'undefined') {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(tag);
-})();
+}
 
 // ===== PAUSAR STREAMING AL INTERACTUAR =====
 const streamingSec = document.getElementById("streaming-section");
