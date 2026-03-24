@@ -895,7 +895,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="songs-grid" id="music">
     
     <!-- 1 -->
-    <article class="cancion-card" id="card-navi" data-title="Tinkuy" data-artist="BVHanKrY"
+    <article class="cancion-card" id="card-tinkuy" data-title="Tinkuy" data-artist="BVHanKrY"
       data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
       <button class="floating-play-btn btn-card-float" aria-label="Reproducir">
         <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -1411,6 +1411,10 @@ document.addEventListener('DOMContentLoaded', () => {
       updateShareLinks(card.dataset.title);
       updateGlobalLikeState(cardId);
       startProgressUpdates();
+      setTimeout(() => {
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+      }, 150);
       
       // Contar reproducción
       const playsEl = card.querySelector('.plays-count');
@@ -1573,6 +1577,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  document.addEventListener("click", () => {
+  if (typeof AudioContext !== "undefined") {
+    const ctx = new AudioContext();
+    if (ctx.state === "suspended") {
+      ctx.resume();
+    }
+  }
+}, { once: true });
 
   // ===== PAUSAR TODOS LOS AUDIOS AL INTERACTUAR CON STREAMING =====
   function pauseAllLocalAudio() {
