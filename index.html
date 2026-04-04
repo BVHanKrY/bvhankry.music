@@ -1075,7 +1075,7 @@ Height=”0” width=”0” style=”display:none;visibility:hidden”></iframe
 
     <section id=”app-location” class=”scroll-fade”>
       <h2>Aplicación</h2>
-      <p>La aplicación web oficial está en esta misma página (<strong>index.html</strong>) y se puede instalar desde el botón flotante <strong> Instalar app</strong> cuando tu navegador lo habilita.</p>
+      <p>La aplicación web oficial está en esta misma página (<strong>index.html</strong>) y se puede instalar desde el botón flotante <strong>📲 Instalar app</strong> cuando tu navegador lo habilita.</p>
       <span class=”tag-coming-soon”>Ruta principal: /index.html</span>
     </section>
   </div>
@@ -1151,7 +1151,7 @@ Height=”0” width=”0” style=”display:none;visibility:hidden”></iframe
 </div>
 
 <div id=”toast-container”></div>
-<button id=”installAppBtn” class=”install-app-btn” type=”button”> Instalar app</button>
+<button id=”installAppBtn” class=”install-app-btn” type=”button”>📲 Instalar app</button>
 
 <script src=https://www.youtube.com/iframe_api></script>
 
@@ -1309,7 +1309,7 @@ Document.addEventListener(‘DOMContentLoaded’, () => {
     let count = parseInt(countSpan.innerText || ‘0’, 10);
     if (newState) {
       heart.classList.add(‘liked’);
-      heart.textContent = ‘’;
+      heart.textContent = ‘♥’;
       count++;
       showToast(“Añadido a Me gusta”);
     } else {
@@ -1518,7 +1518,7 @@ Document.addEventListener(‘DOMContentLoaded’, () => {
       Const heart = card.querySelector(‘.heart-icon’);
       If (heart) {
         Heart.classList.add(‘liked’);
-        Heart.textContent = ‘’;
+        Heart.textContent = ‘♥’;
       }
       Const countSpan = card.querySelector(‘.likes-count’);
       If (countSpan) {
@@ -1735,7 +1735,7 @@ Document.addEventListener(‘DOMContentLoaded’, () => {
       Const countSpan = card.querySelector(‘.likes-count’);
       If (heart) {
         Heart.classList.add(‘liked’);
-        Heart.textContent = ‘’;
+        Heart.textContent = ‘♥’;
       }
       If (countSpan && parseInt(countSpan.innerText) === 0) {
         countSpan.innerText = ‘1’;
