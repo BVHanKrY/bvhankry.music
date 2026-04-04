@@ -1,32 +1,32 @@
 <!DOCTYPE html>
-<html lang=”es”>
+<html lang="es">
 <head>
 
-<meta name=”description” content=”Pulso EP de BVHanKrY: Dub Music desde Ecuador. Escucha online y en todas las plataformas.”>
-<meta property=”og:title” content=”BVHanKrY – Pulso EP”>
-<meta property=”og:description” content=”Dub Music producido en Ecuador. Streaming y visuales exclusivos.”>
-<meta property=”og:image” content=”URL_A_TU_PORTADA.png”>
-<meta property=”og:url” content=https://bvhankry.onrender.com>
-<meta name=”twitter:card” content=”summary_large_image”>
+<meta name="description" content="Pulso EP de BVHanKrY: Dub Music desde Ecuador. Escucha online y en todas las plataformas.">
+<meta property="og:title" content="BVHanKrY - Pulso EP">
+<meta property="og:description" content="Dub Music producido en Ecuador. Streaming y visuales exclusivos.">
+<meta property="og:image" content="URL_A_TU_PORTADA.png">
+<meta property="og:url" content="https://bvhankry.onrender.com">
+<meta name="twitter:card" content="summary_large_image">
 
-<!—Google Tag Manager 
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({‘gtm.start’:
-New Date().getTime(),event:’gtm.js’});var f=d.getElementsByTagName(s)[0],
-J=d.createElement(s),dl=l!=’dataLayer’?’&l=’+l:’’;j.async=true;j.src=
-‘https://www.googletagmanager.com/gtm.js?id=’+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,’script’,’dataLayer’,’GTM-MQQQ48NX’);</script>
-<!—End Google Tag Manager 
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MQQQ48NX');</script>
+<!-- End Google Tag Manager -->
+  
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#050505" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>BVHanKrY - Música Oficial</title>
 
-<meta charset=”UTF-8” />
-<meta name=”viewport” content=”width=device-width, initial-scale=1.0” />
-<meta name=”theme-color” content=”#050505” />
-<meta name=”apple-mobile-web-app-capable” content=”yes” />
-<meta name=”apple-mobile-web-app-status-bar-style” content=”black-translucent” />
-<title>BVHanKrY – Música Oficial</title>
-
-<link href=https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap rel=”stylesheet”>
-<link rel=”icon” href=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png type=”image/png”>
-<link rel=”manifest” href=”manifest.webmanifest”>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link rel="icon" href="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" type="image/png">
+<link rel="manifest" href="manifest.webmanifest">
 
 <style>
 :root{
@@ -44,28 +44,28 @@ J=d.createElement(s),dl=l!=’dataLayer’?’&l=’+l:’’;j.async=true;j.src
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
-Html{scroll-behavior:smooth;}
-Body{
-  Font-family:’Roboto’,sans-serif;
-  Background-color:var(--bg-body);
-  Background-image:var(--bg-gradient), url(https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/ChatGPT%20Image%2030%20dic%202025%2C%2010_59_54%20a.m..png);
-  Background-attachment:fixed;
-  Background-size:cover;
-  Background-position:center;
-  Color:var(--text-primary);
-  Min-height:100vh;
-  Padding-bottom:calc(var(--player-height) + 20px);
-  Overflow-x:hidden;
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Roboto',sans-serif;
+  background-color:var(--bg-body);
+  background-image:var(--bg-gradient), url(https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/ChatGPT%20Image%2030%20dic%202025%2C%2010_59_54%20a.m..png);
+  background-attachment:fixed;
+  background-size:cover;
+  background-position:center;
+  color:var(--text-primary);
+  min-height:100vh;
+  padding-bottom:calc(var(--player-height) + 20px);
+  overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
 
 /* NAV */
 .main-nav{
-  Background-color:rgba(18,18,18,0.95);
-  Backdrop-filter:blur(12px);
-  Height:var(--nav-height);
-  Position:fixed;
-  Top:0;left:0;right:0;
+  background-color:rgba(18,18,18,0.95);
+  backdrop-filter:blur(12px);
+  height:var(--nav-height);
+  position:fixed;
+  top:0;left:0;right:0;
   z-index:1000;
   border-bottom:1px solid rgba(255,255,255,0.05);
   display:flex;
@@ -75,25 +75,25 @@ Body{
 .main-nav.hidden-nav{ transform: translateY(-100%); }
 
 .nav-container{
-  Display:flex;
-  Align-items:center;
-  Justify-content:space-between;
-  Width:100%;
-  Padding:0 32px;
-  Max-width:1600px;
-  Margin:0 auto;
-  Position:relative;
-  Gap:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  padding:0 32px;
+  max-width:1600px;
+  margin:0 auto;
+  position:relative;
+  gap:16px;
 }
 
 .logo img{ height:32px; border-radius:4px; }
 .nav-links{ display:flex; gap:32px; list-style:none; }
 .nav-links a{
-  Color:var(--text-secondary);
-  Text-decoration:none;
-  Font-weight:700;
-  Font-size:0.9rem;
-  Transition:color .2s;
+  color:var(--text-secondary);
+  text-decoration:none;
+  font-weight:700;
+  font-size:0.9rem;
+  transition:color .2s;
 }
 .nav-links a:hover, .nav-links a.active{ color:var(--text-primary); }
 
@@ -102,149 +102,149 @@ Body{
 .social-links a:hover img{ opacity:1; transform:scale(1.1); }
 
 .menu-toggle{
-  Display:none;
-  Background:none;
-  Border:none;
-  Color:#fff;
-  Font-size:1.8rem;
-  Cursor:pointer;
+  display:none;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:1.8rem;
+  cursor:pointer;
 }
 
 /* LAYOUT */
 .container{
-  Max-width:1400px;
-  Margin:calc(var(--nav-height) + 40px) auto 0;
-  Padding:0 32px;
-  Position:relative;
+  max-width:1400px;
+  margin:calc(var(--nav-height) + 40px) auto 0;
+  padding:0 32px;
+  position:relative;
 }
 
-Header{
-  Padding:40px 0;
-  Display:flex;
-  Align-items:flex-end;
-  Gap:24px;
-  Margin-bottom:40px;
+header{
+  padding:40px 0;
+  display:flex;
+  align-items:flex-end;
+  gap:24px;
+  margin-bottom:40px;
 }
 .header-art{
-  Width:232px;height:232px;
-  Background-image:url(‘https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png’);
-  Background-size:cover;background-position:center;
-  Box-shadow:0 8px 50px rgba(0,0,0,0.6);
-  Border-radius:18px;
-  Flex-shrink:0;
-  Border:1px solid rgba(255,255,255,0.1);
-  Position:relative;
-  Overflow:hidden;
-  Box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08);
+  width:232px;height:232px;
+  background-image:url('https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png');
+  background-size:cover;background-position:center;
+  box-shadow:0 8px 50px rgba(0,0,0,0.6);
+  border-radius:18px;
+  flex-shrink:0;
+  border:1px solid rgba(255,255,255,0.1);
+  position:relative;
+  overflow:hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08);
 }
 .header-art::after{
-  Content:’’;
-  Position:absolute;inset:0;
-  Background:linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 100%);
-  Opacity:0;transition:opacity .3s;
-  Pointer-events:none;
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+  opacity:0;transition:opacity .3s;
+  pointer-events:none;
 }
 .header-art:hover::after{opacity:1;}
 
 .header-type{ font-size:0.8rem; text-transform:uppercase; font-weight:700; margin-bottom:8px; }
-Header h1{
-  Font-size:clamp(2.5rem, 6vw, 5rem);
-  Font-weight:900;
-  Line-height:1;
-  Letter-spacing:-2px;
-  Text-shadow:0 2px 10px rgba(0,0,0,.5);
+header h1{
+  font-size:clamp(2.5rem, 6vw, 5rem);
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-2px;
+  text-shadow:0 2px 10px rgba(0,0,0,.5);
 }
-Header p{ font-size:0.9rem; color:var(--text-secondary); margin-top:10px; }
+header p{ font-size:0.9rem; color:var(--text-secondary); margin-top:10px; }
 
 /* SCROLL FADE */
 .scroll-fade{
-  Opacity:0;
-  Transform: translateY(18px);
-  Transition: opacity .6s ease, transform .6s ease;
+  opacity:0;
+  transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s ease;
 }
 .scroll-fade.visible{
-  Opacity:1;
-  Transform: translateY(0);
+  opacity:1;
+  transform: translateY(0);
 }
 
 /* STREAMING SECTION */
 .streaming{
-  Margin-bottom:40px;
-  Padding:24px;
-  Border:1px solid rgba(255,255,255,0.05);
-  Background:rgba(255,255,255,0.02);
-  Border-radius:8px;
-  Backdrop-filter:blur(5px);
+  margin-bottom:40px;
+  padding:24px;
+  border:1px solid rgba(255,255,255,0.05);
+  background:rgba(255,255,255,0.02);
+  border-radius:8px;
+  backdrop-filter:blur(5px);
 }
 .streaming h2{
-  Font-size:1.2rem;
-  Margin-bottom:12px;
-  Display:flex;
-  Align-items:center;
-  Gap:10px;
+  font-size:1.2rem;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 .streaming h2::before{
-  Content:’’;
-  Width:4px;height:18px;
-  Background:var(--accent-green);
-  Border-radius:2px;
-  Display:block;
+  content:'';
+  width:4px;height:18px;
+  background:var(--accent-green);
+  border-radius:2px;
+  display:block;
 }
 .streaming .embed{
-  Display:grid;
-  Gap:16px;
-  Margin-top:12px;
+  display:grid;
+  gap:16px;
+  margin-top:12px;
 }
 .streaming iframe{
-  Width:100%;
-  Border:0;
-  Border-radius:12px;
-  Overflow:hidden;
-  Background:#000;
+  width:100%;
+  border:0;
+  border-radius:12px;
+  overflow:hidden;
+  background:#000;
 }
 
 /* SONGS GRID */
 .songs-grid{
-  Display:grid;
-  Grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
-  Gap:24px;
-  Margin-bottom:60px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+  gap:24px;
+  margin-bottom:60px;
 }
 .cancion-card{
-  Background:var(--bg-card);
-  Border-radius:8px;
-  Padding:16px;
-  Border:1px solid transparent;
-  Transition:background-color .3s, transform .2s, box-shadow .2s, border-color .2s;
-  Cursor:pointer;
-  Display:flex;
-  Flex-direction:column;
-  Position:relative;
+  background:var(--bg-card);
+  border-radius:8px;
+  padding:16px;
+  border:1px solid transparent;
+  transition:background-color .3s, transform .2s, box-shadow .2s, border-color .2s;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  position:relative;
 }
 .cancion-card:hover{
-  Background:var(--bg-card-hover);
-  Transform:translateY(-4px);
-  Border-color:rgba(255,255,255,0.1);
-  Box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  background:var(--bg-card-hover);
+  transform:translateY(-4px);
+  border-color:rgba(255,255,255,0.1);
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 .floating-play-btn{
-  Position:absolute;
-  Right:20px;
-  Bottom:90px;
-  Width:48px;height:48px;
-  Border-radius:50%;
-  Background:var(--accent-green);
-  Box-shadow:0 8px 8px rgba(0,0,0,0.3);
-  Display:flex;align-items:center;justify-content:center;
-  Opacity:0;
-  Transform:translateY(8px);
-  Transition:all .3s ease;
-  Border:none;
-  Cursor:pointer;
+  position:absolute;
+  right:20px;
+  bottom:90px;
+  width:48px;height:48px;
+  border-radius:50%;
+  background:var(--accent-green);
+  box-shadow:0 8px 8px rgba(0,0,0,0.3);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;
+  transform:translateY(8px);
+  transition:all .3s ease;
+  border:none;
+  cursor:pointer;
   z-index:10;
 }
 .cancion-card:hover .floating-play-btn{ opacity:1; transform:translateY(0); }
-.floating-play-btn:hover{ background:var(--accent-hover); transform:scale(1.05) ¡important; }
+.floating-play-btn:hover{ background:var(--accent-hover); transform:scale(1.05) !important; }
 .floating-play-btn svg{ fill:#000;width:24px;height:24px;margin-left:2px; }
 
 .song-header-row{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; }
@@ -263,15 +263,15 @@ Header p{ font-size:0.9rem; color:var(--text-secondary); margin-top:10px; }
 .player-wrapper{ margin-top:auto; padding-top:10px; }
 .audio-controls-row-1{ display:flex; align-items:center; gap:12px; }
 .inline-play-btn{
-  Width:32px;height:32px;
-  Background:transparent;
-  Border:1px solid var(--text-secondary);
-  Border-radius:50%;
-  Display:flex;align-items:center;justify-content:center;
-  Cursor:pointer;
-  Transition:all .2s;
-  Color:#fff;
-  Flex-shrink:0;
+  width:32px;height:32px;
+  background:transparent;
+  border:1px solid var(--text-secondary);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:all .2s;
+  color:#fff;
+  flex-shrink:0;
 }
 .inline-play-btn:hover{ border-color:#fff; transform:scale(1.1); }
 .inline-play-btn svg{ width:12px;height:12px; fill:currentColor; pointer-events:none; }
@@ -280,7 +280,7 @@ Header p{ font-size:0.9rem; color:var(--text-secondary); margin-top:10px; }
 .progress-container{ flex:1; height:4px; background:#535353; border-radius:2px; overflow:hidden; cursor:pointer; }
 .progress-bar{ height:100%; width:0%; background:#fff; transition:width .1s linear; }
 .cancion-card.playing .progress-bar{ background:var(--accent-green); }
-.time-display{ font-size:.75rem; color:var(--text-secondary); min-width:38px; text-align:right; font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, “Liberation Mono”, “Courier New”, monospace; }
+.time-display{ font-size:.75rem; color:var(--text-secondary); min-width:38px; text-align:right; font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
 .song-stats{ display:flex; justify-content:space-between; align-items:center; margin-top:12px; font-size:.75rem; color:var(--text-secondary); }
 .likes-counter{ cursor:pointer; display:flex; align-items:center; gap:6px; user-select:none; }
@@ -290,67 +290,67 @@ Header p{ font-size:0.9rem; color:var(--text-secondary); margin-top:10px; }
 
 .share-button-container{ margin-top:16px; }
 .share-whatsapp{
-  Font-size:.75rem;
-  Color:var(--text-secondary);
-  Text-decoration:none;
-  Text-transform:uppercase;
-  Font-weight:700;
-  Letter-spacing:1px;
-  Border-bottom:1px solid transparent;
-  Transition:.2s;
+  font-size:.75rem;
+  color:var(--text-secondary);
+  text-decoration:none;
+  text-transform:uppercase;
+  font-weight:700;
+  letter-spacing:1px;
+  border-bottom:1px solid transparent;
+  transition:.2s;
 }
 .share-whatsapp:hover{ border-bottom-color:var(--text-primary); color:var(--text-primary); }
 
 /* INFO SECTIONS */
 .info-sections{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:24px; margin-bottom:60px; }
-Section{
-  Padding:24px;
-  Border:1px solid rgba(255,255,255,0.05);
-  Background:rgba(255,255,255,0.02);
-  Border-radius:8px;
-  Backdrop-filter:blur(5px);
+section{
+  padding:24px;
+  border:1px solid rgba(255,255,255,0.05);
+  background:rgba(255,255,255,0.02);
+  border-radius:8px;
+  backdrop-filter:blur(5px);
 }
-Section h2{
-  Font-size:1.2rem;
-  Margin-bottom:12px;
-  Display:flex;
-  Align-items:center;
-  Gap:10px;
+section h2{
+  font-size:1.2rem;
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
-Section h2::before{
-  Content:’’;
-  Width:4px;height:18px;
-  Background:var(--accent-green);
-  Border-radius:2px;
-  Display:block;
+section h2::before{
+  content:'';
+  width:4px;height:18px;
+  background:var(--accent-green);
+  border-radius:2px;
+  display:block;
 }
-Section p{ color:var(--text-secondary); font-size:.9rem; line-height:1.6; }
+section p{ color:var(--text-secondary); font-size:.9rem; line-height:1.6; }
 .tag-coming-soon{
-  Background:#333;color:#fff;
-  Padding:4px 10px;
-  Font-size:.7rem;
-  Font-weight:700;
-  Border-radius:12px;
-  Display:inline-block;
-  Margin-top:10px;
+  background:#333;color:#fff;
+  padding:4px 10px;
+  font-size:.7rem;
+  font-weight:700;
+  border-radius:12px;
+  display:inline-block;
+  margin-top:10px;
 }
 
 /* FOOTER */
-Footer{ margin-top:80px; padding:40px 32px; border-top:1px solid rgba(255,255,255,0.1); text-align:center; }
-Footer p{ font-size:.85rem; color:var(--text-secondary); margin-bottom:8px; }
+footer{ margin-top:80px; padding:40px 32px; border-top:1px solid rgba(255,255,255,0.1); text-align:center; }
+footer p{ font-size:.85rem; color:var(--text-secondary); margin-bottom:8px; }
 .footer-logo{ font-size:1.5rem; font-weight:900; letter-spacing:-1px; margin-bottom:10px; display:inline-block; }
 
 /* GLOBAL PLAYER */
 .global-player{
-  Position:fixed;
-  Bottom:0;left:0;width:100%;
-  Background:#181818;
-  Border-top:1px solid #282828;
-  Height:var(--player-height);
-  Padding:0 24px;
-  Display:flex;
-  Align-items:center;
-  Justify-content:space-between;
+  position:fixed;
+  bottom:0;left:0;width:100%;
+  background:#181818;
+  border-top:1px solid #282828;
+  height:var(--player-height);
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
   z-index:2000;
   transform:translateY(100%);
   transition:transform .35s cubic-bezier(0.2,0.8,0.2,1);
@@ -360,51 +360,41 @@ Footer p{ font-size:.85rem; color:var(--text-secondary); margin-bottom:8px; }
 .global-player.active{ transform:translateY(0); }
 
 .gp-left{
-  Display:flex;
-  Align-items:center;
-  Gap:12px;
-  Width:20%;
-  Max-width:260px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:20%;
+  max-width:260px;
 }
 .gp-cover{
-  Width:var(--vinyl-size); height:var(--vinyl-size);
-  Border-radius:50%;
-  Background:#000;
-  Border:2px solid #333;
-  Position:relative;
-  Overflow:hidden;
-  Cursor:pointer;
-  Box-shadow:0 0 10px rgba(0,0,0,0.5);
-  Flex-shrink:0;
+  width:var(--vinyl-size); height:var(--vinyl-size);
+  border-radius:50%;
+  background:#000;
+  border:2px solid #333;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  box-shadow:0 0 10px rgba(0,0,0,0.5);
+  flex-shrink:0;
 }
-.gp-cover img{ 
-  Width:100%; 
-  Height:100%; 
-  Object-fit:cover; 
-  Border-radius:50%; 
-  Position:relative; 
-  z-index:4; 
-  transition:opacity .25s; 
-}
+.gp-cover img{ width:100%; height:100%; object-fit:cover; border-radius:50%; position:relative; z-index:2; transition:opacity .25s; }
 .gp-cover::before{
-  Content:’’;
-  Position:absolute; 
-  Inset:0;
-  Border-radius:50%;
-  Background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.3) 31%, transparent 32%), 
-  Repeating-radial-gradient(#111 0, #111 1px, #222 2px, #222 3px);
+  content:'';
+  position:absolute; inset:0;
+  border-radius:50%;
+  background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.3) 31%, transparent 32%), repeating-radial-gradient(#111 0, #111 1px, #222 2px, #222 3px);
   z-index:3;
   pointer-events:none;
   box-shadow:inset 0 0 10px rgba(0,0,0,0.8);
 }
 .gp-cover::after{
-  Content:’’;
-  Position:absolute;
-  Top:-50%; left:-50%;
-  Width:200%; height:200%;
-  Background:linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
-  Transform:rotate(30deg) translateY(-100%);
-  Transition:transform .6s ease;
+  content:'';
+  position:absolute;
+  top:-50%; left:-50%;
+  width:200%; height:200%;
+  background:linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+  transform:rotate(30deg) translateY(-100%);
+  transition:transform .6s ease;
   z-index:4;
   pointer-events:none;
 }
@@ -417,74 +407,74 @@ Footer p{ font-size:.85rem; color:var(--text-secondary); margin-bottom:8px; }
 .gp-artist{ font-size:.75rem; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
 .gp-center{
-  Flex:1;
-  Display:flex;
-  Flex-direction:column;
-  Align-items:center;
-  Justify-content:center;
-  Max-width:50%;
-  Padding:0 20px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  max-width:50%;
+  padding:0 20px;
 }
 .gp-controls{ display:flex; align-items:center; gap:24px; margin-bottom:8px; }
 .gp-btn{
-  Background:none;border:none;
-  Color:var(--text-secondary);
-  Cursor:pointer;
-  Display:flex; align-items:center; justify-content:center;
-  Transition:.2s;
-  Padding:4px;
+  background:none;border:none;
+  color:var(--text-secondary);
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:.2s;
+  padding:4px;
 }
 .gp-btn:hover{ color:#fff; transform:scale(1.1); }
 .gp-btn:active{ transform:scale(.95); }
 
 .gp-play-pause{
-  Width:36px;height:36px;
-  Background:#fff;
-  Border-radius:50%;
-  Display:flex; align-items:center; justify-content:center;
-  Color:#000;
-  Cursor:pointer;
-  Border:none;
-  Box-shadow:0 4px 12px rgba(0,0,0,0.3);
-  Transition:.2s;
+  width:36px;height:36px;
+  background:#fff;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color:#000;
+  cursor:pointer;
+  border:none;
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+  transition:.2s;
 }
 .gp-play-pause:hover{ background:var(--accent-green); transform:scale(1.1); }
 .gp-play-pause svg{ width:16px;height:16px; fill:currentColor; }
 
 .gp-progress-wrapper{
-  Width:100%;
-  Display:flex;
-  Align-items:center;
-  Gap:12px;
-  Font-size:.75rem;
-  Color:var(--text-secondary);
-  Font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, “Liberation Mono”, “Courier New”, monospace;
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:.75rem;
+  color:var(--text-secondary);
+  font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 .gp-progress-container{
-  Flex:1;
-  Height:5px;
-  Background:#535353;
-  Border-radius:3px;
-  Cursor:pointer;
-  Position:relative;
+  flex:1;
+  height:5px;
+  background:#535353;
+  border-radius:3px;
+  cursor:pointer;
+  position:relative;
 }
 .gp-progress-bar{
-  Height:100%;
-  Width:0%;
-  Background:var(--accent-green);
-  Border-radius:3px;
-  Box-shadow:0 0 10px var(--accent-green);
-  Position:relative;
+  height:100%;
+  width:0%;
+  background:var(--accent-green);
+  border-radius:3px;
+  box-shadow:0 0 10px var(--accent-green);
+  position:relative;
 }
 
 .gp-extra-actions{ display:flex; gap:16px; margin-top:6px; }
 .gp-action-btn{
-  Background:none;border:none;
-  Color:var(--text-secondary);
-  Cursor:pointer;
-  Transition:.2s;
-  Padding:2px;
-  Display:flex; align-items:center; justify-content:center;
+  background:none;border:none;
+  color:var(--text-secondary);
+  cursor:pointer;
+  transition:.2s;
+  padding:2px;
+  display:flex; align-items:center; justify-content:center;
 }
 .gp-action-btn:hover{ color:#fff; transform:scale(1.1); }
 .gp-action-btn.active-like{ color:var(--accent-green); }
@@ -492,37 +482,37 @@ Footer p{ font-size:.85rem; color:var(--text-secondary); margin-bottom:8px; }
 
 .share-menu-container-center{ position:relative; }
 .share-dropdown{
-  Position:absolute;
-  Bottom:140%;
-  Right:0;
-  Background:#282828;
-  Border-radius:12px;
-  Padding:10px;
-  Display:grid;
-  Grid-template-columns:repeat(3,1fr);
-  Gap:12px;
-  Box-shadow:0 5px 20px rgba(0,0,0,0.5);
-  Opacity:0;
-  Pointer-events:none;
-  Transform:translateY(10px) scale(.95);
-  Transition:.2s ease;
+  position:absolute;
+  bottom:140%;
+  right:0;
+  background:#282828;
+  border-radius:12px;
+  padding:10px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.5);
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(10px) scale(.95);
+  transition:.2s ease;
   z-index:50;
   min-width:200px;
 }
 .share-dropdown.active{
-  Opacity:1;
-  Pointer-events:auto;
-  Transform:translateY(0) scale(1);
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0) scale(1);
 }
 .share-item{
-  Display:flex;
-  Flex-direction:column;
-  Align-items:center;
-  Gap:4px;
-  Color:#fff;
-  Text-decoration:none;
-  Font-size:.7rem;
-  Transition:.2s;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  color:#fff;
+  text-decoration:none;
+  font-size:.7rem;
+  transition:.2s;
 }
 .share-item:hover{ transform:scale(1.1); color:var(--accent-green); }
 .share-item svg{ width:24px;height:24px; fill:currentColor; }
@@ -530,42 +520,42 @@ Footer p{ font-size:.85rem; color:var(--text-secondary); margin-bottom:8px; }
 .gp-right{ width:25%; display:flex; justify-content:flex-end; gap:16px; }
 .volume-widget{ position:relative; display:flex; align-items:center; }
 .volume-popover{
-  Position:absolute; bottom:120%; right:0;
-  Background:#282828;
-  Padding:15px 10px;
-  Border-radius:12px;
-  Display:flex; align-items:center; justify-content:center;
-  Box-shadow:0 5px 20px rgba(0,0,0,0.5);
-  Opacity:0;
-  Pointer-events:none;
-  Transform:translateY(10px);
-  Transition:.25s cubic-bezier(0.2,0.8,0.2,1);
-  Height:120px;
+  position:absolute; bottom:120%; right:0;
+  background:#282828;
+  padding:15px 10px;
+  border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 5px 20px rgba(0,0,0,0.5);
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(10px);
+  transition:.25s cubic-bezier(0.2,0.8,0.2,1);
+  height:120px;
 }
 .volume-widget:hover .volume-popover{ opacity:1; pointer-events:auto; transform:translateY(0); }
-Input[type=range].vol-slider-vertical{
+input[type=range].vol-slider-vertical{
   -webkit-appearance:none;
-  Width:100px;height:4px;
-  Background:#555;
-  Border-radius:2px;
-  Outline:none;
-  Transform:rotate(-90deg);
-  Transform-origin:center;
-  Cursor:pointer;
+  width:100px;height:4px;
+  background:#555;
+  border-radius:2px;
+  outline:none;
+  transform:rotate(-90deg);
+  transform-origin:center;
+  cursor:pointer;
 }
-Input[type=range].vol-slider-vertical::-webkit-slider-thumb{
+input[type=range].vol-slider-vertical::-webkit-slider-thumb{
   -webkit-appearance:none;
-  Width:12px;height:12px;
-  Background:#fff;
-  Border-radius:50%;
-  Cursor:pointer;
-  Box-shadow:0 0 5px rgba(0,0,0,0.5);
+  width:12px;height:12px;
+  background:#fff;
+  border-radius:50%;
+  cursor:pointer;
+  box-shadow:0 0 5px rgba(0,0,0,0.5);
 }
 
 #toast-container{
-  Position: fixed;
-  Right: 18px;
-  Bottom: 18px;
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
   z-index: 2147483647;
   display: flex;
   flex-direction: column;
@@ -573,9 +563,9 @@ Input[type=range].vol-slider-vertical::-webkit-slider-thumb{
   pointer-events: none;
 }
 .install-app-btn {
-  Position: fixed;
-  Right: 24px;
-  Bottom: 170px;
+  position: fixed;
+  right: 24px;
+  bottom: 170px;
   z-index: 2100;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 999px;
@@ -592,145 +582,145 @@ Input[type=range].vol-slider-vertical::-webkit-slider-thumb{
   display: none;
 }
 .install-app-btn.visible {
-  Display: inline-flex;
-  Align-items: center;
-  Gap: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .install-app-btn:hover {
-  Transform: translateY(-2px);
-  Border-color: rgba(30, 215, 96, 0.4);
-  Box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+  border-color: rgba(30, 215, 96, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 @media (max-width: 768px){
   .install-app-btn {
-    Right: 16px;
-    Bottom: 132px;
-    Font-size: 0.72rem;
-    Padding: 8px 14px;
+    right: 16px;
+    bottom: 132px;
+    font-size: 0.72rem;
+    padding: 8px 14px;
   }
 }
 
 .toast{
-  Pointer-events: none;
-  Max-width: min(420px, calc(100vw – 36px));
-  Padding: 12px 14px;
-  Border-radius: 12px;
-  Background: rgba(18,18,18,0.78);
-  Border: 1px solid rgba(255,255,255,0.10);
-  Box-shadow: 0 18px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.05), 0 0 24px rgba(30,215,96,0.10);
-  Backdrop-filter: blur(10px);
-  Color: rgba(255,255,255,0.92);
-  Font-size: 0.92rem;
-  Font-weight: 700;
-  Letter-spacing: 0.2px;
-  Line-height: 1.25;
-  Opacity: 0;
-  Transform: translateY(10px);
-  Transition: opacity 220ms ease, transform 220ms ease;
+  pointer-events: none;
+  max-width: min(420px, calc(100vw - 36px));
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(18,18,18,0.78);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.05), 0 0 24px rgba(30,215,96,0.10);
+  backdrop-filter: blur(10px);
+  color: rgba(255,255,255,0.92);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  line-height: 1.25;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 220ms ease, transform 220ms ease;
 }
 .toast.show{
-  Opacity: 1;
-  Transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 .toast::before{
-  Content:””;
-  Display:inline-block;
-  Width: 10px;
-  Height: 10px;
-  Margin-right: 10px;
-  Border-radius: 999px;
-  Background: var(--accent-green);
-  Box-shadow: 0 0 18px rgba(30,215,96,0.35);
-  Vertical-align: middle;
+  content:"";
+  display:inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  border-radius: 999px;
+  background: var(--accent-green);
+  box-shadow: 0 0 18px rgba(30,215,96,0.35);
+  vertical-align: middle;
 }
 
 @media (max-width: 768px){
   .container{ padding:0 16px; margin-top:calc(var(--nav-height) + 20px); }
-  Header{ flex-direction:column; align-items:flex-start; padding:20px 0; }
+  header{ flex-direction:column; align-items:flex-start; padding:20px 0; }
   .header-art{ width:160px; height:160px; }
-  Header {
-    Flex-direction: row;
-    Align-items: center;
-    Gap: 14px;
+  header {
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
   }
   .header-art {
-    Width: 88px;
-    Height: 88px;
-    Flex-shrink: 0;
+    width: 88px;
+    height: 88px;
+    flex-shrink: 0;
   }
   .header-text {
-    Justify-content: center;
+    justify-content: center;
   }
   .header-type {
-    Font-size: 0.7rem;
-    Margin-bottom: 4px;
+    font-size: 0.7rem;
+    margin-bottom: 4px;
   }
   .header-text h1 {
-    Font-size: 1.8rem;
-    Line-height: 1.05;
-    Margin: 0;
+    font-size: 1.8rem;
+    line-height: 1.05;
+    margin: 0;
   }
-  Header p {
-    Font-size: 0.75rem;
-    Line-height: 1.3;
-    Margin-top: 6px;
+  header p {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    margin-top: 6px;
   }
   .header-art {
-    Width: 100px;
-    Height: 100px;
-    Border-radius: 18px;
+    width: 100px;
+    height: 100px;
+    border-radius: 18px;
   }
   .nav-container{ padding:0 14px; }
   .menu-toggle{ display:block; }
   .nav-links{
-    Display:none;
-    Position:absolute;
-    Top:var(--nav-height);
-    Left:0;
-    Width:100%;
-    Background:rgba(0,0,0,0.92);
-    Padding:12px 0;
-    Flex-direction:column;
-    Gap:0;
+    display:none;
+    position:absolute;
+    top:var(--nav-height);
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,0.92);
+    padding:12px 0;
+    flex-direction:column;
+    gap:0;
     z-index:1001;
   }
   .nav-links.active{ display:flex; }
   .nav-links li{ text-align:center; padding:10px 0; }
   .social-links{ gap:14px; }
   .global-player{
-    Height:auto;
-    Padding:10px 12px;
-    Gap:10px;
+    height:auto;
+    padding:10px 12px;
+    gap:10px;
   }
   .gp-left{
-    Width:auto;
-    Max-width:none;
-    Gap:10px;
+    width:auto;
+    max-width:none;
+    gap:10px;
   }
   .gp-cover{ width:40px; height:40px; }
   .gp-info-text{ max-width:44vw; }
   .gp-title{
-    Font-size:0.82rem;
-    Font-weight:900;
+    font-size:0.82rem;
+    font-weight:900;
   }
   .gp-artist{
-    Font-size:0.72rem;
-    Font-weight:700;
+    font-size:0.72rem;
+    font-weight:700;
   }
   .gp-center{ max-width:none; padding:0; }
   .gp-right{ display:none; }
 }
 
 .embed-grid{
-  Display: grid;
-  Gap: 18px;
+  display: grid;
+  gap: 18px;
 }
 .embed-grid iframe{
-  Width: 100%;
-  Border: 0;
-  Border-radius: 14px;
-  Overflow: hidden;
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
 }
 @media (max-width: 768px){
   .embed-grid{ grid-template-columns: 1fr;}
@@ -739,114 +729,114 @@ Input[type=range].vol-slider-vertical::-webkit-slider-thumb{
 }
 @media (min-width: 769px){
   .embed-grid{
-    Grid-template-columns: 1fr 1fr;
-    Align-items: start;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
   }
   .embed-spotify iframe{
-    Height: 352px;
+    height: 352px;
   }
   .yt-box{
-    Width: 100%;
-    Aspect-ratio: 16 / 9;
-    Border-radius: 14px;
-    Overflow: hidden;
-    Background: #000;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #000;
   }
   .yt-box iframe{
-    Width: 100%;
-    Height: 100%;
-    Display: block;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 }
 
 .scroll-fade{
-  Opacity: 0;
-  Transform: translateY(22px) scale(0.985);
-  Filter: blur(10px);
-  Transition: opacity 900ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
-  Will-change: opacity, transform, filter;
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  filter: blur(10px);
+  transition: opacity 900ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 900ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform, filter;
 }
 .scroll-fade.visible{
-  Opacity: 1;
-  Transform: translateY(0) scale(1);
-  Filter: blur(0);
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
 #streaming-section{
-  Position: relative;
-  Overflow: hidden;
-  Border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
 }
 #streaming-section.visible{
-  Box-shadow: 0 18px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06), 0 0 26px rgba(30,215,96,0.14);
+  box-shadow: 0 18px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06), 0 0 26px rgba(30,215,96,0.14);
 }
 #streaming-section::before{
-  Content:””;
-  Position:absolute;
-  Inset:-2px;
-  Border-radius: 16px;
-  Pointer-events:none;
-  Opacity: 0;
-  Background: radial-gradient(600px 140px at 20% 10%, rgba(30,215,96,0.18), transparent 60%), radial-gradient(520px 160px at 90% 40%, rgba(255,255,255,0.08), transparent 55%), linear-gradient(180deg, rgba(255,255,255,0.03), transparent 35%);
-  Transform: translateY(14px);
-  Filter: blur(10px);
-  Transition: opacity 700ms ease, transform 900ms cubic-bezier(0.2,0.8,0.2,1);
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius: 16px;
+  pointer-events:none;
+  opacity: 0;
+  background: radial-gradient(600px 140px at 20% 10%, rgba(30,215,96,0.18), transparent 60%), radial-gradient(520px 160px at 90% 40%, rgba(255,255,255,0.08), transparent 55%), linear-gradient(180deg, rgba(255,255,255,0.03), transparent 35%);
+  transform: translateY(14px);
+  filter: blur(10px);
+  transition: opacity 700ms ease, transform 900ms cubic-bezier(0.2,0.8,0.2,1);
 }
 #streaming-section.visible::before{
-  Opacity: 1;
-  Transform: translateY(0);
-  Animation: streamGlow 2.6s ease-in-out infinite;
+  opacity: 1;
+  transform: translateY(0);
+  animation: streamGlow 2.6s ease-in-out infinite;
 }
 @keyframes streamGlow{
   0%,100%{ filter: blur(10px); opacity: 0.85; }
   50%{ filter: blur(14px); opacity: 1; }
 }
 #streaming-section h2{
-  Position: relative;
-  Display: inline-block;
-  Transform: translateY(12px);
-  Opacity: 0;
-  Transition: transform 700ms cubic-bezier(0.2,0.8,0.2,1), opacity 700ms ease;
+  position: relative;
+  display: inline-block;
+  transform: translateY(12px);
+  opacity: 0;
+  transition: transform 700ms cubic-bezier(0.2,0.8,0.2,1), opacity 700ms ease;
 }
 #streaming-section.visible h2{
-  Transform: translateY(0);
-  Opacity: 1;
-  Transition-delay: 140ms;
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 140ms;
 }
 #streaming-section h2::before{
-  Content:””;
-  Position:absolute;
-  Left: -12px;
-  Top: 6px;
-  Width: 4px;
-  Height: 18px;
-  Border-radius: 2px;
-  Background: var(--accent-green);
-  Transform: scaleY(0);
-  Transform-origin: top;
-  Transition: transform 700ms cubic-bezier(0.2,0.8,0.2,1);
+  content:"";
+  position:absolute;
+  left: -12px;
+  top: 6px;
+  width: 4px;
+  height: 18px;
+  border-radius: 2px;
+  background: var(--accent-green);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 700ms cubic-bezier(0.2,0.8,0.2,1);
 }
 #streaming-section.visible h2::before{
-  Transform: scaleY(1);
-  Transition-delay: 180ms;
+  transform: scaleY(1);
+  transition-delay: 180ms;
 }
 #streaming-section .embed-item{
-  Opacity: 0;
-  Transform: translateY(16px) scale(0.99);
-  Filter: blur(8px);
-  Transition: opacity 700ms cubic-bezier(0.2,0.8,0.2,1), transform 700ms cubic-bezier(0.2,0.8,0.2,1), filter 700ms cubic-bezier(0.2,0.8,0.2,1);
-  Will-change: opacity, transform, filter;
+  opacity: 0;
+  transform: translateY(16px) scale(0.99);
+  filter: blur(8px);
+  transition: opacity 700ms cubic-bezier(0.2,0.8,0.2,1), transform 700ms cubic-bezier(0.2,0.8,0.2,1), filter 700ms cubic-bezier(0.2,0.8,0.2,1);
+  will-change: opacity, transform, filter;
 }
 #streaming-section.visible .embed-item{
-  Opacity: 1;
-  Transform: translateY(0) scale(1);
-  Filter: blur(0);
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 #streaming-section.visible .embed-spotify{ transition-delay: 160ms; }
 #streaming-section.visible .embed-youtube{ transition-delay: 280ms; }
 @media (min-width: 769px){
   #streaming-section .embed-item{
-    Will-change: transform;
+    will-change: transform;
   }
 }
 @media (max-width: 768px){
@@ -854,494 +844,494 @@ Input[type=range].vol-slider-vertical::-webkit-slider-thumb{
   #streaming-section::before{ filter:none; }
 }
 .floating-play-btn {
-  Display: none ¡important;
+  display: none !important;
 }
 </style>
 </head>
 
 <body>
 
-<!—Google Tag Manager (noscript) 
-<noscript><iframe src=https://www.googletagmanager.com/ns.html?id=GTM-MQQQ48NX
-Height=”0” width=”0” style=”display:none;visibility:hidden”></iframe></noscript>
-<!—End Google Tag Manager (noscript) 
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQQQ48NX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-<!—NAV 
-<nav class=”main-nav”>
-  <div class=”nav-container”>
-    <a href=”#” class=”logo”>
-      <img src=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png alt=”Logo BVHanKrY”>
+<!-- NAV -->
+<nav class="main-nav">
+  <div class="nav-container">
+    <a href="#" class="logo">
+      <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" alt="Logo BVHanKrY">
     </a>
 
-    <ul class=”social-links” aria-label=”Redes sociales”>
-      <li><a href=https://www.instagram.com/henryandresvill/ target=”_blank” aria-label=”Instagram”><img src=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/instagram.png alt=””></a></li>
-      <li><a href=https://wa.link/uuajw5 target=”_blank” aria-label=”WhatsApp”><img src=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/whatsapp.png alt=””></a></li>
-      <li><a href=https://www.youtube.com/channel/UCJrxTphZnI8Rm_GTyCJp44g target=”_blank” aria-label=”YouTube”><img src=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/youtube.png alt=””></a></li>
-      <li><a href=https://open.spotify.com/intl-es/artist/0IPDl4adPnkF6LaoEyUwDl target=”_blank” aria-label=”Spotify”><img src=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/spotify.png alt=””></a></li>
+    <ul class="social-links" aria-label="Redes sociales">
+      <li><a href="https://www.instagram.com/henryandresvill/" target="_blank" aria-label="Instagram"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/instagram.png" alt=""></a></li>
+      <li><a href="https://wa.link/uuajw5" target="_blank" aria-label="WhatsApp"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/whatsapp.png" alt=""></a></li>
+      <li><a href="https://www.youtube.com/channel/UCJrxTphZnI8Rm_GTyCJp44g" target="_blank" aria-label="YouTube"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/youtube.png" alt=""></a></li>
+      <li><a href="https://open.spotify.com/intl-es/artist/0IPDl4adPnkF6LaoEyUwDl" target="_blank" aria-label="Spotify"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/spotify.png" alt=""></a></li>
     </ul>
 
-    <button class=”menu-toggle” aria-label=”Abrir menú” aria-expanded=”false”>☰</button>
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
 
-    <ul class=”nav-links” aria-label=”Secciones”>
-      <li><a href=”#music” class=”active”>Música</a></li>
-      <li><a href=”#videos”>Videos</a></li>
-      <li><a href=”#shop”>Shop</a></li>
-      <li><a href=”#app-location”>App</a></li>
+    <ul class="nav-links" aria-label="Secciones">
+      <li><a href="#music" class="active">Música</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#app-location">App</a></li>
     </ul>
   </div>
 </nav>
 
-<div class=”container”>
+<div class="container">
   <header>
-    <div class=”header-art” aria-label=”Portada EP”></div>
-    <div class=”header-text”>
-      <span class=”header-type”>EP • 2026</span>
+    <div class="header-art" aria-label="Portada EP"></div>
+    <div class="header-text">
+      <span class="header-type">EP • 2026</span>
       <h1>BVHanKrY</h1>
       <p>DUB Music • Ecuador • BVros Productions</p>
     </div>
   </header>
 
-  <!—SONGS 
-  <div class=”songs-grid” id=”music”>
-
-    <!—1 
-    <article class=”cancion-card” id=”card-tinkuy” data-title=”Tinkuy” data-artist=”BVHanKrY”
-      Data-cover=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png>
-      <button class=”floating-play-btn btn-card-float” aria-label=”Reproducir”>
-        <svg viewBox=”0 0 24 24”><path d=”M8 5v14l11-7z”/></svg>
+  <!-- SONGS -->
+  <div class="songs-grid" id="music">
+    
+    <!-- 1 -->
+    <article class="cancion-card" id="card-navi" data-title="Tinkuy" data-artist="BVHanKrY"
+      data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
+      <button class="floating-play-btn btn-card-float" aria-label="Reproducir">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       </button>
 
-      <div class=”song-header-row”>
+      <div class="song-header-row">
         <div>
-          <div class=”song-title-text”>Tinkuy</div>
-          <div class=”song-artist-text”>BVHanKrY</div>
+          <div class="song-title-text">Tinkuy</div>
+          <div class="song-artist-text">BVHanKrY</div>
         </div>
-        <div class=”mini-visualizer”><div class=”bar”></div><div class=”bar”></div><div class=”bar”></div><div class=”bar”></div></div>
+        <div class="mini-visualizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
       </div>
 
-      <div class=”player-wrapper”>
-        <div class=”audio-controls-row-1”>
-          <button class=”inline-play-btn btn-card” aria-label=”Reproducir”>
-            <svg class=”icon-play” viewBox=”0 0 24 24”><path d=”M8 5v14l11-7z”/></svg>
-            <svg class=”icon-pause” viewBox=”0 0 24 24” style=”display:none;”><path d=”M6 19h4V5H6v14zm8-14v14h4V5h-4z”/></svg>
+      <div class="player-wrapper">
+        <div class="audio-controls-row-1">
+          <button class="inline-play-btn btn-card" aria-label="Reproducir">
+            <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
           </button>
-          <div class=”progress-container”><div class=”progress-bar”></div></div>
-          <div class=”time-display”>0:00</div>
+          <div class="progress-container"><div class="progress-bar"></div></div>
+          <div class="time-display">0:00</div>
         </div>
       </div>
 
-      <audio src=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/tinkuy.mp3 preload=”metadata” data-track-title=”tinkuy” data-id=”tinkuy”></audio>
-
-      <div class=”song-stats”>
-        <div class=”likes-counter” title=”Dar Me gusta”><span class=”heart-icon”>♡</span> <span class=”likes-count”>0</span></div>
-        <div class=”plays-counter”><span class=”plays-count”>0</span> plays</div>
+      <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/tinkuy.mp3" preload="metadata" data-track-title="tinkuy" data-id="tinkuy"></audio>
+      
+      <div class="song-stats">
+        <div class="likes-counter" title="Dar Me gusta"><span class="heart-icon">♡</span> <span class="likes-count">0</span></div>
+        <div class="plays-counter"><span class="plays-count">0</span> plays</div>
       </div>
 
-      <div class=”share-button-container”>
-        <a href=”#” class=”share-whatsapp” data-link=https://bvhankry.onrender.com data-title=”Tinkuy”>Compartir</a>
+      <div class="share-button-container">
+        <a href="#" class="share-whatsapp" data-link="https://bvhankry.onrender.com" data-title="Tinkuy">Compartir</a>
       </div>
     </article>
 
-    <!—2 
-    <article class=”cancion-card” id=”card-subtle_gad” data-title=”Subtle_Gad” data-artist=”BVHanKrY”
-      Data-cover=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png>
-      <button class=”floating-play-btn btn-card-float” aria-label=”Reproducir”>
-        <svg viewBox=”0 0 24 24”><path d=”M8 5v14l11-7z”/></svg>
+    <!-- 2 -->
+    <article class="cancion-card" id="card-subtle_gad" data-title="Subtle_Gad" data-artist="BVHanKrY"
+      data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
+      <button class="floating-play-btn btn-card-float" aria-label="Reproducir">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       </button>
 
-      <div class=”song-header-row”>
+      <div class="song-header-row">
         <div>
-          <div class=”song-title-text”>Subtle_Gad</div>
-          <div class=”song-artist-text”>BVHanKrY</div>
+          <div class="song-title-text">Subtle_Gad</div>
+          <div class="song-artist-text">BVHanKrY</div>
         </div>
-        <div class=”mini-visualizer”><div class=”bar”></div><div class=”bar”></div><div class=”bar”></div><div class=”bar”></div></div>
+        <div class="mini-visualizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
       </div>
 
-      <div class=”player-wrapper”>
-        <div class=”audio-controls-row-1”>
-          <button class=”inline-play-btn btn-card” aria-label=”Reproducir”>
-            <svg class=”icon-play” viewBox=”0 0 24 24”><path d=”M8 5v14l11-7z”/></svg>
-            <svg class=”icon-pause” viewBox=”0 0 24 24” style=”display:none;”><path d=”M6 19h4V5H6v14zm8-14v14h4V5h-4z”/></svg>
+      <div class="player-wrapper">
+        <div class="audio-controls-row-1">
+          <button class="inline-play-btn btn-card" aria-label="Reproducir">
+            <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
           </button>
-          <div class=”progress-container”><div class=”progress-bar”></div></div>
-          <div class=”time-display”>0:00</div>
+          <div class="progress-container"><div class="progress-bar"></div></div>
+          <div class="time-display">0:00</div>
         </div>
       </div>
 
-      <audio src=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/Subtle%20gad.mp3 preload=”metadata” data-track-title=”subtle_gad” data-id=”subtle_gad”></audio>
-
-      <div class=”song-stats”>
-        <div class=”likes-counter” title=”Dar Me gusta”><span class=”heart-icon”>♡</span> <span class=”likes-count”>0</span></div>
-        <div class=”plays-counter”><span class=”plays-count”>0</span> plays</div>
+      <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/Subtle%20gad.mp3" preload="metadata" data-track-title="subtle_gad" data-id="subtle_gad"></audio>
+      
+      <div class="song-stats">
+        <div class="likes-counter" title="Dar Me gusta"><span class="heart-icon">♡</span> <span class="likes-count">0</span></div>
+        <div class="plays-counter"><span class="plays-count">0</span> plays</div>
       </div>
 
-      <div class=”share-button-container”>
-        <a href=”#” class=”share-whatsapp” data-link=https://bvhankry.onrender.com data-title=”Subtle_Gad”>Compartir</a>
+      <div class="share-button-container">
+        <a href="#" class="share-whatsapp" data-link="https://bvhankry.onrender.com" data-title="Subtle_Gad">Compartir</a>
       </div>
     </article>
 
-    <!—3 
-    <article class=”cancion-card” id=”card-regrecion” data-title=”Regresión” data-artist=”BVHanKrY”
-      Data-cover=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png>
-      <button class=”floating-play-btn btn-card-float” aria-label=”Reproducir”>
-        <svg viewBox=”0 0 24 24”><path d=”M8 5v14l11-7z”/></svg>
+    <!-- 3 -->
+    <article class="cancion-card" id="card-regrecion" data-title="Regresión" data-artist="BVHanKrY"
+      data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
+      <button class="floating-play-btn btn-card-float" aria-label="Reproducir">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       </button>
 
-      <div class=”song-header-row”>
+      <div class="song-header-row">
         <div>
-          <div class=”song-title-text”>Regresión</div>
-          <div class=”song-artist-text”>BVHanKrY</div>
+          <div class="song-title-text">Regresión</div>
+          <div class="song-artist-text">BVHanKrY</div>
         </div>
-        <div class=”mini-visualizer”><div class=”bar”></div><div class=”bar”></div><div class=”bar”></div><div class=”bar”></div></div>
+        <div class="mini-visualizer"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div></div>
       </div>
 
-      <div class=”player-wrapper”>
-        <div class=”audio-controls-row-1”>
-          <button class=”inline-play-btn btn-card” aria-label=”Reproducir”>
-            <svg class=”icon-play” viewBox=”0 0 24 24”><path d=”M8 5v14l11-7z”/></svg>
-            <svg class=”icon-pause” viewBox=”0 0 24 24” style=”display:none;”><path d=”M6 19h4V5H6v14zm8-14v14h4V5h-4z”/></svg>
+      <div class="player-wrapper">
+        <div class="audio-controls-row-1">
+          <button class="inline-play-btn btn-card" aria-label="Reproducir">
+            <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
           </button>
-          <div class=”progress-container”><div class=”progress-bar”></div></div>
-          <div class=”time-display”>0:00</div>
+          <div class="progress-container"><div class="progress-bar"></div></div>
+          <div class="time-display">0:00</div>
         </div>
       </div>
 
-      <audio src=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/regresi%C3%B3n.mp3 preload=”metadata” data-track-title=”regresión” data-id=”regresion”></audio>
+      <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/regresi%C3%B3n.mp3" preload="metadata" data-track-title="regresión" data-id="regresion"></audio>
 
-      <div class=”song-stats”>
-        <div class=”likes-counter” title=”Dar Me gusta”><span class=”heart-icon”>♡</span> <span class=”likes-count”>0</span></div>
-        <div class=”plays-counter”><span class=”plays-count”>0</span> plays</div>
+      <div class="song-stats">
+        <div class="likes-counter" title="Dar Me gusta"><span class="heart-icon">♡</span> <span class="likes-count">0</span></div>
+        <div class="plays-counter"><span class="plays-count">0</span> plays</div>
       </div>
 
-      <div class=”share-button-container”>
-        <a href=”#” class=”share-whatsapp” data-link=https://bvhankry.onrender.com data-title=”Regresión”>Compartir</a>
+      <div class="share-button-container">
+        <a href="#" class="share-whatsapp" data-link="https://bvhankry.onrender.com" data-title="Regresión">Compartir</a>
       </div>
     </article>
   </div>
 
-  <!—STREAMING 
-  <section id=”streaming-section” class=”streaming scroll-fade”>
+  <!-- STREAMING -->
+  <section id="streaming-section" class="streaming scroll-fade">
     <h2>Streaming en otras plataformas</h2>
-    <div class=”embed embed-grid”>
-      <div class=”embed-item embed-spotify”>
+    <div class="embed embed-grid">
+      <div class="embed-item embed-spotify">
         <iframe
-          Src=https://open.spotify.com/embed/playlist/37i9dQZF1E4yFKxFgd38pU
-          Width=”100%”
-          Height=”352”
-          Loading=”lazy”
-          Frameborder=”0”
-          Allow=”autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture”>
+          src="https://open.spotify.com/embed/playlist/37i9dQZF1E4yFKxFgd38pU"
+          width="100%"
+          height="352"
+          loading="lazy"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
         </iframe>
       </div>
-      <div class=”embed-item embed-youtube”>
-        <div class=”yt-box”>
+      <div class="embed-item embed-youtube">
+        <div class="yt-box">
           <iframe
-            Id=”yt-player”
-            Src=https://www.youtube.com/embed/JJoU2X8_I0I?enablejsapi=1&origin=https://bvhankry.onrender.com
-            Width=”100%”
-            Height=”315”
-            Loading=”lazy”
-            Frameborder=”0”
-            Allow=”accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share”
-            Allowfullscreen>
+            id="yt-player"
+            src="https://www.youtube.com/embed/JJoU2X8_I0I?enablejsapi=1&origin=https://bvhankry.onrender.com"
+            width="100%"
+            height="315"
+            loading="lazy"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
           </iframe>
         </div>
       </div>
     </div>
-    <div style=”margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;”>
-      <a class=”share-whatsapp” href=https://open.spotify.com/playlist/37i9dQZF1E4yFKxFgd38pU target=”_blank” rel=”noopener”>Abrir playlist en Spotify</a>
-      <a class=”share-whatsapp” href=https://youtu.be/JJoU2X8_I0I target=”_blank” rel=”noopener”>Ver video en YouTube</a>
+    <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
+      <a class="share-whatsapp" href="https://open.spotify.com/playlist/37i9dQZF1E4yFKxFgd38pU" target="_blank" rel="noopener">Abrir playlist en Spotify</a>
+      <a class="share-whatsapp" href="https://youtu.be/JJoU2X8_I0I" target="_blank" rel="noopener">Ver video en YouTube</a>
     </div>
   </section>
-
-  <div class=”info-sections”>
-    <section id=”music-info”>
+  
+  <div class="info-sections">
+    <section id="music-info">
       <h2>Sobre el EP</h2>
-      <p>El proyecto “Pulso” explora las profundidades del Dub Music desde Ecuador. Frecuencias bajas diseñadas para sistemas de sonido potentes y atmósferas que transportan al oyente.</p>
-      <span class=”tag-coming-soon”>Streaming Everywhere</span>
+      <p>El proyecto "Pulso" explora las profundidades del Dub Music desde Ecuador. Frecuencias bajas diseñadas para sistemas de sonido potentes y atmósferas que transportan al oyente.</p>
+      <span class="tag-coming-soon">Streaming Everywhere</span>
     </section>
 
-    <section id=”videos”>
+    <section id="videos">
       <h2>Visuales</h2>
       <p>Experiencias audiovisuales complementarias.</p>
-      <span class=”tag-coming-soon”>Coming Soon</span>
+      <span class="tag-coming-soon">Coming Soon</span>
     </section>
 
-    <section id=”shop”>
+    <section id="shop">
       <h2>Mercancía</h2>
       <p>Soporta el arte directamente. Diseños exclusivos, edición limitada.</p>
-      <span class=”tag-coming-soon”>Tienda Oficial</span>
+      <span class="tag-coming-soon">Tienda Oficial</span>
     </section>
-
-    <section id=”app-location” class=”scroll-fade”>
+    
+    <section id="app-location" class="scroll-fade">
       <h2>Aplicación</h2>
       <p>La aplicación web oficial está en esta misma página (<strong>index.html</strong>) y se puede instalar desde el botón flotante <strong>📲 Instalar app</strong> cuando tu navegador lo habilita.</p>
-      <span class=”tag-coming-soon”>Ruta principal: /index.html</span>
+      <span class="tag-coming-soon">Ruta principal: /index.html</span>
     </section>
   </div>
 
   <footer>
-    <div class=”footer-logo”>BVHanKrY</div>
-    <p>© 2026 BVHanKrY – Todos los derechos reservados. Diseñado con pasión por la música y el sonido.</p>
+    <div class="footer-logo">BVHanKrY</div>
+    <p>© 2026 BVHanKrY - Todos los derechos reservados. Diseñado con pasión por la música y el sonido.</p>
   </footer>
 </div>
 
-<!—GLOBAL PLAYER 
-<div class=”global-player” id=”globalPlayer”>
-  <div class=”gp-left”>
-    <div class=”gp-cover” id=”gpCover”>
-      <img id=”gpCoverImg” src=https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png alt=”Cover”>
+<!-- GLOBAL PLAYER -->
+<div class="global-player" id="globalPlayer">
+  <div class="gp-left">
+    <div class="gp-cover" id="gpCover">
+      <img id="gpCoverImg" src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png" alt="Cover">
     </div>
-    <div class=”gp-info-text”>
-      <div class=”gp-title” id=”gpTitle”>Título</div>
-      <div class=”gp-artist” id=”gpArtist”>Artista</div>
+    <div class="gp-info-text">
+      <div class="gp-title" id="gpTitle">Título</div>
+      <div class="gp-artist" id="gpArtist">Artista</div>
     </div>
   </div>
 
-  <div class=”gp-center”>
-    <div class=”gp-controls”>
-      <button class=”gp-btn” id=”gpPrevBtn” title=”Anterior”>
-        <svg width=”24” height=”24” viewBox=”0 0 24 24” fill=”currentColor”><path d=”M6 6h2v12H6zm3.5 6l8.5 6V6z”/></svg>
+  <div class="gp-center">
+    <div class="gp-controls">
+      <button class="gp-btn" id="gpPrevBtn" title="Anterior">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
       </button>
-      <button class=”gp-play-pause” id=”gpPlayBtn” aria-label=”Play/Pause”>
-        <svg class=”gp-icon-play” viewBox=”0 0 24 24”><path d=”M8 5v14l11-7z”/></svg>
-        <svg class=”gp-icon-pause” viewBox=”0 0 24 24” style=”display:none;”><path d=”M6 19h4V5H6v14zm8-14v14h4V5h-4z”/></svg>
+      <button class="gp-play-pause" id="gpPlayBtn" aria-label="Play/Pause">
+        <svg class="gp-icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="gp-icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
       </button>
-      <button class=”gp-btn” id=”gpNextBtn” title=”Siguiente”>
-        <svg width=”24” height=”24” viewBox=”0 0 24 24” fill=”currentColor”><path d=”M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z”/></svg>
+      <button class="gp-btn" id="gpNextBtn" title="Siguiente">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
       </button>
     </div>
-    <div class=”gp-progress-wrapper”>
-      <span id=”gpCurrentTime”>0:00</span>
-      <div class=”gp-progress-container” id=”gpProgressContainer”>
-        <div class=”gp-progress-bar” id=”gpProgressBar”></div>
+    <div class="gp-progress-wrapper">
+      <span id="gpCurrentTime">0:00</span>
+      <div class="gp-progress-container" id="gpProgressContainer">
+        <div class="gp-progress-bar" id="gpProgressBar"></div>
       </div>
-      <span id=”gpDuration”>0:00</span>
+      <span id="gpDuration">0:00</span>
     </div>
-    <div class=”gp-extra-actions”>
-      <button class=”gp-action-btn” id=”gpLikeBtn” title=”Me gusta”>
-        <svg viewBox=”0 0 24 24”><path d=”M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z”/></svg>
+    <div class="gp-extra-actions">
+      <button class="gp-action-btn" id="gpLikeBtn" title="Me gusta">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
       </button>
-      <div class=”share-menu-container-center”>
-        <button class=”gp-action-btn” id=”gpShareToggleBtn” title=”Compartir”>
-          <svg viewBox=”0 0 24 24”><path d=”M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z”/></svg>
+      <div class="share-menu-container-center">
+        <button class="gp-action-btn" id="gpShareToggleBtn" title="Compartir">
+          <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
         </button>
-        <div class=”share-dropdown” id=”shareDropdown”>
-          <a href=”#” class=”share-item” target=”_blank” id=”link-wa”>WA</a>
-          <a href=”#” class=”share-item” target=”_blank” id=”link-fb”>FB</a>
-          <a href=”#” class=”share-item” target=”_blank” id=”link-tw”>X</a>
-          <a href=”#” class=”share-item” target=”_blank” id=”link-tg”>TG</a>
-          <a href=https://www.tiktok.com/ class=”share-item” target=”_blank”>TikTok</a>
-          <a href=https://www.instagram.com/henryandresvill/ class=”share-item” target=”_blank”>Insta</a>
+        <div class="share-dropdown" id="shareDropdown">
+          <a href="#" class="share-item" target="_blank" id="link-wa">WA</a>
+          <a href="#" class="share-item" target="_blank" id="link-fb">FB</a>
+          <a href="#" class="share-item" target="_blank" id="link-tw">X</a>
+          <a href="#" class="share-item" target="_blank" id="link-tg">TG</a>
+          <a href="https://www.tiktok.com/" class="share-item" target="_blank">TikTok</a>
+          <a href="https://www.instagram.com/henryandresvill/" class="share-item" target="_blank">Insta</a>
         </div>
       </div>
     </div>
   </div>
 
-  <div class=”gp-right”>
-    <div class=”volume-widget”>
-      <button class=”gp-btn” title=”Volumen”>
-        <svg width=”20” height=”20” viewBox=”0 0 24 24” fill=”currentColor”><path d=”M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z”/></svg>
+  <div class="gp-right">
+    <div class="volume-widget">
+      <button class="gp-btn" title="Volumen">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
       </button>
-      <div class=”volume-popover”>
-        <input type=”range” class=”vol-slider-vertical” min=”0” max=”1” step=”0.01” value=”1” id=”gpVolumeSlider”>
+      <div class="volume-popover">
+        <input type="range" class="vol-slider-vertical" min="0" max="1" step="0.01" value="1" id="gpVolumeSlider">
       </div>
     </div>
   </div>
 </div>
 
-<div id=”toast-container”></div>
-<button id=”installAppBtn” class=”install-app-btn” type=”button”>📲 Instalar app</button>
+<div id="toast-container"></div>
+<button id="installAppBtn" class="install-app-btn" type="button">📲 Instalar app</button>
 
-<script src=https://www.youtube.com/iframe_api></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
 // ===== TOAST GLOBAL =====
-Function showToast(msg) {
-  Let container = document.getElementById(‘toast-container’);
-  If (¡container) {
-    Container = document.createElement(‘div’);
-    Container.id = ‘toast-container’;
-    Document.body.appendChild(container);
+function showToast(msg) {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    document.body.appendChild(container);
   }
-  If (container.querySelector(‘.toast.show’)) return;
-  Const t = document.createElement(‘div’);
-  t.className = ‘toast show’;
+  if (container.querySelector('.toast.show')) return;
+  const t = document.createElement('div');
+  t.className = 'toast show';
   t.textContent = msg;
   container.appendChild(t);
-  setTimeout(() => { t.classList.remove(‘show’); setTimeout(() => t.remove(), 300); }, 3200);
+  setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 3200);
 }
-Window.showToast = showToast;
+window.showToast = showToast;
 
-Document.addEventListener(‘DOMContentLoaded’, () => {
+document.addEventListener('DOMContentLoaded', () => {
 
   // ===== VARIABLES DEL REPRODUCTOR =====
-  Let currentAudio = null;
-  Let currentCardId = null;
-  Let globalVolumeValue = 1.0;
-  Let rafId = null;
-  Let ytPlayer = null;
+  let currentAudio = null;
+  let currentCardId = null;
+  let globalVolumeValue = 1.0;
+  let rafId = null;
+  let ytPlayer = null;
 
-  Const cards = Array.from(document.querySelectorAll(‘.cancion-card’));
-  Const globalPlayer = document.getElementById(‘globalPlayer’);
-  Const gpTitle = document.getElementById(‘gpTitle’);
-  Const gpArtist = document.getElementById(‘gpArtist’);
-  Const gpCoverImg = document.getElementById(‘gpCoverImg’);
-  Const gpPlayBtn = document.getElementById(‘gpPlayBtn’);
-  Const gpIconPlay = gpPlayBtn.querySelector(‘.gp-icon-play’);
-  Const gpIconPause = gpPlayBtn.querySelector(‘.gp-icon-pause’);
-  Const gpProgressBar = document.getElementById(‘gpProgressBar’);
-  Const gpProgressContainer = document.getElementById(‘gpProgressContainer’);
-  Const gpCurrentTime = document.getElementById(‘gpCurrentTime’);
-  Const gpDuration = document.getElementById(‘gpDuration’);
-  Const gpVolSlider = document.getElementById(‘gpVolumeSlider’);
-  Const gpNextBtn = document.getElementById(‘gpNextBtn’);
-  Const gpPrevBtn = document.getElementById(‘gpPrevBtn’);
-  Const gpLikeBtn = document.getElementById(‘gpLikeBtn’);
-  Const shareToggleBtn = document.getElementById(‘gpShareToggleBtn’);
-  Const shareDropdown = document.getElementById(‘shareDropdown’);
-  Const defaultCover = https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png;
-  Const streamingSection = document.getElementById(“streaming-section”);
+  const cards = Array.from(document.querySelectorAll('.cancion-card'));
+  const globalPlayer = document.getElementById('globalPlayer');
+  const gpTitle = document.getElementById('gpTitle');
+  const gpArtist = document.getElementById('gpArtist');
+  const gpCoverImg = document.getElementById('gpCoverImg');
+  const gpPlayBtn = document.getElementById('gpPlayBtn');
+  const gpIconPlay = gpPlayBtn.querySelector('.gp-icon-play');
+  const gpIconPause = gpPlayBtn.querySelector('.gp-icon-pause');
+  const gpProgressBar = document.getElementById('gpProgressBar');
+  const gpProgressContainer = document.getElementById('gpProgressContainer');
+  const gpCurrentTime = document.getElementById('gpCurrentTime');
+  const gpDuration = document.getElementById('gpDuration');
+  const gpVolSlider = document.getElementById('gpVolumeSlider');
+  const gpNextBtn = document.getElementById('gpNextBtn');
+  const gpPrevBtn = document.getElementById('gpPrevBtn');
+  const gpLikeBtn = document.getElementById('gpLikeBtn');
+  const shareToggleBtn = document.getElementById('gpShareToggleBtn');
+  const shareDropdown = document.getElementById('shareDropdown');
+  const defaultCover = "https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png";
+  const streamingSection = document.getElementById("streaming-section");
 
   // Formato de tiempo REGRESIVO (muestra lo que resta)
-  Const formatRemainingTime = (current, duration) => {
-    If (isNaN(current) || isNaN(duration) || ¡isFinite(duration) || duration <= 0) return “0:00”;
-    Const remaining = Math.max(0, duration – current);
-    Const m = Math.floor(remaining / 60);
-    Const s = Math.floor(remaining % 60);
-    Return `${m}:${s < 10 ¿ “0” : “”}${s}`;
+  const formatRemainingTime = (current, duration) => {
+    if (isNaN(current) || isNaN(duration) || !isFinite(duration) || duration <= 0) return "0:00";
+    const remaining = Math.max(0, duration - current);
+    const m = Math.floor(remaining / 60);
+    const s = Math.floor(remaining % 60);
+    return `${m}:${s < 10 ? "0" : ""}${s}`;
   };
 
-  Const formatDuration = (duration) => {
-    If (isNaN(duration) || ¡isFinite(duration) || duration <= 0) return “0:00”;
-    Const m = Math.floor(duration / 60);
-    Const s = Math.floor(duration % 60);
-    Return `${m}:${s < 10 ¿ “0” : “”}${s}`;
+  const formatDuration = (duration) => {
+    if (isNaN(duration) || !isFinite(duration) || duration <= 0) return "0:00";
+    const m = Math.floor(duration / 60);
+    const s = Math.floor(duration % 60);
+    return `${m}:${s < 10 ? "0" : ""}${s}`;
   };
 
   // ===== INTERACCIÓN CON STREAMING =====
-  Let lastStreamingInteraction = 0;
-  If (streamingSection) {
-    [“pointerdown”, “mousedown”, “touchstart”, “click”, “keydown”].forEach(evt => {
+  let lastStreamingInteraction = 0;
+  if (streamingSection) {
+    ["pointerdown", "mousedown", "touchstart", "click", "keydown"].forEach(evt => {
       streamingSection.addEventListener(evt, () => {
         lastStreamingInteraction = Date.now();
-      }, { capture: true, passive: evt === “touchstart” });
+      }, { capture: true, passive: evt === "touchstart" });
     });
   }
 
   // ===== FUNCIONES DEL REPRODUCTOR =====
-  Function resetCardUI(cardId) {
-    If (¡cardId) return;
-    Const card = document.getElementById(cardId);
-    If (¡card) return;
-    Card.classList.remove(‘playing’);
-    Const progressBar = card.querySelector(‘.progress-bar’);
-    If (progressBar) progressBar.style.width = ‘0%’;
-    Const playIcon = card.querySelector(‘.icon-play’);
-    Const pauseIcon = card.querySelector(‘.icon-pause’);
-    If (playIcon) playIcon.style.display = ‘block’;
-    If (pauseIcon) pauseIcon.style.display = ‘none’;
+  function resetCardUI(cardId) {
+    if (!cardId) return;
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    card.classList.remove('playing');
+    const progressBar = card.querySelector('.progress-bar');
+    if (progressBar) progressBar.style.width = '0%';
+    const playIcon = card.querySelector('.icon-play');
+    const pauseIcon = card.querySelector('.icon-pause');
+    if (playIcon) playIcon.style.display = 'block';
+    if (pauseIcon) pauseIcon.style.display = 'none';
   }
 
-  Function updateCardUI(cardId, isPlaying) {
-    If (¡cardId) return;
-    Const card = document.getElementById(cardId);
-    If (¡card) return;
-    Const playIcon = card.querySelector(‘.icon-play’);
-    Const pauseIcon = card.querySelector(‘.icon-pause’);
-    If (isPlaying) {
-      Card.classList.add(‘playing’);
-      If (playIcon) playIcon.style.display = ‘none’;
-      If (pauseIcon) pauseIcon.style.display = ‘block’;
+  function updateCardUI(cardId, isPlaying) {
+    if (!cardId) return;
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    const playIcon = card.querySelector('.icon-play');
+    const pauseIcon = card.querySelector('.icon-pause');
+    if (isPlaying) {
+      card.classList.add('playing');
+      if (playIcon) playIcon.style.display = 'none';
+      if (pauseIcon) pauseIcon.style.display = 'block';
     } else {
-      Card.classList.remove(‘playing’);
-      If (playIcon) playIcon.style.display = ‘block’;
-      If (pauseIcon) pauseIcon.style.display = ‘none’;
+      card.classList.remove('playing');
+      if (playIcon) playIcon.style.display = 'block';
+      if (pauseIcon) pauseIcon.style.display = 'none';
     }
   }
 
-  Function updateGlobalPlayerUI(isPlaying) {
-    If (¡currentCardId) return;
-    Const card = document.getElementById(currentCardId);
-    If (¡card) return;
+  function updateGlobalPlayerUI(isPlaying) {
+    if (!currentCardId) return;
+    const card = document.getElementById(currentCardId);
+    if (!card) return;
     gpTitle.textContent = card.dataset.title;
     gpArtist.textContent = card.dataset.artist;
     if (isPlaying) {
-      gpIconPlay.style.display = ‘none’;
-      gpIconPause.style.display = ‘block’;
-      document.getElementById(‘gpCover’).classList.add(‘gp-cover-spin’);
+      gpIconPlay.style.display = 'none';
+      gpIconPause.style.display = 'block';
+      document.getElementById('gpCover').classList.add('gp-cover-spin');
     } else {
-      gpIconPlay.style.display = ‘block’;
-      gpIconPause.style.display = ‘none’;
-      document.getElementById(‘gpCover’).classList.remove(‘gp-cover-spin’);
+      gpIconPlay.style.display = 'block';
+      gpIconPause.style.display = 'none';
+      document.getElementById('gpCover').classList.remove('gp-cover-spin');
     }
   }
 
-  Function updateShareLinks(title) {
-    Const text = `Escucha ${title} en BVHanKrY Music`;
-    Const url = ‘https://bvhankry.onrender.com’;
-    Const waLink = document.getElementById(‘link-wa’);
-    Const fbLink = document.getElementById(‘link-fb’);
-    Const twLink = document.getElementById(‘link-tw’);
-    Const tgLink = document.getElementById(‘link-tg’);
-    If (waLink) waLink.href = `https://wa.me/?text=${encodeURIComponent(text + ‘ ‘ + url)}`;
-    If (fbLink) fbLink.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-    If (twLink) twLink.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-    If (tgLink) tgLink.href = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+  function updateShareLinks(title) {
+    const text = `Escucha ${title} en BVHanKrY Music`;
+    const url = 'https://bvhankry.onrender.com';
+    const waLink = document.getElementById('link-wa');
+    const fbLink = document.getElementById('link-fb');
+    const twLink = document.getElementById('link-tw');
+    const tgLink = document.getElementById('link-tg');
+    if (waLink) waLink.href = `https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`;
+    if (fbLink) fbLink.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+    if (twLink) twLink.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    if (tgLink) tgLink.href = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
   }
 
-  Function updateGlobalLikeState(cardId) {
-    Const isLiked = localStorage.getItem(`like-${cardId}`) === ‘true’;
-    If (isLiked) {
-      gpLikeBtn.classList.add(‘active-like’);
+  function updateGlobalLikeState(cardId) {
+    const isLiked = localStorage.getItem(`like-${cardId}`) === 'true';
+    if (isLiked) {
+      gpLikeBtn.classList.add('active-like');
     } else {
-      gpLikeBtn.classList.remove(‘active-like’);
+      gpLikeBtn.classList.remove('active-like');
     }
   }
 
-  Function toggleLike(cardId) {
-    Const card = document.getElementById(cardId);
-    Const likeState = localStorage.getItem(`like-${cardId}`) === ‘true’;
-    Const newState = ¡likeState;
+  function toggleLike(cardId) {
+    const card = document.getElementById(cardId);
+    const likeState = localStorage.getItem(`like-${cardId}`) === 'true';
+    const newState = !likeState;
     localStorage.setItem(`like-${cardId}`, newState);
-    const heart = card.querySelector(‘.heart-icon’);
-    const countSpan = card.querySelector(‘.likes-count’);
-    let count = parseInt(countSpan.innerText || ‘0’, 10);
+    const heart = card.querySelector('.heart-icon');
+    const countSpan = card.querySelector('.likes-count');
+    let count = parseInt(countSpan.innerText || '0', 10);
     if (newState) {
-      heart.classList.add(‘liked’);
-      heart.textContent = ‘♥’;
+      heart.classList.add('liked');
+      heart.textContent = '♥';
       count++;
-      showToast(“Añadido a Me gusta”);
+      showToast("Añadido a Me gusta");
     } else {
-      Heart.classList.remove(‘liked’);
-      Heart.textContent = ‘♡’;
-      Count = Math.max(0, count – 1);
+      heart.classList.remove('liked');
+      heart.textContent = '♡';
+      count = Math.max(0, count - 1);
     }
     countSpan.innerText = count;
     if (currentCardId === cardId) updateGlobalLikeState(cardId);
   }
 
   // ===== ACTUALIZACIÓN DE PROGRESO CON TIEMPO REGRESIVO =====
-  Function updateProgressUI() {
-    If (¡currentAudio || currentAudio.paused) {
-      If (rafId) {
+  function updateProgressUI() {
+    if (!currentAudio || currentAudio.paused) {
+      if (rafId) {
         cancelAnimationFrame(rafId);
         rafId = null;
       }
-      Return;
+      return;
     }
-    Const duration = currentAudio.duration;
-    Const currentTime = currentAudio.currentTime;
-    If (duration && isFinite(duration) && duration > 0) {
-      Const pct = (currentTime / duration) * 100;
+    const duration = currentAudio.duration;
+    const currentTime = currentAudio.currentTime;
+    if (duration && isFinite(duration) && duration > 0) {
+      const pct = (currentTime / duration) * 100;
       gpProgressBar.style.width = `${pct}%`;
       // Tiempo REGRESIVO (lo que resta)
       gpCurrentTime.textContent = formatRemainingTime(currentTime, duration);
       gpDuration.textContent = formatDuration(duration);
       const card = document.getElementById(currentCardId);
       if (card) {
-        const cardProgressBar = card.querySelector(‘.progress-bar’);
-        const cardTimeDisplay = card.querySelector(‘.time-display’);
+        const cardProgressBar = card.querySelector('.progress-bar');
+        const cardTimeDisplay = card.querySelector('.time-display');
         if (cardProgressBar) cardProgressBar.style.width = `${pct}%`;
         if (cardTimeDisplay) cardTimeDisplay.textContent = formatRemainingTime(currentTime, duration);
       }
@@ -1349,47 +1339,47 @@ Document.addEventListener(‘DOMContentLoaded’, () => {
     rafId = requestAnimationFrame(updateProgressUI);
   }
 
-  Function startProgressUpdates() {
-    If (rafId) cancelAnimationFrame(rafId);
+  function startProgressUpdates() {
+    if (rafId) cancelAnimationFrame(rafId);
     rafId = requestAnimationFrame(updateProgressUI);
   }
 
-  Function stopProgressUpdates() {
-    If (rafId) {
+  function stopProgressUpdates() {
+    if (rafId) {
       cancelAnimationFrame(rafId);
       rafId = null;
     }
   }
 
   // ===== PAUSAR YOUTUBE =====
-  Function pauseYouTube() {
-    If (ytPlayer && typeof ytPlayer.pauseVideo === ‘function’) {
-      Try {
+  function pauseYouTube() {
+    if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+      try {
         ytPlayer.pauseVideo();
-      } catch€ {}
+      } catch(e) {}
     }
   }
 
   // ===== PLAY SONG =====
-  Function playSong(cardId) {
-    Const card = document.getElementById(cardId);
-    If (¡card) return;
-    Const audio = card.querySelector(‘audio’);
-    If (¡audio) return;
-
-    Const coverUrl = card.dataset.cover || defaultCover;
-
+  function playSong(cardId) {
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    const audio = card.querySelector('audio');
+    if (!audio) return;
+    
+    const coverUrl = card.dataset.cover || defaultCover;
+    
     // Si ya está sonando la misma canción, pausar
-    If (currentAudio === audio && ¡audio.paused) {
-      Audio.pause();
+    if (currentAudio === audio && !audio.paused) {
+      audio.pause();
       updateCardUI(cardId, false);
       updateGlobalPlayerUI(false);
       stopProgressUpdates();
       return;
     }
-
+    
     // Detener audio anterior si existe
-    If (currentAudio && currentAudio ¡== audio) {
+    if (currentAudio && currentAudio !== audio) {
       currentAudio.pause();
       if (currentCardId) {
         resetCardUI(currentCardId);
@@ -1397,66 +1387,66 @@ Document.addEventListener(‘DOMContentLoaded’, () => {
       }
       stopProgressUpdates();
     }
-
+    
     // Configurar nuevo audio
     currentAudio = audio;
     currentCardId = cardId;
     audio.volume = globalVolumeValue;
-
+    
     // Cambiar portada con efecto fade
-    gpCoverImg.style.opacity = ‘0’;
+    gpCoverImg.style.opacity = '0';
     setTimeout(() => {
       gpCoverImg.src = coverUrl;
-      gpCoverImg.style.opacity = ‘1’;
+      gpCoverImg.style.opacity = '1';
     }, 120);
-
+    
     // Pausar YouTube antes de reproducir
     pauseYouTube();
-
+    
     // Reproducir audio
-    Audio.play().then(() => {
-      globalPlayer.classList.add(‘active’);
+    audio.play().then(() => {
+      globalPlayer.classList.add('active');
       updateCardUI(cardId, true);
       updateGlobalPlayerUI(true);
       updateShareLinks(card.dataset.title);
       updateGlobalLikeState(cardId);
       startProgressUpdates();
-
+      
       // Contar reproducción
-      Const playsEl = card.querySelector(‘.plays-count’);
-      If (¡audio.dataset.counted) {
-        Let count = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || ‘0’, 10);
-        Count++;
+      const playsEl = card.querySelector('.plays-count');
+      if (!audio.dataset.counted) {
+        let count = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0', 10);
+        count++;
         playsEl.textContent = count;
         localStorage.setItem(`plays-${audio.dataset.id}`, count);
-        audio.dataset.counted = ‘true’;
+        audio.dataset.counted = 'true';
       }
     }).catch((err) => {
-      Console.error(‘Error al reproducir:’, err);
-      showToast(“Error al cargar el audio”);
+      console.error('Error al reproducir:', err);
+      showToast("Error al cargar el audio");
     });
   }
 
-  Function playNext() {
-    If (¡currentCardId) return;
-    Const i = cards.findIndex(c => c.id === currentCardId);
-    If (i ¡== -1) {
-      Const nextIndex = (i + 1) % cards.length;
+  function playNext() {
+    if (!currentCardId) return;
+    const i = cards.findIndex(c => c.id === currentCardId);
+    if (i !== -1) {
+      const nextIndex = (i + 1) % cards.length;
       playSong(cards[nextIndex].id);
     }
   }
 
-  Function playPrev() {
-    If (¡currentCardId) return;
-    Const i = cards.findIndex(c => c.id === currentCardId);
-    If (i ¡== -1) {
-      Const prevIndex = (i – 1 + cards.length) % cards.length;
+  function playPrev() {
+    if (!currentCardId) return;
+    const i = cards.findIndex(c => c.id === currentCardId);
+    if (i !== -1) {
+      const prevIndex = (i - 1 + cards.length) % cards.length;
       playSong(cards[prevIndex].id);
     }
   }
 
   // ===== EVENTOS DEL REPRODUCTOR GLOBAL =====
-  gpPlayBtn.addEventListener(‘click’, () => {
+  gpPlayBtn.addEventListener('click', () => {
     if (currentAudio) {
       if (currentAudio.paused) {
         currentAudio.play().then(() => {
@@ -1464,7 +1454,7 @@ Document.addEventListener(‘DOMContentLoaded’, () => {
           updateGlobalPlayerUI(true);
           startProgressUpdates();
           pauseYouTube();
-        }).catch(e => showToast(“Error al reproducir”));
+        }).catch(e => showToast("Error al reproducir"));
       } else {
         currentAudio.pause();
         updateCardUI(currentCardId, false);
@@ -1475,132 +1465,132 @@ Document.addEventListener(‘DOMContentLoaded’, () => {
       playSong(cards[0].id);
     }
   });
-
-  gpNextBtn.addEventListener(‘click’, playNext);
-  gpPrevBtn.addEventListener(‘click’, playPrev);
-
-  gpProgressContainer.addEventListener(‘click’, € => {
-    if (¡currentAudio) return;
+  
+  gpNextBtn.addEventListener('click', playNext);
+  gpPrevBtn.addEventListener('click', playPrev);
+  
+  gpProgressContainer.addEventListener('click', (e) => {
+    if (!currentAudio) return;
     const rect = gpProgressContainer.getBoundingClientRect();
-    const pct = (e.clientX – rect.left) / rect.width;
+    const pct = (e.clientX - rect.left) / rect.width;
     if (currentAudio.duration && isFinite(currentAudio.duration)) {
       currentAudio.currentTime = pct * currentAudio.duration;
     }
   });
-
-  gpVolSlider.addEventListener(‘input’, € => {
+  
+  gpVolSlider.addEventListener('input', (e) => {
     globalVolumeValue = parseFloat(e.target.value);
     if (currentAudio) currentAudio.volume = globalVolumeValue;
   });
-
-  gpLikeBtn.addEventListener(‘click’, () => { if (currentCardId) toggleLike(currentCardId); });
-
-  shareToggleBtn.addEventListener(‘click’, € => {
+  
+  gpLikeBtn.addEventListener('click', () => { if (currentCardId) toggleLike(currentCardId); });
+  
+  shareToggleBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    shareDropdown.classList.toggle(‘active’);
+    shareDropdown.classList.toggle('active');
   });
-
-  Document.addEventListener(‘click’, € => {
-    If (shareDropdown && ¡shareDropdown.contains(e.target) && e.target ¡== shareToggleBtn) {
-      shareDropdown.classList.remove(‘active’);
+  
+  document.addEventListener('click', (e) => {
+    if (shareDropdown && !shareDropdown.contains(e.target) && e.target !== shareToggleBtn) {
+      shareDropdown.classList.remove('active');
     }
   });
 
   // ===== EVENTOS DE LAS TARJETAS =====
-  Cards.forEach(card => {
-    Const audio = card.querySelector(‘audio’);
-    Const plays = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || ‘0’, 10);
-    Const playsEl = card.querySelector(‘.plays-count’);
-    If (playsEl) playsEl.textContent = plays;
-
+  cards.forEach(card => {
+    const audio = card.querySelector('audio');
+    const plays = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0', 10);
+    const playsEl = card.querySelector('.plays-count');
+    if (playsEl) playsEl.textContent = plays;
+    
     // Cargar estado de likes
-    If (localStorage.getItem(`like-${card.id}`) === ‘true’) {
-      Const heart = card.querySelector(‘.heart-icon’);
-      If (heart) {
-        Heart.classList.add(‘liked’);
-        Heart.textContent = ‘♥’;
+    if (localStorage.getItem(`like-${card.id}`) === 'true') {
+      const heart = card.querySelector('.heart-icon');
+      if (heart) {
+        heart.classList.add('liked');
+        heart.textContent = '♥';
       }
-      Const countSpan = card.querySelector(‘.likes-count’);
-      If (countSpan) {
-        Let count = parseInt(countSpan.innerText || ‘0’, 10);
-        If (count === 0) countSpan.innerText = ‘1’;
+      const countSpan = card.querySelector('.likes-count');
+      if (countSpan) {
+        let count = parseInt(countSpan.innerText || '0', 10);
+        if (count === 0) countSpan.innerText = '1';
       }
     }
-
+    
     // Botones de reproducción
-    Const playButtons = card.querySelectorAll(‘.btn-card, .btn-card-float’);
+    const playButtons = card.querySelectorAll('.btn-card, .btn-card-float');
     playButtons.forEach(btn => {
-      btn.addEventListener(‘click’, € => { 
+      btn.addEventListener('click', (e) => { 
         e.stopPropagation(); 
         playSong(card.id); 
       });
     });
-
+    
     // Click en la tarjeta (excepto botones)
-    Card.addEventListener(‘click’, € => {
-      If (¡e.target.closest(‘.btn-card’) && ¡e.target.closest(‘.btn-card-float’) && 
-          ¡e.target.closest(‘.likes-counter’) && ¡e.target.closest(‘.share-whatsapp’) &&
-          ¡e.target.closest(‘.progress-container’)) {
+    card.addEventListener('click', (e) => {
+      if (!e.target.closest('.btn-card') && !e.target.closest('.btn-card-float') && 
+          !e.target.closest('.likes-counter') && !e.target.closest('.share-whatsapp') &&
+          !e.target.closest('.progress-container')) {
         playSong(card.id);
       }
     });
-
+    
     // Likes
-    Const likesCounter = card.querySelector(‘.likes-counter’);
-    If (likesCounter) {
-      likesCounter.addEventListener(‘click’, € => {
+    const likesCounter = card.querySelector('.likes-counter');
+    if (likesCounter) {
+      likesCounter.addEventListener('click', (e) => {
         e.stopPropagation();
         toggleLike(card.id);
       });
     }
-
+    
     // Barra de progreso
-    Const progressContainer = card.querySelector(‘.progress-container’);
-    If (progressContainer) {
-      progressContainer.addEventListener(‘click’, € => {
+    const progressContainer = card.querySelector('.progress-container');
+    if (progressContainer) {
+      progressContainer.addEventListener('click', (e) => {
         e.stopPropagation();
         if (audio === currentAudio) {
           const rect = e.currentTarget.getBoundingClientRect();
-          const pct = (e.clientX – rect.left) / rect.width;
+          const pct = (e.clientX - rect.left) / rect.width;
           if (audio.duration && isFinite(audio.duration)) {
             audio.currentTime = pct * audio.duration;
           }
         }
       });
     }
-
+    
     // Eventos del audio
-    Audio.addEventListener(‘ended’, () => {
-      If (currentCardId === card.id) {
+    audio.addEventListener('ended', () => {
+      if (currentCardId === card.id) {
         stopProgressUpdates();
         playNext();
       }
     });
-
-    Audio.addEventListener(‘play’, () => {
-      If (currentCardId === card.id) {
+    
+    audio.addEventListener('play', () => {
+      if (currentCardId === card.id) {
         startProgressUpdates();
       }
     });
   });
 
   // ===== PAUSAR TODOS LOS AUDIOS AL INTERACTUAR CON STREAMING =====
-  Function pauseAllLocalAudio() {
-    Document.querySelectorAll(“audio”).forEach(a => {
-      If (¡a.paused) a.pause();
+  function pauseAllLocalAudio() {
+    document.querySelectorAll("audio").forEach(a => {
+      if (!a.paused) a.pause();
     });
-    If (currentCardId) {
+    if (currentCardId) {
       updateCardUI(currentCardId, false);
       updateGlobalPlayerUI(false);
       stopProgressUpdates();
     }
   }
-
-  If (streamingSection) {
-    [“pointerdown”, “mousedown”, “touchstart”, “click”].forEach(evt => {
-      streamingSection.addEventListener(evt, € => {
-        const isInteractive = e.target.closest(‘a’) || e.target.closest(‘button’) || e.target.closest(‘iframe’);
-        if (¡isInteractive) {
+  
+  if (streamingSection) {
+    ["pointerdown", "mousedown", "touchstart", "click"].forEach(evt => {
+      streamingSection.addEventListener(evt, (e) => {
+        const isInteractive = e.target.closest('a') || e.target.closest('button') || e.target.closest('iframe');
+        if (!isInteractive) {
           pauseAllLocalAudio();
         }
       }, { capture: true });
@@ -1608,13 +1598,13 @@ Document.addEventListener(‘DOMContentLoaded’, () => {
   }
 
   // ===== YOUTUBE API =====
-  Window.onYouTubeIframeAPIReady = function() {
-    Const ytIframe = document.getElementById(‘yt-player’);
-    If (ytIframe) {
+  window.onYouTubeIframeAPIReady = function() {
+    const ytIframe = document.getElementById('yt-player');
+    if (ytIframe) {
       ytPlayer = new YT.Player(ytIframe, {
         events: {
-          ‘onStateChange’: function(event) {
-            If (event.data === YT.PlayerState.PLAYING) {
+          'onStateChange': function(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
               pauseAllLocalAudio();
             }
           }
@@ -1622,123 +1612,123 @@ Document.addEventListener(‘DOMContentLoaded’, () => {
       });
     }
   };
-
+  
   // Cargar YouTube API si no está cargada
-  If (typeof YT === ‘undefined’ || ¡YT.Player) {
-    Const tag = document.createElement(“script”);
-    Tag.src = https://www.youtube.com/iframe_api;
-    Document.head.appendChild(tag);
+  if (typeof YT === 'undefined' || !YT.Player) {
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
   } else {
-    Window.onYouTubeIframeAPIReady();
+    window.onYouTubeIframeAPIReady();
   }
 
   // ===== MENÚ HAMBURGUESA (SOLO MÓVIL) =====
-  Const menuBtn = document.querySelector(‘.menu-toggle’);
-  Const navLinks = document.querySelector(‘.nav-links’);
-  If (menuBtn && navLinks) {
-    menuBtn.addEventListener(‘click’, () => {
-      const willOpen = ¡navLinks.classList.contains(‘active’);
-      navLinks.classList.toggle(‘active’);
-      menuBtn.setAttribute(‘aria-expanded’, String(willOpen));
+  const menuBtn = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener('click', () => {
+      const willOpen = !navLinks.classList.contains('active');
+      navLinks.classList.toggle('active');
+      menuBtn.setAttribute('aria-expanded', String(willOpen));
     });
   }
 
   // ===== SCROLL NAV HIDE =====
-  Let lastScroll = 0;
-  Window.addEventListener(‘scroll’, () => {
-    Const currentScroll = window.pageYOffset;
-    Const nav = document.querySelector(‘.main-nav’);
-    If (currentScroll > lastScroll && currentScroll > 100) {
-      Nav.classList.add(‘hidden-nav’);
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    const nav = document.querySelector('.main-nav');
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      nav.classList.add('hidden-nav');
     } else {
-      Nav.classList.remove(‘hidden-nav’);
+      nav.classList.remove('hidden-nav');
     }
     lastScroll = currentScroll;
   });
 
   // ===== SCROLL FADE =====
-  Const scrollElements = document.querySelectorAll(“.scroll-fade”);
-  Const io = new IntersectionObserver((entries) => {
-    Entries.forEach(entry => {
-      If (entry.isIntersecting) entry.target.classList.add(“visible”);
+  const scrollElements = document.querySelectorAll(".scroll-fade");
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
     });
   }, { threshold: 0.25 });
   scrollElements.forEach(el => io.observe(el));
-
+  
   // Forzar streaming visible
-  If (streamingSection) {
-    streamingSection.classList.add(“visible”);
+  if (streamingSection) {
+    streamingSection.classList.add("visible");
   }
 
   // ===== INSTALACIÓN PWA =====
-  Const installAppBtn = document.getElementById(‘installAppBtn’);
-  Let deferredInstallPrompt = null;
-  Const isStandalone = window.matchMedia(‘(display-mode: standalone)’).matches || window.navigator.standalone === true;
-
-  If (isStandalone) {
-    If (installAppBtn) installAppBtn.remove();
+  const installAppBtn = document.getElementById('installAppBtn');
+  let deferredInstallPrompt = null;
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  
+  if (isStandalone) {
+    if (installAppBtn) installAppBtn.remove();
   } else {
-    Window.addEventListener(‘beforeinstallprompt’, (event) => {
-      Event.preventDefault();
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
       deferredInstallPrompt = event;
-      if (installAppBtn) installAppBtn.classList.add(‘visible’);
+      if (installAppBtn) installAppBtn.classList.add('visible');
     });
-
-    If (installAppBtn) {
-      installAppBtn.addEventListener(‘click’, async () => {
-        if (¡deferredInstallPrompt) {
-          showToast(‘La instalación no está disponible en este navegador.’);
+    
+    if (installAppBtn) {
+      installAppBtn.addEventListener('click', async () => {
+        if (!deferredInstallPrompt) {
+          showToast('La instalación no está disponible en este navegador.');
           return;
         }
         deferredInstallPrompt.prompt();
         const choiceResult = await deferredInstallPrompt.userChoice;
-        if (choiceResult.outcome === ‘accepted’) showToast(‘App instalada correctamente ✅’);
+        if (choiceResult.outcome === 'accepted') showToast('App instalada correctamente ✅');
         deferredInstallPrompt = null;
-        installAppBtn.classList.remove(‘visible’);
+        installAppBtn.classList.remove('visible');
       });
     }
-
-    Window.addEventListener(‘appinstalled’, () => {
-      If (installAppBtn) installAppBtn.classList.remove(‘visible’);
-      showToast(‘Gracias por instalar la app’);
+    
+    window.addEventListener('appinstalled', () => {
+      if (installAppBtn) installAppBtn.classList.remove('visible');
+      showToast('Gracias por instalar la app');
     });
   }
 
   // ===== SERVICE WORKER =====
-  If (‘serviceWorker’ in navigator) {
-    Window.addEventListener(‘load’, () => {
-      Navigator.serviceWorker.register(‘./sw.js’).catch((error) => {
-        Console.error(‘Service Worker error:’, error);
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch((error) => {
+        console.error('Service Worker error:', error);
       });
     });
   }
 
   // ===== COMPARTIR =====
-  Window.copyToClipboard = (url, title) => {
-    Navigator.clipboard.writeText(`${title} - ${url}`).then(() => showToast(“Enlace copiado”));
+  window.copyToClipboard = (url, title) => {
+    navigator.clipboard.writeText(`${title} - ${url}`).then(() => showToast("Enlace copiado"));
   };
-
-  Document.querySelectorAll(‘.share-whatsapp’).forEach(btn => {
-    Btn.addEventListener(‘click’, function€ {
+  
+  document.querySelectorAll('.share-whatsapp').forEach(btn => {
+    btn.addEventListener('click', function(e) {
       e.preventDefault();
-      const link = this.getAttribute(‘data-link’);
-      const title = this.getAttribute(‘data-title’);
+      const link = this.getAttribute('data-link');
+      const title = this.getAttribute('data-title');
       if (window.copyToClipboard) copyToClipboard(link, title);
     });
   });
-
+  
   // Cargar estado de likes al inicio
-  Cards.forEach(card => {
-    Const isLiked = localStorage.getItem(`like-${card.id}`) === ‘true’;
-    If (isLiked) {
-      Const heart = card.querySelector(‘.heart-icon’);
-      Const countSpan = card.querySelector(‘.likes-count’);
-      If (heart) {
-        Heart.classList.add(‘liked’);
-        Heart.textContent = ‘♥’;
+  cards.forEach(card => {
+    const isLiked = localStorage.getItem(`like-${card.id}`) === 'true';
+    if (isLiked) {
+      const heart = card.querySelector('.heart-icon');
+      const countSpan = card.querySelector('.likes-count');
+      if (heart) {
+        heart.classList.add('liked');
+        heart.textContent = '♥';
       }
-      If (countSpan && parseInt(countSpan.innerText) === 0) {
-        countSpan.innerText = ‘1’;
+      if (countSpan && parseInt(countSpan.innerText) === 0) {
+        countSpan.innerText = '1';
       }
     }
   });
