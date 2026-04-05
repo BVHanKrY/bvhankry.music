@@ -38,7 +38,6 @@
   --player-h:52px;
 }
 
-/* ─── Reset & Base ─── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -58,7 +57,6 @@ a{color:inherit}
 button{font-family:inherit}
 img{display:block}
 
-/* ─── Barra de progreso superior ─── */
 .top-progress{
   position:fixed;top:0;left:0;
   height:2px;width:0%;
@@ -67,7 +65,6 @@ img{display:block}
   pointer-events:none;
 }
 
-/* ─── Navegación ─── */
 .main-nav{
   position:fixed;top:0;left:0;right:0;
   height:var(--nav-h);
@@ -101,13 +98,11 @@ img{display:block}
   line-height:1;
 }
 
-/* ─── Contenedor principal ─── */
 .container{
   max-width:1100px;margin:0 auto;
   padding:calc(var(--nav-h) + 40px) 24px 0;
 }
 
-/* ─── Hero ─── */
 .hero{
   display:flex;align-items:center;gap:28px;
   padding:0 0 36px;
@@ -135,7 +130,6 @@ img{display:block}
   color:var(--accent);letter-spacing:4px;text-transform:uppercase;
 }
 
-/* ─── Track List ─── */
 .tracklist-header{
   display:grid;
   grid-template-columns:48px 1fr auto auto 40px;
@@ -160,7 +154,6 @@ img{display:block}
 .track-row.playing .track-title-text{color:var(--accent)}
 .track-row.playing .tr-num{color:var(--accent)}
 
-/* Trigger (número / play / pause) */
 .track-trigger{
   background:none;border:none;cursor:pointer;
   padding:0;color:var(--muted);
@@ -168,10 +161,7 @@ img{display:block}
   width:48px;height:40px;
 }
 .track-trigger:focus-visible{outline:1px solid var(--accent);outline-offset:-1px}
-.tr-num{
-  font-family:var(--mono);font-size:.82rem;
-  display:block;
-}
+.tr-num{font-family:var(--mono);font-size:.82rem;display:block}
 .tr-play,.tr-pause{display:none;width:14px;height:14px;fill:currentColor}
 .track-row:hover .tr-num{display:none}
 .track-row:hover .tr-play{display:block}
@@ -180,7 +170,6 @@ img{display:block}
 .track-row.playing:hover .tr-play{display:none}
 .track-row.playing:hover .tr-pause{display:block}
 
-/* Info */
 .track-info{overflow:hidden;min-width:0}
 .track-title-text{
   font-size:.9rem;font-weight:500;
@@ -193,7 +182,6 @@ img{display:block}
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 
-/* Duración y plays */
 .track-duration{
   font-family:var(--mono);font-size:.75rem;
   color:var(--muted);min-width:40px;text-align:right;
@@ -203,7 +191,6 @@ img{display:block}
   color:var(--muted);min-width:60px;text-align:right;
 }
 
-/* Like */
 .track-like{
   background:none;border:none;cursor:pointer;
   color:var(--muted);padding:0;
@@ -216,7 +203,6 @@ img{display:block}
 .track-like svg{width:16px;height:16px;fill:currentColor}
 .track-like.liked{color:var(--accent)}
 
-/* Línea de progreso bajo la fila */
 .track-progress-line{
   position:absolute;bottom:0;left:0;
   width:100%;height:2px;
@@ -228,7 +214,6 @@ img{display:block}
   transition:width .1s linear;
 }
 
-/* ─── Streaming ─── */
 .streaming-section{
   border:1px solid var(--border);
   margin:40px 0;
@@ -256,7 +241,6 @@ img{display:block}
 }
 .stream-link:hover{color:var(--accent)}
 
-/* ─── Info Grid ─── */
 .info-grid{
   display:grid;grid-template-columns:1fr 1fr;
   gap:1px;background:var(--border);
@@ -281,8 +265,14 @@ img{display:block}
   letter-spacing:1px;text-transform:uppercase;
   color:var(--muted);
 }
+.info-teaser-link{
+  display:inline-block;margin-top:14px;
+  font-family:var(--mono);font-size:.72rem;
+  color:var(--accent);text-decoration:none;
+  letter-spacing:1px;transition:color .15s;
+}
+.info-teaser-link:hover{color:var(--text)}
 
-/* ─── Footer ─── */
 footer{
   padding:36px 0;
   border-top:1px solid var(--border);
@@ -297,7 +287,6 @@ footer p{
   font-family:var(--mono);letter-spacing:.5px;
 }
 
-/* ─── Global Player ─── */
 .global-player{
   position:fixed;bottom:0;left:0;width:100%;
   height:var(--player-h);
@@ -391,7 +380,6 @@ footer p{
   border:none;cursor:pointer;
 }
 
-/* Share dropdown */
 .share-wrap{position:relative}
 .share-dropdown{
   position:absolute;bottom:calc(100% + 8px);right:0;
@@ -415,7 +403,6 @@ footer p{
 .share-item:hover{color:var(--accent)}
 .share-item svg{width:18px;height:18px;fill:currentColor}
 
-/* ─── Toast ─── */
 #toast-container{
   position:fixed;bottom:72px;right:20px;z-index:9999;
   display:flex;flex-direction:column;gap:8px;pointer-events:none;
@@ -437,7 +424,6 @@ footer p{
   background:var(--accent);vertical-align:middle;
 }
 
-/* ─── Install Button ─── */
 .install-btn{
   position:fixed;right:20px;bottom:72px;z-index:2100;
   padding:7px 14px;
@@ -452,12 +438,203 @@ footer p{
 .install-btn.visible{display:block}
 .install-btn:hover{background:var(--accent);color:var(--bg)}
 
-/* ─── Scroll Fade ─── */
 .scroll-fade{
   opacity:0;transform:translateY(14px);
   transition:opacity .5s ease,transform .5s ease;
 }
 .scroll-fade.visible{opacity:1;transform:translateY(0)}
+
+/* ═══════════════════════════════════════════
+   MERCH — Minimalismo Digital / Flat Design
+   ═══════════════════════════════════════════ */
+
+.merch-section{
+  border:1px solid var(--border);
+  margin:0 0 40px;
+}
+.merch-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 20px;
+  border-bottom:1px solid var(--border);
+}
+.merch-header-label{
+  font-family:var(--mono);font-size:.65rem;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);
+}
+.merch-header-count{
+  font-family:var(--mono);font-size:.6rem;
+  color:var(--muted);letter-spacing:1px;
+}
+.merch-header-count span{color:var(--accent)}
+
+/* Grid de productos */
+.merch-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--border);
+}
+.merch-item{
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  background:var(--bg);
+  aspect-ratio:1/1.15;
+}
+.merch-item img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .4s ease;
+}
+.merch-item:hover img{transform:scale(1.04)}
+
+/* Overlay hover — flat, sin blur */
+.merch-overlay{
+  position:absolute;inset:0;
+  background:rgba(10,10,10,.82);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  opacity:0;
+  transition:opacity .15s;
+}
+.merch-item:hover .merch-overlay{opacity:1}
+.merch-overlay-num{
+  font-family:var(--mono);font-size:1.6rem;
+  font-weight:700;color:var(--accent);
+  letter-spacing:2px;
+}
+.merch-overlay-text{
+  font-family:var(--mono);font-size:.6rem;
+  color:var(--muted);
+  letter-spacing:2px;text-transform:uppercase;
+}
+
+/* Marquee inferior del merch */
+.merch-marquee{
+  border-top:1px solid var(--border);
+  overflow:hidden;
+  padding:10px 0;
+  position:relative;
+}
+.merch-marquee::before,
+.merch-marquee::after{
+  content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;
+  pointer-events:none;
+}
+.merch-marquee::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+.merch-marquee::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+.merch-marquee-track{
+  display:flex;
+  animation:marqueeScroll 20s linear infinite;
+  width:max-content;
+}
+.merch-marquee-item{
+  font-family:var(--mono);font-size:.65rem;
+  color:var(--muted);letter-spacing:2px;
+  text-transform:uppercase;
+  white-space:nowrap;
+  padding:0 28px;
+  flex-shrink:0;
+}
+.merch-marquee-item .dot{
+  display:inline-block;
+  width:4px;height:4px;
+  background:var(--accent);
+  margin:0 20px;
+  vertical-align:middle;
+}
+@keyframes marqueeScroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+/* ─── Lightbox ─── */
+.lightbox{
+  position:fixed;inset:0;
+  z-index:4000;
+  background:var(--bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s;
+}
+.lightbox.open{opacity:1;pointer-events:auto}
+
+.lightbox-topbar{
+  position:absolute;top:0;left:0;right:0;
+  height:48px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;
+  border-bottom:1px solid var(--border);
+  background:var(--bg);
+}
+.lightbox-counter{
+  font-family:var(--mono);font-size:.7rem;
+  color:var(--muted);letter-spacing:2px;
+}
+.lightbox-counter span{color:var(--accent)}
+.lightbox-close{
+  background:none;border:none;color:var(--muted);
+  cursor:pointer;padding:8px;
+  font-family:var(--mono);font-size:1.2rem;
+  transition:color .12s;
+  display:flex;align-items:center;justify-content:center;
+}
+.lightbox-close:hover{color:var(--text)}
+
+.lightbox-img-wrap{
+  position:absolute;
+  top:48px;bottom:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  cursor:pointer;
+}
+.lightbox-img-wrap img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+
+.lightbox-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:none;border:none;
+  color:var(--muted);cursor:pointer;
+  padding:16px;
+  transition:color .12s;
+  z-index:10;
+  display:flex;align-items:center;justify-content:center;
+}
+.lightbox-nav:hover{color:var(--accent)}
+.lightbox-prev{left:0}
+.lightbox-next{right:0}
+.lightbox-nav svg{width:28px;height:28px;fill:currentColor}
+
+/* Indicador de pieza en lightbox */
+.lightbox-piece-label{
+  position:absolute;
+  bottom:20px;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:.6rem;
+  color:var(--muted);letter-spacing:3px;
+  text-transform:uppercase;
+  z-index:10;
+  pointer-events:none;
+}
+
+/* Stagger de entrada para items del merch */
+.merch-item{
+  opacity:0;transform:translateY(10px);
+  transition:opacity .4s ease,transform .4s ease;
+}
+.merch-item.revealed{opacity:1;transform:translateY(0)}
 
 /* ─── Responsive ─── */
 @media(max-width:768px){
@@ -495,6 +672,12 @@ footer p{
 
   .info-grid{grid-template-columns:1fr}
 
+  .merch-grid{grid-template-columns:repeat(2,1fr)}
+  .merch-item{aspect-ratio:1/1.2}
+
+  .lightbox-nav{padding:10px}
+  .lightbox-nav svg{width:22px;height:22px}
+
   .global-player{
     grid-template-columns:1fr auto;
     height:auto;padding:8px 12px;gap:8px;
@@ -509,7 +692,13 @@ footer p{
   #toast-container{right:14px;bottom:64px}
 }
 
-/* ─── Reduced Motion ─── */
+@media(max-width:420px){
+  .merch-grid{grid-template-columns:1fr 1fr;gap:1px}
+  .merch-item{aspect-ratio:1/1.3}
+  .merch-overlay-num{font-size:1.1rem}
+  .merch-overlay-text{font-size:.5rem}
+}
+
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{
     animation-duration:.01ms!important;
@@ -523,10 +712,8 @@ footer p{
 
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQQQ48NX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<!-- Barra de progreso superior -->
 <div class="top-progress" id="topProgress"></div>
 
-<!-- Navegación -->
 <nav class="main-nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
@@ -550,7 +737,6 @@ footer p{
 
 <div class="container">
 
-  <!-- Hero -->
   <section class="hero">
     <div class="hero-cover">
       <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png" alt="Portada Pulso EP">
@@ -563,75 +749,37 @@ footer p{
     </div>
   </section>
 
-  <!-- Track List -->
   <div id="music">
     <div class="tracklist-header">
-      <span>#</span>
-      <span>Título</span>
-      <span>Duración</span>
-      <span>Plays</span>
-      <span></span>
+      <span>#</span><span>Título</span><span>Duración</span><span>Plays</span><span></span>
     </div>
 
-    <!-- Tinkuy -->
-    <div class="track-row" id="row-tinkuy" data-title="Tinkuy" data-artist="BVHanKrY"
-         data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
-      <button class="track-trigger" aria-label="Reproducir Tinkuy">
-        <span class="tr-num">01</span>
-        <svg class="tr-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="tr-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      </button>
-      <div class="track-info">
-        <div class="track-title-text">Tinkuy</div>
-        <div class="track-artist-text">BVHanKrY</div>
-      </div>
+    <div class="track-row" id="row-tinkuy" data-title="Tinkuy" data-artist="BVHanKrY" data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
+      <button class="track-trigger" aria-label="Reproducir Tinkuy"><span class="tr-num">01</span><svg class="tr-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="tr-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+      <div class="track-info"><div class="track-title-text">Tinkuy</div><div class="track-artist-text">BVHanKrY</div></div>
       <span class="track-duration">--:--</span>
       <span class="track-plays"><span class="track-plays-count">0</span> plays</span>
-      <button class="track-like" aria-label="Me gusta">
-        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      </button>
+      <button class="track-like" aria-label="Me gusta"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
       <div class="track-progress-line"><div class="track-progress-fill"></div></div>
       <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/tinkuy.mp3" preload="metadata" data-id="tinkuy"></audio>
     </div>
 
-    <!-- Subtle_Gad -->
-    <div class="track-row" id="row-subtle_gad" data-title="Subtle_Gad" data-artist="BVHanKrY"
-         data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
-      <button class="track-trigger" aria-label="Reproducir Subtle_Gad">
-        <span class="tr-num">02</span>
-        <svg class="tr-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="tr-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      </button>
-      <div class="track-info">
-        <div class="track-title-text">Subtle_Gad</div>
-        <div class="track-artist-text">BVHanKrY</div>
-      </div>
+    <div class="track-row" id="row-subtle_gad" data-title="Subtle_Gad" data-artist="BVHanKrY" data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
+      <button class="track-trigger" aria-label="Reproducir Subtle_Gad"><span class="tr-num">02</span><svg class="tr-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="tr-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+      <div class="track-info"><div class="track-title-text">Subtle_Gad</div><div class="track-artist-text">BVHanKrY</div></div>
       <span class="track-duration">--:--</span>
       <span class="track-plays"><span class="track-plays-count">0</span> plays</span>
-      <button class="track-like" aria-label="Me gusta">
-        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      </button>
+      <button class="track-like" aria-label="Me gusta"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
       <div class="track-progress-line"><div class="track-progress-fill"></div></div>
       <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/Subtle%20gad.mp3" preload="metadata" data-id="subtle_gad"></audio>
     </div>
 
-    <!-- Regresión -->
-    <div class="track-row" id="row-regresion" data-title="Regresión" data-artist="BVHanKrY"
-         data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
-      <button class="track-trigger" aria-label="Reproducir Regresión">
-        <span class="tr-num">03</span>
-        <svg class="tr-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="tr-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      </button>
-      <div class="track-info">
-        <div class="track-title-text">Regresión</div>
-        <div class="track-artist-text">BVHanKrY</div>
-      </div>
+    <div class="track-row" id="row-regresion" data-title="Regresión" data-artist="BVHanKrY" data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
+      <button class="track-trigger" aria-label="Reproducir Regresión"><span class="tr-num">03</span><svg class="tr-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="tr-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+      <div class="track-info"><div class="track-title-text">Regresión</div><div class="track-artist-text">BVHanKrY</div></div>
       <span class="track-duration">--:--</span>
       <span class="track-plays"><span class="track-plays-count">0</span> plays</span>
-      <button class="track-like" aria-label="Me gusta">
-        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      </button>
+      <button class="track-like" aria-label="Me gusta"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
       <div class="track-progress-line"><div class="track-progress-fill"></div></div>
       <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/regresi%C3%B3n.mp3" preload="metadata" data-id="regresion"></audio>
     </div>
@@ -641,12 +789,8 @@ footer p{
   <section class="streaming-section scroll-fade" id="streaming-section">
     <div class="streaming-label">// Plataformas</div>
     <div class="embed-grid">
-      <div class="embed-cell">
-        <iframe src="https://open.spotify.com/embed/playlist/1fdvC7VC5YAHgTRE5ZCnH6?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-      <div class="embed-cell">
-        <iframe id="yt-player" src="https://www.youtube.com/embed/JJoU2X8_I0I?enablejsapi=1&origin=https://bvhankry.onrender.com" width="100%" height="352" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
+      <div class="embed-cell"><iframe src="https://open.spotify.com/embed/playlist/1fdvC7VC5YAHgTRE5ZCnH6?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
+      <div class="embed-cell"><iframe id="yt-player" src="https://www.youtube.com/embed/JJoU2X8_I0I?enablejsapi=1&origin=https://bvhankry.onrender.com" width="100%" height="352" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
     </div>
     <div class="streaming-links">
       <a class="stream-link" href="https://open.spotify.com/playlist/1fdvC7VC5YAHgTRE5ZCnH6?si=yLTCxcWdSGyxkYShJ0FN8Q" target="_blank" rel="noopener">Spotify →</a>
@@ -669,13 +813,98 @@ footer p{
     <div class="info-cell" id="shop">
       <h2>Mercancía</h2>
       <p>Soporta el arte directamente. Diseños exclusivos, edición limitada.</p>
-      <span class="info-tag">Tienda Oficial</span>
+      <a href="#merch-section" class="info-teaser-link">Ver colección →</a>
     </div>
     <div class="info-cell scroll-fade" id="app-location">
       <h2>Aplicación</h2>
       <p>Aplicación web oficial en esta misma página. Instala desde el botón flotante cuando tu navegador lo habilite.</p>
       <span class="info-tag">Ruta: /index.html</span>
     </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       MERCH SECCIÓN COMPLETA
+       ═══════════════════════════════════════ -->
+  <section class="merch-section scroll-fade" id="merch-section">
+    <div class="merch-header">
+      <span class="merch-header-label">// Colección</span>
+      <span class="merch-header-count"><span>06</span> piezas</span>
+    </div>
+    <div class="merch-grid" id="merchGrid">
+      <!-- Item 001 -->
+      <div class="merch-item" data-index="0">
+        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%203.png" alt="Colección 001" loading="lazy">
+        <div class="merch-overlay">
+          <span class="merch-overlay-num">001</span>
+          <span class="merch-overlay-text">Ver detalle</span>
+        </div>
+      </div>
+      <!-- Item 002 -->
+      <div class="merch-item" data-index="1">
+        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%204.png" alt="Colección 002" loading="lazy">
+        <div class="merch-overlay">
+          <span class="merch-overlay-num">002</span>
+          <span class="merch-overlay-text">Ver detalle</span>
+        </div>
+      </div>
+      <!-- Item 003 -->
+      <div class="merch-item" data-index="2">
+        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%205.png" alt="Colección 003" loading="lazy">
+        <div class="merch-overlay">
+          <span class="merch-overlay-num">003</span>
+          <span class="merch-overlay-text">Ver detalle</span>
+        </div>
+      </div>
+      <!-- Item 004 -->
+      <div class="merch-item" data-index="3">
+        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%206.png" alt="Colección 004" loading="lazy">
+        <div class="merch-overlay">
+          <span class="merch-overlay-num">004</span>
+          <span class="merch-overlay-text">Ver detalle</span>
+        </div>
+      </div>
+      <!-- Item 005 -->
+      <div class="merch-item" data-index="4">
+        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion.png" alt="Colección 005" loading="lazy">
+        <div class="merch-overlay">
+          <span class="merch-overlay-num">005</span>
+          <span class="merch-overlay-text">Ver detalle</span>
+        </div>
+      </div>
+      <!-- Item 006 -->
+      <div class="merch-item" data-index="5">
+        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/coleccion%207.png" alt="Colección 006" loading="lazy">
+        <div class="merch-overlay">
+          <span class="merch-overlay-num">006</span>
+          <span class="merch-overlay-text">Ver detalle</span>
+        </div>
+      </div>
+    </div>
+    <!-- Marquee -->
+    <div class="merch-marquee">
+      <div class="merch-marquee-track">
+        <span class="merch-marquee-item">BVHanKrY<span class="dot"></span>Pulso Collection<span class="dot"></span>Ecuador<span class="dot"></span>Edición Limitada<span class="dot"></span>Dub Music<span class="dot"></span>BVros Productions<span class="dot"></span>2026</span>
+        <span class="merch-marquee-item">BVHanKrY<span class="dot"></span>Pulso Collection<span class="dot"></span>Ecuador<span class="dot"></span>Edición Limitada<span class="dot"></span>Dub Music<span class="dot"></span>BVros Productions<span class="dot"></span>2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de producto">
+    <div class="lightbox-topbar">
+      <span class="lightbox-counter"><span id="lbCurrent">01</span> / <span id="lbTotal">06</span></span>
+      <button class="lightbox-close" id="lbClose" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="lightbox-img-wrap" id="lbImgWrap">
+      <img id="lbImg" src="" alt="Producto">
+    </div>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Anterior">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+    <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Siguiente">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
+    <div class="lightbox-piece-label" id="lbLabel">Pieza 001</div>
   </div>
 
   <footer>
@@ -694,29 +923,19 @@ footer p{
     </div>
   </div>
   <div class="gp-center">
-    <button class="gp-btn" id="gpPrevBtn" title="Anterior">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-    </button>
+    <button class="gp-btn" id="gpPrevBtn" title="Anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
     <button class="gp-play-main" id="gpPlayBtn" aria-label="Play/Pause">
       <svg class="gp-icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       <svg class="gp-icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>
-    <button class="gp-btn" id="gpNextBtn" title="Siguiente">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-    </button>
-    <div class="gp-progress-track" id="gpProgressTrack">
-      <div class="gp-progress-fill" id="gpProgressFill"></div>
-    </div>
+    <button class="gp-btn" id="gpNextBtn" title="Siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+    <div class="gp-progress-track" id="gpProgressTrack"><div class="gp-progress-fill" id="gpProgressFill"></div></div>
     <span class="gp-time" id="gpTime">0:00 / 0:00</span>
   </div>
   <div class="gp-right">
-    <button class="gp-action-btn" id="gpLikeBtn" title="Me gusta">
-      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    </button>
+    <button class="gp-action-btn" id="gpLikeBtn" title="Me gusta"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
     <div class="share-wrap">
-      <button class="gp-action-btn" id="gpShareBtn" title="Compartir">
-        <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
-      </button>
+      <button class="gp-action-btn" id="gpShareBtn" title="Compartir"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg></button>
       <div class="share-dropdown" id="shareDropdown">
         <a href="#" class="share-item" target="_blank" id="link-wa">WA</a>
         <a href="#" class="share-item" target="_blank" id="link-fb">FB</a>
@@ -737,7 +956,7 @@ footer p{
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ─── Referencias DOM ─── */
+  /* ─── Reproductor (sin cambios) ─── */
   const rows = Array.from(document.querySelectorAll('.track-row'));
   const globalPlayer = document.getElementById('globalPlayer');
   const gpTitle = document.getElementById('gpTitle');
@@ -759,14 +978,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const defaultCover = "https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png";
   const streamingSection = document.getElementById('streaming-section');
 
-  /* ─── Estado ─── */
-  let currentAudio = null;
-  let currentRowId = null;
-  let globalVol = 1;
-  let rafId = null;
-  let ytPlayer = null;
+  let currentAudio = null, currentRowId = null, globalVol = 1, rafId = null, ytPlayer = null;
 
-  /* ─── Utilidades ─── */
   function fmt(d) {
     if (!d || !isFinite(d) || d <= 0) return '0:00';
     const m = Math.floor(d / 60), s = Math.floor(d % 60);
@@ -780,24 +993,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const c = document.getElementById('toast-container');
     if (c.querySelector('.toast.show')) return;
     const t = document.createElement('div');
-    t.className = 'toast show';
-    t.textContent = msg;
+    t.className = 'toast show'; t.textContent = msg;
     c.appendChild(t);
     setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 3000);
   }
 
-  /* ─── UI: Fila ─── */
   function updateRowUI(rowId, playing) {
     const row = document.getElementById(rowId);
     if (!row) return;
     row.classList.toggle('playing', playing);
-    if (!playing) {
-      const fill = row.querySelector('.track-progress-fill');
-      if (fill) fill.style.width = '0%';
-    }
+    if (!playing) { const f = row.querySelector('.track-progress-fill'); if (f) f.style.width = '0%'; }
   }
-
-  /* ─── UI: Player Global ─── */
   function updateGPUI(playing) {
     if (!currentRowId) return;
     const row = document.getElementById(currentRowId);
@@ -806,35 +1012,25 @@ document.addEventListener('DOMContentLoaded', () => {
     gpIconPlay.style.display = playing ? 'none' : 'block';
     gpIconPause.style.display = playing ? 'block' : 'none';
   }
-
   function updateGPLikeState(rowId) {
     gpLikeBtn.classList.toggle('active-like', localStorage.getItem('like-' + rowId) === 'true');
   }
-
   function updateShareLinks(title) {
-    const text = 'Escucha ' + title + ' en BVHanKrY Music';
-    const url = 'https://bvhankry.onrender.com';
+    const text = 'Escucha ' + title + ' en BVHanKrY Music', url = 'https://bvhankry.onrender.com';
     const el = (id) => document.getElementById(id);
     if (el('link-wa')) el('link-wa').href = 'https://wa.me/?text=' + encodeURIComponent(text + ' ' + url);
     if (el('link-fb')) el('link-fb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
     if (el('link-tw')) el('link-tw').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
     if (el('link-tg')) el('link-tg').href = 'https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text);
   }
-
-  /* ─── Likes ─── */
   function toggleLike(rowId) {
-    const row = document.getElementById(rowId);
-    if (!row) return;
-    const liked = localStorage.getItem('like-' + rowId) === 'true';
-    const next = !liked;
+    const row = document.getElementById(rowId); if (!row) return;
+    const liked = localStorage.getItem('like-' + rowId) === 'true', next = !liked;
     localStorage.setItem('like-' + rowId, next);
-    const btn = row.querySelector('.track-like');
-    btn.classList.toggle('liked', next);
+    row.querySelector('.track-like').classList.toggle('liked', next);
     if (currentRowId === rowId) updateGPLikeState(rowId);
     if (next) showToast('Añadido a Me gusta');
   }
-
-  /* ─── Progreso (rAF) ─── */
   function tickProgress() {
     if (!currentAudio || currentAudio.paused) { stopTick(); return; }
     const d = currentAudio.duration, c = currentAudio.currentTime;
@@ -844,8 +1040,8 @@ document.addEventListener('DOMContentLoaded', () => {
       topProgress.style.width = pct + '%';
       gpTime.textContent = fmtRem(c, d) + ' / ' + fmt(d);
       if (currentRowId) {
-        const row = document.getElementById(currentRowId);
-        const fill = row && row.querySelector('.track-progress-fill');
+        const f = document.getElementById(currentRowId);
+        const fill = f && f.querySelector('.track-progress-fill');
         if (fill) fill.style.width = pct + '%';
       }
     }
@@ -853,55 +1049,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   function startTick() { if (rafId) cancelAnimationFrame(rafId); rafId = requestAnimationFrame(tickProgress); }
   function stopTick() { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } }
-
-  /* ─── YouTube ─── */
   function pauseYT() { if (ytPlayer && ytPlayer.pauseVideo) try { ytPlayer.pauseVideo(); } catch(e){} }
-
-  /* ─── Pausar todo audio local ─── */
   function pauseAll() {
     document.querySelectorAll('audio').forEach(a => { if (!a.paused) a.pause(); });
     if (currentRowId) { updateRowUI(currentRowId, false); updateGPUI(false); stopTick(); }
   }
 
-  /* ─── Reproducir pista ─── */
   function playTrack(rowId) {
-    const row = document.getElementById(rowId);
-    if (!row) return;
-    const audio = row.querySelector('audio');
-    if (!audio) return;
-
-    // Si es la misma y está sonando → pausar
+    const row = document.getElementById(rowId); if (!row) return;
+    const audio = row.querySelector('audio'); if (!audio) return;
     if (currentAudio === audio && !audio.paused) {
-      audio.pause();
-      updateRowUI(rowId, false);
-      updateGPUI(false);
-      stopTick();
-      return;
+      audio.pause(); updateRowUI(rowId, false); updateGPUI(false); stopTick(); return;
     }
-
-    // Pausar anterior
     if (currentAudio && currentAudio !== audio) {
-      currentAudio.pause();
-      if (currentRowId) updateRowUI(currentRowId, false);
-      stopTick();
+      currentAudio.pause(); if (currentRowId) updateRowUI(currentRowId, false); stopTick();
     }
-
-    currentAudio = audio;
-    currentRowId = rowId;
-    audio.volume = globalVol;
-
+    currentAudio = audio; currentRowId = rowId; audio.volume = globalVol;
     gpCoverImg.src = row.dataset.cover || defaultCover;
     pauseYT();
-
     audio.play().then(() => {
       globalPlayer.classList.add('active');
-      updateRowUI(rowId, true);
-      updateGPUI(true);
-      updateShareLinks(row.dataset.title);
-      updateGPLikeState(rowId);
-      startTick();
-
-      // Contar play una sola vez
+      updateRowUI(rowId, true); updateGPUI(true);
+      updateShareLinks(row.dataset.title); updateGPLikeState(rowId); startTick();
       if (!audio.dataset.counted) {
         let count = parseInt(localStorage.getItem('plays-' + audio.dataset.id) || '0', 10);
         count++;
@@ -924,81 +1093,41 @@ document.addEventListener('DOMContentLoaded', () => {
     if (i !== -1) playTrack(rows[(i - 1 + rows.length) % rows.length].id);
   }
 
-  /* ─── Eventos: Filas ─── */
   rows.forEach(row => {
     const audio = row.querySelector('audio');
-
-    // Inicializar plays
     const plays = parseInt(localStorage.getItem('plays-' + audio.dataset.id) || '0', 10);
     const playsEl = row.querySelector('.track-plays-count');
     if (playsEl) playsEl.textContent = plays;
-
-    // Inicializar likes
-    if (localStorage.getItem('like-' + row.id) === 'true') {
-      row.querySelector('.track-like').classList.add('liked');
-    }
-
-    // Cargar duración desde metadata
+    if (localStorage.getItem('like-' + row.id) === 'true') row.querySelector('.track-like').classList.add('liked');
     audio.addEventListener('loadedmetadata', () => {
       const durEl = row.querySelector('.track-duration');
       if (durEl) durEl.textContent = fmt(audio.duration);
     });
-
-    // Click en fila → reproducir
-    row.addEventListener('click', (e) => {
-      if (e.target.closest('.track-like')) return;
-      playTrack(row.id);
-    });
-
-    // Like
-    row.querySelector('.track-like').addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleLike(row.id);
-    });
-
-    // Fin → siguiente
-    audio.addEventListener('ended', () => {
-      if (currentRowId === row.id) { stopTick(); playNext(); }
-    });
+    row.addEventListener('click', (e) => { if (e.target.closest('.track-like')) return; playTrack(row.id); });
+    row.querySelector('.track-like').addEventListener('click', (e) => { e.stopPropagation(); toggleLike(row.id); });
+    audio.addEventListener('ended', () => { if (currentRowId === row.id) { stopTick(); playNext(); } });
   });
 
-  /* ─── Eventos: Player Global ─── */
   gpPlayBtn.addEventListener('click', () => {
     if (currentAudio) {
       if (currentAudio.paused) {
         currentAudio.play().then(() => { updateRowUI(currentRowId, true); updateGPUI(true); startTick(); pauseYT(); }).catch(() => showToast('Error'));
-      } else {
-        currentAudio.pause(); updateRowUI(currentRowId, false); updateGPUI(false); stopTick();
-      }
-    } else if (rows.length) { playTrack(rows[0].id); }
+      } else { currentAudio.pause(); updateRowUI(currentRowId, false); updateGPUI(false); stopTick(); }
+    } else if (rows.length) playTrack(rows[0].id);
   });
-
   gpNextBtn.addEventListener('click', playNext);
   gpPrevBtn.addEventListener('click', playPrev);
-
   gpProgressTrack.addEventListener('click', (e) => {
     if (!currentAudio) return;
     const rect = gpProgressTrack.getBoundingClientRect();
     const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
     if (currentAudio.duration && isFinite(currentAudio.duration)) currentAudio.currentTime = pct * currentAudio.duration;
   });
-
-  gpVolume.addEventListener('input', (e) => {
-    globalVol = parseFloat(e.target.value);
-    if (currentAudio) currentAudio.volume = globalVol;
-  });
-
+  gpVolume.addEventListener('input', (e) => { globalVol = parseFloat(e.target.value); if (currentAudio) currentAudio.volume = globalVol; });
   gpLikeBtn.addEventListener('click', () => { if (currentRowId) toggleLike(currentRowId); });
+  gpShareBtn.addEventListener('click', (e) => { e.stopPropagation(); shareDropdown.classList.toggle('active'); });
+  document.addEventListener('click', (e) => { if (shareDropdown && !shareDropdown.contains(e.target) && e.target !== gpShareBtn) shareDropdown.classList.remove('active'); });
 
-  gpShareBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    shareDropdown.classList.toggle('active');
-  });
-  document.addEventListener('click', (e) => {
-    if (shareDropdown && !shareDropdown.contains(e.target) && e.target !== gpShareBtn) shareDropdown.classList.remove('active');
-  });
-
-  /* ─── Streaming: pausar audio local al interactuar ─── */
   if (streamingSection) {
     ['pointerdown','mousedown','touchstart','click'].forEach(evt => {
       streamingSection.addEventListener(evt, (e) => {
@@ -1007,19 +1136,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ─── YouTube API ─── */
   function initYT() {
     const iframe = document.getElementById('yt-player');
     if (iframe && typeof YT !== 'undefined' && YT.Player) {
-      ytPlayer = new YT.Player(iframe, {
-        events: { 'onStateChange': (e) => { if (e.data === YT.PlayerState.PLAYING) pauseAll(); } }
-      });
+      ytPlayer = new YT.Player(iframe, { events: { 'onStateChange': (e) => { if (e.data === YT.PlayerState.PLAYING) pauseAll(); } } });
     }
   }
-  if (typeof YT !== 'undefined' && YT.Player) { initYT(); }
-  else { window.onYouTubeIframeAPIReady = initYT; }
+  if (typeof YT !== 'undefined' && YT.Player) initYT();
+  else window.onYouTubeIframeAPIReady = initYT;
 
-  /* ─── Menú hamburguesa ─── */
   const menuBtn = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
   if (menuBtn && navLinks) {
@@ -1030,7 +1155,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ─── Nav hide on scroll ─── */
   let lastScroll = 0;
   window.addEventListener('scroll', () => {
     const cur = window.pageYOffset;
@@ -1038,56 +1162,151 @@ document.addEventListener('DOMContentLoaded', () => {
     lastScroll = cur;
   });
 
-  /* ─── Scroll fade ─── */
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.15 });
   document.querySelectorAll('.scroll-fade').forEach(el => io.observe(el));
 
-  /* ─── PWA Install ─── */
   const installBtn = document.getElementById('installAppBtn');
   let deferredPrompt = null;
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-
-  if (isStandalone) {
-    if (installBtn) installBtn.remove();
-  } else {
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      if (installBtn) installBtn.classList.add('visible');
-    });
+  if (isStandalone) { if (installBtn) installBtn.remove(); }
+  else {
+    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; if (installBtn) installBtn.classList.add('visible'); });
     if (installBtn) {
       installBtn.addEventListener('click', async () => {
         if (!deferredPrompt) { showToast('Instalación no disponible'); return; }
         deferredPrompt.prompt();
         const r = await deferredPrompt.userChoice;
         if (r.outcome === 'accepted') showToast('App instalada');
-        deferredPrompt = null;
-        installBtn.classList.remove('visible');
+        deferredPrompt = null; installBtn.classList.remove('visible');
       });
     }
-    window.addEventListener('appinstalled', () => {
-      if (installBtn) installBtn.classList.remove('visible');
-      showToast('Gracias por instalar la app');
-    });
+    window.addEventListener('appinstalled', () => { if (installBtn) installBtn.classList.remove('visible'); showToast('Gracias por instalar la app'); });
   }
 
-  /* ─── Service Worker ─── */
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch(e => console.error('SW error:', e));
-    });
+    window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(e => console.error('SW error:', e)); });
   }
 
-  /* ─── Limpiar progreso al pausar ─── */
   document.querySelectorAll('audio').forEach(a => {
-    a.addEventListener('pause', () => {
-      if (a === currentAudio) {
-        topProgress.style.width = '0%';
-      }
-    });
+    a.addEventListener('pause', () => { if (a === currentAudio) topProgress.style.width = '0%'; });
   });
+
+
+  /* ═══════════════════════════════════════════
+     MERCH — Lightbox + Stagger + Swipe
+     ═══════════════════════════════════════════ */
+
+  const merchItems = Array.from(document.querySelectorAll('.merch-item'));
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCurrent = document.getElementById('lbCurrent');
+  const lbTotal = document.getElementById('lbTotal');
+  const lbLabel = document.getElementById('lbLabel');
+  const lbClose = document.getElementById('lbClose');
+  const lbPrev = document.getElementById('lbPrev');
+  const lbNext = document.getElementById('lbNext');
+  const lbImgWrap = document.getElementById('lbImgWrap');
+
+  const totalItems = merchItems.length;
+  lbTotal.textContent = totalItems < 10 ? '0' + totalItems : totalItems;
+
+  // URLs de las imágenes (ya están en los src)
+  const merchSrcs = merchItems.map(item => item.querySelector('img').src);
+
+  let lbIndex = 0;
+
+  function openLightbox(index) {
+    lbIndex = index;
+    updateLightbox();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function updateLightbox() {
+    lbImg.src = merchSrcs[lbIndex];
+    const num = lbIndex + 1;
+    lbCurrent.textContent = num < 10 ? '0' + num : num;
+    lbLabel.textContent = 'Pieza ' + (num < 10 ? '0' + num : num);
+  }
+
+  function lbGo(dir) {
+    lbIndex = (lbIndex + dir + totalItems) % totalItems;
+    updateLightbox();
+  }
+
+  // Click en items
+  merchItems.forEach((item, i) => {
+    item.addEventListener('click', () => openLightbox(i));
+  });
+
+  // Controles lightbox
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', (e) => { e.stopPropagation(); lbGo(-1); });
+  lbNext.addEventListener('click', (e) => { e.stopPropagation(); lbGo(1); });
+
+  // Click fuera de imagen para cerrar
+  lbImgWrap.addEventListener('click', (e) => {
+    if (e.target === lbImgWrap) closeLightbox();
+  });
+
+  // Teclado
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lbGo(-1);
+    if (e.key === 'ArrowRight') lbGo(1);
+  });
+
+  // Swipe en móvil para el lightbox
+  let touchStartX = 0;
+  let touchEndX = 0;
+  lbImgWrap.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  lbImgWrap.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) lbGo(1);   // swipe izquierdo → siguiente
+      else lbGo(-1);            // swipe derecho → anterior
+    }
+  }, { passive: true });
+
+  // Stagger de entrada para los items del merch
+  const merchGrid = document.getElementById('merchGrid');
+  if (merchGrid) {
+    const merchIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const items = entry.target.querySelectorAll('.merch-item');
+          items.forEach((item, i) => {
+            setTimeout(() => {
+              item.classList.add('revealed');
+            }, i * 90);
+          });
+          merchIO.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    merchIO.observe(merchGrid);
+  }
+
+  // Enlace teaser "Ver colección →" scroll suave
+  const teaserLink = document.querySelector('.info-teaser-link');
+  if (teaserLink) {
+    teaserLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.getElementById('merch-section');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 
 }); // fin DOMContentLoaded
 </script>
