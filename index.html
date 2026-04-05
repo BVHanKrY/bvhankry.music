@@ -1514,16 +1514,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (playsEl) playsEl.textContent = plays;
 
     // Cargar estado de likes
-    if (localStorage.getItem(`like-${card.id}`) === 'true') {
-      const heart = card.querySelector('.heart-icon');
-      if (heart) {
+    const isLiked = localStorage.getItem(`like-${card.id}`) === 'true'; // Usamos variable como sugerías
+    if (isLiked) {
+    const heart = card.querySelector('.heart-icon');
+    const countSpan = card.querySelector('.likes-count');
+      
+    if (heart) {
         heart.classList.add('liked');
         heart.textContent = '♥';
       }
-      const countSpan = card.querySelector('.likes-count');
+      
+      // Lógica para el contador
       if (countSpan) {
-        let count = parseInt(countSpan.innerText || '0', 10);
-        if (count === 0) countSpan.innerText = '1';
+      let count = parseInt(countSpan.innerText || '0', 10);
+        // Si el contador era 0, lo subimos a 1 para que coincida con el like
+      if (count === 0) countSpan.innerText = '1';
       }
     }
 
@@ -1726,23 +1731,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.copyToClipboard) copyToClipboard(link, title);
     });
   });
-
-  // Cargar estado de likes al inicio
-  cards.forEach(card => {
-    const isLiked = localStorage.getItem(`like-${card.id}`) === 'true';
-    if (isLiked) {
-      const heart = card.querySelector('.heart-icon');
-      const countSpan = card.querySelector('.likes-count');
-      if (heart) {
-        heart.classList.add('liked');
-        heart.textContent = '♥';
-      }
-      if (countSpan && parseInt(countSpan.innerText) === 0) {
-        countSpan.innerText = '1';
-      }
-    }
-  });
-});
 </script>
 </body>
 </html>
