@@ -1711,24 +1711,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ===== SERVICE WORKER =====
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch((error) => {
-        console.error('Service Worker error:', error);
-      });
+     window.addEventListener('load', () => {
+     navigator.serviceWorker.register('./sw.js').catch((error) => {
+     console.error('Service Worker error:', error);
+    });
     });
   }
 
   // ===== COMPARTIR =====
-  window.copyToClipboard = (url, title) => {
-    navigator.clipboard.writeText(`${title} - ${url}`).then(() => showToast("Enlace copiado"));
-  };
+     window.copyToClipboard = (url, title) => {
+     navigator.clipboard.writeText(`${title} - ${url}`).then(() => showToast("Enlace copiado"));
+     };
 
-  document.querySelectorAll('.share-whatsapp').forEach(btn => {
+    // ===== COMPARTIR (VERSIÓN MEJORADA) =====
+  // Función para compartir en tarjetas
+    document.querySelectorAll('.share-whatsapp').forEach(btn => {
     btn.addEventListener('click', function(e) {
-      e.preventDefault();
+    e.preventDefault(); // Evitamos el comportamiento por defecto
+      
       const link = this.getAttribute('data-link');
       const title = this.getAttribute('data-title');
-      if (window.copyToClipboard) copyToClipboard(link, title);
+      const text = `Escucha ${title} en BVHanKrY Music`;
+
+      // 1. Intentamos usar la API nativa de compartir del sistema (Móviles y PC modernos)
+      if (navigator.share) {
+          navigator.share({
+          title: title,
+          text: text,
+          url: link
+        }).then(() => {
+          console.log('Contenido compartido con éxito');
+        }).catch((error) => {
+          console.log('Error al compartir o cancelado:', error);
+        });
+    } else {
+        // 2. Si no hay API nativa (PC antiguos), abrimos WhatsApp Web directamente
+      const waUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + link)}`;
+        window.open(waUrl, '_blank');
+      }
     });
   });
 </script>
