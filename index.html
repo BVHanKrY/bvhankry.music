@@ -5,7 +5,7 @@
 <meta name="description" content="Pulso EP de BVHanKrY: Dub Music desde Ecuador. Escucha online y en todas las plataformas.">
 <meta property="og:title" content="BVHanKrY - Pulso EP">
 <meta property="og:description" content="Dub Music producido en Ecuador. Streaming y visuales exclusivos.">
-<meta property="og:image" content="URL_A_TU_PORTADA.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
 <meta property="og:url" content="https://bvhankry.onrender.com">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -648,39 +648,13 @@ input[type=range].vol-slider-vertical::-webkit-slider-thumb{
 @media (max-width: 768px){
   .container{ padding:0 16px; margin-top:calc(var(--nav-height) + 20px); }
   header{ flex-direction:column; align-items:flex-start; padding:20px 0; }
-  .header-art{ width:160px; height:160px; }
-  header {
-    flex-direction: row;
-    align-items: center;
-    gap: 14px;
-  }
-  .header-art {
-    width: 88px;
-    height: 88px;
-    flex-shrink: 0;
-  }
-  .header-text {
-    justify-content: center;
-  }
-  .header-type {
-    font-size: 0.7rem;
-    margin-bottom: 4px;
-  }
-  .header-text h1 {
-    font-size: 1.8rem;
-    line-height: 1.05;
-    margin: 0;
-  }
-  header p {
-    font-size: 0.75rem;
-    line-height: 1.3;
-    margin-top: 6px;
-  }
-  .header-art {
-    width: 100px;
-    height: 100px;
-    border-radius: 18px;
-  }
+  .header-art{ width:100px; height:100px; border-radius:18px; }
+  header { flex-direction: row; align-items: center; gap: 14px; }
+  .header-text { justify-content: center; }
+  .header-type { font-size: 0.7rem; margin-bottom: 4px; }
+  .header-text h1 { font-size: 1.8rem; line-height: 1.05; margin: 0; }
+  header p { font-size: 0.75rem; line-height: 1.3; margin-top: 6px; }
+  
   .nav-container{ padding:0 14px; }
   .menu-toggle{ display:block; }
   .nav-links{
@@ -703,21 +677,11 @@ input[type=range].vol-slider-vertical::-webkit-slider-thumb{
     padding:10px 12px;
     gap:10px;
   }
-  .gp-left{
-    width:auto;
-    max-width:none;
-    gap:10px;
-  }
+  .gp-left{ width:auto; max-width:none; gap:10px; }
   .gp-cover{ width:40px; height:40px; }
   .gp-info-text{ max-width:44vw; }
-  .gp-title{
-    font-size:0.82rem;
-    font-weight:900;
-  }
-  .gp-artist{
-    font-size:0.72rem;
-    font-weight:700;
-  }
+  .gp-title{ font-size:0.82rem; font-weight:900; }
+  .gp-artist{ font-size:0.72rem; font-weight:700; }
   .gp-center{ max-width:none; padding:0; }
   .gp-right{ display:none; }
 }
@@ -742,9 +706,7 @@ input[type=range].vol-slider-vertical::-webkit-slider-thumb{
     grid-template-columns: 1fr 1fr;
     align-items: start;
   }
-  .embed-spotify iframe{
-    height: 352px;
-  }
+  .embed-spotify iframe{ height: 352px; }
   .yt-box{
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -844,18 +806,8 @@ input[type=range].vol-slider-vertical::-webkit-slider-thumb{
 }
 #streaming-section.visible .embed-spotify{ transition-delay: 160ms; }
 #streaming-section.visible .embed-youtube{ transition-delay: 280ms; }
-@media (min-width: 769px){
-  #streaming-section .embed-item{
-    will-change: transform;
-  }
-}
-@media (max-width: 768px){
-  .scroll-fade{ filter:none; transform: translateY(16px); }
-  #streaming-section::before{ filter:none; }
-}
-.floating-play-btn {
-  display: none !important;
-}
+
+.floating-play-btn { display: none !important; }
 </style>
 </head>
 
@@ -1049,8 +1001,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
     <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
-      <a class="share-whatsapp" href="https://open.spotify.com/playlist/37i9dQZF1E4yFKxFgd38pU" target="_blank" rel="noopener">Abrir playlist en Spotify</a>
-      <a class="share-whatsapp" href="https://youtu.be/JJoU2X8_I0I" target="_blank" rel="noopener">Ver video en YouTube</a>
+      <!-- NOTA: Cambié la clase a 'stream-link' para que no interfiera con el JS de compartir -->
+      <a class="stream-link" href="https://open.spotify.com/playlist/37i9dQZF1E4yFKxFgd38pU" target="_blank" rel="noopener">Abrir playlist en Spotify</a>
+      <a class="stream-link" href="https://youtu.be/JJoU2X8_I0I" target="_blank" rel="noopener">Ver video en YouTube</a>
     </div>
   </section>
 
@@ -1203,7 +1156,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const defaultCover = "https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png";
   const streamingSection = document.getElementById("streaming-section");
 
-  // Formato de tiempo REGRESIVO (muestra lo que resta)
+  // Formato de tiempo REGRESIVO
   const formatRemainingTime = (current, duration) => {
     if (isNaN(current) || isNaN(duration) || !isFinite(duration) || duration <= 0) return "0:00";
     const remaining = Math.max(0, duration - current);
@@ -1321,7 +1274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentCardId === cardId) updateGlobalLikeState(cardId);
   }
 
-  // ===== ACTUALIZACIÓN DE PROGRESO CON TIEMPO REGRESIVO =====
+  // ===== ACTUALIZACIÓN DE PROGRESO =====
   function updateProgressUI() {
     if (!currentAudio || currentAudio.paused) {
       if (rafId) {
@@ -1335,7 +1288,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (duration && isFinite(duration) && duration > 0) {
       const pct = (currentTime / duration) * 100;
       gpProgressBar.style.width = `${pct}%`;
-      // Tiempo REGRESIVO (lo que resta)
       gpCurrentTime.textContent = formatRemainingTime(currentTime, duration);
       gpDuration.textContent = formatDuration(duration);
       const card = document.getElementById(currentCardId);
@@ -1379,7 +1331,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const coverUrl = card.dataset.cover || defaultCover;
 
-    // Si ya está sonando la misma canción, pausar
     if (currentAudio === audio && !audio.paused) {
       audio.pause();
       updateCardUI(cardId, false);
@@ -1388,7 +1339,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Detener audio anterior si existe
     if (currentAudio && currentAudio !== audio) {
       currentAudio.pause();
       if (currentCardId) {
@@ -1398,22 +1348,18 @@ document.addEventListener('DOMContentLoaded', () => {
       stopProgressUpdates();
     }
 
-    // Configurar nuevo audio
     currentAudio = audio;
     currentCardId = cardId;
     audio.volume = globalVolumeValue;
 
-    // Cambiar portada con efecto fade
     gpCoverImg.style.opacity = '0';
     setTimeout(() => {
       gpCoverImg.src = coverUrl;
       gpCoverImg.style.opacity = '1';
     }, 120);
 
-    // Pausar YouTube antes de reproducir
     pauseYouTube();
 
-    // Reproducir audio
     audio.play().then(() => {
       globalPlayer.classList.add('active');
       updateCardUI(cardId, true);
@@ -1422,7 +1368,6 @@ document.addEventListener('DOMContentLoaded', () => {
       updateGlobalLikeState(cardId);
       startProgressUpdates();
 
-      // Contar reproducción
       const playsEl = card.querySelector('.plays-count');
       if (!audio.dataset.counted) {
         let count = parseInt(localStorage.getItem(`plays-${audio.dataset.id}`) || '0', 10);
@@ -1513,26 +1458,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const playsEl = card.querySelector('.plays-count');
     if (playsEl) playsEl.textContent = plays;
 
-    // Cargar estado de likes
-    const isLiked = localStorage.getItem(`like-${card.id}`) === 'true'; // Usamos variable como sugerías
+    // Cargar estado de likes (CÓDIGO UNIFICADO Y LIMPIO)
+    const isLiked = localStorage.getItem(`like-${card.id}`) === 'true';
     if (isLiked) {
-    const heart = card.querySelector('.heart-icon');
-    const countSpan = card.querySelector('.likes-count');
-      
-    if (heart) {
+      const heart = card.querySelector('.heart-icon');
+      const countSpan = card.querySelector('.likes-count');
+      if (heart) {
         heart.classList.add('liked');
         heart.textContent = '♥';
       }
-      
-      // Lógica para el contador
       if (countSpan) {
-      let count = parseInt(countSpan.innerText || '0', 10);
-        // Si el contador era 0, lo subimos a 1 para que coincida con el like
-      if (count === 0) countSpan.innerText = '1';
+        let count = parseInt(countSpan.innerText || '0', 10);
+        if (count === 0) countSpan.innerText = '1';
       }
     }
 
-    // Botones de reproducción
     const playButtons = card.querySelectorAll('.btn-card, .btn-card-float');
     playButtons.forEach(btn => {
       btn.addEventListener('click', (e) => { 
@@ -1541,7 +1481,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Click en la tarjeta (excepto botones)
     card.addEventListener('click', (e) => {
       if (!e.target.closest('.btn-card') && !e.target.closest('.btn-card-float') && 
           !e.target.closest('.likes-counter') && !e.target.closest('.share-whatsapp') &&
@@ -1550,7 +1489,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Likes
     const likesCounter = card.querySelector('.likes-counter');
     if (likesCounter) {
       likesCounter.addEventListener('click', (e) => {
@@ -1559,7 +1497,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Barra de progreso
     const progressContainer = card.querySelector('.progress-container');
     if (progressContainer) {
       progressContainer.addEventListener('click', (e) => {
@@ -1574,7 +1511,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Eventos del audio
     audio.addEventListener('ended', () => {
       if (currentCardId === card.id) {
         stopProgressUpdates();
@@ -1628,7 +1564,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Cargar YouTube API si no está cargada
   if (typeof YT === 'undefined' || !YT.Player) {
     const tag = document.createElement("script");
     tag.src = "https://www.youtube.com/iframe_api";
@@ -1637,7 +1572,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onYouTubeIframeAPIReady();
   }
 
-  // ===== MENÚ HAMBURGUESA (SOLO MÓVIL) =====
+  // ===== MENÚ HAMBURGUESA =====
   const menuBtn = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
   if (menuBtn && navLinks) {
@@ -1670,7 +1605,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.25 });
   scrollElements.forEach(el => io.observe(el));
 
-  // Forzar streaming visible
   if (streamingSection) {
     streamingSection.classList.add("visible");
   }
@@ -1711,31 +1645,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ===== SERVICE WORKER =====
   if ('serviceWorker' in navigator) {
-     window.addEventListener('load', () => {
-     navigator.serviceWorker.register('./sw.js').catch((error) => {
-     console.error('Service Worker error:', error);
-    });
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch((error) => {
+        console.error('Service Worker error:', error);
+      });
     });
   }
 
-  // ===== COMPARTIR =====
-     window.copyToClipboard = (url, title) => {
-     navigator.clipboard.writeText(`${title} - ${url}`).then(() => showToast("Enlace copiado"));
-     };
-
-    // ===== COMPARTIR (VERSIÓN MEJORADA) =====
-  // Función para compartir en tarjetas
-    document.querySelectorAll('.share-whatsapp').forEach(btn => {
+  // ===== COMPARTIR (CORREGIDO Y ESPECÍFICO) =====
+  // Usamos '.cancion-card .share-whatsapp' para NO afectar los enlaces de Spotify/Youtube
+  document.querySelectorAll('.cancion-card .share-whatsapp').forEach(btn => {
     btn.addEventListener('click', function(e) {
-    e.preventDefault(); // Evitamos el comportamiento por defecto
+      e.preventDefault(); // Evitamos que el # suba la página
       
       const link = this.getAttribute('data-link');
       const title = this.getAttribute('data-title');
       const text = `Escucha ${title} en BVHanKrY Music`;
 
-      // 1. Intentamos usar la API nativa de compartir del sistema (Móviles y PC modernos)
+      // Intentamos usar la API nativa de compartir
       if (navigator.share) {
-          navigator.share({
+        navigator.share({
           title: title,
           text: text,
           url: link
@@ -1744,13 +1673,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }).catch((error) => {
           console.log('Error al compartir o cancelado:', error);
         });
-    } else {
-        // 2. Si no hay API nativa (PC antiguos), abrimos WhatsApp Web directamente
-      const waUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + link)}`;
+      } else {
+        // Si no hay API nativa, abrimos WhatsApp Web
+        const waUrl = `https://wa.me/?text=${encodeURIComponent(text + ' ' + link)}`;
         window.open(waUrl, '_blank');
       }
     });
   });
+});
 </script>
 </body>
 </html>
