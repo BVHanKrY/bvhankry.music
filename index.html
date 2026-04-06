@@ -30,37 +30,20 @@
 
 <style>
 :root{
-  --bg:#0a0a0a;
-  --surface:#111111;
-  --border:#1a1a1a;
-  --border-hi:#2a2a2a;
-  --text:#e0e0e0;
-  --muted:#505050;
-  --accent:#00ff66;
-  --accent-dim:#00cc52;
-  --mono:'JetBrains Mono',monospace;
-  --sans:'Space Grotesk',sans-serif;
-  --nav-h:52px;
-  --player-h:52px;
+  --bg:#0a0a0a;--surface:#111111;--border:#1a1a1a;--border-hi:#2a2a2a;
+  --text:#e0e0e0;--muted:#505050;--accent:#00ff66;--accent-dim:#00cc52;
+  --mono:'JetBrains Mono',monospace;--sans:'Space Grotesk',sans-serif;
+  --nav-h:52px;--player-h:52px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  font-family:var(--sans);
-  background-color:var(--bg);
-  background-image:
-    linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);
-  background-size:48px 48px;
-  color:var(--text);
-  min-height:100vh;
-  padding-bottom:calc(var(--player-h) + 24px);
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
+  font-family:var(--sans);background-color:var(--bg);
+  background-image:linear-gradient(rgba(255,255,255,.013) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.013) 1px,transparent 1px);
+  background-size:48px 48px;color:var(--text);min-height:100vh;
+  padding-bottom:calc(var(--player-h) + 24px);overflow-x:hidden;-webkit-font-smoothing:antialiased;
 }
-a{color:inherit}
-button{font-family:inherit}
-img{display:block}
+a{color:inherit}button{font-family:inherit}img{display:block}
 .top-progress{position:fixed;top:0;left:0;height:2px;width:0%;background:var(--accent);z-index:3000;pointer-events:none}
 .main-nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:var(--bg);border-bottom:1px solid var(--border);z-index:1000;transition:transform .2s ease}
 .main-nav.hidden-nav{transform:translateY(-100%)}
@@ -75,7 +58,7 @@ img{display:block}
 .menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.6rem;cursor:pointer;line-height:1}
 .container{max-width:1100px;margin:0 auto;padding:calc(var(--nav-h) + 40px) 24px 0}
 
-.hero{display:flex;align-items:center;gap:28px;padding:0 0 36px;border-bottom:1px solid var(--border);margin-bottom:0}
+.hero{display:flex;align-items:center;gap:28px;padding:0 0 36px;border-bottom:1px solid var(--border)}
 .hero-cover{width:140px;height:140px;flex-shrink:0;overflow:hidden;border:1px solid var(--border)}
 .hero-cover img{width:100%;height:100%;object-fit:cover}
 .hero-meta{font-family:var(--mono);font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
@@ -86,36 +69,29 @@ img{display:block}
 .tracklist-header{display:grid;grid-template-columns:48px 1fr auto auto 40px;gap:16px;padding:10px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
 .track-row{display:grid;grid-template-columns:48px 1fr auto auto 40px;align-items:center;gap:16px;padding:11px 0;border-bottom:1px solid var(--border);position:relative;cursor:pointer;transition:background-color .12s}
 .track-row:hover{background-color:rgba(255,255,255,.015)}
-.track-row.playing .track-title-text{color:var(--accent)}
-.track-row.playing .tr-num{color:var(--accent)}
+.track-row.playing .track-title-text{color:var(--accent)}.track-row.playing .tr-num{color:var(--accent)}
 .track-trigger{background:none;border:none;cursor:pointer;padding:0;color:var(--muted);display:flex;align-items:center;justify-content:center;width:48px;height:40px}
 .track-trigger:focus-visible{outline:1px solid var(--accent);outline-offset:-1px}
 .tr-num{font-family:var(--mono);font-size:.82rem;display:block}
 .tr-play,.tr-pause{display:none;width:14px;height:14px;fill:currentColor}
-.track-row:hover .tr-num{display:none}
-.track-row:hover .tr-play{display:block}
-.track-row.playing .tr-num{display:none}
-.track-row.playing .tr-pause{display:block}
-.track-row.playing:hover .tr-play{display:none}
-.track-row.playing:hover .tr-pause{display:block}
+.track-row:hover .tr-num{display:none}.track-row:hover .tr-play{display:block}
+.track-row.playing .tr-num{display:none}.track-row.playing .tr-pause{display:block}
+.track-row.playing:hover .tr-play{display:none}.track-row.playing:hover .tr-pause{display:block}
 .track-info{overflow:hidden;min-width:0}
 .track-title-text{font-size:.9rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:color .15s}
 .track-artist-text{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .track-duration{font-family:var(--mono);font-size:.75rem;color:var(--muted);min-width:40px;text-align:right}
 .track-plays{font-family:var(--mono);font-size:.7rem;color:var(--muted);min-width:60px;text-align:right}
 .track-like{background:none;border:none;cursor:pointer;color:var(--muted);padding:0;display:flex;align-items:center;justify-content:center;width:40px;height:40px;transition:color .15s}
-.track-like:hover{color:var(--text)}
-.track-like:focus-visible{outline:1px solid var(--accent);outline-offset:-1px}
-.track-like svg{width:16px;height:16px;fill:currentColor}
-.track-like.liked{color:var(--accent)}
+.track-like:hover{color:var(--text)}.track-like:focus-visible{outline:1px solid var(--accent);outline-offset:-1px}
+.track-like svg{width:16px;height:16px;fill:currentColor}.track-like.liked{color:var(--accent)}
 .track-progress-line{position:absolute;bottom:0;left:0;width:100%;height:2px;background:transparent;pointer-events:none}
 .track-progress-fill{height:100%;width:0%;background:var(--accent);transition:width .1s linear}
 
 .streaming-section{border:1px solid var(--border);margin:40px 0}
 .streaming-label{padding:12px 20px;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
 .embed-grid{display:grid;grid-template-columns:1fr 1fr}
-.embed-cell{border-right:1px solid var(--border)}
-.embed-cell:last-child{border-right:none}
+.embed-cell{border-right:1px solid var(--border)}.embed-cell:last-child{border-right:none}
 .embed-cell iframe{width:100%;height:352px;border:0;display:block}
 .streaming-links{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:24px;flex-wrap:wrap}
 .stream-link{font-family:var(--mono);font-size:.7rem;color:var(--muted);text-decoration:none;letter-spacing:1px;transition:color .15s}
@@ -123,7 +99,7 @@ img{display:block}
 
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin:40px 0}
 .info-cell{background:var(--bg);padding:28px}
-.info-cell h2{font-family:var(--mono);font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:0}
+.info-cell h2{font-family:var(--mono);font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:flex;align-items:center}
 .info-cell h2::before{content:'/';margin-right:8px;color:var(--accent)}
 .info-cell p{font-size:.85rem;color:var(--text);line-height:1.65}
 .info-tag{display:inline-block;margin-top:10px;padding:3px 10px;border:1px solid var(--border);font-family:var(--mono);font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
@@ -153,19 +129,16 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 .gp-time{font-family:var(--mono);font-size:.65rem;color:var(--muted);min-width:70px;text-align:right;flex-shrink:0}
 .gp-right{display:flex;align-items:center;gap:4px}
 .gp-action-btn{background:none;border:none;color:var(--muted);cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center;transition:color .12s}
-.gp-action-btn:hover{color:var(--text)}
-.gp-action-btn.active-like{color:var(--accent)}
+.gp-action-btn:hover{color:var(--text)}.gp-action-btn.active-like{color:var(--accent)}
 .gp-action-btn svg{width:16px;height:16px;fill:currentColor}
 .gp-vol-slider{-webkit-appearance:none;appearance:none;width:70px;height:2px;background:var(--border);outline:none;cursor:pointer}
 .gp-vol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:8px;height:8px;background:var(--text);cursor:pointer}
 .gp-vol-slider::-moz-range-thumb{width:8px;height:8px;background:var(--text);border:none;cursor:pointer}
-
 .share-wrap{position:relative}
 .share-dropdown{position:absolute;bottom:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);padding:6px;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;opacity:0;pointer-events:none;transform:translateY(6px);transition:opacity .15s,transform .15s;z-index:50}
 .share-dropdown.active{opacity:1;pointer-events:auto;transform:translateY(0)}
 .share-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 10px;color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:.55rem;letter-spacing:1px;text-transform:uppercase;transition:color .12s}
-.share-item:hover{color:var(--accent)}
-.share-item svg{width:18px;height:18px;fill:currentColor}
+.share-item:hover{color:var(--accent)}.share-item svg{width:18px;height:18px;fill:currentColor}
 
 #toast-container{position:fixed;bottom:72px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
 .toast{padding:10px 14px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:.75rem;opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s;pointer-events:none}
@@ -174,8 +147,7 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 .toast.toast-wa::before{background:#25D366}
 
 .install-btn{position:fixed;right:20px;bottom:72px;z-index:2100;padding:7px 14px;background:transparent;border:1px solid var(--accent);color:var(--accent);font-family:var(--mono);font-size:.65rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background .15s,color .15s;display:none}
-.install-btn.visible{display:block}
-.install-btn:hover{background:var(--accent);color:var(--bg)}
+.install-btn.visible{display:block}.install-btn:hover{background:var(--accent);color:var(--bg)}
 .scroll-fade{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
 .scroll-fade.visible{opacity:1;transform:translateY(0)}
 
@@ -223,10 +195,158 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 .merch-marquee-item .dot{display:inline-block;width:4px;height:4px;background:var(--accent);margin:0 20px;vertical-align:middle}
 @keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* Separador entre secciones */
 .merch-divider{display:flex;align-items:center;gap:16px;margin:0 0 40px;padding:0 20px}
 .merch-divider-line{flex:1;height:1px;background:var(--border)}
 .merch-divider-text{font-family:var(--mono);font-size:.55rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+
+/* ═══════════════════════════════════════════════════════
+   BOOK — Estilo portada de libro para digitales
+   ═══════════════════════════════════════════════════════ */
+
+.merch-grid--book{grid-template-columns:repeat(4,1fr)}
+
+.merch-item--book{
+  aspect-ratio:1/1.42;
+  perspective:800px;
+}
+.merch-item--book.revealed{
+  animation:bookFloat 5s ease-in-out infinite;
+}
+.merch-item--book:hover{
+  animation:none;
+}
+
+@keyframes bookFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-3px)}
+}
+
+.book-inner{
+  position:absolute;inset:0;
+  transform-style:preserve-3d;
+  transition:transform .45s ease,box-shadow .45s ease;
+  will-change:transform;
+  border-radius:2px;
+  overflow:hidden;
+}
+
+/* Lomo del libro */
+.book-spine{
+  position:absolute;left:0;top:0;bottom:0;width:14px;
+  background:linear-gradient(to right,rgba(0,0,0,.55) 0%,rgba(0,0,0,.25) 50%,transparent 100%);
+  z-index:4;pointer-events:none;
+}
+.book-spine::after{
+  content:'';position:absolute;left:6px;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,transparent,rgba(255,255,255,.06) 20%,rgba(255,255,255,.06) 80%,transparent);
+}
+
+/* Borde de páginas */
+.book-pages{
+  position:absolute;right:0;top:2px;bottom:2px;width:5px;
+  background:repeating-linear-gradient(to bottom,rgba(255,255,255,.025) 0px,rgba(255,255,255,.025) 1px,transparent 1px,transparent 3px);
+  z-index:4;pointer-events:none;
+}
+
+/* Brillo que sigue al mouse */
+.book-shine{
+  position:absolute;inset:0;z-index:5;pointer-events:none;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.12) 0%,transparent 55%);
+  opacity:0;transition:opacity .25s;
+}
+.merch-item--book:hover .book-shine{opacity:1}
+
+/* Overlay de libro — contenido más rico */
+.book-overlay{
+  position:absolute;inset:0;z-index:6;
+  background:rgba(10,10,10,.88);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:6px;padding:16px;
+  opacity:0;transition:opacity .2s;
+}
+.merch-item--book:hover .book-overlay{opacity:1}
+
+/* Tag de categoría */
+.book-tag{
+  display:inline-block;padding:2px 10px;
+  border:1px solid var(--accent);
+  font-family:var(--mono);font-size:.48rem;
+  letter-spacing:2.5px;color:var(--accent);
+  text-transform:uppercase;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease;
+}
+.merch-item--book:hover .book-tag{opacity:1;transform:translateY(0);transition-delay:0s}
+
+.book-overlay .merch-overlay-num{
+  font-size:1.4rem;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease;
+}
+.merch-item--book:hover .merch-overlay-num{opacity:1;transform:translateY(0);transition-delay:.04s}
+
+.book-overlay .book-overlay-name{
+  font-family:var(--mono);font-size:.6rem;
+  color:var(--text);letter-spacing:1px;
+  text-transform:uppercase;text-align:center;
+  max-width:90%;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease;
+}
+.merch-item--book:hover .book-overlay-name{opacity:1;transform:translateY(0);transition-delay:.08s}
+
+.book-overlay .book-overlay-desc{
+  font-family:var(--mono);font-size:.48rem;
+  color:var(--muted);letter-spacing:.5px;
+  text-align:center;max-width:85%;
+  line-height:1.5;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease;
+}
+.merch-item--book:hover .book-overlay-desc{opacity:1;transform:translateY(0);transition-delay:.12s}
+
+.book-overlay .merch-overlay-price{
+  font-size:.82rem;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease;
+}
+.merch-item--book:hover .merch-overlay-price{opacity:1;transform:translateY(0);transition-delay:.16s}
+
+.book-overlay .merch-buy-btn{
+  font-size:.52rem;padding:4px 14px;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease,background .15s,color .15s;
+}
+.merch-item--book:hover .merch-buy-btn{opacity:1;transform:translateY(0);transition-delay:.2s}
+.merch-item--book:hover .merch-buy-btn:hover{background:var(--accent);color:var(--bg)}
+
+.book-overlay .book-overlay-hint{
+  font-family:var(--mono);font-size:.45rem;
+  color:var(--muted);letter-spacing:2px;
+  text-transform:uppercase;opacity:0;
+  transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease;
+}
+.merch-item--book:hover .book-overlay-hint{opacity:.5;transform:translateY(0);transition-delay:.24s}
+
+/* Precio en books — posición ajustada */
+.merch-item--book .merch-price-tag{
+  padding:20px 28px 8px 18px;
+}
+.merch-item--book .merch-price-value{font-size:.72rem}
+.merch-item--book .merch-price-num{font-size:.5rem}
+
+/* Línea decorativa en overlay de libro */
+.book-overlay-line{
+  width:24px;height:1px;
+  background:var(--accent);opacity:.4;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .2s ease,transform .2s ease;
+}
+.merch-item--book:hover .book-overlay-line{opacity:.4;transform:translateY(0);transition-delay:.1s}
+
 
 /* ─── Lightbox ─── */
 .lightbox{position:fixed;inset:0;z-index:4000;background:var(--bg);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}
@@ -239,11 +359,8 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 .lightbox-img-wrap{position:absolute;top:48px;bottom:56px;left:0;right:0;display:flex;align-items:center;justify-content:center;padding:20px;cursor:pointer}
 .lightbox-img-wrap img{max-width:100%;max-height:100%;object-fit:contain}
 .lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;padding:16px;transition:color .12s;z-index:10;display:flex;align-items:center;justify-content:center}
-.lightbox-nav:hover{color:var(--accent)}
-.lightbox-prev{left:0}
-.lightbox-next{right:0}
+.lightbox-nav:hover{color:var(--accent)}.lightbox-prev{left:0}.lightbox-next{right:0}
 .lightbox-nav svg{width:28px;height:28px;fill:currentColor}
-
 .lightbox-buy-bar{position:absolute;bottom:0;left:0;right:0;height:56px;background:var(--surface);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:12;gap:16px}
 .lightbox-buy-info{display:flex;align-items:center;gap:14px;overflow:hidden;min-width:0;flex:1}
 .lightbox-buy-name{font-family:var(--mono);font-size:.7rem;color:var(--text);letter-spacing:1px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -254,65 +371,52 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 .lightbox-buy-btn svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
 
 /* ─── Responsive ─── */
+@media(max-width:900px){
+  .merch-grid--book{grid-template-columns:repeat(3,1fr)}
+}
 @media(max-width:768px){
   .container{padding:calc(var(--nav-h) + 24px) 16px 0}
   .hero{gap:16px;padding-bottom:24px;flex-wrap:wrap}
-  .hero-cover{width:90px;height:90px}
-  .hero-title{font-size:1.8rem}
-  .hero-sub,.hero-ep{font-size:.7rem}
-  .nav-inner{padding:0 14px}
-  .menu-toggle{display:block}
+  .hero-cover{width:90px;height:90px}.hero-title{font-size:1.8rem}.hero-sub,.hero-ep{font-size:.7rem}
+  .nav-inner{padding:0 14px}.menu-toggle{display:block}
   .nav-links{display:none;position:absolute;top:var(--nav-h);left:0;width:100%;background:var(--bg);border-bottom:1px solid var(--border);padding:8px 0;flex-direction:column;gap:0;z-index:1001}
-  .nav-links.active{display:flex}
-  .nav-links li{text-align:center;padding:10px 0}
-  .nav-social{gap:12px}
+  .nav-links.active{display:flex}.nav-links li{text-align:center;padding:10px 0}.nav-social{gap:12px}
   .tracklist-header{display:none}
   .track-row{grid-template-columns:36px 1fr auto 36px;gap:10px;padding:9px 0}
-  .track-plays{display:none}
-  .track-trigger{width:36px}
-  .track-like{width:36px}
+  .track-plays{display:none}.track-trigger{width:36px}.track-like{width:36px}
   .embed-grid{grid-template-columns:1fr}
-  .embed-cell{border-right:none;border-bottom:1px solid var(--border)}
-  .embed-cell:last-child{border-bottom:none}
+  .embed-cell{border-right:none;border-bottom:1px solid var(--border)}.embed-cell:last-child{border-bottom:none}
   .embed-cell iframe{height:152px}
   .info-grid{grid-template-columns:1fr}
-  .merch-grid{grid-template-columns:repeat(2,1fr)}
-  .merch-item{aspect-ratio:1/1.2}
+  .merch-grid{grid-template-columns:repeat(2,1fr)}.merch-item{aspect-ratio:1/1.2}
+  .merch-grid--book{grid-template-columns:repeat(3,1fr)}
+  .merch-item--book{aspect-ratio:1/1.35}
   .merch-price-value{font-size:.7rem}
-  .merch-overlay-num{font-size:1.1rem}
-  .merch-overlay-name{font-size:.55rem}
-  .merch-overlay-price{font-size:.75rem}
+  .merch-overlay-num{font-size:1.1rem}.merch-overlay-name{font-size:.55rem}.merch-overlay-price{font-size:.75rem}
   .merch-buy-btn{padding:4px 12px;font-size:.5rem}
-  .merch-buy-btn svg{width:9px;height:9px}
   .merch-header-badge{display:none}
-  .lightbox-nav{padding:10px}
-  .lightbox-nav svg{width:22px;height:22px}
+  .lightbox-nav{padding:10px}.lightbox-nav svg{width:22px;height:22px}
   .lightbox-buy-bar{padding:8px 14px;gap:10px}
-  .lightbox-buy-platform{display:none}
-  .lightbox-buy-name{font-size:.6rem}
-  .lightbox-buy-price{font-size:.78rem}
-  .lightbox-buy-btn{padding:5px 12px;font-size:.52rem}
-  .lightbox-buy-btn svg{width:10px;height:10px}
+  .lightbox-buy-platform{display:none}.lightbox-buy-name{font-size:.6rem}.lightbox-buy-price{font-size:.78rem}
+  .lightbox-buy-btn{padding:5px 12px;font-size:.52rem}.lightbox-buy-btn svg{width:10px;height:10px}
   .lightbox-img-wrap{bottom:52px}
   .global-player{grid-template-columns:1fr auto;height:auto;padding:8px 12px;gap:8px}
-  .gp-left{min-width:0}
-  .gp-cover{width:28px;height:28px}
-  .gp-title{font-size:.75rem}
-  .gp-artist{font-size:.6rem}
-  .gp-right{display:none}
-  .gp-time{min-width:58px;font-size:.6rem}
+  .gp-left{min-width:0}.gp-cover{width:28px;height:28px}.gp-title{font-size:.75rem}.gp-artist{font-size:.6rem}
+  .gp-right{display:none}.gp-time{min-width:58px;font-size:.6rem}
   .install-btn{right:14px;bottom:64px;font-size:.58rem;padding:6px 10px}
   #toast-container{right:14px;bottom:64px}
 }
 @media(max-width:420px){
-  .merch-grid{grid-template-columns:1fr 1fr;gap:1px}
-  .merch-item{aspect-ratio:1/1.3}
-  .merch-overlay-num{font-size:1rem}
-  .merch-overlay-name{font-size:.5rem}
-  .merch-overlay-price{font-size:.68rem}
-  .merch-price-tag{padding:18px 8px 6px}
-  .merch-price-value{font-size:.65rem}
-  .merch-price-num{font-size:.5rem}
+  .merch-grid{grid-template-columns:1fr 1fr;gap:1px}.merch-item{aspect-ratio:1/1.3}
+  .merch-grid--book{grid-template-columns:1fr 1fr 1fr;gap:1px}
+  .merch-item--book{aspect-ratio:1/1.4}
+  .merch-overlay-num{font-size:1rem}.merch-overlay-name{font-size:.5rem}.merch-overlay-price{font-size:.68rem}
+  .merch-price-tag{padding:18px 8px 6px}.merch-price-value{font-size:.65rem}.merch-price-num{font-size:.5rem}
+  .book-spine{width:10px}.book-pages{width:3px}
+  .book-overlay .merch-overlay-num{font-size:1rem}
+  .book-overlay .book-overlay-name{font-size:.48rem}
+  .book-overlay .merch-overlay-price{font-size:.68rem}
+  .book-overlay .merch-buy-btn{font-size:.46rem;padding:3px 10px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
@@ -328,13 +432,11 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 
 <nav class="main-nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" alt="BVHanKrY">
-    </a>
+    <a href="#" class="nav-logo"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/iconos/pesta%C3%B1a%20simbo.png" alt="BVHanKrY"></a>
     <ul class="nav-links" aria-label="Secciones">
       <li><a href="#music" class="active">Música</a></li>
       <li><a href="#videos">Videos</a></li>
-      <li><a href="#merch-digital">Shop</a></li>
+      <li><a href="#merch-physical">Shop</a></li>
       <li><a href="#app-location">App</a></li>
     </ul>
     <ul class="nav-social" aria-label="Redes sociales">
@@ -350,9 +452,7 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 <div class="container">
 
   <section class="hero">
-    <div class="hero-cover">
-      <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png" alt="Portada Pulso EP">
-    </div>
+    <div class="hero-cover"><img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png" alt="Portada Pulso EP"></div>
     <div>
       <div class="hero-meta">EP // 2026 // ECUADOR</div>
       <h1 class="hero-title">BVHanKrY</h1>
@@ -362,20 +462,15 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
   </section>
 
   <div id="music">
-    <div class="tracklist-header">
-      <span>#</span><span>Título</span><span>Duración</span><span>Plays</span><span></span>
-    </div>
-
+    <div class="tracklist-header"><span>#</span><span>Título</span><span>Duración</span><span>Plays</span><span></span></div>
     <div class="track-row" id="row-tinkuy" data-title="Tinkuy" data-artist="BVHanKrY" data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
       <button class="track-trigger" aria-label="Reproducir Tinkuy"><span class="tr-num">01</span><svg class="tr-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="tr-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
       <div class="track-info"><div class="track-title-text">Tinkuy</div><div class="track-artist-text">BVHanKrY</div></div>
-      <span class="track-duration">--:--</span>
-      <span class="track-plays"><span class="track-plays-count">0</span> plays</span>
+      <span class="track-duration">--:--</span><      span class="track-plays"><span class="track-plays-count">0</span> plays</span>
       <button class="track-like" aria-label="Me gusta"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
       <div class="track-progress-line"><div class="track-progress-fill"></div></div>
       <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/tinkuy.mp3" preload="metadata" data-id="tinkuy"></audio>
     </div>
-
     <div class="track-row" id="row-subtle_gad" data-title="Subtle_Gad" data-artist="BVHanKrY" data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
       <button class="track-trigger" aria-label="Reproducir Subtle_Gad"><span class="tr-num">02</span><svg class="tr-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="tr-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
       <div class="track-info"><div class="track-title-text">Subtle_Gad</div><div class="track-artist-text">BVHanKrY</div></div>
@@ -385,7 +480,6 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
       <div class="track-progress-line"><div class="track-progress-fill"></div></div>
       <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/Subtle%20gad.mp3" preload="metadata" data-id="subtle_gad"></audio>
     </div>
-
     <div class="track-row" id="row-regresion" data-title="Regresión" data-artist="BVHanKrY" data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
       <button class="track-trigger" aria-label="Reproducir Regresión"><span class="tr-num">03</span><svg class="tr-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="tr-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
       <div class="track-info"><div class="track-title-text">Regresión</div><div class="track-artist-text">BVHanKrY</div></div>
@@ -422,8 +516,8 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
     </div>
     <div class="info-cell" id="shop">
       <h2>Mercancía</h2>
-      <p>Soporta el arte directamente. Productos digitales y físicos, edición limitada.</p>
-      <a href="#merch-digital" class="info-teaser-link">Ver colección →</a>
+      <p>Soporta el arte directamente. Productos físicos y digitales, edición limitada.</p>
+      <a href="#merch-physical" class="info-teaser-link">Ver colección →</a>
     </div>
     <div class="info-cell scroll-fade" id="app-location">
       <h2>Aplicación</h2>
@@ -433,36 +527,7 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
   </div>
 
   <!-- ═══════════════════════════════════════
-       SECCIÓN: PRODUCTOS DIGITALES
-       ═══════════════════════════════════════ -->
-  <section class="merch-section scroll-fade" id="merch-digital">
-    <div class="merch-header">
-      <div style="display:flex;align-items:center">
-        <span class="merch-header-label">// Productos Digitales</span>
-        <span class="merch-header-badge digital">Hotmart</span>
-      </div>
-      <div class="merch-header-right">
-        <span class="merch-header-count" id="digitalCount"><span>00</span> piezas</span>
-      </div>
-    </div>
-    <div class="merch-grid" id="digitalGrid"></div>
-    <div class="merch-marquee">
-      <div class="merch-marquee-track">
-        <span class="merch-marquee-item">BVHanKrY<span class="dot"></span>Digitales<span class="dot"></span>Hotmart<span class="dot"></span>Ebooks<span class="dot"></span>Cursos<span class="dot"></span>Piano<span class="dot"></span>Música<span class="dot"></span>Ecuador<span class="dot"></span>2026</span>
-        <span class="merch-marquee-item">BVHanKrY<span class="dot"></span>Digitales<span class="dot"></span>Hotmart<span class="dot"></span>Ebooks<span class="dot"></span>Cursos<span class="dot"></span>Piano<span class="dot"></span>Música<span class="dot"></span>Ecuador<span class="dot"></span>2026</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Separador visual -->
-  <div class="merch-divider">
-    <div class="merch-divider-line"></div>
-    <span class="merch-divider-text">Físicos</span>
-    <div class="merch-divider-line"></div>
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       SECCIÓN: PRODUCTOS FÍSICOS
+       SECCIÓN: PRODUCTOS FÍSICOS (primero)
        ═══════════════════════════════════════ -->
   <section class="merch-section scroll-fade" id="merch-physical">
     <div class="merch-header">
@@ -483,31 +548,51 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
     </div>
   </section>
 
-  <!-- Lightbox compartido -->
+  <!-- Separador visual -->
+  <div class="merch-divider">
+    <div class="merch-divider-line"></div>
+    <span class="merch-divider-text">Digitales</span>
+    <div class="merch-divider-line"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SECCIÓN: PRODUCTOS DIGITALES (segundo, estilo libro)
+       ═══════════════════════════════════════ -->
+  <section class="merch-section scroll-fade" id="merch-digital">
+    <div class="merch-header">
+      <div style="display:flex;align-items:center">
+        <span class="merch-header-label">// Productos Digitales</span>
+        <span class="merch-header-badge digital">Hotmart</span>
+      </div>
+      <div class="merch-header-right">
+        <span class="merch-header-count" id="digitalCount"><span>00</span> piezas</span>
+      </div>
+    </div>
+    <div class="merch-grid merch-grid--book" id="digitalGrid"></div>
+    <div class="merch-marquee">
+      <div class="merch-marquee-track">
+        <span class="merch-marquee-item">BVHanKrY<span class="dot"></span>Digitales<span class="dot"></span>Hotmart<span class="dot"></span>Ebooks<span class="dot"></span>Cursos<span class="dot"></span>Piano<span class="dot"></span>Música<span class="dot"></span>Ecuador<span class="dot"></span>2026</span>
+        <span class="merch-marquee-item">BVHanKrY<span class="dot"></span>Digitales<span class="dot"></span>Hotmart<span class="dot"></span>Ebooks<span class="dot"></span>Cursos<span class="dot"></span>Piano<span class="dot"></span>Música<span class="dot"></span>Ecuador<span class="dot"></span>2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de producto">
     <div class="lightbox-topbar">
       <span class="lightbox-counter"><span id="lbCurrent">01</span> / <span id="lbTotal">06</span></span>
       <button class="lightbox-close" id="lbClose" aria-label="Cerrar">✕</button>
     </div>
-    <div class="lightbox-img-wrap" id="lbImgWrap">
-      <img id="lbImg" src="" alt="Producto">
-    </div>
-    <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Anterior">
-      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-    </button>
-    <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Siguiente">
-      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </button>
+    <div class="lightbox-img-wrap" id="lbImgWrap"><img id="lbImg" src="" alt="Producto"></div>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+    <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
     <div class="lightbox-buy-bar" id="lbBuyBar">
       <div class="lightbox-buy-info">
         <span class="lightbox-buy-name" id="lbBuyName">—</span>
         <span class="lightbox-buy-price" id="lbBuyPrice">—</span>
       </div>
       <span class="lightbox-buy-platform" id="lbBuyPlatform">—</span>
-      <button class="lightbox-buy-btn" id="lbBuyBtn">
-        Comprar
-        <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
-      </button>
+      <button class="lightbox-buy-btn" id="lbBuyBtn">Comprar<svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></button>
     </div>
   </div>
 
@@ -517,21 +602,14 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
   </footer>
 </div>
 
-<!-- Global Player -->
 <div class="global-player" id="globalPlayer">
   <div class="gp-left">
     <div class="gp-cover"><img id="gpCoverImg" src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png" alt=""></div>
-    <div class="gp-info-text">
-      <div class="gp-title" id="gpTitle">—</div>
-      <div class="gp-artist" id="gpArtist">—</div>
-    </div>
+    <div class="gp-info-text"><div class="gp-title" id="gpTitle">—</div><div class="gp-artist" id="gpArtist">—</div></div>
   </div>
   <div class="gp-center">
     <button class="gp-btn" id="gpPrevBtn" title="Anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
-    <button class="gp-play-main" id="gpPlayBtn" aria-label="Play/Pause">
-      <svg class="gp-icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      <svg class="gp-icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-    </button>
+    <button class="gp-play-main" id="gpPlayBtn" aria-label="Play/Pause"><svg class="gp-icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="gp-icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
     <button class="gp-btn" id="gpNextBtn" title="Siguiente"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
     <div class="gp-progress-track" id="gpProgressTrack"><div class="gp-progress-fill" id="gpProgressFill"></div></div>
     <span class="gp-time" id="gpTime">0:00 / 0:00</span>
@@ -558,245 +636,202 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
 
   /* ═══════════════════════════════════════════════════════════
-     CATÁLOGO DE PRODUCTOS — FUENTE ÚNICA DE DATOS
-     
-     Dos arrays separados: DIGITALES y FÍSICOS.
-     Para agregar un producto nuevo solo copia un bloque
-     y pégalo al final del array correspondiente.
-     Todo se genera solo: grid, precios, botones, lightbox.
-     
-     Campos:
-       name       → Nombre visible del producto
-       image      → URL completa de la imagen
-       price      → Precio numérico (ej: 25.00)
-       type       → 'digital' (Hotmart) | 'physical' (Mercado Libre)
-       paymentUrl → URL real de compra en la plataforma
-                    Usa '#' mientras configuras el enlace real.
-                    Si está en '#', al comprar redirige a WhatsApp
-                    con mensaje personalizado del producto.
+     CATÁLOGO DE PRODUCTOS
      ═══════════════════════════════════════════════════════════ */
 
-  var BASE_IMG = 'https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/';
-
-  var DIGITAL_PRODUCTS = [
-    {
-      name: 'Ebook Modos',
-      image: BASE_IMG + 'merch/Ebook%20Modos.jpg',
-      price: 2.50,
-      type: 'digital',
-      paymentUrl: '#'
-    },
-    {
-      name: 'Cursos de Música',
-      image: BASE_IMG + 'merch/cursos%20de%20musica.png',
-      price: 10.00,
-      type: 'digital',
-      paymentUrl: '#'
-    },
-    {
-      name: 'Curso de Piano Avanzado',
-      image: BASE_IMG + 'merch/curso%20de%20piano%20avanzado.png',
-      price: 18.00,
-      type: 'digital',
-      paymentUrl: '#'
-    },
-    {
-      name: 'Curso de Piano Básico',
-      image: BASE_IMG + 'merch/curso%20de%20piano%20basico.png',
-      price: 10.00,
-      type: 'digital',
-      paymentUrl: '#'
-    },
-    {
-      name: 'Curso de Piano Intermedio',
-      image: BASE_IMG + 'merch/curso%20de%20piano%20intermedio.png',
-      price: 12.00,
-      type: 'digital',
-      paymentUrl: '#'
-    }
-  ];
+  var BASE = 'https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/';
 
   var PHYSICAL_PRODUCTS = [
-    {
-      name: 'Colección NFC',
-      image: BASE_IMG + 'merch/coleccion%20NFC%20.png',
-      price: 15.00,
-      type: 'physical',
-      paymentUrl: '#'
-    },
-    {
-      name: 'Camiseta Colección',
-      image: BASE_IMG + 'merch/camisetas%20coleccion.png',
-      price: 45.00,
-      type: 'physical',
-      paymentUrl: '#'
-    },
-    {
-      name: 'Camiseta Colección 6',
-      image: BASE_IMG + 'merch/camisetas%20coleccion%206.png',
-      price: 12.00,
-      type: 'physical',
-      paymentUrl: '#'
-    },
-    {
-      name: 'Camiseta Colección 5',
-      image: BASE_IMG + 'merch/camisetas%20coleccion%205.png',
-      price: 25.00,
-      type: 'physical',
-      paymentUrl: '#'
-    },
-    {
-      name: 'Camiseta Colección 4',
-      image: BASE_IMG + 'merch/camisetas%20coleccion%204.png',
-      price: 15.00,
-      type: 'physical',
-      paymentUrl: '#'
-    },
-    {
-      name: 'Camiseta Colección 3',
-      image: BASE_IMG + 'merch/camisetas%20coleccion%203.png',
-      price: 25.00,
-      type: 'physical',
-      paymentUrl: '#'
-    }
+    { name:'Colección NFC', image:BASE+'merch/coleccion%20NFC%20.png', price:15.00, type:'physical', paymentUrl:'#' },
+    { name:'Camiseta Colección', image:BASE+'merch/camisetas%20coleccion.png', price:45.00, type:'physical', paymentUrl:'#' },
+    { name:'Camiseta Colección 6', image:BASE+'merch/camisetas%20coleccion%206.png', price:12.00, type:'physical', paymentUrl:'#' },
+    { name:'Camiseta Colección 5', image:BASE+'merch/camisetas%20coleccion%205.png', price:25.00, type:'physical', paymentUrl:'#' },
+    { name:'Camiseta Colección 4', image:BASE+'merch/camisetas%20coleccion%204.png', price:15.00, type:'physical', paymentUrl:'#' },
+    { name:'Camiseta Colección 3', image:BASE+'merch/camisetas%20coleccion%203.png', price:25.00, type:'physical', paymentUrl:'#' }
   ];
 
+  var DIGITAL_PRODUCTS = [
+    { name:'Ebook Modos', category:'ebook', desc:'Guía completa de modos musicales', image:BASE+'merch/Ebook%20Modos.jpg', price:2.50, type:'digital', paymentUrl:'#' },
+    { name:'Cursos de Música', category:'curso', desc:'Aprende desde cero producción musical', image:BASE+'merch/cursos%20de%20musica.png', price:10.00, type:'digital', paymentUrl:'#' },
+    { name:'Curso de Piano Avanzado', category:'curso', desc:'Técnicas avanzadas de interpretación', image:BASE+'merch/curso%20de%20piano%20avanzado.png', price:18.00, type:'digital', paymentUrl:'#' },
+    { name:'Curso de Piano Básico', category:'curso', desc:'Fundamentos esenciales del piano', image:BASE+'merch/curso%20de%20piano%20basico.png', price:10.00, type:'digital', paymentUrl:'#' },
+    { name:'Curso de Piano Intermedio', category:'curso', desc:'Lleva tu nivel al siguiente escalón', image:BASE+'merch/curso%20de%20piano%20intermedio.png', price:12.00, type:'digital', paymentUrl:'#' }
+  ];
 
   /* ─── Utilidades ─── */
-  function formatPrice(n) {
-    return '$' + n.toFixed(2).replace('.', ',');
-  }
+  function fmtP(n){ return '$'+n.toFixed(2).replace('.',','); }
+  function pad(n){ return n<10?'0'+n:''+n; }
+  function platLabel(t){ return t==='digital'?'// en Hotmart':'// en Mercado Libre'; }
+  function platName(t){ return t==='digital'?'Hotmart':'Mercado Libre'; }
 
-  function padNum(n) {
-    return n < 10 ? '0' + n : '' + n;
-  }
+  var WA_NUM = '593981417078';
 
-  function getPlatformLabel(type) {
-    return type === 'digital' ? '// en Hotmart' : '// en Mercado Libre';
-  }
-
-  function getPlatformName(type) {
-    return type === 'digital' ? 'Hotmart' : 'Mercado Libre';
-  }
-
-  /* Número de WhatsApp del vendedor */
-  var WA_NUMBER = '593981417078';
-
-  /*
-   * Flujo de compra:
-   * - Si paymentUrl está configurado → redirige a la pasarela
-   * - Si paymentUrl es '#' → muestra aviso de plataforma pendiente,
-   *   luego aviso de contacto vendedor, y redirige a WhatsApp
-   *   con mensaje personalizado que incluye el nombre del producto
-   */
   function handleBuy(product) {
     if (product.paymentUrl && product.paymentUrl !== '#') {
       window.open(product.paymentUrl, '_blank', 'noopener,noreferrer');
       return;
     }
-
-    var platform = getPlatformName(product.type);
-    showToast('Enlace de pago pendiente en ' + platform);
-
+    var plat = platName(product.type);
+    showToast('Enlace de pago pendiente en ' + plat);
     setTimeout(function() {
       showToast('Contacto directo vendedor', 'wa');
-
       setTimeout(function() {
-        var text = 'Me interesa el producto: ' + product.name + ' (' + formatPrice(product.price) + ')';
-        var waUrl = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text);
-        window.open(waUrl, '_blank', 'noopener,noreferrer');
+        var text = 'Me interesa el producto: ' + product.name + ' (' + fmtP(product.price) + ')';
+        window.open('https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(text), '_blank', 'noopener,noreferrer');
       }, 1400);
-
     }, 1600);
   }
 
-
-  /* ─── Toast mejorado: permite apilar y soporta tipo 'wa' ─── */
   function showToast(msg, type) {
     var c = document.getElementById('toast-container');
     var t = document.createElement('div');
-    t.className = 'toast';
-    if (type === 'wa') t.className = 'toast toast-wa';
+    t.className = 'toast' + (type==='wa'?' toast-wa':'');
     t.textContent = msg;
     c.appendChild(t);
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        t.classList.add('show');
-      });
-    });
-    setTimeout(function() {
-      t.classList.remove('show');
-      setTimeout(function() { t.remove(); }, 300);
-    }, 3000);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ t.classList.add('show'); }); });
+    setTimeout(function(){ t.classList.remove('show'); setTimeout(function(){ t.remove(); },300); },3000);
   }
 
-
   /* ═══════════════════════════════════════════════════════════
-     RENDERIZAR GRID — Función reutilizable para ambas secciones
+     RENDER — Productos físicos (estándar)
      ═══════════════════════════════════════════════════════════ */
 
-  function renderMerchGrid(gridId, countId, products) {
-    var grid = document.getElementById(gridId);
-    var countEl = document.getElementById(countId);
-    var total = products.length;
-
-    countEl.innerHTML = '<span>' + padNum(total) + '</span> piezas';
+  function renderPhysicalGrid() {
+    var grid = document.getElementById('physicalGrid');
+    var countEl = document.getElementById('physicalCount');
+    var prods = PHYSICAL_PRODUCTS;
+    countEl.innerHTML = '<span>'+pad(prods.length)+'</span> piezas';
 
     var html = '';
-    for (var i = 0; i < total; i++) {
-      var p = products[i];
-      var num = padNum(i + 1);
-      var price = formatPrice(p.price);
-      html += '' +
-        '<div class="merch-item" data-index="' + i + '">' +
-          '<img src="' + p.image + '" alt="' + p.name + '" loading="lazy">' +
-          '<div class="merch-price-tag">' +
-            '<span class="merch-price-num">' + num + '</span>' +
-            '<span class="merch-price-value">' + price + '</span>' +
-          '</div>' +
-          '<div class="merch-overlay">' +
-            '<span class="merch-overlay-num">' + num + '</span>' +
-            '<span class="merch-overlay-name">' + p.name + '</span>' +
-            '<span class="merch-overlay-price">' + price + '</span>' +
-            '<button class="merch-buy-btn" data-buy="' + i + '">' +
-              'Comprar' +
-              '<svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>' +
-            '</button>' +
-            '<span class="merch-overlay-hint">ver detalle</span>' +
-          '</div>' +
-        '</div>';
+    for (var i = 0; i < prods.length; i++) {
+      var p = prods[i];
+      html += '<div class="merch-item" data-index="'+i+'">' +
+        '<img src="'+p.image+'" alt="'+p.name+'" loading="lazy">' +
+        '<div class="merch-price-tag"><span class="merch-price-num">'+pad(i+1)+'</span><span class="merch-price-value">'+fmtP(p.price)+'</span></div>' +
+        '<div class="merch-overlay">' +
+          '<span class="merch-overlay-num">'+pad(i+1)+'</span>' +
+          '<span class="merch-overlay-name">'+p.name+'</span>' +
+          '<span class="merch-overlay-price">'+fmtP(p.price)+'</span>' +
+          '<button class="merch-buy-btn" data-buy="'+i+'">Comprar<svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></button>' +
+          '<span class="merch-overlay-hint">ver detalle</span>' +
+        '</div></div>';
     }
     grid.innerHTML = html;
 
-    /* Delegación de eventos en el grid */
     grid.addEventListener('click', function(e) {
       var buyBtn = e.target.closest('.merch-buy-btn');
-      if (buyBtn) {
-        e.stopPropagation();
-        var idx = parseInt(buyBtn.dataset.buy, 10);
-        handleBuy(products[idx]);
-        return;
-      }
+      if (buyBtn) { e.stopPropagation(); handleBuy(prods[parseInt(buyBtn.dataset.buy,10)]); return; }
       var item = e.target.closest('.merch-item');
-      if (item) {
-        var idx2 = parseInt(item.dataset.index, 10);
-        openLightbox(products, idx2);
-      }
+      if (item) openLightbox(prods, parseInt(item.dataset.index,10));
+    });
+
+    return grid;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     RENDER — Productos digitales (estilo portada de libro)
+     ═══════════════════════════════════════════════════════════ */
+
+  function renderDigitalGrid() {
+    var grid = document.getElementById('digitalGrid');
+    var countEl = document.getElementById('digitalCount');
+    var prods = DIGITAL_PRODUCTS;
+    countEl.innerHTML = '<span>'+pad(prods.length)+'</span> piezas';
+
+    var html = '';
+    for (var i = 0; i < prods.length; i++) {
+      var p = prods[i];
+      var tag = (p.category || 'ebook').toUpperCase();
+      var desc = p.desc || '';
+      html += '<div class="merch-item merch-item--book" data-index="'+i+'" style="animation-delay:'+(i*0.6)+'s">' +
+        '<div class="book-inner">' +
+          '<img src="'+p.image+'" alt="'+p.name+'" loading="lazy">' +
+          '<div class="book-spine"></div>' +
+          '<div class="book-pages"></div>' +
+          '<div class="book-shine"></div>' +
+        '</div>' +
+        '<div class="merch-price-tag"><span class="merch-price-num">'+pad(i+1)+'</span><span class="merch-price-value">'+fmtP(p.price)+'</span></div>' +
+        '<div class="book-overlay">' +
+          '<span class="book-tag">'+tag+'</span>' +
+          '<span class="merch-overlay-num">'+pad(i+1)+'</span>' +
+          '<span class="book-overlay-name">'+p.name+'</span>' +
+          '<div class="book-overlay-line"></div>' +
+          (desc ? '<span class="book-overlay-desc">'+desc+'</span>' : '') +
+          '<span class="merch-overlay-price">'+fmtP(p.price)+'</span>' +
+          '<button class="merch-buy-btn" data-buy="'+i+'">Comprar<svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg></button>' +
+          '<span class="book-overlay-hint">explorar contenido</span>' +
+        '</div></div>';
+    }
+    grid.innerHTML = html;
+
+    /* Event delegation */
+    grid.addEventListener('click', function(e) {
+      var buyBtn = e.target.closest('.merch-buy-btn');
+      if (buyBtn) { e.stopPropagation(); handleBuy(prods[parseInt(buyBtn.dataset.buy,10)]); return; }
+      var item = e.target.closest('.merch-item--book');
+      if (item) openLightbox(prods, parseInt(item.dataset.index,10));
     });
 
     return grid;
   }
 
   /* Renderizar ambas secciones */
-  var digitalGridEl = renderMerchGrid('digitalGrid', 'digitalCount', DIGITAL_PRODUCTS);
-  var physicalGridEl = renderMerchGrid('physicalGrid', 'physicalCount', PHYSICAL_PRODUCTS);
-
+  var physicalGridEl = renderPhysicalGrid();
+  var digitalGridEl = renderDigitalGrid();
 
   /* ═══════════════════════════════════════════════════════════
-     LIGHTBOX — Compartido, navega dentro de la sección activa
+     3D TILT + SHINE — Solo para libros digitales
+     ═══════════════════════════════════════════════════════════ */
+
+  var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  if (!isTouch) {
+    var bookItems = document.querySelectorAll('.merch-item--book');
+
+    bookItems.forEach(function(item) {
+      var inner = item.querySelector('.book-inner');
+      var shine = item.querySelector('.book-shine');
+
+      item.addEventListener('mouseenter', function() {
+        inner.style.transition = 'none';
+      });
+
+      item.addEventListener('mousemove', function(e) {
+        var rect = inner.getBoundingClientRect();
+        var x = e.clientX - rect.left;
+        var y = e.clientY - rect.top;
+        var cx = rect.width / 2;
+        var cy = rect.height / 2;
+        var rotX = ((y - cy) / cy) * -10;
+        var rotY = ((x - cx) / cx) * 10;
+
+        inner.style.transform = 'rotateX('+rotX+'deg) rotateY('+rotY+'deg) scale(1.04)';
+
+        /* Sombra dinámica que se desplaza */
+        var sx = rotY * -1.5;
+        var sy = rotX * 1.5;
+        inner.style.boxShadow = sx+'px '+sy+'px 25px rgba(0,0,0,0.5)';
+
+        /* Brillo sigue al mouse */
+        var px = (x / rect.width) * 100;
+        var py = (y / rect.height) * 100;
+        inner.style.setProperty('--mx', px+'%');
+        inner.style.setProperty('--my', py+'%');
+      });
+
+      item.addEventListener('mouseleave', function() {
+        inner.style.transition = 'transform .45s ease, box-shadow .45s ease';
+        inner.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+        inner.style.boxShadow = 'none';
+      });
+    });
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     LIGHTBOX — Compartido entre ambas secciones
      ═══════════════════════════════════════════════════════════ */
 
   var lightbox = document.getElementById('lightbox');
@@ -812,13 +847,13 @@ document.addEventListener('DOMContentLoaded', () => {
   var lbBuyPlatform = document.getElementById('lbBuyPlatform');
   var lbBuyBtn = document.getElementById('lbBuyBtn');
 
-  var lbProducts = []; /* Array de la sección activa en el lightbox */
+  var lbProducts = [];
   var lbIndex = 0;
 
   function openLightbox(products, index) {
     lbProducts = products;
     lbIndex = index;
-    lbTotal.textContent = padNum(lbProducts.length);
+    lbTotal.textContent = pad(lbProducts.length);
     updateLightbox();
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -831,13 +866,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateLightbox() {
     var product = lbProducts[lbIndex];
-    var num = lbIndex + 1;
     lbImg.src = product.image;
     lbImg.alt = product.name;
-    lbCurrent.textContent = padNum(num);
+    lbCurrent.textContent = pad(lbIndex + 1);
     lbBuyName.textContent = product.name;
-    lbBuyPrice.textContent = formatPrice(product.price);
-    lbBuyPlatform.textContent = getPlatformLabel(product.type);
+    lbBuyPrice.textContent = fmtP(product.price);
+    lbBuyPlatform.textContent = platLabel(product.type);
   }
 
   function lbGo(dir) {
@@ -846,17 +880,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   lbClose.addEventListener('click', closeLightbox);
-  lbPrev.addEventListener('click', function(e) { e.stopPropagation(); lbGo(-1); });
-  lbNext.addEventListener('click', function(e) { e.stopPropagation(); lbGo(1); });
-
-  lbBuyBtn.addEventListener('click', function(e) {
+  lbPrev.addEventListener('click', function(e){ e.stopPropagation(); lbGo(-1); });
+  lbNext.addEventListener('click', function(e){ e.stopPropagation(); lbGo(1); });
+  lbBuyBtn.addEventListener('click', function(e){
     e.stopPropagation();
     if (lbProducts.length > 0) handleBuy(lbProducts[lbIndex]);
   });
-
-  lbImgWrap.addEventListener('click', function(e) {
-    if (e.target === lbImgWrap) closeLightbox();
-  });
+  lbImgWrap.addEventListener('click', function(e){ if (e.target === lbImgWrap) closeLightbox(); });
 
   document.addEventListener('keydown', function(e) {
     if (!lightbox.classList.contains('open')) return;
@@ -865,55 +895,43 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight') lbGo(1);
   });
 
-  /* Swipe en móvil */
-  var touchStartX = 0;
-  lbImgWrap.addEventListener('touchstart', function(e) {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  lbImgWrap.addEventListener('touchend', function(e) {
-    touchEndX = e.changedTouches[0].screenX;
-    var diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) lbGo(1);
-      else lbGo(-1);
-    }
-  }, { passive: true });
+  var touchSX = 0;
+  lbImgWrap.addEventListener('touchstart', function(e){ touchSX = e.changedTouches[0].screenX; }, {passive:true});
+  lbImgWrap.addEventListener('touchend', function(e){
+    var diff = touchSX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) lbGo(diff > 0 ? 1 : -1);
+  }, {passive:true});
 
-
-  /* ─── Stagger de entrada para cada grid ─── */
-  function setupStagger(gridEl) {
-    var merchIO = new IntersectionObserver(function(entries) {
+  /* ─── Stagger de entrada ─── */
+  function setupStagger(el) {
+    var io = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           var items = entry.target.querySelectorAll('.merch-item');
           items.forEach(function(item, i) {
-            setTimeout(function() {
-              item.classList.add('revealed');
-            }, i * 90);
+            setTimeout(function(){ item.classList.add('revealed'); }, i * 90);
           });
-          merchIO.unobserve(entry.target);
+          io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
-    merchIO.observe(gridEl);
+    }, {threshold:0.1});
+    io.observe(el);
   }
-  setupStagger(digitalGridEl);
   setupStagger(physicalGridEl);
+  setupStagger(digitalGridEl);
 
-
-  /* ─── Enlace teaser "Ver colección →" ─── */
+  /* ─── Teaser link ─── */
   var teaserLink = document.querySelector('.info-teaser-link');
   if (teaserLink) {
     teaserLink.addEventListener('click', function(e) {
       e.preventDefault();
-      var target = document.getElementById('merch-digital');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var t = document.getElementById('merch-physical');
+      if (t) t.scrollIntoView({behavior:'smooth',block:'start'});
     });
   }
 
-
   /* ═══════════════════════════════════════════
-     REPRODUCTOR — Sin cambios respecto al original
+     REPRODUCTOR — Sin cambios
      ═══════════════════════════════════════════ */
 
   var rows = Array.from(document.querySelectorAll('.track-row'));
@@ -934,217 +952,76 @@ document.addEventListener('DOMContentLoaded', () => {
   var gpShareBtn = document.getElementById('gpShareBtn');
   var shareDropdown = document.getElementById('shareDropdown');
   var topProgress = document.getElementById('topProgress');
-  var defaultCover = BASE_IMG + 'fondo/portada%20pulso.png';
+  var defaultCover = BASE+'fondo/portada%20pulso.png';
   var streamingSection = document.getElementById('streaming-section');
-
   var currentAudio = null, currentRowId = null, globalVol = 1, rafId = null, ytPlayer = null;
 
-  function fmt(d) {
-    if (!d || !isFinite(d) || d <= 0) return '0:00';
-    var m = Math.floor(d / 60), s = Math.floor(d % 60);
-    return m + ':' + (s < 10 ? '0' : '') + s;
-  }
-  function fmtRem(cur, dur) {
-    if (!dur || !isFinite(dur) || dur <= 0) return '0:00';
-    return fmt(Math.max(0, dur - cur));
-  }
+  function fmt(d){ if(!d||!isFinite(d)||d<=0)return'0:00'; var m=Math.floor(d/60),s=Math.floor(d%60); return m+':'+(s<10?'0':'')+s; }
+  function fmtR(c,d){ if(!d||!isFinite(d)||d<=0)return'0:00'; return fmt(Math.max(0,d-c)); }
 
-  function updateRowUI(rowId, playing) {
-    var row = document.getElementById(rowId);
-    if (!row) return;
-    row.classList.toggle('playing', playing);
-    if (!playing) { var f = row.querySelector('.track-progress-fill'); if (f) f.style.width = '0%'; }
-  }
-  function updateGPUI(playing) {
-    if (!currentRowId) return;
-    var row = document.getElementById(currentRowId);
-    gpTitle.textContent = row ? row.dataset.title : '—';
-    gpArtist.textContent = row ? row.dataset.artist : '—';
-    gpIconPlay.style.display = playing ? 'none' : 'block';
-    gpIconPause.style.display = playing ? 'block' : 'none';
-  }
-  function updateGPLikeState(rowId) {
-    gpLikeBtn.classList.toggle('active-like', localStorage.getItem('like-' + rowId) === 'true');
-  }
-  function updateShareLinks(title) {
-    var text = 'Escucha ' + title + ' en BVHanKrY Music', url = 'https://bvhankry.onrender.com';
-    var el = function(id) { return document.getElementById(id); };
-    if (el('link-wa')) el('link-wa').href = 'https://wa.me/?text=' + encodeURIComponent(text + ' ' + url);
-    if (el('link-fb')) el('link-fb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
-    if (el('link-tw')) el('link-tw').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
-    if (el('link-tg')) el('link-tg').href = 'https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text);
-  }
-  function toggleLike(rowId) {
-    var row = document.getElementById(rowId); if (!row) return;
-    var liked = localStorage.getItem('like-' + rowId) === 'true', next = !liked;
-    localStorage.setItem('like-' + rowId, next);
-    row.querySelector('.track-like').classList.toggle('liked', next);
-    if (currentRowId === rowId) updateGPLikeState(rowId);
-    if (next) showToast('Añadido a Me gusta');
-  }
-  function tickProgress() {
-    if (!currentAudio || currentAudio.paused) { stopTick(); return; }
-    var d = currentAudio.duration, c = currentAudio.currentTime;
-    if (d && isFinite(d) && d > 0) {
-      var pct = (c / d) * 100;
-      gpProgressFill.style.width = pct + '%';
-      topProgress.style.width = pct + '%';
-      gpTime.textContent = fmtRem(c, d) + ' / ' + fmt(d);
-      if (currentRowId) {
-        var f = document.getElementById(currentRowId);
-        var fill = f && f.querySelector('.track-progress-fill');
-        if (fill) fill.style.width = pct + '%';
-      }
-    }
-    rafId = requestAnimationFrame(tickProgress);
-  }
-  function startTick() { if (rafId) cancelAnimationFrame(rafId); rafId = requestAnimationFrame(tickProgress); }
-  function stopTick() { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } }
-  function pauseYT() { if (ytPlayer && ytPlayer.pauseVideo) try { ytPlayer.pauseVideo(); } catch(e){} }
-  function pauseAll() {
-    document.querySelectorAll('audio').forEach(function(a) { if (!a.paused) a.pause(); });
-    if (currentRowId) { updateRowUI(currentRowId, false); updateGPUI(false); stopTick(); }
-  }
+  function updateRowUI(id,p){ var r=document.getElementById(id);if(!r)return;r.classList.toggle('playing',p);if(!p){var f=r.querySelector('.track-progress-fill');if(f)f.style.width='0%';} }
+  function updateGPUI(p){ if(!currentRowId)return;var r=document.getElementById(currentRowId);gpTitle.textContent=r?r.dataset.title:'—';gpArtist.textContent=r?r.dataset.artist:'—';gpIconPlay.style.display=p?'none':'block';gpIconPause.style.display=p?'block':'none'; }
+  function updateGPLike(id){ gpLikeBtn.classList.toggle('active-like',localStorage.getItem('like-'+id)==='true'); }
+  function updateShareLinks(t){ var tx='Escucha '+t+' en BVHanKrY Music',u='https://bvhankry.onrender.com';var el=function(id){return document.getElementById(id);};if(el('link-wa'))el('link-wa').href='https://wa.me/?text='+encodeURIComponent(tx+' '+u);if(el('link-fb'))el('link-fb').href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(u);if(el('link-tw'))el('link-tw').href='https://twitter.com/intent/tweet?text='+encodeURIComponent(tx)+'&url='+encodeURIComponent(u);if(el('link-tg'))el('link-tg').href='https://t.me/share/url?url='+encodeURIComponent(u)+'&text='+encodeURIComponent(tx); }
+  function toggleLike(id){ var r=document.getElementById(id);if(!r)return;var lk=localStorage.getItem('like-'+id)==='true',n=!lk;localStorage.setItem('like-'+id,n);r.querySelector('.track-like').classList.toggle('liked',n);if(currentRowId===id)updateGPLike(id);if(n)showToast('Añadido a Me gusta'); }
+  function tick(){ if(!currentAudio||currentAudio.paused){stopTick();return;}var d=currentAudio.duration,c=currentAudio.currentTime;if(d&&isFinite(d)&&d>0){var p=(c/d)*100;gpProgressFill.style.width=p+'%';topProgress.style.width=p+'%';gpTime.textContent=fmtR(c,d)+' / '+fmt(d);if(currentRowId){var f=document.getElementById(currentRowId);var fl=f&&f.querySelector('.track-progress-fill');if(fl)fl.style.width=p+'%';}}rafId=requestAnimationFrame(tick); }
+  function startTick(){if(rafId)cancelAnimationFrame(rafId);rafId=requestAnimationFrame(tick);}
+  function stopTick(){if(rafId){cancelAnimationFrame(rafId);rafId=null;}}
+  function pauseYT(){if(ytPlayer&&ytPlayer.pauseVideo)try{ytPlayer.pauseVideo();}catch(e){}}
+  function pauseAll(){document.querySelectorAll('audio').forEach(function(a){if(!a.paused)a.pause();});if(currentRowId){updateRowUI(currentRowId,false);updateGPUI(false);stopTick();}}
 
-  function playTrack(rowId) {
-    var row = document.getElementById(rowId); if (!row) return;
-    var audio = row.querySelector('audio'); if (!audio) return;
-    if (currentAudio === audio && !audio.paused) {
-      audio.pause(); updateRowUI(rowId, false); updateGPUI(false); stopTick(); return;
-    }
-    if (currentAudio && currentAudio !== audio) {
-      currentAudio.pause(); if (currentRowId) updateRowUI(currentRowId, false); stopTick();
-    }
-    currentAudio = audio; currentRowId = rowId; audio.volume = globalVol;
-    gpCoverImg.src = row.dataset.cover || defaultCover;
-    pauseYT();
-    audio.play().then(function() {
-      globalPlayer.classList.add('active');
-      updateRowUI(rowId, true); updateGPUI(true);
-      updateShareLinks(row.dataset.title); updateGPLikeState(rowId); startTick();
-      if (!audio.dataset.counted) {
-        var count = parseInt(localStorage.getItem('plays-' + audio.dataset.id) || '0', 10);
-        count++;
-        var el2 = row.querySelector('.track-plays-count');
-        if (el2) el2.textContent = count;
-        localStorage.setItem('plays-' + audio.dataset.id, count);
-        audio.dataset.counted = 'true';
-      }
-    }).catch(function() { showToast('Error al cargar el audio'); });
+  function playTrack(id){
+    var r=document.getElementById(id);if(!r)return;var a=r.querySelector('audio');if(!a)return;
+    if(currentAudio===a&&!a.paused){a.pause();updateRowUI(id,false);updateGPUI(false);stopTick();return;}
+    if(currentAudio&&currentAudio!==a){currentAudio.pause();if(currentRowId)updateRowUI(currentRowId,false);stopTick();}
+    currentAudio=a;currentRowId=id;a.volume=globalVol;gpCoverImg.src=r.dataset.cover||defaultCover;pauseYT();
+    a.play().then(function(){globalPlayer.classList.add('active');updateRowUI(id,true);updateGPUI(true);updateShareLinks(r.dataset.title);updateGPLike(id);startTick();if(!a.dataset.counted){var cn=parseInt(localStorage.getItem('plays-'+a.dataset.id)||'0',10);cn++;var el2=r.querySelector('.track-plays-count');if(el2)el2.textContent=cn;localStorage.setItem('plays-'+a.dataset.id,cn);a.dataset.counted='true';}}).catch(function(){showToast('Error al cargar el audio');});
   }
+  function playNext(){if(!currentRowId)return;var i=rows.findIndex(function(r){return r.id===currentRowId;});if(i!==-1)playTrack(rows[(i+1)%rows.length].id);}
+  function playPrev(){if(!currentRowId)return;var i=rows.findIndex(function(r){return r.id===currentRowId;});if(i!==-1)playTrack(rows[(i-1+rows.length)%rows.length].id);}
 
-  function playNext() {
-    if (!currentRowId) return;
-    var i = rows.findIndex(function(r) { return r.id === currentRowId; });
-    if (i !== -1) playTrack(rows[(i + 1) % rows.length].id);
-  }
-  function playPrev() {
-    if (!currentRowId) return;
-    var i = rows.findIndex(function(r) { return r.id === currentRowId; });
-    if (i !== -1) playTrack(rows[(i - 1 + rows.length) % rows.length].id);
-  }
-
-  rows.forEach(function(row) {
-    var audio = row.querySelector('audio');
-    var plays = parseInt(localStorage.getItem('plays-' + audio.dataset.id) || '0', 10);
-    var playsEl = row.querySelector('.track-plays-count');
-    if (playsEl) playsEl.textContent = plays;
-    if (localStorage.getItem('like-' + row.id) === 'true') row.querySelector('.track-like').classList.add('liked');
-    audio.addEventListener('loadedmetadata', function() {
-      var durEl = row.querySelector('.track-duration');
-      if (durEl) durEl.textContent = fmt(audio.duration);
-    });
-    row.addEventListener('click', function(e) { if (e.target.closest('.track-like')) return; playTrack(row.id); });
-    row.querySelector('.track-like').addEventListener('click', function(e) { e.stopPropagation(); toggleLike(row.id); });
-    audio.addEventListener('ended', function() { if (currentRowId === row.id) { stopTick(); playNext(); } });
+  rows.forEach(function(r){
+    var a=r.querySelector('audio');var ps=parseInt(localStorage.getItem('plays-'+a.dataset.id)||'0',10);var pe=r.querySelector('.track-plays-count');if(pe)pe.textContent=ps;
+    if(localStorage.getItem('like-'+r.id)==='true')r.querySelector('.track-like').classList.add('liked');
+    a.addEventListener('loadedmetadata',function(){var de=r.querySelector('.track-duration');if(de)de.textContent=fmt(a.duration);});
+    r.addEventListener('click',function(e){if(e.target.closest('.track-like'))return;playTrack(r.id);});
+    r.querySelector('.track-like').addEventListener('click',function(e){e.stopPropagation();toggleLike(r.id);});
+    a.addEventListener('ended',function(){if(currentRowId===r.id){stopTick();playNext();}});
   });
 
-  gpPlayBtn.addEventListener('click', function() {
-    if (currentAudio) {
-      if (currentAudio.paused) {
-        currentAudio.play().then(function() { updateRowUI(currentRowId, true); updateGPUI(true); startTick(); pauseYT(); }).catch(function() { showToast('Error'); });
-      } else { currentAudio.pause(); updateRowUI(currentRowId, false); updateGPUI(false); stopTick(); }
-    } else if (rows.length) playTrack(rows[0].id);
-  });
-  gpNextBtn.addEventListener('click', playNext);
-  gpPrevBtn.addEventListener('click', playPrev);
-  gpProgressTrack.addEventListener('click', function(e) {
-    if (!currentAudio) return;
-    var rect = gpProgressTrack.getBoundingClientRect();
-    var pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    if (currentAudio.duration && isFinite(currentAudio.duration)) currentAudio.currentTime = pct * currentAudio.duration;
-  });
-  gpVolume.addEventListener('input', function(e) { globalVol = parseFloat(e.target.value); if (currentAudio) currentAudio.volume = globalVol; });
-  gpLikeBtn.addEventListener('click', function() { if (currentRowId) toggleLike(currentRowId); });
-  gpShareBtn.addEventListener('click', function(e) { e.stopPropagation(); shareDropdown.classList.toggle('active'); });
-  document.addEventListener('click', function(e) { if (shareDropdown && !shareDropdown.contains(e.target) && e.target !== gpShareBtn) shareDropdown.classList.remove('active'); });
+  gpPlayBtn.addEventListener('click',function(){if(currentAudio){if(currentAudio.paused){currentAudio.play().then(function(){updateRowUI(currentRowId,true);updateGPUI(true);startTick();pauseYT();}).catch(function(){showToast('Error');});}else{currentAudio.pause();updateRowUI(currentRowId,false);updateGPUI(false);stopTick();}}else if(rows.length)playTrack(rows[0].id);});
+  gpNextBtn.addEventListener('click',playNext);gpPrevBtn.addEventListener('click',playPrev);
+  gpProgressTrack.addEventListener('click',function(e){if(!currentAudio)return;var rect=gpProgressTrack.getBoundingClientRect();var p=Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));if(currentAudio.duration&&isFinite(currentAudio.duration))currentAudio.currentTime=p*currentAudio.duration;});
+  gpVolume.addEventListener('input',function(e){globalVol=parseFloat(e.target.value);if(currentAudio)currentAudio.volume=globalVol;});
+  gpLikeBtn.addEventListener('click',function(){if(currentRowId)toggleLike(currentRowId);});
+  gpShareBtn.addEventListener('click',function(e){e.stopPropagation();shareDropdown.classList.toggle('active');});
+  document.addEventListener('click',function(e){if(shareDropdown&&!shareDropdown.contains(e.target)&&e.target!==gpShareBtn)shareDropdown.classList.remove('active');});
 
-  if (streamingSection) {
-    ['pointerdown','mousedown','touchstart','click'].forEach(function(evt) {
-      streamingSection.addEventListener(evt, function(e) {
-        if (!e.target.closest('a') && !e.target.closest('button') && !e.target.closest('iframe')) pauseAll();
-      }, { capture: true, passive: evt === 'touchstart' });
-    });
-  }
+  if(streamingSection){['pointerdown','mousedown','touchstart','click'].forEach(function(evt){streamingSection.addEventListener(evt,function(e){if(!e.target.closest('a')&&!e.target.closest('button')&&!e.target.closest('iframe'))pauseAll();},{capture:true,passive:evt==='touchstart'});});}
 
-  function initYT() {
-    var iframe = document.getElementById('yt-player');
-    if (iframe && typeof YT !== 'undefined' && YT.Player) {
-      ytPlayer = new YT.Player(iframe, { events: { 'onStateChange': function(e) { if (e.data === YT.PlayerState.PLAYING) pauseAll(); } } });
-    }
-  }
-  if (typeof YT !== 'undefined' && YT.Player) initYT();
-  else window.onYouTubeIframeAPIReady = initYT;
+  function initYT(){var ifr=document.getElementById('yt-player');if(ifr&&typeof YT!=='undefined'&&YT.Player){ytPlayer=new YT.Player(ifr,{events:{'onStateChange':function(e){if(e.data===YT.PlayerState.PLAYING)pauseAll();}}});}}
+  if(typeof YT!=='undefined'&&YT.Player)initYT();else window.onYouTubeIframeAPIReady=initYT;
 
-  var menuBtn = document.querySelector('.menu-toggle');
-  var navLinks = document.querySelector('.nav-links');
-  if (menuBtn && navLinks) {
-    menuBtn.addEventListener('click', function() {
-      var open = !navLinks.classList.contains('active');
-      navLinks.classList.toggle('active');
-      menuBtn.setAttribute('aria-expanded', String(open));
-    });
-  }
+  var menuBtn=document.querySelector('.menu-toggle');var navLinks=document.querySelector('.nav-links');
+  if(menuBtn&&navLinks){menuBtn.addEventListener('click',function(){var o=!navLinks.classList.contains('active');navLinks.classList.toggle('active');menuBtn.setAttribute('aria-expanded',String(o));});}
 
-  var lastScroll = 0;
-  window.addEventListener('scroll', function() {
-    var cur = window.pageYOffset;
-    document.querySelector('.main-nav').classList.toggle('hidden-nav', cur > lastScroll && cur > 80);
-    lastScroll = cur;
-  });
+  var lastScroll=0;
+  window.addEventListener('scroll',function(){var c=window.pageYOffset;document.querySelector('.main-nav').classList.toggle('hidden-nav',c>lastScroll&&c>80);lastScroll=c;});
 
-  var io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.scroll-fade').forEach(function(el) { io.observe(el); });
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.15});
+  document.querySelectorAll('.scroll-fade').forEach(function(el){io.observe(el);});
 
-  var installBtn = document.getElementById('installAppBtn');
-  var deferredPrompt = null;
-  var isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-  if (isStandalone) { if (installBtn) installBtn.remove(); }
-  else {
-    window.addEventListener('beforeinstallprompt', function(e) { e.preventDefault(); deferredPrompt = e; if (installBtn) installBtn.classList.add('visible'); });
-    if (installBtn) {
-      installBtn.addEventListener('click', async function() {
-        if (!deferredPrompt) { showToast('Instalación no disponible'); return; }
-        deferredPrompt.prompt();
-        var r = await deferredPrompt.userChoice;
-        if (r.outcome === 'accepted') showToast('App instalada');
-        deferredPrompt = null; installBtn.classList.remove('visible');
-      });
-    }
-    window.addEventListener('appinstalled', function() { if (installBtn) installBtn.classList.remove('visible'); showToast('Gracias por instalar la app'); });
-  }
+  var installBtn=document.getElementById('installAppBtn');var deferredPrompt=null;
+  var isStandalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+  if(isStandalone){if(installBtn)installBtn.remove();}
+  else{window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;if(installBtn)installBtn.classList.add('visible');});
+  if(installBtn){installBtn.addEventListener('click',async function(){if(!deferredPrompt){showToast('Instalación no disponible');return;}deferredPrompt.prompt();var r=await deferredPrompt.userChoice;if(r.outcome==='accepted')showToast('App instalada');deferredPrompt=null;installBtn.classList.remove('visible');});}
+  window.addEventListener('appinstalled',function(){if(installBtn)installBtn.classList.remove('visible');showToast('Gracias por instalar la app');});}
 
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() { navigator.serviceWorker.register('./sw.js').catch(function(e) { console.error('SW error:', e); }); });
-  }
+  if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(e){console.error('SW error:',e);});});}
+  document.querySelectorAll('audio').forEach(function(a){a.addEventListener('pause',function(){if(a===currentAudio)topProgress.style.width='0%';});});
 
-  document.querySelectorAll('audio').forEach(function(a) {
-    a.addEventListener('pause', function() { if (a === currentAudio) topProgress.style.width = '0%'; });
-  });
-
-}); // fin DOMContentLoaded
+});
 </script>
 </body>
 </html>
