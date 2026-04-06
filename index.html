@@ -452,7 +452,7 @@ footer p{
 .scroll-fade.visible{opacity:1;transform:translateY(0)}
 
 /* ═══════════════════════════════════════════
-   MERCH — Minimalismo Digital / Flat Design
+   MERCH — Grid + Precios + Compra
    ═══════════════════════════════════════════ */
 
 .merch-section{
@@ -484,13 +484,19 @@ footer p{
   gap:1px;
   background:var(--border);
 }
+
+/* ─── Item individual ─── */
 .merch-item{
   position:relative;
   overflow:hidden;
   cursor:pointer;
   background:var(--bg);
   aspect-ratio:1/1.15;
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .4s ease,transform .4s ease;
 }
+.merch-item.revealed{opacity:1;transform:translateY(0)}
 .merch-item img{
   width:100%;height:100%;
   object-fit:cover;
@@ -499,17 +505,44 @@ footer p{
 }
 .merch-item:hover img{transform:scale(1.04)}
 
-/* Overlay hover — flat, sin blur */
+/* ─── Precio siempre visible (debajo de cada producto) ─── */
+.merch-price-tag{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:24px 10px 8px;
+  background:linear-gradient(transparent,rgba(10,10,10,.92));
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  z-index:2;
+  pointer-events:none;
+}
+.merch-price-num{
+  font-family:var(--mono);
+  font-size:.55rem;
+  color:var(--muted);
+  letter-spacing:2px;
+}
+.merch-price-value{
+  font-family:var(--mono);
+  font-size:.78rem;
+  color:var(--accent);
+  font-weight:500;
+  letter-spacing:.5px;
+}
+
+/* ─── Overlay hover ─── */
 .merch-overlay{
   position:absolute;inset:0;
-  background:rgba(10,10,10,.82);
+  background:rgba(10,10,10,.84);
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:10px;
+  gap:6px;
   opacity:0;
   transition:opacity .15s;
+  z-index:3;
 }
 .merch-item:hover .merch-overlay{opacity:1}
 .merch-overlay-num{
@@ -517,10 +550,56 @@ footer p{
   font-weight:700;color:var(--accent);
   letter-spacing:2px;
 }
-.merch-overlay-text{
-  font-family:var(--mono);font-size:.6rem;
+.merch-overlay-name{
+  font-family:var(--mono);font-size:.62rem;
+  color:var(--text);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  max-width:85%;
+  text-align:center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.merch-overlay-price{
+  font-family:var(--mono);font-size:.88rem;
+  color:var(--accent);
+  font-weight:600;
+  margin-top:2px;
+}
+.merch-buy-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:5px 16px;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  font-family:var(--mono);
+  font-size:.56rem;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  text-decoration:none;
+  background:transparent;
+  cursor:pointer;
+  transition:background .15s,color .15s;
+  margin-top:4px;
+  flex-shrink:0;
+}
+.merch-buy-btn:hover{
+  background:var(--accent);
+  color:var(--bg);
+}
+.merch-buy-btn svg{
+  width:11px;height:11px;
+  fill:currentColor;
+  flex-shrink:0;
+}
+.merch-overlay-hint{
+  font-family:var(--mono);font-size:.5rem;
   color:var(--muted);
-  letter-spacing:2px;text-transform:uppercase;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  opacity:.6;
 }
 
 /* Marquee inferior del merch */
@@ -583,6 +662,7 @@ footer p{
   padding:0 20px;
   border-bottom:1px solid var(--border);
   background:var(--bg);
+  z-index:12;
 }
 .lightbox-counter{
   font-family:var(--mono);font-size:.7rem;
@@ -600,7 +680,7 @@ footer p{
 
 .lightbox-img-wrap{
   position:absolute;
-  top:48px;bottom:0;left:0;right:0;
+  top:48px;bottom:56px;left:0;right:0;
   display:flex;align-items:center;justify-content:center;
   padding:20px;
   cursor:pointer;
@@ -625,23 +705,80 @@ footer p{
 .lightbox-next{right:0}
 .lightbox-nav svg{width:28px;height:28px;fill:currentColor}
 
-/* Indicador de pieza en lightbox */
-.lightbox-piece-label{
+/* ─── Barra de compra en lightbox ─── */
+.lightbox-buy-bar{
   position:absolute;
-  bottom:20px;left:50%;transform:translateX(-50%);
-  font-family:var(--mono);font-size:.6rem;
-  color:var(--muted);letter-spacing:3px;
+  bottom:0;left:0;right:0;
+  height:56px;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  z-index:12;
+  gap:16px;
+}
+.lightbox-buy-info{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  overflow:hidden;
+  min-width:0;
+  flex:1;
+}
+.lightbox-buy-name{
+  font-family:var(--mono);
+  font-size:.7rem;
+  color:var(--text);
+  letter-spacing:1px;
   text-transform:uppercase;
-  z-index:10;
-  pointer-events:none;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
-
-/* Stagger de entrada para items del merch */
-.merch-item{
-  opacity:0;transform:translateY(10px);
-  transition:opacity .4s ease,transform .4s ease;
+.lightbox-buy-price{
+  font-family:var(--mono);
+  font-size:.88rem;
+  color:var(--accent);
+  font-weight:600;
+  flex-shrink:0;
 }
-.merch-item.revealed{opacity:1;transform:translateY(0)}
+.lightbox-buy-platform{
+  font-family:var(--mono);
+  font-size:.52rem;
+  color:var(--muted);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  flex-shrink:0;
+}
+.lightbox-buy-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 16px;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  font-family:var(--mono);
+  font-size:.58rem;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  text-decoration:none;
+  background:transparent;
+  cursor:pointer;
+  transition:background .15s,color .15s;
+  flex-shrink:0;
+  white-space:nowrap;
+}
+.lightbox-buy-btn:hover{
+  background:var(--accent);
+  color:var(--bg);
+}
+.lightbox-buy-btn svg{
+  width:12px;height:12px;
+  fill:currentColor;
+  flex-shrink:0;
+}
 
 /* ─── Responsive ─── */
 @media(max-width:768px){
@@ -681,9 +818,26 @@ footer p{
 
   .merch-grid{grid-template-columns:repeat(2,1fr)}
   .merch-item{aspect-ratio:1/1.2}
+  .merch-price-value{font-size:.7rem}
+  .merch-overlay-num{font-size:1.1rem}
+  .merch-overlay-name{font-size:.55rem}
+  .merch-overlay-price{font-size:.75rem}
+  .merch-buy-btn{padding:4px 12px;font-size:.5rem}
+  .merch-buy-btn svg{width:9px;height:9px}
 
   .lightbox-nav{padding:10px}
   .lightbox-nav svg{width:22px;height:22px}
+
+  .lightbox-buy-bar{
+    padding:8px 14px;
+    gap:10px;
+  }
+  .lightbox-buy-platform{display:none}
+  .lightbox-buy-name{font-size:.6rem}
+  .lightbox-buy-price{font-size:.78rem}
+  .lightbox-buy-btn{padding:5px 12px;font-size:.52rem}
+  .lightbox-buy-btn svg{width:10px;height:10px}
+  .lightbox-img-wrap{bottom:52px}
 
   .global-player{
     grid-template-columns:1fr auto;
@@ -702,8 +856,12 @@ footer p{
 @media(max-width:420px){
   .merch-grid{grid-template-columns:1fr 1fr;gap:1px}
   .merch-item{aspect-ratio:1/1.3}
-  .merch-overlay-num{font-size:1.1rem}
-  .merch-overlay-text{font-size:.5rem}
+  .merch-overlay-num{font-size:1rem}
+  .merch-overlay-name{font-size:.5rem}
+  .merch-overlay-price{font-size:.68rem}
+  .merch-price-tag{padding:18px 8px 6px}
+  .merch-price-value{font-size:.65rem}
+  .merch-price-num{font-size:.5rem}
 }
 
 @media(prefers-reduced-motion:reduce){
@@ -801,7 +959,7 @@ footer p{
     </div>
     <div class="streaming-links">
       <a class="stream-link" href="https://open.spotify.com/playlist/1fdvC7VC5YAHgTRE5ZCnH6?si=yLTCxcWdSGyxkYShJ0FN8Q" target="_blank" rel="noopener">Spotify →</a>
-      <a class="stream-link" href="https://www.youtube.com/@bvhankry">YouTube →</a>
+      <a class="stream-link" href="https://www.youtube.com/@bvhankry" target="_blank">YouTube →</a>
     </div>
   </section>
 
@@ -830,64 +988,16 @@ footer p{
   </div>
 
   <!-- ═══════════════════════════════════════
-       MERCH SECCIÓN COMPLETA
+       MERCH — Generado dinámicamente
        ═══════════════════════════════════════ -->
   <section class="merch-section scroll-fade" id="merch-section">
     <div class="merch-header">
       <span class="merch-header-label">// Colección</span>
-      <span class="merch-header-count"><span>06</span> piezas</span>
+      <span class="merch-header-count" id="merchCount"><span>00</span> piezas</span>
     </div>
     <div class="merch-grid" id="merchGrid">
-      <!-- Item 001 -->
-      <div class="merch-item" data-index="0">
-        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%203.png" alt="Colección 001" loading="lazy">
-        <div class="merch-overlay">
-          <span class="merch-overlay-num">001</span>
-          <span class="merch-overlay-text">Ver detalle</span>
-        </div>
-      </div>
-      <!-- Item 002 -->
-      <div class="merch-item" data-index="1">
-        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%204.png" alt="Colección 002" loading="lazy">
-        <div class="merch-overlay">
-          <span class="merch-overlay-num">002</span>
-          <span class="merch-overlay-text">Ver detalle</span>
-        </div>
-      </div>
-      <!-- Item 003 -->
-      <div class="merch-item" data-index="2">
-        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%205.png" alt="Colección 003" loading="lazy">
-        <div class="merch-overlay">
-          <span class="merch-overlay-num">003</span>
-          <span class="merch-overlay-text">Ver detalle</span>
-        </div>
-      </div>
-      <!-- Item 004 -->
-      <div class="merch-item" data-index="3">
-        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%206.png" alt="Colección 004" loading="lazy">
-        <div class="merch-overlay">
-          <span class="merch-overlay-num">004</span>
-          <span class="merch-overlay-text">Ver detalle</span>
-        </div>
-      </div>
-      <!-- Item 005 -->
-      <div class="merch-item" data-index="4">
-        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion.png" alt="Colección 005" loading="lazy">
-        <div class="merch-overlay">
-          <span class="merch-overlay-num">005</span>
-          <span class="merch-overlay-text">Ver detalle</span>
-        </div>
-      </div>
-      <!-- Item 006 -->
-      <div class="merch-item" data-index="5">
-        <img src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/coleccion%207.png" alt="Colección 006" loading="lazy">
-        <div class="merch-overlay">
-          <span class="merch-overlay-num">006</span>
-          <span class="merch-overlay-text">Ver detalle</span>
-        </div>
-      </div>
+      <!-- Se genera con JS desde PRODUCTS -->
     </div>
-    <!-- Marquee -->
     <div class="merch-marquee">
       <div class="merch-marquee-track">
         <span class="merch-marquee-item">BVHanKrY<span class="dot"></span>Pulso Collection<span class="dot"></span>Ecuador<span class="dot"></span>Edición Limitada<span class="dot"></span>Dub Music<span class="dot"></span>BVros Productions<span class="dot"></span>2026</span>
@@ -911,7 +1021,18 @@ footer p{
     <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Siguiente">
       <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
     </button>
-    <div class="lightbox-piece-label" id="lbLabel">Pieza 001</div>
+    <!-- Barra de compra en lightbox -->
+    <div class="lightbox-buy-bar" id="lbBuyBar">
+      <div class="lightbox-buy-info">
+        <span class="lightbox-buy-name" id="lbBuyName">—</span>
+        <span class="lightbox-buy-price" id="lbBuyPrice">—</span>
+      </div>
+      <span class="lightbox-buy-platform" id="lbBuyPlatform">—</span>
+      <button class="lightbox-buy-btn" id="lbBuyBtn">
+        Comprar
+        <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+      </button>
+    </div>
   </div>
 
   <footer>
@@ -963,7 +1084,154 @@ footer p{
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ─── Reproductor (sin cambios) ─── */
+  /* ═══════════════════════════════════════════════════════════
+     CATÁLOGO DE PRODUCTOS — FUENTE ÚNICA DE DATOS
+     
+     Para agregar un nuevo producto solo copia un bloque
+     y pégalo al final del array. Todo se genera solo:
+     grid, precios, botones, lightbox y redirecciones.
+     
+     Campos:
+       name       → Nombre visible del producto
+       image      → URL completa de la imagen
+       price      → Precio numérico (ej: 25.00)
+       type       → 'physical' (Mercado Libre) | 'digital' (Hotmart)
+       paymentUrl → URL real de compra en la plataforma
+                    Usa '#' mientras configuras el enlace real
+     ═══════════════════════════════════════════════════════════ */
+
+  const PRODUCTS = [
+    {
+      name: 'Camiseta Colección 3',
+      image: 'https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%203.png',
+      price: 25.00,
+      type: 'physical',
+      paymentUrl: '#'
+    },
+    {
+      name: 'Camiseta Colección 4',
+      image: 'https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%204.png',
+      price: 15.00,
+      type: 'physical',
+      paymentUrl: '#'
+    },
+    {
+      name: 'Camiseta Colección 5',
+      image: 'https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%205.png',
+      price: 25.00,
+      type: 'physical',
+      paymentUrl: '#'
+    },
+    {
+      name: 'Camiseta Colección 6',
+      image: 'https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion%206.png',
+      price: 12.00,
+      type: 'physical',
+      paymentUrl: '#'
+    },
+    {
+      name: 'Camiseta Colección',
+      image: 'https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/camisetas%20coleccion.png',
+      price: 45.00,
+      type: 'physical',
+      paymentUrl: '#'
+    },
+    {
+      name: 'Colección 7',
+      image: 'https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/merch/coleccion%207.png',
+      price: 15.00,
+      type: 'physical',
+      paymentUrl: '#'
+    }
+    /* ── Ejemplo de producto digital (descomenta cuando lo necesites):
+    ,
+    {
+      name: 'Pulso EP — Digital',
+      image: 'https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png',
+      price: 8.00,
+      type: 'digital',
+      paymentUrl: 'https://pay.hotmart.com/TU_LINK_AQUI'
+    }
+    ── */
+  ];
+
+  /* ─── Utilidades de producto ─── */
+  function formatPrice(n) {
+    return '$' + n.toFixed(2).replace('.', ',');
+  }
+
+  function padNum(n) {
+    return n < 10 ? '0' + n : '' + n;
+  }
+
+  function getPlatformLabel(type) {
+    return type === 'digital' ? '// en Hotmart' : '// en Mercado Libre';
+  }
+
+  /* Redirige a la pasarela de pago o muestra aviso si no está configurada */
+  function handleBuy(index) {
+    const product = PRODUCTS[index];
+    if (!product || !product.paymentUrl || product.paymentUrl === '#') {
+      showToast('Enlace de pago pendiente de configuración');
+      return;
+    }
+    window.open(product.paymentUrl, '_blank', 'noopener,noreferrer');
+  }
+
+  /* ─── Renderizar grid de merch ─── */
+  const merchGrid = document.getElementById('merchGrid');
+  const merchCountEl = document.getElementById('merchCount');
+
+  function renderMerchGrid() {
+    const total = PRODUCTS.length;
+    merchCountEl.innerHTML = '<span>' + padNum(total) + '</span> piezas';
+
+    merchGrid.innerHTML = PRODUCTS.map((p, i) => {
+      const num = padNum(i + 1);
+      const price = formatPrice(p.price);
+      return '' +
+        '<div class="merch-item" data-index="' + i + '">' +
+          '<img src="' + p.image + '" alt="' + p.name + '" loading="lazy">' +
+          '<div class="merch-price-tag">' +
+            '<span class="merch-price-num">' + num + '</span>' +
+            '<span class="merch-price-value">' + price + '</span>' +
+          '</div>' +
+          '<div class="merch-overlay">' +
+            '<span class="merch-overlay-num">' + num + '</span>' +
+            '<span class="merch-overlay-name">' + p.name + '</span>' +
+            '<span class="merch-overlay-price">' + price + '</span>' +
+            '<button class="merch-buy-btn" data-buy="' + i + '">' +
+              'Comprar' +
+              '<svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>' +
+            '</button>' +
+            '<span class="merch-overlay-hint">ver detalle</span>' +
+          '</div>' +
+        '</div>';
+    }).join('');
+
+    /* Delegación de eventos en el grid */
+    merchGrid.addEventListener('click', function(e) {
+      /* Si hizo clic en "Comprar", no abrir lightbox */
+      const buyBtn = e.target.closest('.merch-buy-btn');
+      if (buyBtn) {
+        e.stopPropagation();
+        const idx = parseInt(buyBtn.dataset.buy, 10);
+        handleBuy(idx);
+        return;
+      }
+      /* Cualquier otra parte del item → lightbox */
+      const item = e.target.closest('.merch-item');
+      if (item) {
+        const idx = parseInt(item.dataset.index, 10);
+        openLightbox(idx);
+      }
+    });
+  }
+
+  renderMerchGrid();
+
+
+  /* ─── Reproductor ─── */
   const rows = Array.from(document.querySelectorAll('.track-row'));
   const globalPlayer = document.getElementById('globalPlayer');
   const gpTitle = document.getElementById('gpTitle');
@@ -1202,25 +1470,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ═══════════════════════════════════════════
-     MERCH — Lightbox + Stagger + Swipe
+     LIGHTBOX — Con barra de compra integrada
      ═══════════════════════════════════════════ */
 
-  const merchItems = Array.from(document.querySelectorAll('.merch-item'));
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
   const lbCurrent = document.getElementById('lbCurrent');
   const lbTotal = document.getElementById('lbTotal');
-  const lbLabel = document.getElementById('lbLabel');
   const lbClose = document.getElementById('lbClose');
   const lbPrev = document.getElementById('lbPrev');
   const lbNext = document.getElementById('lbNext');
   const lbImgWrap = document.getElementById('lbImgWrap');
+  const lbBuyName = document.getElementById('lbBuyName');
+  const lbBuyPrice = document.getElementById('lbBuyPrice');
+  const lbBuyPlatform = document.getElementById('lbBuyPlatform');
+  const lbBuyBtn = document.getElementById('lbBuyBtn');
 
-  const totalItems = merchItems.length;
-  lbTotal.textContent = totalItems < 10 ? '0' + totalItems : totalItems;
-
-  // URLs de las imágenes (ya están en los src)
-  const merchSrcs = merchItems.map(item => item.querySelector('img').src);
+  const totalItems = PRODUCTS.length;
+  lbTotal.textContent = padNum(totalItems);
 
   let lbIndex = 0;
 
@@ -1237,10 +1504,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateLightbox() {
-    lbImg.src = merchSrcs[lbIndex];
+    const product = PRODUCTS[lbIndex];
     const num = lbIndex + 1;
-    lbCurrent.textContent = num < 10 ? '0' + num : num;
-    lbLabel.textContent = 'Pieza ' + (num < 10 ? '0' + num : num);
+
+    lbImg.src = product.image;
+    lbImg.alt = product.name;
+    lbCurrent.textContent = padNum(num);
+
+    /* Actualizar barra de compra */
+    lbBuyName.textContent = product.name;
+    lbBuyPrice.textContent = formatPrice(product.price);
+    lbBuyPlatform.textContent = getPlatformLabel(product.type);
   }
 
   function lbGo(dir) {
@@ -1248,22 +1522,22 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLightbox();
   }
 
-  // Click en items
-  merchItems.forEach((item, i) => {
-    item.addEventListener('click', () => openLightbox(i));
-  });
-
-  // Controles lightbox
   lbClose.addEventListener('click', closeLightbox);
   lbPrev.addEventListener('click', (e) => { e.stopPropagation(); lbGo(-1); });
   lbNext.addEventListener('click', (e) => { e.stopPropagation(); lbGo(1); });
 
-  // Click fuera de imagen para cerrar
+  /* Botón comprar en lightbox */
+  lbBuyBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    handleBuy(lbIndex);
+  });
+
+  /* Click fuera de imagen para cerrar */
   lbImgWrap.addEventListener('click', (e) => {
     if (e.target === lbImgWrap) closeLightbox();
   });
 
-  // Teclado
+  /* Teclado */
   document.addEventListener('keydown', (e) => {
     if (!lightbox.classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
@@ -1271,9 +1545,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight') lbGo(1);
   });
 
-  // Swipe en móvil para el lightbox
+  /* Swipe en móvil */
   let touchStartX = 0;
-  let touchEndX = 0;
   lbImgWrap.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
   }, { passive: true });
@@ -1281,13 +1554,12 @@ document.addEventListener('DOMContentLoaded', () => {
     touchEndX = e.changedTouches[0].screenX;
     const diff = touchStartX - touchEndX;
     if (Math.abs(diff) > 50) {
-      if (diff > 0) lbGo(1);   // swipe izquierdo → siguiente
-      else lbGo(-1);            // swipe derecho → anterior
+      if (diff > 0) lbGo(1);
+      else lbGo(-1);
     }
   }, { passive: true });
 
-  // Stagger de entrada para los items del merch
-  const merchGrid = document.getElementById('merchGrid');
+  /* Stagger de entrada para items del merch */
   if (merchGrid) {
     const merchIO = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1305,7 +1577,7 @@ document.addEventListener('DOMContentLoaded', () => {
     merchIO.observe(merchGrid);
   }
 
-  // Enlace teaser "Ver colección →" scroll suave
+  /* Enlace teaser "Ver colección →" */
   const teaserLink = document.querySelector('.info-teaser-link');
   if (teaserLink) {
     teaserLink.addEventListener('click', (e) => {
