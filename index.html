@@ -152,7 +152,7 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 .scroll-fade.visible{opacity:1;transform:translateY(0)}
 
 /* ═══════════════════════════════════════════
-   MERCH — Secciones + Precios + Compra
+   MERCH — Grid con espaciado respirable
    ═══════════════════════════════════════════ */
 
 .merch-section{border:1px solid var(--border);margin:0 0 40px}
@@ -165,23 +165,55 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 .merch-header-count{font-family:var(--mono);font-size:.6rem;color:var(--muted);letter-spacing:1px}
 .merch-header-count span{color:var(--accent)}
 
-.merch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+/* Grid principal — espaciado generoso estilo Google Play */
+.merch-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  padding:18px;
+}
 
-.merch-item{position:relative;overflow:hidden;cursor:pointer;background:var(--bg);aspect-ratio:1/1.15;opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease}
+/* Tarjeta individual — bordes redondeados, borde sutil */
+.merch-item{
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:8px;
+  aspect-ratio:1/1.15;
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .4s ease,transform .4s ease,border-color .2s;
+}
 .merch-item.revealed{opacity:1;transform:translateY(0)}
+.merch-item:hover{border-color:var(--border-hi)}
 .merch-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
-.merch-item:hover img{transform:scale(1.04)}
+.merch-item:hover img{transform:scale(1.03)}
 
-.merch-price-tag{position:absolute;bottom:0;left:0;right:0;padding:24px 10px 8px;background:linear-gradient(transparent,rgba(10,10,10,.92));display:flex;justify-content:space-between;align-items:flex-end;z-index:2;pointer-events:none}
+.merch-price-tag{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:28px 12px 10px;
+  background:linear-gradient(transparent,rgba(10,10,10,.9));
+  display:flex;justify-content:space-between;align-items:flex-end;
+  z-index:2;pointer-events:none;
+  border-radius:0 0 7px 7px;
+}
 .merch-price-num{font-family:var(--mono);font-size:.55rem;color:var(--muted);letter-spacing:2px}
 .merch-price-value{font-family:var(--mono);font-size:.78rem;color:var(--accent);font-weight:500;letter-spacing:.5px}
 
-.merch-overlay{position:absolute;inset:0;background:rgba(10,10,10,.84);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;opacity:0;transition:opacity .15s;z-index:3}
+.merch-overlay{
+  position:absolute;inset:0;
+  background:rgba(10,10,10,.85);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  opacity:0;transition:opacity .15s;z-index:3;
+  border-radius:8px;
+}
 .merch-item:hover .merch-overlay{opacity:1}
 .merch-overlay-num{font-family:var(--mono);font-size:1.6rem;font-weight:700;color:var(--accent);letter-spacing:2px}
 .merch-overlay-name{font-family:var(--mono);font-size:.62rem;color:var(--text);letter-spacing:1px;text-transform:uppercase;max-width:85%;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .merch-overlay-price{font-family:var(--mono);font-size:.88rem;color:var(--accent);font-weight:600;margin-top:2px}
-.merch-buy-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 16px;border:1px solid var(--accent);color:var(--accent);font-family:var(--mono);font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;background:transparent;cursor:pointer;transition:background .15s,color .15s;margin-top:4px;flex-shrink:0}
+.merch-buy-btn{display:inline-flex;align-items:center;gap:5px;padding:5px 16px;border:1px solid var(--accent);color:var(--accent);font-family:var(--mono);font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;background:transparent;cursor:pointer;transition:background .15s,color .15s;margin-top:4px;flex-shrink:0;border-radius:4px}
 .merch-buy-btn:hover{background:var(--accent);color:var(--bg)}
 .merch-buy-btn svg{width:11px;height:11px;fill:currentColor;flex-shrink:0}
 .merch-overlay-hint{font-family:var(--mono);font-size:.5rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;opacity:.6}
@@ -210,15 +242,16 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
   perspective:800px;
 }
 .merch-item--book.revealed{
-  animation:bookFloat 5s ease-in-out infinite;
+  animation:bookFloat 4.5s ease-in-out infinite;
 }
 .merch-item--book:hover{
   animation:none;
 }
 
+/* Float más pronunciado: 3px → 7px */
 @keyframes bookFloat{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-3px)}
+  50%{transform:translateY(-7px)}
 }
 
 .book-inner{
@@ -226,11 +259,10 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
   transform-style:preserve-3d;
   transition:transform .45s ease,box-shadow .45s ease;
   will-change:transform;
-  border-radius:2px;
+  border-radius:7px;
   overflow:hidden;
 }
 
-/* Lomo del libro */
 .book-spine{
   position:absolute;left:0;top:0;bottom:0;width:14px;
   background:linear-gradient(to right,rgba(0,0,0,.55) 0%,rgba(0,0,0,.25) 50%,transparent 100%);
@@ -241,14 +273,12 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
   background:linear-gradient(to bottom,transparent,rgba(255,255,255,.06) 20%,rgba(255,255,255,.06) 80%,transparent);
 }
 
-/* Borde de páginas */
 .book-pages{
   position:absolute;right:0;top:2px;bottom:2px;width:5px;
   background:repeating-linear-gradient(to bottom,rgba(255,255,255,.025) 0px,rgba(255,255,255,.025) 1px,transparent 1px,transparent 3px);
   z-index:4;pointer-events:none;
 }
 
-/* Brillo que sigue al mouse */
 .book-shine{
   position:absolute;inset:0;z-index:5;pointer-events:none;
   background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.12) 0%,transparent 55%);
@@ -256,7 +286,6 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 }
 .merch-item--book:hover .book-shine{opacity:1}
 
-/* Overlay de libro — contenido más rico */
 .book-overlay{
   position:absolute;inset:0;z-index:6;
   background:rgba(10,10,10,.88);
@@ -264,10 +293,10 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
   align-items:center;justify-content:center;
   gap:6px;padding:16px;
   opacity:0;transition:opacity .2s;
+  border-radius:7px;
 }
 .merch-item--book:hover .book-overlay{opacity:1}
 
-/* Tag de categoría */
 .book-tag{
   display:inline-block;padding:2px 10px;
   border:1px solid var(--accent);
@@ -331,14 +360,12 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 }
 .merch-item--book:hover .book-overlay-hint{opacity:.5;transform:translateY(0);transition-delay:.24s}
 
-/* Precio en books — posición ajustada */
 .merch-item--book .merch-price-tag{
   padding:20px 28px 8px 18px;
 }
 .merch-item--book .merch-price-value{font-size:.72rem}
 .merch-item--book .merch-price-num{font-size:.5rem}
 
-/* Línea decorativa en overlay de libro */
 .book-overlay-line{
   width:24px;height:1px;
   background:var(--accent);opacity:.4;
@@ -366,13 +393,13 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 .lightbox-buy-name{font-family:var(--mono);font-size:.7rem;color:var(--text);letter-spacing:1px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lightbox-buy-price{font-family:var(--mono);font-size:.88rem;color:var(--accent);font-weight:600;flex-shrink:0}
 .lightbox-buy-platform{font-family:var(--mono);font-size:.52rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;flex-shrink:0}
-.lightbox-buy-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border:1px solid var(--accent);color:var(--accent);font-family:var(--mono);font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;background:transparent;cursor:pointer;transition:background .15s,color .15s;flex-shrink:0;white-space:nowrap}
+.lightbox-buy-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border:1px solid var(--accent);color:var(--accent);font-family:var(--mono);font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;background:transparent;cursor:pointer;transition:background .15s,color .15s;flex-shrink:0;white-space:nowrap;border-radius:4px}
 .lightbox-buy-btn:hover{background:var(--accent);color:var(--bg)}
 .lightbox-buy-btn svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
 
 /* ─── Responsive ─── */
 @media(max-width:900px){
-  .merch-grid--book{grid-template-columns:repeat(3,1fr)}
+  .merch-grid--book{grid-template-columns:repeat(3,1fr);gap:12px;padding:14px}
 }
 @media(max-width:768px){
   .container{padding:calc(var(--nav-h) + 24px) 16px 0}
@@ -388,8 +415,9 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
   .embed-cell{border-right:none;border-bottom:1px solid var(--border)}.embed-cell:last-child{border-bottom:none}
   .embed-cell iframe{height:152px}
   .info-grid{grid-template-columns:1fr}
-  .merch-grid{grid-template-columns:repeat(2,1fr)}.merch-item{aspect-ratio:1/1.2}
-  .merch-grid--book{grid-template-columns:repeat(3,1fr)}
+  .merch-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:14px}
+  .merch-item{aspect-ratio:1/1.2}
+  .merch-grid--book{grid-template-columns:repeat(3,1fr);gap:12px;padding:14px}
   .merch-item--book{aspect-ratio:1/1.35}
   .merch-price-value{font-size:.7rem}
   .merch-overlay-num{font-size:1.1rem}.merch-overlay-name{font-size:.55rem}.merch-overlay-price{font-size:.75rem}
@@ -407,8 +435,9 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
   #toast-container{right:14px;bottom:64px}
 }
 @media(max-width:420px){
-  .merch-grid{grid-template-columns:1fr 1fr;gap:1px}.merch-item{aspect-ratio:1/1.3}
-  .merch-grid--book{grid-template-columns:1fr 1fr 1fr;gap:1px}
+  .merch-grid{grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+  .merch-item{aspect-ratio:1/1.3}
+  .merch-grid--book{grid-template-columns:1fr 1fr 1fr;gap:10px;padding:10px}
   .merch-item--book{aspect-ratio:1/1.4}
   .merch-overlay-num{font-size:1rem}.merch-overlay-name{font-size:.5rem}.merch-overlay-price{font-size:.68rem}
   .merch-price-tag{padding:18px 8px 6px}.merch-price-value{font-size:.65rem}.merch-price-num{font-size:.5rem}
@@ -466,7 +495,8 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
     <div class="track-row" id="row-tinkuy" data-title="Tinkuy" data-artist="BVHanKrY" data-cover="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/portada%20pulso.png">
       <button class="track-trigger" aria-label="Reproducir Tinkuy"><span class="tr-num">01</span><svg class="tr-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="tr-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
       <div class="track-info"><div class="track-title-text">Tinkuy</div><div class="track-artist-text">BVHanKrY</div></div>
-      <span class="track-duration">--:--</span><      span class="track-plays"><span class="track-plays-count">0</span> plays</span>
+      <span class="track-duration">--:--</span>
+      <span class="track-plays"><span class="track-plays-count">0</span> plays</span>
       <button class="track-like" aria-label="Me gusta"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
       <div class="track-progress-line"><div class="track-progress-fill"></div></div>
       <audio src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/tinkuy.mp3" preload="metadata" data-id="tinkuy"></audio>
@@ -527,7 +557,7 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
   </div>
 
   <!-- ═══════════════════════════════════════
-       SECCIÓN: PRODUCTOS FÍSICOS (primero)
+       SECCIÓN: PRODUCTOS FÍSICOS
        ═══════════════════════════════════════ -->
   <section class="merch-section scroll-fade" id="merch-physical">
     <div class="merch-header">
@@ -556,7 +586,7 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
   </div>
 
   <!-- ═══════════════════════════════════════
-       SECCIÓN: PRODUCTOS DIGITALES (segundo, estilo libro)
+       SECCIÓN: PRODUCTOS DIGITALES
        ═══════════════════════════════════════ -->
   <section class="merch-section scroll-fade" id="merch-digital">
     <div class="merch-header">
@@ -638,10 +668,6 @@ footer p{font-size:.7rem;color:var(--muted);font-family:var(--mono);letter-spaci
 <script>
 document.addEventListener('DOMContentLoaded', function() {
 
-  /* ═══════════════════════════════════════════════════════════
-     CATÁLOGO DE PRODUCTOS
-     ═══════════════════════════════════════════════════════════ */
-
   var BASE = 'https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/';
 
   var PHYSICAL_PRODUCTS = [
@@ -661,7 +687,6 @@ document.addEventListener('DOMContentLoaded', function() {
     { name:'Curso de Piano Intermedio', category:'curso', desc:'Lleva tu nivel al siguiente escalón', image:BASE+'merch/curso%20de%20piano%20intermedio.png', price:12.00, type:'digital', paymentUrl:'#' }
   ];
 
-  /* ─── Utilidades ─── */
   function fmtP(n){ return '$'+n.toFixed(2).replace('.',','); }
   function pad(n){ return n<10?'0'+n:''+n; }
   function platLabel(t){ return t==='digital'?'// en Hotmart':'// en Mercado Libre'; }
@@ -696,7 +721,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   /* ═══════════════════════════════════════════════════════════
-     RENDER — Productos físicos (estándar)
+     RENDER — Productos físicos
      ═══════════════════════════════════════════════════════════ */
 
   function renderPhysicalGrid() {
@@ -732,7 +757,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   /* ═══════════════════════════════════════════════════════════
-     RENDER — Productos digitales (estilo portada de libro)
+     RENDER — Productos digitales (estilo libro)
      ═══════════════════════════════════════════════════════════ */
 
   function renderDigitalGrid() {
@@ -767,7 +792,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     grid.innerHTML = html;
 
-    /* Event delegation */
     grid.addEventListener('click', function(e) {
       var buyBtn = e.target.closest('.merch-buy-btn');
       if (buyBtn) { e.stopPropagation(); handleBuy(prods[parseInt(buyBtn.dataset.buy,10)]); return; }
@@ -778,7 +802,6 @@ document.addEventListener('DOMContentLoaded', function() {
     return grid;
   }
 
-  /* Renderizar ambas secciones */
   var physicalGridEl = renderPhysicalGrid();
   var digitalGridEl = renderDigitalGrid();
 
@@ -793,7 +816,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     bookItems.forEach(function(item) {
       var inner = item.querySelector('.book-inner');
-      var shine = item.querySelector('.book-shine');
 
       item.addEventListener('mouseenter', function() {
         inner.style.transition = 'none';
@@ -810,12 +832,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         inner.style.transform = 'rotateX('+rotX+'deg) rotateY('+rotY+'deg) scale(1.04)';
 
-        /* Sombra dinámica que se desplaza */
         var sx = rotY * -1.5;
         var sy = rotX * 1.5;
         inner.style.boxShadow = sx+'px '+sy+'px 25px rgba(0,0,0,0.5)';
 
-        /* Brillo sigue al mouse */
         var px = (x / rect.width) * 100;
         var py = (y / rect.height) * 100;
         inner.style.setProperty('--mx', px+'%');
@@ -831,7 +851,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   /* ═══════════════════════════════════════════════════════════
-     LIGHTBOX — Compartido entre ambas secciones
+     LIGHTBOX
      ═══════════════════════════════════════════════════════════ */
 
   var lightbox = document.getElementById('lightbox');
@@ -931,7 +951,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   /* ═══════════════════════════════════════════
-     REPRODUCTOR — Sin cambios
+     REPRODUCTOR
      ═══════════════════════════════════════════ */
 
   var rows = Array.from(document.querySelectorAll('.track-row'));
